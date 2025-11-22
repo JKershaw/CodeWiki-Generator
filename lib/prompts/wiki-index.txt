@@ -1,0 +1,28 @@
+You are generating a wiki index page that serves as the navigation hub.
+
+Repository: {{repositoryName}}
+
+Wiki Structure:
+{{wikiStructure}}
+
+Task: Generate a comprehensive index.md file in markdown format.
+
+Requirements:
+1. Start with a clear title and overview
+2. Organize pages by category (Concepts, Components, Guides)
+3. For each page, include:
+   - Link to the page
+   - Brief description (1 line) based on the title
+4. Add a "Getting Started" or "Navigation" section
+5. Keep it concise and scannable
+6. Use proper markdown formatting
+
+Structure:
+- Title and project overview (2-3 sentences)
+- Section for each category with brief intro
+- Bulleted list of pages with links and descriptions
+- Navigation tips at the end
+
+DO NOT include frontmatter (---). Start directly with the markdown heading.
+
+Generate ONLY the markdown content for the index page, nothing else.
