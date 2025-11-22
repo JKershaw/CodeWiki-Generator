@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-11-22T21:00:00Z",
+  "lastUpdated": "2025-11-22T22:00:00Z",
   "pages": {
     "index": {
       "path": "index.md",
@@ -29,10 +29,10 @@
   },
   "requestQueue": [],
   "stats": {
-    "totalPages": 16,
+    "totalPages": 18,
     "conceptPages": 1,
-    "componentPages": 12,
-    "guidePages": 2
+    "componentPages": 13,
+    "guidePages": 3
   },
   "newPages": {
     "wiki-manager": {
@@ -88,6 +88,18 @@
       "title": "Meta-Analysis Agent",
       "incomingLinks": 1,
       "lastUpdated": "2025-11-22T21:00:00Z"
+    },
+    "processor": {
+      "path": "components/processor.md",
+      "title": "Processor",
+      "incomingLinks": 4,
+      "lastUpdated": "2025-11-22T22:00:00Z"
+    },
+    "processing-logic": {
+      "path": "guides/processing-logic.md",
+      "title": "Processing Logic Guide",
+      "incomingLinks": 2,
+      "lastUpdated": "2025-11-22T22:00:00Z"
     }
   }
 }

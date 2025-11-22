@@ -41,16 +41,21 @@ Detailed documentation of individual code modules:
 - [Documentation Writer Agent](components/agents/documentation-writer.md) - Generates markdown docs
 - [Meta-Analysis Agent](components/agents/meta-analysis.md) - Identifies patterns and gaps
 
+**Processing Engine:**
+- [Processor](components/processor.md) - Main orchestration layer coordinating all components
+
 ### Guides
 How-to guides and operational documentation:
 - [Getting Started](guides/getting-started.md) - Setup and installation
 - [Testing Approach](guides/testing-approach.md) - TDD methodology
+- [Processing Logic](guides/processing-logic.md) - Decision trees and processing algorithms
 
 ## Development Status
 
 ✅ **Phase 1 Complete**: Core Infrastructure (WikiManager, StateManager, GitHub Integration)
 ✅ **Phase 2 Complete**: AI Agent System (Claude Client, Agents, Prompt Templates)
-🚧 **Phase 3 In Progress**: Processor Implementation
+✅ **Phase 3 Complete**: Processing Engine (Commit Processor, Repository Processor)
+🚧 **Phase 4 In Progress**: Web Interface
 
 ## Navigation
 

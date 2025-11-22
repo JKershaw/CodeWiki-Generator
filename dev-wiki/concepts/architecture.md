@@ -29,13 +29,29 @@ Wraps the Octokit library to access repository data:
 - Handles authentication and rate limiting
 
 ### 2. Processor (`lib/processor.js`)
-The main orchestration engine:
-- Walks through commits sequentially
-- Determines which files are significant
-- Coordinates AI agents
-- Manages state persistence
-- Triggers meta-analysis periodically
-- Enforces cost limits
+The main orchestration engine that coordinates all components:
+
+**processRepository(repoUrl, options)**:
+- Parses GitHub repository URL
+- Fetches all commits chronologically
+- Loads saved state or initializes fresh
+- Implements pause/resume from any commit
+- Enforces cost limits before each commit
+- Triggers meta-analysis every N commits (default: 5)
+- Saves state after each commit for crash recovery
+- Returns comprehensive processing statistics
+
+**processCommit(commit, state)**:
+- Filters files (skips deletions, binary files, insignificant files)
+- Retrieves relevant wiki context (up to 3 related pages)
+- Analyzes each significant file via CodeAnalysisAgent
+- Generates/updates documentation via DocumentationWriterAgent
+- Creates or updates wiki pages via WikiManager
+- Tracks per-commit statistics
+
+**File Filtering**:
+- Processes: source code (.js, .ts, .py, .java, .go, etc.)
+- Skips: config files, lock files, tests, docs, build artifacts
 
 ### 3. AI Agents (`lib/agents/`)
 Specialized Claude API calls for different tasks:
@@ -85,28 +101,66 @@ Web interface for human oversight:
 
 ## Data Flow
 
-### Processing a Single Commit
+### Complete System Flow
 
-1. **Fetch**: Get commit data from GitHub
-2. **Filter**: Determine if files are significant (ignore configs, deps)
-3. **Contextualize**: Find ≤3 related wiki pages for each file
-4. **Analyze**: Call Code Analysis Agent with diff + context
-5. **Document**: Call Documentation Writer Agent with analysis
-6. **Persist**: Save wiki pages via Wiki Manager
-7. **Update**: Increment state, broadcast progress
-8. **Meta-analyze**: Every 5 commits, look for themes
+```
+User Request → processRepository(repoUrl)
+    ↓
+[1] Parse Repository URL (GitHub Client)
+    ↓
+[2] Fetch All Commits (GitHub API)
+    ↓
+[3] Load or Initialize State (State Manager)
+    ↓
+[4] FOR EACH Commit:
+    ├─ Check Cost Limit → PAUSE if exceeded
+    ├─ Process Commit (see below)
+    ├─ Aggregate Statistics
+    ├─ Save State (State Manager)
+    └─ Meta-Analysis Check
+        └─ IF at frequency interval:
+            ├─ Run MetaAnalysisAgent
+            ├─ Store recommendations
+            └─ Save State
+    ↓
+[5] Mark Complete & Return Statistics
+```
 
-### Processing a Repository
+### Processing a Single Commit (Step 4 Detail)
 
-1. Load or initialize state
-2. Fetch commit list from GitHub
-3. For each unprocessed commit:
-   - Process commit (see above)
-   - Save state
-   - Check cost limits
-   - Respect pause flag
-4. Generate final meta-analysis
-5. Save complete state
+```
+Commit Object (sha, message, files[])
+    ↓
+[A] FOR EACH File:
+    ├─ Has patch? → SKIP if no
+    ├─ Is significant? → SKIP if no
+    ├─ Get Context (WikiManager.getRelatedPages)
+    │   └─ Return ≤3 related pages
+    ├─ Analyze Code (CodeAnalysisAgent)
+    │   ├─ Input: filePath, diff, message, relatedPages
+    │   └─ Output: { concepts[], codeElements[], relationships[] }
+    └─ FOR EACH Concept:
+        ├─ Determine Page Path (kebab-case)
+        ├─ Check if Page Exists (WikiManager.getPage)
+        ├─ Generate Documentation (DocumentationWriterAgent)
+        │   ├─ Input: conceptName, analysis, existingContent
+        │   └─ Output: markdown string
+        └─ Create or Update Page (WikiManager)
+            └─ Track: pagesCreated / pagesUpdated
+    ↓
+Return Commit Summary
+```
+
+### State Persistence Points
+
+State is saved at these points to enable pause/resume:
+
+1. **After Each Commit**: Saves current position and statistics
+2. **After Meta-Analysis**: Saves analysis results and updated position
+3. **On Cost Limit**: Marks status as 'paused', saves state
+4. **On Completion**: Marks status as 'completed', final save
+
+State file location: `.codewiki/state.json`
 
 ## Key Design Decisions
 
