@@ -1,8 +1,10 @@
 const Processor = require('../../lib/processor');
 const WikiManager = require('../../lib/wiki-manager');
 const StateManager = require('../../lib/state-manager');
+const GitHubClient = require('../../lib/github');
 const CodeAnalysisAgent = require('../../lib/agents/code-analysis-agent');
 const DocumentationWriterAgent = require('../../lib/agents/documentation-writer-agent');
+const MetaAnalysisAgent = require('../../lib/agents/meta-analysis-agent');
 
 describe('Processor', () => {
   let processor;
@@ -369,6 +371,272 @@ describe('Processor', () => {
     it('should handle concepts with spaces', () => {
       const path = processor.determinePagePath('Session Manager');
       expect(path).toBe('components/session-manager');
+    });
+  });
+
+  describe('processRepository', () => {
+    let mockGithubClient;
+    let mockMetaAnalysisAgent;
+    let mockClaudeClient;
+
+    beforeEach(() => {
+      // Add GitHub client and meta-analysis agent mocks
+      mockGithubClient = {
+        parseRepoUrl: jest.fn(),
+        getCommits: jest.fn()
+      };
+
+      mockMetaAnalysisAgent = {
+        shouldRunMetaAnalysis: jest.fn(),
+        analyzeProgress: jest.fn()
+      };
+
+      mockClaudeClient = {
+        getCostSummary: jest.fn().mockReturnValue({
+          totalCost: 0,
+          inputTokens: 0,
+          outputTokens: 0
+        })
+      };
+
+      processor.githubClient = mockGithubClient;
+      processor.metaAnalysisAgent = mockMetaAnalysisAgent;
+      processor.claudeClient = mockClaudeClient;
+    });
+
+    it('should process multiple commits in sequence', async () => {
+      const commits = [
+        { sha: 'abc', message: 'Commit 1', files: [{ filename: 'src/a.js', patch: '+ code' }] },
+        { sha: 'def', message: 'Commit 2', files: [{ filename: 'src/b.js', patch: '+ code' }] }
+      ];
+
+      mockGithubClient.parseRepoUrl.mockReturnValue({ owner: 'user', repo: 'test' });
+      mockGithubClient.getCommits.mockResolvedValue(commits);
+
+      mockStateManager.loadState.mockResolvedValue({
+        repoUrl: '',
+        currentCommit: 0,
+        totalCommits: 0,
+        status: 'idle'
+      });
+
+      mockCodeAnalysisAgent.isSignificantFile.mockReturnValue(true);
+      mockWikiManager.getRelatedPages.mockReturnValue([]);
+      mockCodeAnalysisAgent.analyzeCode.mockResolvedValue({
+        concepts: ['Test'],
+        codeElements: [],
+        relationships: []
+      });
+      mockDocWriterAgent.writeDocumentation.mockResolvedValue('# Test');
+      mockWikiManager.createPage.mockResolvedValue();
+      mockMetaAnalysisAgent.shouldRunMetaAnalysis.mockReturnValue(false);
+
+      const result = await processor.processRepository('https://github.com/user/test');
+
+      expect(result.commitsProcessed).toBe(2);
+      expect(mockStateManager.saveState).toHaveBeenCalled();
+    });
+
+    it('should trigger meta-analysis every N commits', async () => {
+      const commits = [
+        { sha: '1', message: 'C1', files: [] },
+        { sha: '2', message: 'C2', files: [] },
+        { sha: '3', message: 'C3', files: [] },
+        { sha: '4', message: 'C4', files: [] },
+        { sha: '5', message: 'C5', files: [] }
+      ];
+
+      mockGithubClient.parseRepoUrl.mockReturnValue({ owner: 'user', repo: 'test' });
+      mockGithubClient.getCommits.mockResolvedValue(commits);
+
+      mockStateManager.loadState.mockResolvedValue({
+        repoUrl: '',
+        currentCommit: 0,
+        totalCommits: 0,
+        status: 'idle',
+        lastMetaAnalysis: 0
+      });
+
+      mockMetaAnalysisAgent.shouldRunMetaAnalysis
+        .mockReturnValueOnce(false)  // Commit 1
+        .mockReturnValueOnce(false)  // Commit 2
+        .mockReturnValueOnce(false)  // Commit 3
+        .mockReturnValueOnce(false)  // Commit 4
+        .mockReturnValueOnce(true);  // Commit 5
+
+      mockMetaAnalysisAgent.analyzeProgress.mockResolvedValue({
+        themes: ['Pattern emerging'],
+        newPagesNeeded: [],
+        gaps: [],
+        reorganization: []
+      });
+
+      const result = await processor.processRepository('https://github.com/user/test');
+
+      expect(mockMetaAnalysisAgent.analyzeProgress).toHaveBeenCalledTimes(1);
+      expect(result.metaAnalysisRuns).toBe(1);
+    });
+
+    it('should save state after each commit', async () => {
+      const commits = [
+        { sha: 'abc', message: 'Commit 1', files: [] },
+        { sha: 'def', message: 'Commit 2', files: [] }
+      ];
+
+      mockGithubClient.parseRepoUrl.mockReturnValue({ owner: 'user', repo: 'test' });
+      mockGithubClient.getCommits.mockResolvedValue(commits);
+
+      mockStateManager.loadState.mockResolvedValue({
+        repoUrl: '',
+        currentCommit: 0,
+        totalCommits: 0,
+        status: 'idle'
+      });
+
+      mockMetaAnalysisAgent.shouldRunMetaAnalysis.mockReturnValue(false);
+
+      await processor.processRepository('https://github.com/user/test');
+
+      // Should save after each commit + once on completion
+      // (2 commits + 1 completion = 3 total saves)
+      expect(mockStateManager.saveState).toHaveBeenCalledTimes(3);
+    });
+
+    it('should resume from saved state', async () => {
+      const commits = [
+        { sha: 'abc', message: 'C1', files: [] },
+        { sha: 'def', message: 'C2', files: [] },
+        { sha: 'ghi', message: 'C3', files: [] }
+      ];
+
+      mockGithubClient.parseRepoUrl.mockReturnValue({ owner: 'user', repo: 'test' });
+      mockGithubClient.getCommits.mockResolvedValue(commits);
+
+      // State indicates we already processed 2 commits
+      mockStateManager.loadState.mockResolvedValue({
+        repoUrl: 'https://github.com/user/test',
+        currentCommit: 2,
+        totalCommits: 3,
+        status: 'processing'
+      });
+
+      mockMetaAnalysisAgent.shouldRunMetaAnalysis.mockReturnValue(false);
+
+      const result = await processor.processRepository('https://github.com/user/test');
+
+      // Should only process the remaining commit (commit 3)
+      expect(result.commitsProcessed).toBe(1);
+    });
+
+    it('should enforce cost limits', async () => {
+      const commits = Array(10).fill(null).map((_, i) => ({
+        sha: `commit${i}`,
+        message: `Commit ${i}`,
+        files: [{ filename: 'src/code.js', patch: '+ code' }]
+      }));
+
+      mockGithubClient.parseRepoUrl.mockReturnValue({ owner: 'user', repo: 'test' });
+      mockGithubClient.getCommits.mockResolvedValue(commits);
+
+      mockStateManager.loadState.mockResolvedValue({
+        repoUrl: '',
+        currentCommit: 0,
+        totalCommits: 0,
+        status: 'idle'
+      });
+
+      mockCodeAnalysisAgent.isSignificantFile.mockReturnValue(true);
+      mockWikiManager.getRelatedPages.mockReturnValue([]);
+      mockCodeAnalysisAgent.analyzeCode.mockResolvedValue({
+        concepts: ['Test'],
+        codeElements: [],
+        relationships: []
+      });
+      mockDocWriterAgent.writeDocumentation.mockResolvedValue('# Test');
+      mockWikiManager.createPage.mockResolvedValue();
+      mockMetaAnalysisAgent.shouldRunMetaAnalysis.mockReturnValue(false);
+
+      // Mock increasing costs - hit limit on 3rd check
+      mockClaudeClient.getCostSummary
+        .mockReturnValueOnce({ totalCost: 0.0 })     // Initial check
+        .mockReturnValueOnce({ totalCost: 0.0005 })  // After commit 1
+        .mockReturnValueOnce({ totalCost: 0.002 })   // After commit 2 - exceeds limit
+        .mockReturnValue({ totalCost: 0.002 });      // Subsequent calls
+
+      // Set a low cost limit
+      const result = await processor.processRepository(
+        'https://github.com/user/test',
+        { maxCost: 0.001 } // Very low limit
+      );
+
+      // Should stop before processing all commits
+      expect(result.stopped).toBe(true);
+      expect(result.stopReason).toBe('cost_limit');
+      expect(result.commitsProcessed).toBeLessThan(10);
+    });
+
+    it('should track processing statistics', async () => {
+      const commits = [
+        { sha: 'abc', message: 'Add feature', files: [
+          { filename: 'src/feature.js', patch: '+ code' },
+          { filename: 'package.json', patch: '+ dep' }
+        ]}
+      ];
+
+      mockGithubClient.parseRepoUrl.mockReturnValue({ owner: 'user', repo: 'test' });
+      mockGithubClient.getCommits.mockResolvedValue(commits);
+
+      mockStateManager.loadState.mockResolvedValue({
+        repoUrl: '',
+        currentCommit: 0,
+        totalCommits: 0,
+        status: 'idle'
+      });
+
+      mockCodeAnalysisAgent.isSignificantFile
+        .mockReturnValueOnce(true)   // feature.js
+        .mockReturnValueOnce(false); // package.json
+
+      mockWikiManager.getRelatedPages.mockReturnValue([]);
+      mockCodeAnalysisAgent.analyzeCode.mockResolvedValue({
+        concepts: ['Feature'],
+        codeElements: [],
+        relationships: []
+      });
+      mockDocWriterAgent.writeDocumentation.mockResolvedValue('# Feature');
+      mockWikiManager.createPage.mockResolvedValue();
+      mockMetaAnalysisAgent.shouldRunMetaAnalysis.mockReturnValue(false);
+
+      const result = await processor.processRepository('https://github.com/user/test');
+
+      expect(result).toMatchObject({
+        commitsProcessed: 1,
+        totalFiles: 2,
+        filesProcessed: 1,
+        filesSkipped: 1,
+        pagesCreated: 1,
+        pagesUpdated: 0
+      });
+    });
+
+    it('should handle GitHub API rate limits', async () => {
+      mockGithubClient.parseRepoUrl.mockReturnValue({ owner: 'user', repo: 'test' });
+
+      // GitHub client will retry internally, but if it fails we should handle it
+      const rateLimitError = new Error('API rate limit exceeded');
+      rateLimitError.status = 403;
+      mockGithubClient.getCommits.mockRejectedValue(rateLimitError);
+
+      mockStateManager.loadState.mockResolvedValue({
+        repoUrl: '',
+        currentCommit: 0,
+        totalCommits: 0,
+        status: 'idle'
+      });
+
+      await expect(
+        processor.processRepository('https://github.com/user/test')
+      ).rejects.toThrow('API rate limit exceeded');
     });
   });
 });
