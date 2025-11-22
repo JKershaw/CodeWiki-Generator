@@ -25,7 +25,9 @@ High-level architectural concepts, patterns, and mental models:
 
 ### Components
 Detailed documentation of individual code modules:
-- Components will be added as they are implemented
+- [WikiManager](components/wiki-manager.md) - Read/write wiki markdown files
+- [StateManager](components/state-manager.md) - Processing state persistence
+- [GitHub Integration](components/github-integration.md) - Fetch repository data
 
 ### Guides
 How-to guides and operational documentation:

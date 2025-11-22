@@ -29,9 +29,29 @@
   },
   "requestQueue": [],
   "stats": {
-    "totalPages": 4,
+    "totalPages": 7,
     "conceptPages": 1,
-    "componentPages": 0,
+    "componentPages": 3,
     "guidePages": 2
+  },
+  "newPages": {
+    "wiki-manager": {
+      "path": "components/wiki-manager.md",
+      "title": "WikiManager",
+      "incomingLinks": 2,
+      "lastUpdated": "2025-11-22T20:00:00Z"
+    },
+    "state-manager": {
+      "path": "components/state-manager.md",
+      "title": "StateManager",
+      "incomingLinks": 2,
+      "lastUpdated": "2025-11-22T20:00:00Z"
+    },
+    "github-integration": {
+      "path": "components/github-integration.md",
+      "title": "GitHub Integration",
+      "incomingLinks": 1,
+      "lastUpdated": "2025-11-22T20:00:00Z"
+    }
   }
 }
