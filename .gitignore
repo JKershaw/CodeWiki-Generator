@@ -11,9 +11,6 @@ package-lock.json
 # Processing state
 state.json
 
-# Generated wiki
-wiki/
-
 # IDE
 .vscode/
 .idea/
