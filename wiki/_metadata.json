@@ -1,24 +1,48 @@
 {
-  "generated": "2025-11-22T22:39:22.548Z",
+  "generated": "2025-11-22T22:53:52.828Z",
   "pages": {
-    "concepts/automated-wiki-navigation-generation.md": {
-      "title": "Automated wiki navigation generation",
+    "concepts/operational-guide-generation.md": {
+      "title": "Operational guide generation",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/category-based-page-organization.md": {
-      "title": "Category-based page organization",
+    "concepts/repository-introspection-for-documentation.md": {
+      "title": "Repository introspection for documentation",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/template-driven-ai-content-generation.md": {
-      "title": "Template-driven AI content generation",
+    "components/guide-generation-agent.md": {
+      "title": "GuideGenerationAgent",
+      "created": "2025-11-22",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/automated-guide-generation-from-existing-documentation.md": {
+      "title": "Automated guide generation from existing documentation",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/repository-structure-analysis-for-documentation.md": {
+      "title": "Repository structure analysis for documentation",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/content-categorization-for-documentation-workflow.md": {
+      "title": "Content categorization for documentation workflow",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
@@ -26,33 +50,33 @@
       "updated": "2025-11-22"
     },
     "concepts/wiki-index-generation.md": {
-      "title": "Wiki index generation",
+      "title": "Wiki Index Generation",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/phase-based-processing-workflow.md": {
-      "title": "Phase-based processing workflow",
+    "concepts/category-based-page-organization.md": {
+      "title": "Category-based Page Organization",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/graceful-degradation-for-non-critical-operations.md": {
-      "title": "Graceful degradation for non-critical operations",
+    "concepts/template-driven-content-generation.md": {
+      "title": "Template-driven Content Generation",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "components/wiki-index-agent.md": {
-      "title": "WikiIndexAgent",
+    "concepts/conditional-post-processing.md": {
+      "title": "Conditional Post-Processing",
       "created": "2025-11-22",
-      "category": "component",
+      "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
@@ -81,56 +105,64 @@
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/hierarchical-metadata-architecture.md": {
-      "title": "Hierarchical metadata architecture",
+    "concepts/automatic-statistics-calculation.md": {
+      "title": "Automatic statistics calculation",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "components/_metadata.json-file-format.md": {
-      "title": "_metadata.json file format",
+    "concepts/concept-format-normalization.md": {
+      "title": "concept format normalization",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/category-aware-concept-extraction.md": {
+      "title": "category-aware concept extraction",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/legacy-format-migration.md": {
+      "title": "legacy format migration",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/category-aware-concept-routing.md": {
+      "title": "Category-aware concept routing",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "components/concept-object-model.md": {
+      "title": "Concept object model",
       "created": "2025-11-22",
       "category": "component",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/concept-format-migration-pattern.md": {
-      "title": "Concept format migration pattern",
-      "created": "2025-11-22",
-      "category": "concept",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-22"
-    },
-    "components/categorized-concept-extraction.md": {
-      "title": "Categorized concept extraction",
+    "components/directory-mapping-strategy.md": {
+      "title": "Directory mapping strategy",
       "created": "2025-11-22",
       "category": "component",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/category-aware-routing-system.md": {
-      "title": "Category-aware routing system",
-      "created": "2025-11-22",
-      "category": "concept",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-22"
-    },
-    "concepts/flexible-concept-representation.md": {
-      "title": "Flexible concept representation",
-      "created": "2025-11-22",
-      "category": "concept",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-22"
-    },
-    "concepts/self-documentation-workflow.md": {
-      "title": "Self-documentation workflow",
+    "concepts/self-documenting-system.md": {
+      "title": "Self-documenting system",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
@@ -145,124 +177,108 @@
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "components/mock-git-hub-client-pattern.md": {
-      "title": "Mock GitHub client pattern",
+    "concepts/mock-client-pattern.md": {
+      "title": "Mock client pattern",
       "created": "2025-11-22",
-      "category": "component",
+      "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
     "concepts/cost-aware-processing.md": {
-      "title": "Cost-Aware Processing",
+      "title": "Cost-aware processing",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/wiki-page-lifecycle-management.md": {
-      "title": "Wiki page lifecycle management",
+    "concepts/wiki-page-creation-and-update-parameter-standardization.md": {
+      "title": "Wiki page creation and update parameter standardization",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/options-based-api-pattern.md": {
-      "title": "Options-based API pattern",
-      "created": "2025-11-22",
-      "category": "concept",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-22"
-    },
-    "concepts/processing-state-normalization.md": {
-      "title": "Processing state normalization",
-      "created": "2025-11-22",
-      "category": "concept",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-22"
-    },
-    "concepts/local-development-testing.md": {
-      "title": "Local Development Testing",
-      "created": "2025-11-22",
-      "category": "concept",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-22"
-    },
-    "components/git-integration-layer.md": {
-      "title": "Git Integration Layer",
+    "components/file-path-normalization-with-extensions.md": {
+      "title": "File path normalization with extensions",
       "created": "2025-11-22",
       "category": "component",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/mock-git-hub-client-pattern.md": {
-      "title": "Mock GitHub Client Pattern",
+    "components/processing-state-terminology-alignment.md": {
+      "title": "Processing state terminology alignment",
+      "created": "2025-11-22",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/local-git-integration-testing.md": {
+      "title": "Local Git Integration Testing",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/self-testing-pattern.md": {
-      "title": "Self-testing pattern",
+    "concepts/git-hub-client-mocking-strategy.md": {
+      "title": "GitHub Client Mocking Strategy",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/cost-aware-testing.md": {
-      "title": "Cost-aware testing",
+    "components/git-command-line-integration.md": {
+      "title": "Git Command Line Integration",
       "created": "2025-11-22",
-      "category": "concept",
+      "category": "component",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "guides/safe-output-isolation.md": {
-      "title": "Safe output isolation",
+    "guides/self-documentation-testing.md": {
+      "title": "Self-Documentation Testing",
       "created": "2025-11-22",
       "category": "guide",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/repository-level-processing.md": {
-      "title": "Repository-Level Processing",
+    "concepts/self-testing-approach.md": {
+      "title": "Self-testing approach",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/stateful-processing-with-resume-capability.md": {
-      "title": "Stateful Processing with Resume Capability",
+    "concepts/cost-controlled-processing.md": {
+      "title": "Cost-controlled processing",
       "created": "2025-11-22",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     },
-    "concepts/meta-analysis-integration.md": {
-      "title": "Meta-Analysis Integration",
+    "guides/safe-output-separation.md": {
+      "title": "Safe output separation",
       "created": "2025-11-22",
-      "category": "concept",
+      "category": "guide",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-22"
     }
   },
   "statistics": {
-    "totalPages": 32,
+    "totalPages": 34,
     "concepts": 25,
-    "components": 6,
-    "guides": 1,
+    "components": 7,
+    "guides": 2,
     "totalCommitsProcessed": 0,
     "orphanedPages": []
   }

@@ -1,5 +1,5 @@
 ---
-title: Category-based page organization
+title: Category-based Page Organization
 category: concept
 related: []
 created: 2025-11-22
@@ -8,65 +8,90 @@ updated: 2025-11-22
 
 # Category-based Page Organization
 
-**Purpose and Overview**  
-Category-based page organization is a standardized system for classifying wiki content into distinct types (concepts, components, guides) to enable systematic navigation generation. This organizational structure allows the WikiIndexAgent to automatically generate coherent index pages by grouping related content together.
+## Purpose and Overview
+
+Category-based page organization provides a systematic approach to structuring wiki documentation by grouping pages into logical categories such as concepts, components, and guides. This organizational system enables automatic generation of navigation structures and ensures consistent, discoverable documentation layout.
 
 ## Key Functionality
 
-The system establishes three primary categories for wiki content:
+The organization system operates through three main categories:
 
-- **Concepts** - High-level architectural patterns and design principles
-- **Components** - Specific code elements, classes, and modules  
-- **Guides** - Step-by-step instructions and how-to documentation
+- **Concepts**: High-level ideas, patterns, and architectural principles
+- **Components**: Specific code elements, classes, and modules
+- **Guides**: Step-by-step instructions and tutorials
 
-### How It Works
+### Automatic Index Generation
 
-1. **Page Classification** - Each wiki page is assigned to one of the standard categories based on its content type and purpose
-2. **Structure Formatting** - The `_formatWikiStructure` function groups pages by category, creating a hierarchical data structure
-3. **Navigation Generation** - Categorized content is processed through AI prompts to generate organized index pages with logical groupings
+The `WikiIndexAgent` processes categorized pages to generate navigation indexes:
 
-The categorization system ensures that:
-- Related content appears together in navigation
-- Users can quickly locate information by content type
-- Index generation follows consistent organizational patterns
+```python
+# Example wiki data structure
+wiki_data = {
+    "concepts": [
+        {"name": "Authentication Flow", "abstraction": "high"},
+        {"name": "Data Pipeline", "abstraction": "medium"}
+    ],
+    "components": [
+        {"name": "UserManager", "type": "class"},
+        {"name": "DatabaseConnector", "type": "module"}
+    ],
+    "guides": [
+        {"title": "Setting Up Development Environment"},
+        {"title": "Deployment Guide"}
+    ]
+}
+```
+
+### Content Processing
+
+The system formats and processes content through specialized methods:
+
+- `_formatWikiStructure()` organizes pages by category for template input
+- `_cleanMarkdown()` normalizes generated content by removing code blocks and frontmatter
+- Template-driven generation ensures consistent formatting across all index pages
 
 ## Relationships
 
-This organizational system integrates with several components:
+**Dependencies:**
+- `ClaudeClient` for AI-powered content generation
+- `PromptManager` for template-based prompt rendering
 
-- **WikiIndexAgent** - Consumes the category structure to generate navigation indexes
-- **PromptManager** - Uses categorized data in the 'wiki-index' template for AI content generation
-- **ClaudeClient** - Processes the organized structure to create coherent navigation content
+**Integrations:**
+- Part of the agent-based architecture pattern
+- Processes wiki data structures from content analysis systems
+- Generates markdown files compatible with standard wiki platforms
 
-The category system extends the broader agent-based architecture by providing standardized data structures that AI agents can reliably process.
+**Data Flow:**
+1. Content analysis categorizes pages
+2. `WikiIndexAgent` processes categorized data
+3. Templates format the structure for AI generation
+4. Generated indexes provide navigation entry points
 
 ## Usage Examples
 
-### Basic Category Structure
-```javascript
-const wikiData = {
-  concepts: [
-    { name: "Automated navigation", path: "/concepts/auto-nav.md" }
-  ],
-  components: [
-    { name: "WikiIndexAgent", path: "/components/wiki-agent.md" }
-  ],
-  guides: [
-    { name: "Setting up wiki automation", path: "/guides/setup.md" }
-  ]
-};
+### Basic Index Generation
+
+```python
+agent = WikiIndexAgent()
+index_content = agent.generateIndex(wiki_data)
+# Produces structured markdown with categorized navigation links
 ```
 
-### Generated Navigation Output
+### Category Structure
+
+Pages are automatically organized into sections:
+
 ```markdown
 ## Concepts
-- [Automated navigation](/concepts/auto-nav.md)
+- [Authentication Flow](concepts/authentication-flow.md)
+- [Data Pipeline](concepts/data-pipeline.md)
 
-## Components  
-- [WikiIndexAgent](/components/wiki-agent.md)
+## Components
+- [UserManager](components/user-manager.md)
+- [DatabaseConnector](components/database-connector.md)
 
 ## Guides
-- [Setting up wiki automation](/guides/setup.md)
+- [Setting Up Development Environment](guides/setup.md)
 ```
 
-This organizational approach ensures that documentation remains navigable and logically structured as the codebase grows.
+This categorization ensures users can quickly locate information based on their needs - whether they're seeking conceptual understanding, specific component details, or step-by-step guidance.

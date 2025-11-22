@@ -1,5 +1,5 @@
 ---
-title: Wiki index generation
+title: Wiki Index Generation
 category: concept
 related: []
 created: 2025-11-22
@@ -8,45 +8,69 @@ updated: 2025-11-22
 
 # Wiki Index Generation
 
+Automatically generates navigation index pages for wiki documentation by analyzing content structure and creating organized, category-based navigation using AI-powered content generation.
+
 ## Purpose and Overview
 
-Wiki index generation creates structured navigation pages for generated documentation, enabling easy discovery and browsing of analyzed code components. This automated process runs as a completion phase after the main documentation generation, organizing all generated pages into a coherent index structure.
+The Wiki Index Generation system creates structured `index.md` files that serve as navigation hubs for wiki documentation. It analyzes existing wiki content, categorizes pages by type (concepts, components, guides), and generates comprehensive index pages that help users discover and navigate documentation efficiently.
 
 ## Key Functionality
 
-The wiki index generation system operates through a specialized agent-based approach:
+### Content Analysis and Organization
+- **Category-based Organization**: Automatically sorts wiki pages into concepts, components, and guides for logical grouping
+- **Structure Formatting**: Processes wiki data into a standardized format suitable for AI prompt generation
+- **Template-driven Generation**: Uses configurable prompt templates through PromptManager for consistent output formatting
 
-- **WikiIndexAgent** - Generates structured index pages by analyzing existing documentation and creating hierarchical navigation
-- **Conditional execution** - Only runs when processing completes successfully and remains within cost limits
-- **Graceful degradation** - Index generation failures don't disrupt the main documentation process
-- **Repository context** - Incorporates repository information to provide meaningful organization and context
+### Index Generation Process
+The `WikiIndexAgent` class handles the complete index generation workflow:
 
-The process collects all generated wiki pages through the WikiManager and delegates the actual index creation to the WikiIndexAgent, which structures the content for optimal navigation.
+1. **Data Processing**: Takes structured wiki data and formats it by category using `_formatWikiStructure`
+2. **AI Generation**: Sends formatted data to Claude AI via ClaudeClient to generate navigation content
+3. **Content Cleanup**: Post-processes output with `_cleanMarkdown` to remove code blocks, frontmatter, and normalize formatting
+4. **Output Delivery**: Returns clean markdown ready for use as an index page
+
+### Conditional Post-Processing
+Index generation operates as a conditional final step in the main processing pipeline. The `generateWikiIndex` function only executes when the primary documentation generation completes successfully, preventing incomplete or corrupted navigation indexes from being created when processing failures occur.
+
+### Markdown Processing
+- Removes unnecessary code block markers and frontmatter
+- Normalizes whitespace and formatting
+- Ensures clean, readable navigation structure
 
 ## Relationships
 
-Wiki index generation integrates seamlessly with the existing agent architecture:
+- **ClaudeClient Integration**: Leverages AI capabilities for intelligent content generation and natural language processing
+- **PromptManager Dependency**: Uses template-based prompt rendering for consistent and customizable output formats
+- **Agent Architecture**: Functions as a specialized agent within the larger documentation generation system
+- **WikiManager Integration**: Collaborates with WikiManager for page discovery and file operations during index creation
+- **Pipeline Integration**: Executes as the final step after main documentation generation, with execution dependent on processing success state
 
-- Works alongside `CodeAnalysisAgent`, `DocumentationWriterAgent`, and `MetaAnalysisAgent`
-- Depends on `WikiManager` for page collection and file system operations  
-- Consumes output from the main processing workflow to understand repository structure
-- Operates as the final phase in the documentation generation pipeline
+## Usage Examples
 
-## Usage
+```python
+# Basic index generation
+wiki_agent = WikiIndexAgent()
+index_content = wiki_agent.generateIndex(wiki_data)
 
-The index generation runs automatically as part of the documentation workflow:
-
-```javascript
-// Index generation is triggered after successful processing
-if (processingComplete && !costLimitExceeded) {
-  await generateWikiIndex(repoInfo, wikiManager);
+# wiki_data structure expected:
+{
+    "pages": [
+        {
+            "title": "Authentication System",
+            "category": "component",
+            "description": "Handles user authentication flows"
+        },
+        {
+            "title": "Error Handling Patterns",
+            "category": "concept", 
+            "description": "Common error handling strategies"
+        }
+    ]
 }
+
+# Pipeline integration with conditional execution
+if processing_successful:
+    generateWikiIndex(wiki_manager, processed_data)
 ```
 
-The `generateWikiIndex` function orchestrates the entire process by:
-
-1. Collecting existing wiki pages from the WikiManager
-2. Passing repository context and page data to the WikiIndexAgent
-3. Generating structured index content based on the analyzed documentation
-
-This creates a comprehensive navigation structure that helps users explore the generated documentation efficiently, with pages organized by category, component type, and conceptual relationships.
+The generated index creates organized sections for each category with appropriate navigation links and descriptions, making it easy for users to find relevant documentation based on their needs.

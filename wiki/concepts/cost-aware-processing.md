@@ -1,5 +1,5 @@
 ---
-title: Cost-Aware Processing
+title: Cost-aware processing
 category: concept
 related: []
 created: 2025-11-22
@@ -10,57 +10,48 @@ updated: 2025-11-22
 
 ## Purpose and Overview
 
-Cost-aware processing enables the documentation generator to operate within specified budget constraints when using AI APIs like Claude. This prevents runaway costs during large-scale documentation generation by setting limits on API usage and monitoring spending throughout the process.
+Cost-aware processing prevents excessive API usage during documentation generation by implementing built-in cost limiting mechanisms. This concept ensures that large-scale repository analysis remains economically sustainable while maintaining comprehensive documentation coverage.
 
 ## Key Functionality
 
-The cost-aware processing system works by:
+The cost-aware processing system monitors and controls API consumption through several mechanisms:
 
-- **Budget Monitoring**: Tracks API usage costs in real-time during documentation generation through the `ClaudeClient`
-- **Threshold Enforcement**: Stops processing when predefined spending limits are reached, preventing unexpected charges
-- **Repository-Scale Operations**: Manages costs across entire repository processing, not just individual commits
-- **Resume Capability**: Integrates with stateful processing to allow cost-effective continuation of interrupted work
-- **Cost Estimation**: Provides upfront estimates for documentation generation based on repository size and complexity
+- **Request Limiting**: Tracks API calls and enforces maximum thresholds to prevent runaway costs
+- **Intelligent Batching**: Groups related operations to minimize total API requests
+- **Early Termination**: Stops processing when cost limits are approached, preserving partial results
+- **Cost Estimation**: Provides upfront estimates of processing costs based on repository size and complexity
 
-The system integrates with the `processRepository` function to add cost controls without changing the fundamental documentation workflow. It calculates costs based on token usage for AI API calls and maintains running totals throughout the generation process, with periodic cost checks during meta-analysis phases.
+The system applies the same cost limiting logic whether analyzing external repositories through the GitHub API or processing local git history, ensuring consistent resource management across different data sources.
 
 ## Relationships
 
-Cost-aware processing connects to several system components:
+Cost-aware processing integrates directly with:
 
-- **processRepository Function**: The main entry point that orchestrates cost-aware repository processing
-- **ClaudeClient**: Handles Claude API interactions with built-in cost tracking capabilities
-- **StateManager**: Preserves cost tracking data across processing sessions for accurate resume functionality
-- **MetaAnalysisAgent**: Incorporates cost considerations into periodic quality assessments
-- **Configuration System**: Reads budget limits and cost thresholds from project settings
+- **Processor Class**: Core processing logic includes cost tracking and enforcement
+- **GitHub API Integration**: Monitors external API usage and rate limits
+- **Local Git Integration**: Applies cost controls even when processing local repository data
+- **Self-documentation System**: Uses identical cost limiting when generating documentation from local git history
+
+The cost management operates transparently within the existing processor workflow, requiring no changes to the core documentation generation logic.
 
 ## Usage Examples
 
-### Repository Processing with Budget Limits
+Cost limits are configured at the processor level:
 
 ```javascript
-const processor = new Processor();
-
-await processor.processRepository('owner/repo', {
-  maxCost: 25.00,           // Maximum $25 spend
-  warningThreshold: 0.8,    // Warn at 80% of budget
-  resumeFromState: true     // Continue from previous session
+const processor = new Processor({
+  maxApiCalls: 1000,
+  costThreshold: 50.00,
+  enableEarlyTermination: true
 });
 ```
 
-### Cost Monitoring During Generation
+The system provides cost feedback during processing:
 
-```javascript
-// Cost tracking is built into the ClaudeClient
-const claudeClient = new ClaudeClient({
-  costLimit: 10.00
-});
-
-// Processing automatically stops when limit is reached
-await processor.processRepository('large-repo', {
-  maxCost: 50.00,
-  batchSize: 10  // Process in smaller batches for better cost control
-});
+```
+Processing repository... (API calls: 245/1000, estimated cost: $12.30)
+Cost threshold reached - stopping with partial results
+Documentation generated with cost-aware limitations applied
 ```
 
-The cost-aware system ensures documentation generation remains predictable and controlled, especially important for large repositories where unchecked API usage during repository-wide analysis could result in significant unexpected charges.
+Cost-aware processing automatically activates in both standard repository analysis and self-documentation workflows, ensuring consistent resource management regardless of the data source.

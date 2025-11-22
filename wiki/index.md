@@ -1,54 +1,59 @@
 # CodeWiki-Generator
 
-An automated wiki generation system that creates and maintains comprehensive documentation for code repositories. This tool leverages AI-powered content generation, hierarchical metadata management, and automated navigation to transform codebases into well-organized, searchable wikis.
+An automated documentation system that generates comprehensive wikis from code repositories. This project provides intelligent content extraction, categorization, and structured documentation generation with cost-aware processing and self-documenting capabilities.
 
 ## Concepts
 
-Core architectural patterns and design principles that drive the wiki generation system:
+Core ideas and approaches that drive the system's architecture and functionality.
 
-- [Automated wiki navigation generation](concepts/automated-wiki-navigation-generation.md) - Dynamic generation of navigation structures and index pages
-- [Category-aware routing system](concepts/category-aware-routing-system.md) - Intelligent routing based on content categorization and metadata
-- [Category-based page organization](concepts/category-based-page-organization.md) - Hierarchical organization of wiki content by functional categories
-- [Concept format migration pattern](concepts/concept-format-migration-pattern.md) - Systematic approach to evolving and migrating documentation formats
-- [Cost-Aware Processing](concepts/cost-aware-processing.md) - Optimization strategies to minimize computational and API costs
-- [Cost-aware testing](concepts/cost-aware-testing.md) - Testing methodologies that balance coverage with resource consumption
-- [Flexible concept representation](concepts/flexible-concept-representation.md) - Adaptable content models that support diverse documentation needs
-- [Global metadata tracking system](concepts/global-metadata-tracking-system.md) - Centralized system for managing metadata across all wiki pages
-- [Global metadata tracking](concepts/global-metadata-tracking.md) - Comprehensive tracking of page states, dependencies, and processing history
-- [Graceful degradation for non-critical operations](concepts/graceful-degradation-for-non-critical-operations.md) - Resilient handling of failures in non-essential processes
-- [Hierarchical metadata architecture](concepts/hierarchical-metadata-architecture.md) - Structured metadata organization supporting inheritance and composition
-- [Local Development Testing](concepts/local-development-testing.md) - Development workflow optimized for local testing and iteration
-- [Meta-Analysis Integration](concepts/meta-analysis-integration.md) - System for analyzing and improving documentation quality and coverage
-- [Mock GitHub Client Pattern](concepts/mock-git-hub-client-pattern.md) - Testing pattern for simulating GitHub API interactions
-- [Options-based API pattern](concepts/options-based-api-pattern.md) - Flexible API design using configuration objects for extensibility
-- [Page lifecycle metadata management](concepts/page-lifecycle-metadata-management.md) - Comprehensive tracking of page creation, updates, and dependencies
-- [Phase-based processing workflow](concepts/phase-based-processing-workflow.md) - Sequential processing pipeline with clear separation of concerns
-- [Processing state normalization](concepts/processing-state-normalization.md) - Consistent state representation across different processing phases
-- [Repository-Level Processing](concepts/repository-level-processing.md) - Holistic approach to analyzing and documenting entire repositories
-- [Self-documentation workflow](concepts/self-documentation-workflow.md) - Automated process for documenting the documentation system itself
-- [Self-testing pattern](concepts/self-testing-pattern.md) - Recursive testing approach where the system validates its own functionality
-- [Stateful Processing with Resume Capability](concepts/stateful-processing-with-resume-capability.md) - Robust processing pipeline with checkpoint and resume functionality
-- [Template-driven AI content generation](concepts/template-driven-ai-content-generation.md) - Structured approach to generating consistent, high-quality content using AI
-- [Wiki index generation](concepts/wiki-index-generation.md) - Automated creation of navigation and overview pages
-- [Wiki page lifecycle management](concepts/wiki-page-lifecycle-management.md) - Complete workflow for creating, updating, and maintaining wiki pages
+- [Automated guide generation from existing documentation](concepts/automated-guide-generation-from-existing-documentation.md) - Automatically creating structured guides by processing existing documentation files
+- [Automatic statistics calculation](concepts/automatic-statistics-calculation.md) - Real-time computation of metrics and analytics for documentation content
+- [Category-aware concept extraction](concepts/category-aware-concept-extraction.md) - Intelligent identification and classification of concepts based on content categories
+- [Category-aware concept routing](concepts/category-aware-concept-routing.md) - Dynamic routing of concepts to appropriate documentation sections based on classification
+- [Category-based Page Organization](concepts/category-based-page-organization.md) - Systematic organization of wiki pages using hierarchical category structures
+- [Concept format normalization](concepts/concept-format-normalization.md) - Standardizing concept representation across different documentation formats
+- [Conditional Post-Processing](concepts/conditional-post-processing.md) - Applying targeted processing steps based on content type and requirements
+- [Content categorization for documentation workflow](concepts/content-categorization-for-documentation-workflow.md) - Systematic classification of content to optimize documentation generation workflows
+- [Cost-aware processing](concepts/cost-aware-processing.md) - Optimizing resource usage and API costs during documentation generation
+- [Cost-controlled processing](concepts/cost-controlled-processing.md) - Implementing budget constraints and cost monitoring for processing operations
+- [GitHub Client Mocking Strategy](concepts/git-hub-client-mocking-strategy.md) - Testing approach for GitHub API interactions without external dependencies
+- [Global metadata tracking system](concepts/global-metadata-tracking-system.md) - Comprehensive system for tracking metadata across all documentation components
+- [Global metadata tracking](concepts/global-metadata-tracking.md) - Monitoring and maintaining metadata consistency throughout the documentation lifecycle
+- [Legacy format migration](concepts/legacy-format-migration.md) - Converting and updating documentation from older formats to current standards
+- [Local Git Integration Testing](concepts/local-git-integration-testing.md) - Testing Git operations and repository interactions in local development environments
+- [Mock client pattern](concepts/mock-client-pattern.md) - Design pattern for creating test doubles of external service clients
+- [Operational guide generation](concepts/operational-guide-generation.md) - Creating practical guides for system operation and maintenance procedures
+- [Page lifecycle metadata management](concepts/page-lifecycle-metadata-management.md) - Managing metadata throughout the creation, update, and maintenance of wiki pages
+- [Repository introspection for documentation](concepts/repository-introspection-for-documentation.md) - Analyzing repository structure and content to generate relevant documentation
+- [Repository structure analysis for documentation](concepts/repository-structure-analysis-for-documentation.md) - Deep analysis of codebase organization to inform documentation structure
+- [Self-documenting system](concepts/self-documenting-system.md) - System design that automatically generates and maintains its own documentation
+- [Self-testing approach](concepts/self-testing-approach.md) - Testing methodology where the system validates its own functionality and outputs
+- [Template-driven Content Generation](concepts/template-driven-content-generation.md) - Using templates to ensure consistent structure and formatting across generated content
+- [Wiki Index Generation](concepts/wiki-index-generation.md) - Automated creation of navigation and index pages for wiki content
+- [Wiki page creation and update parameter standardization](concepts/wiki-page-creation-and-update-parameter-standardization.md) - Establishing consistent parameters and interfaces for wiki page operations
 
 ## Components
 
-Key architectural components and modules that implement the wiki generation functionality:
+Specific implementation modules and architectural elements that make up the system.
 
-- [_metadata.json file format](components/_metadata.json-file-format.md) - Standardized metadata format for tracking page and processing information
-- [Categorized concept extraction](components/categorized-concept-extraction.md) - Intelligent extraction and categorization of concepts from source code
-- [Git Integration Layer](components/git-integration-layer.md) - Abstraction layer for version control operations and repository management
-- [Local git integration](components/local-git-integration.md) - Direct integration with local git repositories for development workflows
-- [Mock GitHub client pattern](components/mock-git-hub-client-pattern.md) - Testing infrastructure for GitHub API interactions without external dependencies
-- [WikiIndexAgent](components/wiki-index-agent.md) - Specialized agent responsible for generating and maintaining wiki navigation
+- [Concept object model](components/concept-object-model.md) - Data structures and classes representing concepts within the documentation system
+- [Directory mapping strategy](components/directory-mapping-strategy.md) - Approach for mapping repository directories to documentation organization
+- [File path normalization with extensions](components/file-path-normalization-with-extensions.md) - Standardizing file paths and handling various file extensions consistently
+- [Git Command Line Integration](components/git-command-line-integration.md) - Interface layer for executing Git operations through command line tools
+- [GuideGenerationAgent](components/guide-generation-agent.md) - Autonomous agent responsible for creating and updating documentation guides
+- [Local git integration](components/local-git-integration.md) - Component for managing Git operations within local development workflows
+- [Processing state terminology alignment](components/processing-state-terminology-alignment.md) - Standardizing terminology used across different processing states and workflows
 
 ## Guides
 
-Practical guides for using and extending the wiki generation system:
+Practical instructions and procedures for using and maintaining the system.
 
-- [Safe output isolation](guides/safe-output-isolation.md) - Best practices for isolating generated content and preventing data corruption
+- [Safe output separation](guides/safe-output-separation.md) - Best practices for isolating and managing different types of generated output
+- [Self-Documentation Testing](guides/self-documentation-testing.md) - Procedures for testing the system's self-documentation capabilities
 
 ## Navigation
 
-This wiki is automatically generated and maintained by the CodeWiki-Generator system. Each page includes metadata about its generation process and relationships to other content. Use the category-based organization above to explore different aspects of the system, or browse the automatically generated cross-references within individual pages to discover related concepts and components.
+- Browse **Concepts** to understand the theoretical foundation and design principles
+- Explore **Components** to learn about specific implementation details and modules
+- Follow **Guides** for practical instructions and operational procedures
+- Each page includes cross-references to related concepts and components for deeper exploration

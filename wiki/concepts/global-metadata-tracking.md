@@ -10,29 +10,55 @@ updated: 2025-11-22
 
 ## Purpose and Overview
 
-Global metadata tracking provides systematic collection and persistence of page metadata across the wiki system. This enables enhanced navigation, relationship mapping, and future features like link tracking by maintaining a centralized view of all page attributes and connections.
+Global metadata tracking establishes a system-wide approach for maintaining searchable and linkable documentation metadata across all wiki pages. This system captures essential page information like titles, categories, and prepares the foundation for future link relationship tracking between pages.
 
 ## Key Functionality
 
-The system captures and stores essential metadata for every wiki page through the `updatePageGlobalMetadata` function:
+The metadata tracking system operates through page lifecycle management, handling both new page creation and existing page updates differently to enable comprehensive analytics and link tracking.
 
-- **Page identification**: Full path, title, and category information
-- **Lifecycle tracking**: Creation timestamps for new pages, update timestamps for existing pages
-- **Link preparation**: Placeholder fields for incoming and outgoing page relationships (future feature)
+### Core Operations
 
-The metadata update process differentiates between page creation and updates, ensuring accurate lifecycle tracking while building a foundation for relationship mapping between wiki pages.
+- **Page Registration**: Creates metadata entries for new wiki pages with basic information
+- **Metadata Updates**: Refreshes existing page metadata while preserving historical tracking data
+- **Link Preparation**: Establishes the framework for future incoming/outgoing link relationship tracking
+- **Category Tracking**: Maintains categorization information for enhanced page organization
+
+### Metadata Structure
+
+Each page's global metadata includes:
+- **Title**: Current page title for search and display purposes
+- **Category**: Page categorization for organizational hierarchy
+- **Link Tracking**: Placeholder structure for future bidirectional link relationships
 
 ## Relationships
 
-- **Extends WikiManager**: Adds metadata persistence capabilities to the core wiki management functionality
-- **Integrates with Processor workflows**: Hooks into existing page creation and update processes to automatically capture metadata
-- **Prepares for link tracking**: Establishes the data structure needed for future page relationship and link analysis features
+### Component Integration
 
-## Implementation Notes
+- **WikiManager Integration**: Leverages WikiManager for metadata persistence and storage operations
+- **Processor Enhancement**: Extends the core Processor workflow to automatically include metadata tracking during page processing
+- **Future Link System**: Provides the foundational structure for implementing comprehensive link relationship tracking
 
-The system uses a lifecycle-aware approach where:
-- New pages receive a `createdAt` timestamp
-- Existing pages get an `updatedAt` timestamp
-- Both track the same core metadata (path, title, category) consistently
+## Implementation
 
-This design supports wiki evolution tracking while maintaining a clean separation between creation and modification events.
+### Primary Function
+
+```javascript
+updatePageGlobalMetadata(pageId, title, category, isNewPage)
+```
+
+The function handles both creation and update scenarios:
+- **New Pages**: Initializes complete metadata structure with empty link tracking
+- **Existing Pages**: Updates title and category while preserving existing link relationships
+- **Future-Ready**: Includes stubbed sections for incoming/outgoing link implementation
+
+### Usage Context
+
+This system integrates automatically into the page processing workflow, requiring no direct developer intervention for basic operations. The metadata updates occur transparently during normal wiki page creation and modification processes.
+
+## Future Extensibility
+
+The current implementation prepares for advanced features including:
+- Bidirectional link relationship tracking
+- Page analytics and usage metrics
+- Enhanced search capabilities based on metadata
+- Category-based navigation and filtering systems

@@ -10,63 +10,58 @@ updated: 2025-11-22
 
 ## Purpose and Overview
 
-The global metadata tracking system provides centralized management of wiki page metadata and statistics through a persistent `_metadata.json` file. It enables system-wide analytics and page lifecycle tracking by maintaining both individual page metadata and aggregated statistics across the entire wiki.
+The global metadata tracking system provides centralized metadata management for wiki pages through a persistent `_metadata.json` file. It automatically maintains statistics about page types, orphaned pages, and overall wiki health to support monitoring and management operations.
 
 ## Key Functionality
 
-### Metadata Storage Architecture
+The system extends the WikiManager class with four core functions that handle metadata persistence and calculation:
 
-The system uses a hierarchical approach with two levels of metadata:
-
-- **Page-level metadata**: Individual page information stored in the `pages` object
-- **Global statistics**: Aggregated data including page counts by category and generation timestamps
-
-### Core Operations
-
-- **`loadGlobalMetadata()`** - Initializes or loads the global metadata file, creating default structure on first access
-- **`saveGlobalMetadata()`** - Persists metadata changes to disk with formatted JSON output
-- **`updatePageGlobalMetadata()`** - Updates individual page metadata and recalculates global statistics
-- **`getPageGlobalMetadata()`** - Retrieves metadata for specific pages from the global store
+- **`loadGlobalMetadata()`** - Retrieves metadata from `_metadata.json` or initializes default structure
+- **`saveGlobalMetadata(metadata)`** - Persists metadata object to disk
+- **`updatePageGlobalMetadata(pagePath, pageMetadata)`** - Updates individual page metadata and recalculates global statistics
+- **`getPageGlobalMetadata(pagePath)`** - Retrieves metadata for a specific page
 
 ### Automatic Statistics Calculation
 
 The system automatically tracks:
-- Total page counts by category
-- Last generation timestamps
-- Page creation and modification tracking
+- **Page counts by type** - Categorizes pages (concepts, components, guides, etc.)
+- **Orphaned page detection** - Identifies pages without incoming links
+- **Wiki health metrics** - Provides aggregate statistics for monitoring
+
+Statistics are recalculated whenever page metadata is updated, ensuring real-time accuracy without manual intervention.
 
 ## Relationships
 
-- **Extends WikiManager**: Adds persistent metadata capabilities to the core wiki management functionality
-- **Complements frontmatter parsing**: Works alongside existing page-level metadata extraction to provide global context
-- **Foundation for analytics**: Enables wiki statistics, reporting, and dashboard features
+- **Extends WikiManager** - Adds metadata capabilities to existing page generation workflow
+- **Complements page generation** - Metadata tracking occurs alongside normal wiki operations
+- **Enables monitoring systems** - Provides data foundation for wiki health dashboards and reporting
 
 ## Usage Examples
 
-### Tracking Page Updates
+### Basic Metadata Operations
 
 ```javascript
-// Update metadata when a page is modified
-await updatePageGlobalMetadata('user-guide', {
-  category: 'guide',
-  lastModified: new Date().toISOString(),
-  wordCount: 1250
+// Load existing metadata
+const metadata = await loadGlobalMetadata();
+
+// Update page metadata
+await updatePageGlobalMetadata('concepts/authentication.md', {
+  type: 'concept',
+  lastModified: Date.now(),
+  incomingLinks: ['guides/login-flow.md']
 });
+
+// Retrieve specific page metadata
+const pageData = getPageGlobalMetadata('concepts/authentication.md');
 ```
 
-### Retrieving Page Information
-
-```javascript
-// Get metadata for a specific page
-const pageMetadata = await getPageGlobalMetadata('api-reference');
-console.log(pageMetadata.category, pageMetadata.lastModified);
-```
-
-### Accessing Global Statistics
+### Accessing Statistics
 
 ```javascript
 const metadata = await loadGlobalMetadata();
-console.log(`Total guides: ${metadata.statistics.pagesByCategory.guide || 0}`);
+console.log(`Total pages: ${metadata.statistics.totalPages}`);
+console.log(`Orphaned pages: ${metadata.statistics.orphanedPages}`);
+console.log(`Concepts: ${metadata.statistics.pageTypes.concept || 0}`);
 ```
 
-The metadata file structure automatically maintains consistency between individual page data and aggregate statistics, ensuring accurate system-wide reporting without manual synchronization.
+The metadata structure automatically maintains consistency and provides immediate access to wiki health metrics for monitoring and management purposes.
