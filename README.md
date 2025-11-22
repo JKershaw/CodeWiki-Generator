@@ -39,11 +39,14 @@ cd CodeWiki-Generator
 npm install
 ```
 
-3. Configure environment variables:
+3. Configure environment variables (for manual testing):
 ```bash
 cp .env.example .env
 # Edit .env and add your API keys
+# See ENVIRONMENT.md for detailed configuration options
 ```
+
+**Note**: API keys are NOT required for running tests. Tests automatically use mocks.
 
 4. Start the server:
 ```bash
@@ -94,7 +97,9 @@ The quality of the self-generated documentation validates the quality of the sys
 
 ## Testing
 
-Run the test suite:
+### Running Tests
+
+Run the full test suite:
 ```bash
 npm test
 ```
@@ -103,6 +108,18 @@ Watch mode for development:
 ```bash
 npm test:watch
 ```
+
+**Important**: Tests automatically use mocks for all API calls. No API keys required, no API costs incurred.
+
+### Manual Testing with Real APIs
+
+To test with actual GitHub and Anthropic APIs:
+1. Add your API keys to `.env`
+2. Set `TEST_MODE=false` in `.env`
+3. Run the server: `npm start`
+4. Use the dashboard to process a repository
+
+See [ENVIRONMENT.md](ENVIRONMENT.md) for detailed configuration options.
 
 ## Cost Estimation
 
