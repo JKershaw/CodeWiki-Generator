@@ -1,5 +1,5 @@
 ---
-title: Page Lifecycle Metadata Management
+title: Page lifecycle metadata management
 category: concept
 related: []
 created: 2025-11-22
@@ -10,48 +10,53 @@ updated: 2025-11-22
 
 ## Purpose and Overview
 
-The Page Lifecycle Metadata Management system maintains a centralized registry of wiki page metadata throughout their entire lifecycle. This system captures essential page information including titles, categories, and link relationships, enabling advanced features like link analysis and page relationship tracking.
+The page lifecycle metadata management system tracks essential information about wiki pages throughout their creation and evolution. It maintains a centralized metadata store that enables enhanced navigation, relationship mapping, and future link tracking capabilities across the wiki system.
 
 ## Key Functionality
 
 ### Global Metadata Tracking
 
-The system creates and maintains global metadata entries for every wiki page, storing:
+The system maintains persistent metadata for each wiki page, capturing:
 
-- **Page titles** - For display and reference purposes
-- **Categories** - For organizational and filtering capabilities  
-- **Link relationships** - Incoming and outgoing links between pages
-- **Lifecycle state** - Creation and update timestamps
+- **Page identity**: Unique slug and human-readable title
+- **Categorization**: Page category for organizational structure
+- **Relationship placeholders**: Reserved fields for incoming and outgoing link tracking (future implementation)
 
-### Metadata Persistence
+### Lifecycle-Aware Updates
 
-The `updatePageGlobalMetadata` function handles both creation and updates of page metadata:
+The `updatePageGlobalMetadata` function handles both page creation and updates intelligently:
 
 ```javascript
-// Updates global metadata for a wiki page
-updatePageGlobalMetadata(pageId, metadata)
+updatePageGlobalMetadata(slug, title, category)
 ```
 
-This function ensures data consistency by:
-- Creating new metadata entries for new pages
-- Updating existing entries when pages are modified
-- Maintaining referential integrity for link relationships
+**Parameters:**
+- `slug`: Unique page identifier
+- `title`: Display title for the page
+- `category`: Organizational category
 
-### Lifecycle Integration
-
-The metadata management integrates seamlessly with the page processing workflow, automatically updating metadata whenever pages are:
-- Created
-- Modified
-- Linked to or from other pages
+The function creates new metadata entries for fresh pages and updates existing entries when pages are modified, ensuring the metadata store stays synchronized with page changes.
 
 ## Relationships
 
-- **WikiManager Integration** - Persists metadata through the WikiManager's storage layer
-- **Processor Extension** - Extends the existing page processing workflow to include metadata updates
-- **Future Feature Preparation** - Provides the data foundation for upcoming link analysis and page relationship features
+### Integration Points
 
-## Implementation Notes
+- **WikiManager Extension**: Enhances the core WikiManager with persistent metadata capabilities
+- **Processor Workflow**: Integrates seamlessly into existing page creation and update processes
+- **Future Link Tracking**: Establishes the foundation for bidirectional link relationship tracking
 
-The system uses a medium-level abstraction that balances flexibility with performance. The metadata structure is designed to support future enhancements while maintaining efficient access patterns for current operations.
+### Data Flow
 
-This infrastructure enables developers to build sophisticated wiki features like automatic page suggestions, broken link detection, and content relationship analysis without requiring fundamental architectural changes.
+1. Page creation/update triggers in Processor
+2. Metadata extraction from page content
+3. `updatePageGlobalMetadata` call with page details
+4. Persistent storage of metadata for system-wide access
+
+## Architecture Considerations
+
+The metadata structure includes placeholder fields for link relationships, indicating planned expansion for:
+- Automatic backlink generation
+- Page relationship visualization
+- Wiki graph analysis capabilities
+
+This forward-thinking design ensures the metadata system can evolve without breaking existing functionality or requiring data migration.

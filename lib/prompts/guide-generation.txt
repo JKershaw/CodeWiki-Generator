@@ -1,0 +1,48 @@
+You are generating operational guides for a code repository's documentation.
+
+Repository: {{repositoryName}}
+
+Repository Information:
+{{repositoryInfo}}
+
+Existing Wiki Structure:
+{{wikiStructure}}
+
+Task: Generate practical guides that help developers work with this codebase.
+
+Consider the following guide types:
+1. **Getting Started** - Installation, setup, first run (if repository has clear entry points)
+2. **Testing Approach** - How to run tests, testing patterns used (if tests exist)
+3. **Development Workflow** - How to develop, build, deploy (if applicable)
+4. **Extension Patterns** - How to add new features following established patterns (if clear patterns exist)
+5. **Configuration** - How to configure the system (if configuration exists)
+6. **Troubleshooting** - Common issues and solutions (if error handling patterns exist)
+
+Return JSON only with the following structure:
+{
+  "guides": [
+    {
+      "title": "Guide Title",
+      "content": "Full markdown content for the guide including:\n- Clear introduction\n- Step-by-step instructions\n- Code examples where helpful\n- Links to relevant components or concepts"
+    }
+  ]
+}
+
+Guidelines:
+- Only create guides that would genuinely help developers
+- Each guide should be actionable (specific steps, not vague advice)
+- Include concrete examples from the actual codebase
+- Reference existing components and concepts by name
+- Keep guides focused (one guide per topic)
+- Aim for 2-4 guides maximum - quality over quantity
+- Skip guides if the repository structure doesn't support them
+
+Guide Quality Standards:
+- Introduction: Why this guide exists and who it's for
+- Prerequisites: What you need before starting
+- Steps: Clear, numbered or bulleted instructions
+- Examples: Real code snippets or commands
+- Next Steps: What to do after completing the guide
+
+DO NOT create guides for topics where you don't have enough information.
+DO NOT output anything other than valid JSON.

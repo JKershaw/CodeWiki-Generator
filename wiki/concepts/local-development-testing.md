@@ -8,41 +8,34 @@ updated: 2025-11-22
 
 # Local Development Testing
 
-The local development testing module enables testing the CodeWiki Generator on itself using local git history instead of GitHub API calls. This allows developers to iterate and debug without external dependencies or rate limits.
+## Purpose and Overview
+
+The Local Development Testing system enables developers to test the CodeWiki Generator on itself using local git history instead of the GitHub API. This eliminates API rate limits and costs during development while providing a realistic test environment using the actual codebase.
 
 ## Key Functionality
 
-The module replaces the GitHub API client with a mock that extracts equivalent data directly from the local git repository:
+The system works by substituting the GitHub API client with a mock implementation that sources data from local git commands:
 
-### Git Data Extraction
+- **Local Git Integration**: Uses `git log` and `git show` commands to extract commit history and file changes
+- **API Mocking**: Replaces the `githubClient.getCommits()` interface with local git data
+- **Isolated Output**: Generates documentation in `generated-wiki/` to avoid conflicts with the development wiki
+- **Self-Testing**: Runs the complete processing pipeline on the codebase itself
 
-- **Commit History**: Uses `git log` to retrieve commit SHAs, messages, and timestamps
-- **File Changes**: Executes `git diff --name-only` to identify modified files per commit
-- **Patch Generation**: Captures full diffs via `git show` for content analysis
-- **Error Handling**: Gracefully handles git command failures and empty results
+### Core Components
 
-### Mock Client Pattern
-
-The module implements the same interface as the GitHub client:
-- `getCommits()` - Returns locally extracted commit data
-- `getFileContent()` - Reads files directly from filesystem
-- `getCommitDiff()` - Provides git-generated patches
-
-### Processing Pipeline
-
-1. Extracts recent commits from local repository
-2. Creates mock GitHub client with local data
-3. Initializes processor with mocked dependencies
-4. Generates wiki content to separate output directory (`generated-wiki/`)
+- `getLocalCommits()`: Executes git commands to retrieve commit data and transforms it into the expected GitHub API format
+- `main()`: Orchestrates the test by configuring the Processor with mocked dependencies and local repository settings
 
 ## Relationships
 
-- **Depends on**: `lib/processor` for core analysis logic
-- **Mocks**: `githubClient` interface from main application
-- **Outputs to**: `generated-wiki/` directory (separate from production `dev-wiki/`)
-- **Processes**: Same repository structure and files as production workflow
+The local testing system integrates with several core components:
 
-## Usage
+- **Processor Class**: Uses the main `lib/processor` without modification by implementing its expected interface
+- **GitHub Client Interface**: Mocks the `getCommits()` method to provide local data instead of API responses
+- **File System**: Reads from the current repository and writes output to isolated directories
+- **Node.js Child Process**: Executes git commands via `execSync` for data extraction
+
+## Usage Examples
 
 Run the local test script directly:
 
@@ -50,10 +43,10 @@ Run the local test script directly:
 node test-run-local.js
 ```
 
-This processes the current repository's git history and generates documentation in the `generated-wiki/` directory, allowing comparison with production output and validation of changes before deployment.
+The script automatically:
+1. Detects the current repository path
+2. Extracts recent commit history using git
+3. Processes the commits through the standard pipeline
+4. Outputs generated documentation to `generated-wiki/`
 
-The script is particularly useful for:
-- Testing configuration changes
-- Debugging analysis logic
-- Validating output format modifications
-- Development without GitHub API rate limits
+This approach allows developers to validate changes, test new features, and debug the system without external dependencies or API costs.
