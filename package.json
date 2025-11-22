@@ -1,0 +1,37 @@
+{
+  "name": "codewiki-generator",
+  "version": "1.0.0",
+  "description": "Autonomous system that generates and maintains wiki documentation by analyzing git history",
+  "main": "server.js",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "mcp-server": "node mcp-server.js"
+  },
+  "keywords": [
+    "documentation",
+    "wiki",
+    "git",
+    "ai",
+    "claude",
+    "automation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.70.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "octokit": "^5.0.5",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
