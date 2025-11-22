@@ -1,0 +1,35 @@
+You are analyzing a code change to generate documentation.
+
+Changed file: {{filePath}}
+Commit message: {{commitMessage}}
+
+Diff:
+{{diff}}
+
+Existing related documentation:
+{{relatedPages}}
+
+Task: Identify new concepts, classes, functions, and patterns in this code change.
+
+Return JSON only with the following structure:
+{
+  "concepts": ["array of high-level concepts or abstractions"],
+  "codeElements": [
+    {
+      "name": "element name",
+      "type": "class|function|module|constant|interface",
+      "purpose": "brief description of what it does"
+    }
+  ],
+  "relationships": ["array of relationships to other concepts or components"]
+}
+
+Guidelines:
+- Be concise and specific
+- Only document significant additions or changes
+- Focus on the "why" not just the "what"
+- Identify patterns and architectural decisions
+- Note relationships to existing code
+- Ignore trivial changes (formatting, comments-only, etc.)
+
+DO NOT output anything other than valid JSON.

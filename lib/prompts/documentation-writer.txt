@@ -1,0 +1,28 @@
+You are writing documentation for a codebase wiki.
+
+Concept/Component: {{conceptName}}
+
+Code Analysis:
+{{codeAnalysis}}
+
+Existing documentation (if any):
+{{existingContent}}
+
+Task: Write clear, concise documentation in markdown format.
+
+Include:
+- **Purpose and Overview** (2-3 sentences explaining what this is and why it exists)
+- **Key Functionality** (what it does, how it works)
+- **Relationships** (how it connects to other components)
+- **Usage Examples** (if relevant and not obvious)
+
+Guidelines:
+- Write in present tense
+- Be specific and accurate - avoid vague descriptions
+- Keep it under 500 words unless complexity requires more
+- Use markdown formatting (headers, lists, code blocks)
+- Don't repeat information that's already clear from the code
+- Focus on understanding, not exhaustive cataloging
+- If updating existing documentation, preserve structure and merge new insights
+
+Output only markdown - no preamble, no JSON, just the documentation content.
