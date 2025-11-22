@@ -21,7 +21,7 @@ An autonomous system that generates and maintains comprehensive wiki documentati
 ### Concepts
 High-level architectural concepts, patterns, and mental models:
 - [Architecture](concepts/architecture.md) - Overall system design
-- [Agent System](concepts/agent-system.md) - AI agent architecture
+- [Wiki Improvement Strategy](concepts/wiki-improvement-strategy.md) - Evolution plan for documentation system
 
 ### Components
 Detailed documentation of individual code modules:
