@@ -20,7 +20,8 @@ describe('Processor', () => {
       createPage: jest.fn(),
       updatePage: jest.fn(),
       searchPages: jest.fn(),
-      getRelatedPages: jest.fn()
+      getRelatedPages: jest.fn(),
+      updatePageGlobalMetadata: jest.fn()
     };
 
     mockStateManager = {
