@@ -1,0 +1,245 @@
+{
+  "generated": "2025-11-22T22:21:57.913Z",
+  "pages": {
+    "concepts/global-metadata-tracking.md": {
+      "title": "Global metadata tracking",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/page-lifecycle-metadata-management.md": {
+      "title": "Page Lifecycle Metadata Management",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/wiki-statistics-aggregation.md": {
+      "title": "Wiki statistics aggregation",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/concept-categorization-system.md": {
+      "title": "concept categorization system",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/backward-compatibility-pattern.md": {
+      "title": "backward compatibility pattern",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "components/structured-concept-format.md": {
+      "title": "structured concept format",
+      "created": "2025-11-22",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/category-aware-concept-extraction.md": {
+      "title": "Category-aware concept extraction",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/dynamic-documentation-routing.md": {
+      "title": "Dynamic documentation routing",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/self-documentation-pattern.md": {
+      "title": "Self-documentation pattern",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "components/local-git-integration.md": {
+      "title": "Local git integration",
+      "created": "2025-11-22",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "components/git-hub-client-mocking.md": {
+      "title": "GitHub client mocking",
+      "created": "2025-11-22",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/wiki-page-management-api-standardization.md": {
+      "title": "Wiki page management API standardization",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "components/page-path-normalization.md": {
+      "title": "Page path normalization",
+      "created": "2025-11-22",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/processing-status-terminology.md": {
+      "title": "Processing status terminology",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/local-development-testing.md": {
+      "title": "Local Development Testing",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/git-integration-for-commit-processing.md": {
+      "title": "Git Integration for Commit Processing",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/mock-client-pattern.md": {
+      "title": "Mock Client Pattern",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/self-testing-pattern.md": {
+      "title": "Self-testing pattern",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "components/cost-limited-testing.md": {
+      "title": "Cost-limited testing",
+      "created": "2025-11-22",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "guides/test-output-isolation.md": {
+      "title": "Test output isolation",
+      "created": "2025-11-22",
+      "category": "guide",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/repository-level-batch-processing.md": {
+      "title": "Repository-level batch processing",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/cost-aware-processing-with-limits.md": {
+      "title": "Cost-aware processing with limits",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/adaptive-meta-analysis-scheduling.md": {
+      "title": "Adaptive meta-analysis scheduling",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "components/resumable-processing-state.md": {
+      "title": "Resumable processing state",
+      "created": "2025-11-22",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "components/git-hub-repository-integration.md": {
+      "title": "GitHub repository integration",
+      "created": "2025-11-22",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/commit-based-documentation-processing.md": {
+      "title": "Commit-based documentation processing",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/multi-agent-coordination-pattern.md": {
+      "title": "Multi-agent coordination pattern",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "concepts/context-aware-documentation-generation.md": {
+      "title": "Context-aware documentation generation",
+      "created": "2025-11-22",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    },
+    "components/processor-class.md": {
+      "title": "Processor class",
+      "created": "2025-11-22",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-22"
+    }
+  },
+  "statistics": {
+    "totalPages": 29,
+    "concepts": 20,
+    "components": 8,
+    "guides": 1,
+    "totalCommitsProcessed": 0,
+    "orphanedPages": []
+  }
+}
