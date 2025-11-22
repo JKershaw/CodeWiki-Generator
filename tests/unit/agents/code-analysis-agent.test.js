@@ -38,9 +38,14 @@ describe('CodeAnalysisAgent', () => {
 
       const result = await agent.analyzeCode('src/auth.js', fileDiff, commitMessage, relatedPages);
 
-      expect(result).toEqual(mockAnalysis);
-      expect(result.concepts).toContain('Authentication');
+      // Result should have normalized concepts to object format
+      expect(result.concepts).toHaveLength(2);
+      expect(result.concepts[0].name).toBe('Authentication');
+      expect(result.concepts[0].category).toBe('component'); // Default for legacy format
+      expect(result.concepts[1].name).toBe('Session Management');
       expect(result.codeElements[0].name).toBe('AuthService');
+      expect(result.relationships).toEqual(['uses SessionManager', 'called by UserController']);
+      expect(result.suggestedGuides).toEqual([]);
     });
 
     it('should pass file path, diff, and commit message to prompt', async () => {

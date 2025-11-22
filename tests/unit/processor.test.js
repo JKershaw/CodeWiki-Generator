@@ -226,7 +226,8 @@ describe('Processor', () => {
         'components/auth-service.md',
         expect.stringContaining('Updated'),
         {
-          title: 'AuthService'
+          title: 'AuthService',
+          category: 'components'
         }
       );
     });
