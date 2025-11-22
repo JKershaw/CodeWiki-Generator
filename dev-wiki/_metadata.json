@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-11-22T19:24:00Z",
+  "lastUpdated": "2025-11-22T21:00:00Z",
   "pages": {
     "index": {
       "path": "index.md",
@@ -29,9 +29,9 @@
   },
   "requestQueue": [],
   "stats": {
-    "totalPages": 7,
+    "totalPages": 16,
     "conceptPages": 1,
-    "componentPages": 3,
+    "componentPages": 12,
     "guidePages": 2
   },
   "newPages": {
@@ -52,6 +52,42 @@
       "title": "GitHub Integration",
       "incomingLinks": 1,
       "lastUpdated": "2025-11-22T20:00:00Z"
+    },
+    "claude-client": {
+      "path": "components/claude-client.md",
+      "title": "Claude Client",
+      "incomingLinks": 3,
+      "lastUpdated": "2025-11-22T21:00:00Z"
+    },
+    "prompt-manager": {
+      "path": "components/prompt-manager.md",
+      "title": "Prompt Manager",
+      "incomingLinks": 3,
+      "lastUpdated": "2025-11-22T21:00:00Z"
+    },
+    "agents-overview": {
+      "path": "components/agents/overview.md",
+      "title": "AI Agent System",
+      "incomingLinks": 3,
+      "lastUpdated": "2025-11-22T21:00:00Z"
+    },
+    "code-analysis-agent": {
+      "path": "components/agents/code-analysis.md",
+      "title": "Code Analysis Agent",
+      "incomingLinks": 2,
+      "lastUpdated": "2025-11-22T21:00:00Z"
+    },
+    "documentation-writer-agent": {
+      "path": "components/agents/documentation-writer.md",
+      "title": "Documentation Writer Agent",
+      "incomingLinks": 2,
+      "lastUpdated": "2025-11-22T21:00:00Z"
+    },
+    "meta-analysis-agent": {
+      "path": "components/agents/meta-analysis.md",
+      "title": "Meta-Analysis Agent",
+      "incomingLinks": 1,
+      "lastUpdated": "2025-11-22T21:00:00Z"
     }
   }
 }

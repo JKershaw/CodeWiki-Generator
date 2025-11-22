@@ -25,9 +25,21 @@ High-level architectural concepts, patterns, and mental models:
 
 ### Components
 Detailed documentation of individual code modules:
+
+**Core Infrastructure:**
 - [WikiManager](components/wiki-manager.md) - Read/write wiki markdown files
 - [StateManager](components/state-manager.md) - Processing state persistence
 - [GitHub Integration](components/github-integration.md) - Fetch repository data
+
+**AI System:**
+- [Claude Client](components/claude-client.md) - Anthropic SDK wrapper with cost tracking
+- [Prompt Manager](components/prompt-manager.md) - Template system for AI prompts
+
+**AI Agents:**
+- [Agent System Overview](components/agents/overview.md) - Architecture of the AI agent pipeline
+- [Code Analysis Agent](components/agents/code-analysis.md) - Analyzes code changes
+- [Documentation Writer Agent](components/agents/documentation-writer.md) - Generates markdown docs
+- [Meta-Analysis Agent](components/agents/meta-analysis.md) - Identifies patterns and gaps
 
 ### Guides
 How-to guides and operational documentation:
@@ -36,7 +48,9 @@ How-to guides and operational documentation:
 
 ## Development Status
 
-🚧 Currently implementing Phase 1: Core Infrastructure
+✅ **Phase 1 Complete**: Core Infrastructure (WikiManager, StateManager, GitHub Integration)
+✅ **Phase 2 Complete**: AI Agent System (Claude Client, Agents, Prompt Templates)
+🚧 **Phase 3 In Progress**: Processor Implementation
 
 ## Navigation
 
