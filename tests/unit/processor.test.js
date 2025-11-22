@@ -223,9 +223,11 @@ describe('Processor', () => {
       expect(result.pagesUpdated).toBe(1);
       expect(result.pagesCreated).toBe(0);
       expect(mockWikiManager.updatePage).toHaveBeenCalledWith(
-        'components/auth-service',
-        'AuthService',
-        expect.stringContaining('Updated')
+        'components/auth-service.md',
+        expect.stringContaining('Updated'),
+        {
+          title: 'AuthService'
+        }
       );
     });
 
@@ -360,17 +362,17 @@ describe('Processor', () => {
   describe('determinePagePath', () => {
     it('should convert concept name to page path', () => {
       const path = processor.determinePagePath('AuthService');
-      expect(path).toBe('components/auth-service');
+      expect(path).toBe('components/auth-service.md');
     });
 
     it('should handle multi-word concepts', () => {
       const path = processor.determinePagePath('UserAuthenticationManager');
-      expect(path).toBe('components/user-authentication-manager');
+      expect(path).toBe('components/user-authentication-manager.md');
     });
 
     it('should handle concepts with spaces', () => {
       const path = processor.determinePagePath('Session Manager');
-      expect(path).toBe('components/session-manager');
+      expect(path).toBe('components/session-manager.md');
     });
   });
 
@@ -517,7 +519,7 @@ describe('Processor', () => {
         repoUrl: 'https://github.com/user/test',
         currentCommit: 2,
         totalCommits: 3,
-        status: 'processing'
+        status: 'running'
       });
 
       mockMetaAnalysisAgent.shouldRunMetaAnalysis.mockReturnValue(false);
