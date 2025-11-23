@@ -1,0 +1,521 @@
+{
+  "generated": "2025-11-23T08:50:20.259Z",
+  "pages": {
+    "concepts/resilient-llm-response-parsing.md": {
+      "title": "Resilient LLM response parsing",
+      "created": "2025-11-23",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/progressive-json-repair-strategy.md": {
+      "title": "Progressive JSON repair strategy",
+      "created": "2025-11-23",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/architecture-synthesis-agent-pattern.md": {
+      "title": "Architecture synthesis agent pattern",
+      "created": "2025-11-23",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/architecture-overview-agent.md": {
+      "title": "ArchitectureOverviewAgent",
+      "created": "2025-11-23",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/system-level-documentation-generation.md": {
+      "title": "System-level documentation generation",
+      "created": "2025-11-23",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/category-based-content-organization.md": {
+      "title": "Category-based content organization",
+      "created": "2025-11-23",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/json-response-cleaning-for-llm-apis.md": {
+      "title": "JSON response cleaning for LLM APIs",
+      "created": "2025-11-23",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/operational-documentation-generation.md": {
+      "title": "Operational documentation generation",
+      "created": "2025-11-23",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/repository-fingerprinting.md": {
+      "title": "Repository fingerprinting",
+      "created": "2025-11-23",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/guide-generation-agent.md": {
+      "title": "GuideGenerationAgent",
+      "created": "2025-11-23",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/operational-guide-generation.md": {
+      "title": "Operational Guide Generation",
+      "created": "2025-11-23",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/repository-structure-analysis.md": {
+      "title": "Repository Structure Analysis",
+      "created": "2025-11-23",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/wiki-index-generation-system.md": {
+      "title": "Wiki index generation system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/wiki-index-generation-with-auto-navigation.md": {
+      "title": "Wiki index generation with auto-navigation",
+      "created": "2025-11-23",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/web-dashboard-architecture.md": {
+      "title": "Web Dashboard Architecture",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/production-ready-server-setup.md": {
+      "title": "Production-ready server setup",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-aware-documentation-generation.md": {
+      "title": "Test-aware documentation generation",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-coverage-discovery-and-analysis.md": {
+      "title": "Test coverage discovery and analysis",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/context-enriched-documentation-generation.md": {
+      "title": "Context-enriched documentation generation",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/enhanced-documentation-metadata-system.md": {
+      "title": "Enhanced documentation metadata system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/test-driven-code-example-extraction.md": {
+      "title": "Test-driven code example extraction",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/cross-page-linking-system.md": {
+      "title": "Cross-page linking system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/cross-linking-system.md": {
+      "title": "Cross-linking system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/related-pages-discovery-system.md": {
+      "title": "Related pages discovery system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/wiki-manager-integration.md": {
+      "title": "WikiManager integration",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/link-discovery-agent.md": {
+      "title": "LinkDiscoveryAgent",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/two-phase-cross-linking-system.md": {
+      "title": "Two-phase cross-linking system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/web-dashboard-control-interface.md": {
+      "title": "Web Dashboard Control Interface",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/asynchronous-background-processing.md": {
+      "title": "Asynchronous Background Processing",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/state-based-process-control.md": {
+      "title": "State-based Process Control",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/interactive-web-dashboard.md": {
+      "title": "Interactive Web Dashboard",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/process-control-api-integration.md": {
+      "title": "Process Control API Integration",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/dashboard-controller.md": {
+      "title": "DashboardController",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/nested-wiki-routing.md": {
+      "title": "Nested Wiki Routing",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/express-web-interface-architecture.md": {
+      "title": "Express web interface architecture",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/dashboard-server-implementation.md": {
+      "title": "Dashboard server implementation",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/test-coverage-integration-in-documentation-generation.md": {
+      "title": "Test coverage integration in documentation generation",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-driven-documentation-system.md": {
+      "title": "Test-driven documentation system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/test-coverage-analyzer-component.md": {
+      "title": "TestCoverageAnalyzer component",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/enhanced-documentation-generation-system.md": {
+      "title": "Enhanced documentation generation system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-integrated-documentation-system.md": {
+      "title": "Test-integrated documentation system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/source-file-tracking-in-documentation.md": {
+      "title": "Source file tracking in documentation",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/standalone-processing-scripts.md": {
+      "title": "Standalone processing scripts",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/cross-linking-debugging-framework.md": {
+      "title": "Cross-linking debugging framework",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "guides/debug-scripts-pattern.md": {
+      "title": "Debug scripts pattern",
+      "created": "2025-11-23",
+      "category": "guide",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/sequential-cross-linking-pipeline.md": {
+      "title": "Sequential cross-linking pipeline",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/web-dashboard-control-interface.md": {
+      "title": "Web dashboard control interface",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "lib/dashboard-controller.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/step-wise-processing-control.md": {
+      "title": "Step-wise processing control",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/dashboard-controller.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/dashboard-control-interface.md": {
+      "title": "Dashboard Control Interface",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "public/app.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/real-time-status-monitoring.md": {
+      "title": "Real-time Status Monitoring",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "public/app.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/wiki-integration.md": {
+      "title": "Wiki Integration",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/express-web-interface-for-documentation-management.md": {
+      "title": "Express web interface for documentation management",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/production-ready-server-configuration.md": {
+      "title": "Production-ready server configuration",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-coverage-integration.md": {
+      "title": "Test Coverage Integration",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-coverage-documentation-system.md": {
+      "title": "Test coverage documentation system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/test-coverage-analyzer.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/test-coverage-analyzer-class.md": {
+      "title": "TestCoverageAnalyzer class",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "lib/test-coverage-analyzer.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-driven-documentation-enrichment.md": {
+      "title": "Test-driven documentation enrichment",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/source-file-metadata-tracking.md": {
+      "title": "Source file metadata tracking",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    }
+  },
+  "statistics": {
+    "totalPages": 58,
+    "concepts": 34,
+    "components": 23,
+    "guides": 1,
+    "totalCommitsProcessed": 0,
+    "orphanedPages": []
+  }
+}

@@ -1,0 +1,245 @@
+/* CodeWiki Generator - Dashboard Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #f5f5f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  color: #2563eb;
+  margin-bottom: 5px;
+}
+
+.version {
+  color: #666;
+  font-size: 0.9em;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+section {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+section h2 {
+  margin-bottom: 15px;
+  color: #1e40af;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 10px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.status-badge.idle {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status-badge.processing {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge.paused {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.completed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #374151;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.btn-warning {
+  background: #f59e0b;
+  color: white;
+}
+
+.btn-warning:hover {
+  background: #d97706;
+}
+
+.btn-secondary {
+  background: #6b7280;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+}
+
+.wiki-panel ul {
+  list-style: none;
+}
+
+.wiki-panel li {
+  margin-bottom: 10px;
+}
+
+.wiki-panel a {
+  color: #2563eb;
+  text-decoration: none;
+  padding: 5px 0;
+  display: inline-block;
+}
+
+.wiki-panel a:hover {
+  text-decoration: underline;
+}
+
+.wiki-content {
+  line-height: 1.8;
+}
+
+.wiki-content h1,
+.wiki-content h2,
+.wiki-content h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: #1e40af;
+}
+
+.wiki-content code {
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.wiki-content pre {
+  background: #1f2937;
+  color: #f3f4f6;
+  padding: 15px;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 15px 0;
+}
+
+.wiki-content pre code {
+  background: none;
+  padding: 0;
+  color: #f3f4f6;
+}
+
+.breadcrumb {
+  color: #6b7280;
+  font-size: 0.9em;
+}
+
+.breadcrumb a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.related-pages {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid #e5e7eb;
+}
+
+footer {
+  margin-top: 30px;
+  padding: 20px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.9em;
+}
+
+.error-page {
+  text-align: center;
+  padding-top: 50px;
+}
+
+.error-message {
+  font-size: 1.2em;
+  color: #dc2626;
+  margin: 30px 0;
+}

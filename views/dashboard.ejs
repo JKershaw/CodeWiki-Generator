@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeWiki Generator Dashboard</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>CodeWiki Generator Dashboard</h1>
+      <p class="version">v<%= version %></p>
+    </header>
+
+    <main>
+      <section class="status-panel">
+        <h2>Processing Status</h2>
+        <div class="status-info">
+          <p><strong>Status:</strong> <span class="status-badge <%= state.status %>"><%= state.status %></span></p>
+          <p><strong>Repository:</strong> <%= state.repoUrl || 'None' %></p>
+          <p><strong>Progress:</strong> <%= state.currentCommit %> / <%= state.totalCommits %> commits</p>
+          <p><strong>Pages:</strong> <%= state.pagesCreated %> created, <%= state.pagesUpdated %> updated</p>
+        </div>
+      </section>
+
+      <section class="control-panel">
+        <h2>Controls</h2>
+        <form id="start-form">
+          <div class="form-group">
+            <label for="repoUrl">Repository URL:</label>
+            <input
+              type="text"
+              id="repoUrl"
+              name="repoUrl"
+              placeholder="https://github.com/owner/repo"
+              value="<%= state.repoUrl || '' %>"
+            >
+          </div>
+          <div class="button-group">
+            <button type="submit" class="btn btn-primary">Start Processing</button>
+            <button type="button" id="pauseBtn" class="btn btn-warning">Pause</button>
+            <button type="button" id="stepBtn" class="btn btn-secondary">Step</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="project-panel">
+        <h2>Wiki Project</h2>
+        <div class="form-group">
+          <label for="project">Select Project:</label>
+          <select id="project" class="project-selector">
+            <% projects.forEach(function(project) { %>
+              <option value="<%= project %>" <%= project === defaultProject ? 'selected' : '' %>>
+                <%= project.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') %>
+              </option>
+            <% }); %>
+          </select>
+        </div>
+      </section>
+
+      <section class="wiki-panel">
+        <h2>Generated Wiki</h2>
+        <p>View generated documentation:</p>
+        <ul id="wiki-links">
+          <li><a href="/wiki/<%= defaultProject %>/index" class="wiki-link">Wiki Index</a></li>
+          <li><a href="/wiki/<%= defaultProject %>/concepts/architecture" class="wiki-link">Architecture</a></li>
+          <li><a href="/wiki/<%= defaultProject %>/guides/getting-started" class="wiki-link">Getting Started</a></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>CodeWiki Generator - Automated Documentation System</p>
+    </footer>
+  </div>
+
+  <script src="/public/app.js"></script>
+</body>
+</html>
