@@ -41,7 +41,7 @@ This guide helps you set up and run the CodeWiki-Generator for the first time. T
 
 2. **Generate documentation**
    - The [ArchitectureOverviewAgent](../components/architecture-overview-agent.md) will analyze your repository structure
-   - The GuideGenerationAgent will create operational guides
+   - The [GuideGenerationAgent](../components/guide-generation-agent.md) will create operational guides
    - Wiki index generation will create auto-navigation
 
 3. **Review output**

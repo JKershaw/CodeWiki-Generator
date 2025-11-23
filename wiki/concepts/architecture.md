@@ -1,5 +1,5 @@
 ---
-related: []
+related: [components/progressive-json-repair-strategy.md, components/repository-structure-analysis.md, concepts/repository-fingerprinting.md, components/architecture-overview-agent.md, components/guide-generation-agent.md]
 updated: 2025-11-23
 ---
 
@@ -7,102 +7,116 @@ updated: 2025-11-23
 
 ## System Overview
 
-CodeWiki-Generator is an intelligent documentation automation system that analyzes software repositories and generates comprehensive wiki-style documentation using Large Language Model (LLM) agents. The system automatically discovers code patterns, architectural decisions, and operational procedures within a codebase, then produces structured markdown documentation organized into concepts, components, and guides. This eliminates the manual overhead of maintaining technical documentation while ensuring consistency and completeness across development teams.
+CodeWiki-Generator is an intelligent documentation system that automatically analyzes codebases and generates comprehensive wiki-style documentation using LLM agents. The system transforms raw repository contents into structured documentation including architectural overviews, implementation guides, and navigable indexes, enabling teams to maintain up-to-date documentation with minimal manual effort. It employs a multi-agent approach where specialized AI agents handle different aspects of documentation generation, from repository analysis to content synthesis.
 
 ## Core Architecture
 
-The system follows an **[Architecture synthesis agent pattern](../concepts/architecture-synthesis-agent-pattern.md)** where specialized LLM agents collaborate to analyze and document different aspects of a codebase. Each agent operates independently but contributes to a unified documentation ecosystem. The architecture is designed around the principle of **[Category-based content organization](../concepts/category-based-content-organization.md)**, automatically classifying generated content into concepts (design patterns), components (implementation modules), and guides (operational procedures).
+The system follows an **agent-based architecture** built around the [Architecture synthesis agent pattern](../concepts/architecture-synthesis-agent-pattern.md), where specialized LLM-powered agents collaborate to analyze and document codebases. Each agent has a focused responsibility and operates independently while contributing to a unified documentation output. The architecture emphasizes resilience and adaptability, using progressive parsing strategies to handle the inherent unpredictability of LLM responses while maintaining consistent output quality.
 
-The system employs a pipeline-based approach where repository analysis feeds into specialized documentation generation agents, which then produce structured outputs that are assembled into a navigable wiki structure. Error resilience is built into every layer through progressive parsing strategies and response validation.
+The system implements [Category-based content organization](../concepts/category-based-content-organization.md) to structure generated documentation into logical groupings (concepts, components, guides) that mirror how developers naturally think about software systems. This organizational approach enables both human readers and the generation agents to navigate and build upon existing documentation effectively.
 
 ## Major Components
 
-### [Repository Structure Analysis](../components/repository-structure-analysis.md)
-The foundation component that fingerprints repositories to understand their organization, technologies, and architectural patterns. It creates a structural map that guides all downstream documentation generation, identifying key files, dependency relationships, and organizational patterns.
-
 ### [ArchitectureOverviewAgent](../components/architecture-overview-agent.md)
-A specialized LLM agent responsible for synthesizing high-level architectural documentation. It processes the repository fingerprint and generates system-level overviews, architectural decision records, and technology stack summaries. This agent focuses on the "why" and "how" of system design rather than implementation details.
+The primary orchestrator responsible for synthesizing high-level system documentation. This agent analyzes repository structure, existing documentation, and component relationships to generate comprehensive architecture overviews. It operates at the system level, focusing on how pieces fit together rather than implementation details.
 
 ### [GuideGenerationAgent](../components/guide-generation-agent.md)
-Handles the creation of operational and procedural documentation by analyzing code patterns, configuration files, and existing documentation fragments. It generates step-by-step guides for development, deployment, and maintenance tasks, ensuring that implicit tribal knowledge is captured and formalized.
+Specializes in creating operational and implementation guides based on code patterns and usage examples found in the repository. This agent bridges the gap between architectural concepts and practical implementation, generating step-by-step procedures and best practices documentation.
+
+### [Repository Structure Analysis](../components/repository-structure-analysis.md)
+The foundation component that performs [Repository fingerprinting](../concepts/repository-fingerprinting.md) to understand codebase organization, dependencies, and key artifacts. It creates a structured representation of the repository that other agents can consume, identifying important files, directories, and architectural patterns without requiring deep code parsing.
 
 ### [Progressive JSON repair strategy](../components/progressive-json-repair-strategy.md)
-A resilient parsing system that handles the inherent unreliability of LLM-generated structured outputs. Rather than failing on malformed JSON, it applies incremental repair techniques to salvage partial responses and maintain system reliability even when LLM outputs are imperfect.
+A critical infrastructure component that implements [Resilient LLM response parsing](../concepts/resilient-llm-response-parsing.md) to handle malformed or incomplete JSON responses from language models. This component ensures system reliability by progressively attempting to repair and parse LLM outputs, preventing failures due to formatting inconsistencies.
 
-### [Wiki index generation with auto-navigation](../concepts/wiki-index-generation-with-auto-navigation.md)
-The assembly component that takes generated documentation fragments and creates a coherent, navigable wiki structure. It builds cross-references, generates table-of-contents hierarchies, and creates landing pages that help users discover relevant documentation.
+### Wiki Index Generator
+Implements [Wiki index generation with auto-navigation](../concepts/wiki-index-generation-with-auto-navigation.md) to create discoverable entry points into the generated documentation. This component builds cross-references between documentation sections and generates navigation structures that help users find relevant information quickly.
 
-### [JSON response cleaning for LLM APIs](../concepts/json-response-cleaning-for-llm-apis.md)
-A preprocessing layer that standardizes and validates LLM outputs before they enter the documentation pipeline. This component handles common LLM output issues like markdown formatting inconsistencies, malformed JSON structures, and content hallucinations.
+### Content Synthesizer
+Coordinates between agents to ensure documentation coherence and prevent duplication. It manages the overall documentation generation workflow and applies [JSON response cleaning for LLM APIs](../concepts/json-response-cleaning-for-llm-apis.md) to ensure consistent output formatting across all generated content.
 
-### [Resilient LLM response parsing](../concepts/resilient-llm-response-parsing.md)
-The error handling and recovery system that ensures documentation generation continues even when individual LLM calls fail or return unexpected outputs. It implements retry logic, fallback strategies, and partial result recovery to maintain system robustness.
+### Documentation Store
+Manages persistence and retrieval of generated documentation, maintaining the category-based organization structure and handling updates to existing documentation without losing manual modifications.
 
 ## Data Flow
 
 The system processes repositories through a multi-stage pipeline:
 
 ```
-Repository Input
-       ↓
-Repository Structure Analysis (fingerprinting)
-       ↓
-Agent Dispatch (parallel processing)
-       ↓
-┌─────────────────┬─────────────────┬─────────────────┐
-│ Architecture    │ Component       │ Guide           │
-│ Overview Agent  │ Analysis Agent  │ Generation Agent│
-└─────────────────┴─────────────────┴─────────────────┘
-       ↓                   ↓                   ↓
-JSON Response Cleaning & Resilient Parsing
-       ↓
-[Category-based Content Organization](../concepts/category-based-content-organization.md)
-       ↓
-[Wiki Index Generation with Auto-navigation](../concepts/wiki-index-generation-with-auto-navigation.md)
-       ↓
-Final Documentation Output
+Repository Input → Structure Analysis → Agent Orchestration → Content Generation → Output Assembly
+
+1. Repository Ingestion
+   ├── File system scanning
+   ├── Dependency analysis  
+   └── Pattern recognition
+
+2. Analysis Phase
+   ├── [Repository fingerprinting](../concepts/repository-fingerprinting.md)
+   ├── Architecture extraction
+   └── Component identification
+
+3. Generation Phase
+   ├── [ArchitectureOverviewAgent](../components/architecture-overview-agent.md) → System docs
+   ├── [GuideGenerationAgent](../components/guide-generation-agent.md) → Operational docs
+   └── Parallel agent execution
+
+4. Assembly Phase
+   ├── Progressive JSON repair
+   ├── Content deduplication
+   ├── Cross-reference building
+   └── Index generation
+
+5. Output Phase
+   ├── Markdown generation
+   ├── Navigation structure
+   └── Category organization
 ```
 
-Each agent operates on the same repository fingerprint but focuses on different documentation aspects. The **[Operational documentation generation](../concepts/operational-documentation-generation.md)** pattern ensures that outputs are immediately usable rather than requiring manual post-processing. All agent outputs flow through the same validation and assembly pipeline before being integrated into the final wiki structure.
+Information flows bidirectionally between agents, with each agent contributing insights that inform others. The [Repository Structure Analysis](../components/repository-structure-analysis.md) creates the foundational data model that all other components consume, while the [Progressive JSON repair strategy](../components/progressive-json-repair-strategy.md) ensures data integrity throughout the pipeline.
 
 ## Key Design Decisions
 
-### Agent-Based Architecture over Monolithic Processing
-**Choice**: Separate specialized LLM agents rather than a single general-purpose processor
-**Rationale**: Different documentation types require different prompting strategies, context windows, and validation approaches. Specialized agents can optimize for their specific domain while maintaining focused, manageable prompts.
-**Trade-offs**: Gained flexibility and maintainability at the cost of increased system complexity and coordination overhead.
+### Agent-Based Architecture Over Monolithic Processing
+**Choice**: Implement specialized agents rather than a single large processing system
+**Rationale**: Different aspects of documentation require different analytical approaches and domain knowledge. Agents can be developed, tested, and improved independently while maintaining focused expertise.
+**Trade-offs**: Increased system complexity and coordination overhead in exchange for modularity, testability, and the ability to leverage different LLM prompting strategies for different tasks.
 
-### Progressive Error Recovery vs Fail-Fast
-**Choice**: Implemented **[Progressive JSON repair strategy](../components/progressive-json-repair-strategy.md)** and **[Resilient LLM response parsing](../concepts/resilient-llm-response-parsing.md)** instead of strict validation
-**Rationale**: LLMs are inherently unreliable for structured output generation. A fail-fast approach would result in too many incomplete documentation runs, while progressive repair maximizes the value extracted from each LLM call.
-**Trade-offs**: Improved system reliability and output completeness at the cost of increased processing complexity and potential quality variations.
+### [Progressive JSON Repair Strategy](../components/progressive-json-repair-strategy.md)
+**Choice**: Implement multi-stage parsing with repair attempts rather than strict validation
+**Rationale**: LLM outputs are inherently unpredictable and may contain formatting errors or incomplete responses. Rigid parsing would cause frequent failures and reduce system reliability.
+**Trade-offs**: Additional processing overhead and complexity in exchange for significantly improved robustness and user experience.
 
-### Category-Based Organization vs Flat Structure
-**Choice**: Enforced **[Category-based content organization](../concepts/category-based-content-organization.md)** (concepts, components, guides) rather than allowing free-form documentation structure
-**Rationale**: Consistent organization patterns make documentation more discoverable and maintainable. The three-category system maps well to how developers mentally model software systems.
-**Trade-offs**: Gained consistency and navigability while potentially constraining documentation that doesn't fit neatly into these categories.
+### Category-Based Organization Over Flat Structure
+**Choice**: Organize documentation into concepts, components, and guides rather than a flat file structure
+**Rationale**: This organization matches how developers naturally categorize and search for information, improving discoverability and enabling agents to build upon existing documentation effectively.
+**Trade-offs**: More complex navigation generation and cross-referencing requirements in exchange for better information architecture and user experience.
 
-### [Repository Fingerprinting](../concepts/repository-fingerprinting.md) vs Full Content Analysis
-**Choice**: Implemented **[Repository fingerprinting](../concepts/repository-fingerprinting.md)** to create lightweight structural summaries rather than processing entire codebases
-**Rationale**: Full content analysis doesn't scale to large repositories and often introduces noise. Fingerprinting captures the essential architectural patterns while keeping LLM context windows manageable.
-**Trade-offs**: Gained scalability and focused analysis while potentially missing implementation details that could inform documentation.
+### [Repository Fingerprinting](../concepts/repository-fingerprinting.md) Over Deep Code Analysis
+**Choice**: Focus on structural analysis and patterns rather than detailed code parsing
+**Rationale**: Enables faster processing and reduces dependencies on language-specific parsing tools while still capturing essential architectural information.
+**Trade-offs**: Less detailed code-level insights in exchange for broader language support, faster processing, and reduced complexity.
+
+### Resilient Parsing Over Strict Validation
+**Choice**: Implement tolerant parsing with multiple fallback strategies
+**Rationale**: LLM responses vary in quality and format consistency. Strict validation would cause unnecessary failures and reduce the system's practical utility.
+**Trade-offs**: More complex error handling and potential for accepting lower-quality outputs in exchange for higher success rates and better user experience.
 
 ## Extension Points
 
 ### Custom Agent Development
-Developers can extend the system by implementing additional specialized agents that follow the same input/output contracts. New agents should consume repository fingerprints and produce JSON outputs that integrate with the **[Wiki index generation with auto-navigation](../concepts/wiki-index-generation-with-auto-navigation.md)** system.
-
-### Content Category Extensions
-While the system defaults to concepts/components/guides, the **[Category-based content organization](../concepts/category-based-content-organization.md)** pattern can accommodate additional categories by extending the classification logic and updating the index generation templates.
-
-### LLM Provider Integration
-The **[JSON response cleaning for LLM APIs](../concepts/json-response-cleaning-for-llm-apis.md)** and **[Resilient LLM response parsing](../concepts/resilient-llm-response-parsing.md)** components provide standardized interfaces that can accommodate different LLM providers beyond the default implementation. New providers need only implement the base API contract.
+Developers can create specialized agents by implementing the base agent interface and registering them with the system. New agents can focus on specific documentation types (API docs, deployment guides, security documentation) or target particular technologies or frameworks.
 
 ### Repository Analysis Plugins
-The **[Repository Structure Analysis](../components/repository-structure-analysis.md)** component can be extended with language-specific or framework-specific analysis plugins that enhance fingerprinting for particular technology stacks.
+The [Repository Structure Analysis](../components/repository-structure-analysis.md) component supports plugins for recognizing framework-specific patterns, custom project structures, or specialized toolchains. Plugins can extend the fingerprinting capabilities to better understand domain-specific codebases.
 
-### Documentation Template Customization
-Organizations can customize the output format and structure by modifying the wiki generation templates while preserving the underlying agent coordination and content organization patterns.
+### Output Format Extensions
+The system's category-based organization can be extended with new documentation types beyond concepts, components, and guides. Custom categories can be defined with their own generation rules and cross-referencing logic.
 
-### Post-Processing Workflows
-The system's modular output structure enables integration with external documentation systems, static site generators, or content management platforms through custom post-processing stages.
+### LLM Provider Integration
+The [Progressive JSON repair strategy](../components/progressive-json-repair-strategy.md) is designed to work with different LLM providers. New providers can be integrated by implementing the provider interface and configuring appropriate prompting strategies for each agent type.
+
+### Content Post-Processing
+Custom post-processing steps can be added to the content generation pipeline to handle organization-specific formatting requirements, integrate with existing documentation systems, or apply custom validation rules.
+
+### Navigation and Index Customization
+The Wiki index generation system supports custom navigation structures and cross-referencing rules, allowing organizations to adapt the output to their specific documentation standards and tooling requirements.
