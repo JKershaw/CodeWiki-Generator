@@ -58,10 +58,11 @@ async function enhanceBidirectionalLinks() {
     // Find potential mentions of other pages
     const mentions = linkDiscovery.findMentions(markdownContent, pageIndex);
 
-    // Filter out self-references and already-linked
+    // Filter out self-references, already-linked, and mentions inside HTML
     const validMentions = mentions.filter(m =>
       m.targetPath !== pagePath &&
-      !isAlreadyLinked(markdownContent, m.position)
+      !isAlreadyLinked(markdownContent, m.position) &&
+      !isInsideHtmlTag(markdownContent, m.position)
     );
 
     if (validMentions.length === 0) {
@@ -98,17 +99,77 @@ async function enhanceBidirectionalLinks() {
 }
 
 /**
- * Check if a position is already part of a link
+ * Check if a position is already part of a link or inside HTML tags
  */
 function isAlreadyLinked(content, position) {
   const before = content.substring(Math.max(0, position - 100), position);
   const after = content.substring(position, position + 100);
 
+  // Check for markdown links
   const openBracket = before.lastIndexOf('[');
   const closeBracket = before.lastIndexOf(']');
   const openParen = after.indexOf('](');
 
-  return openBracket !== -1 && openBracket > closeBracket && openParen !== -1;
+  if (openBracket !== -1 && openBracket > closeBracket && openParen !== -1) {
+    return true;
+  }
+
+  // Check for HTML tags - look for unclosed tags before position
+  const htmlTagOpen = before.lastIndexOf('<');
+  const htmlTagClose = before.lastIndexOf('>');
+
+  // If we have an unclosed HTML tag before this position, we're inside HTML
+  if (htmlTagOpen !== -1 && htmlTagOpen > htmlTagClose) {
+    return true;
+  }
+
+  // Also check if we're inside an HTML href attribute
+  const hrefPattern = /<a\s+[^>]*href\s*=\s*["'][^"']*$/;
+  if (hrefPattern.test(before)) {
+    return true;
+  }
+
+  return false;
+}
+
+/**
+ * Check if a position is inside any HTML tag (not just links)
+ */
+function isInsideHtmlTag(content, position) {
+  // Look in a wider range to find HTML tags
+  const before = content.substring(Math.max(0, position - 500), position);
+  const after = content.substring(position, Math.min(content.length, position + 500));
+
+  // Check if we're inside an HTML tag of any kind
+  const lastOpenTag = before.lastIndexOf('<');
+  const lastCloseTag = before.lastIndexOf('>');
+
+  // If the last < comes after the last >, we're inside a tag
+  if (lastOpenTag > lastCloseTag) {
+    return true;
+  }
+
+  // Check if we're between an opening and closing HTML tag
+  // Look for patterns like <tag>...position...</tag>
+  const htmlBlockPattern = /<(h\d|p|li|ul|ol|div|span|a)[^>]*>/gi;
+  let match;
+  while ((match = htmlBlockPattern.exec(before)) !== null) {
+    const tagName = match[1];
+    const openPos = match.index;
+    const closeTagPattern = new RegExp(`</${tagName}>`, 'i');
+    const afterMatch = content.substring(match.index + match[0].length);
+    const closeMatch = closeTagPattern.exec(afterMatch);
+
+    if (closeMatch) {
+      const closePos = match.index + match[0].length + closeMatch.index;
+      // If position is between opening and closing tag
+      if (position >= match.index && position <= closePos) {
+        return true;
+      }
+    }
+  }
+
+  return false;
 }
 
 /**

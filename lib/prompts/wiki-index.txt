@@ -11,11 +11,13 @@ Requirements:
 1. Start with a clear title and overview
 2. Organize pages by category (Concepts, Components, Guides)
 3. For each page, include:
-   - Link to the page
+   - Link to the page using markdown syntax: [Page Title](path/to/page.md)
    - Brief description (1 line) based on the title
 4. Add a "Getting Started" or "Navigation" section
 5. Keep it concise and scannable
-6. Use proper markdown formatting
+6. Use ONLY markdown formatting - NO HTML tags
+7. Use # for headings, - for lists, [text](url) for links
+8. NEVER use <h1>, <p>, <li>, <a>, or any other HTML tags
 
 Structure:
 - Title and project overview (2-3 sentences)
