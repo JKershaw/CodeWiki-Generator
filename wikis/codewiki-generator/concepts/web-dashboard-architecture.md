@@ -2,56 +2,48 @@
 title: Web Dashboard Architecture
 category: concept
 sourceFile: server.js
-related: [components/wiki-integration.md, components/dashboard-controller.md]
+related: [components/dashboard-controller.md, components/wiki-integration.md]
 created: 2025-11-23
 updated: 2025-11-23
 ---
 
-# Web Dashboard Architecture
-
-## Purpose and Overview
-
-The Web Dashboard Architecture transforms the application from a CLI-only system into a web-accessible interface, providing centralized monitoring and control capabilities through a browser. This architecture implements a comprehensive dashboard that integrates system status reporting, processing control, and documentation viewing into a single web interface.
-
-## Key Functionality
-
-The dashboard provides several core capabilities:
-
-- **System Monitoring**: Real-time status reporting through API endpoints that display current system state and health metrics
-- **Processing Control**: Web-based controls for starting, pausing, stepping through, and batch processing operations that were previously only available via CLI
-- **[Wiki Integration](../components/wiki-integration.md)**: Seamless viewing of documentation and wiki content through nested URL patterns like `/wiki/concepts/architecture`
-- **Dashboard Interface**: A centralized web UI that consolidates all system operations and information into an accessible format
-
-The `DashboardController` class serves as the primary orchestrator, handling HTTP routes and business logic for all dashboard operations. The architecture supports both interactive dashboard rendering and API endpoints for programmatic access.
-
-## Relationships
-
-The Web Dashboard Architecture integrates with several existing system components:
-
-- **Health Check System**: Builds upon existing health monitoring endpoints to provide web-accessible status information
-- **CLI Processing Engine**: Exposes existing CLI functionality through web endpoints, maintaining the same underlying processing logic
-- **Documentation System**: Connects the wiki and documentation viewing capabilities directly within the dashboard interface
-- **Express Server Infrastructure**: Utilizes the established server framework with additional middleware for dashboard-specific routing and static file serving
-
-## Usage Example
-
-```javascript
-const express = require('express');
-const DashboardController = require('./server');
+<h1>Web Dashboard Architecture</h1>
+<h2>Purpose and Overview</h2>
+<p>The Web Dashboard Architecture transforms the application from a CLI-only system into a web-accessible interface, providing centralized monitoring and control capabilities through a browser. This architecture implements a comprehensive dashboard that integrates system status reporting, processing control, and documentation viewing into a single web interface.</p>
+<h2>Key Functionality</h2>
+<p>The dashboard provides several core capabilities:</p>
+<ul>
+<li><strong>System Monitoring</strong>: Real-time status reporting through API endpoints that display current system state and health metrics</li>
+<li><strong>Processing Control</strong>: Web-based controls for starting, pausing, stepping through, and batch processing operations that were previously only available via CLI</li>
+<li><strong><a href="../components/wiki-integration.md">[Wiki Integration](../components/wiki-integration.md)</a></strong>: Seamless viewing of documentation and wiki content through nested URL patterns like <code>/wiki/concepts/architecture</code></li>
+<li><strong>Dashboard Interface</strong>: A centralized web UI that consolidates all system operations and information into an accessible format</li>
+</ul>
+<p>The <code>[DashboardController](../components/dashboard-controller.md)</code> class serves as the primary orchestrator, handling HTTP routes and business logic for all dashboard operations. The architecture supports both interactive dashboard rendering and API endpoints for programmatic access.</p>
+<h2>Relationships</h2>
+<p>The Web Dashboard Architecture integrates with several existing system components:</p>
+<ul>
+<li><strong>Health Check System</strong>: Builds upon existing health monitoring endpoints to provide web-accessible status information</li>
+<li><strong>CLI Processing Engine</strong>: Exposes existing CLI functionality through web endpoints, maintaining the same underlying processing logic</li>
+<li><strong>Documentation System</strong>: Connects the wiki and documentation viewing capabilities directly within the dashboard interface</li>
+<li><strong>Express Server Infrastructure</strong>: Utilizes the established server framework with additional middleware for dashboard-specific routing and static file serving</li>
+</ul>
+<h2>Usage Example</h2>
+<pre><code class="language-javascript">const express = require(&#39;express&#39;);
+const [DashboardController](../components/dashboard-controller.md) = require(&#39;./server&#39;);
 
 // Initialize dashboard with Express app
 const app = express();
 const dashboard = new [DashboardController](../components/dashboard-controller.md)(app);
 
 // Access dashboard endpoints
-app.get('/', dashboard.renderDashboard);
-app.get('/api/status', dashboard.getStatus);
-app.post('/api/start', dashboard.startProcessing);
-```
-
-## Testing
-
-**Test Coverage**: Comprehensive integration testing in `tests/integration/server.test.js`
-- **11 test cases** across **6 test suites**
-- **Test Categories**: Express Server configuration, Health Check endpoints, Static File Serving, View Engine setup, Error Handling, and Middleware Configuration
-- Tests ensure proper server initialization, route handling, and integration between dashboard components and existing system infrastructure
+app.get(&#39;/&#39;, dashboard.renderDashboard);
+app.get(&#39;/api/status&#39;, dashboard.getStatus);
+app.post(&#39;/api/start&#39;, dashboard.startProcessing);
+</code></pre>
+<h2>Testing</h2>
+<p><strong>Test Coverage</strong>: Comprehensive integration testing in <code>tests/integration/server.test.js</code></p>
+<ul>
+<li><strong>11 test cases</strong> across <strong>6 test suites</strong></li>
+<li><strong>Test Categories</strong>: Express Server configuration, Health Check endpoints, Static File Serving, View Engine setup, Error Handling, and Middleware Configuration</li>
+<li>Tests ensure proper server initialization, route handling, and integration between dashboard components and existing system infrastructure</li>
+</ul>

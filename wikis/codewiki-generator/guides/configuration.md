@@ -1,31 +1,22 @@
 ---
-related: [components/dashboard-control-interface.md, concepts/production-ready-server-configuration.md, concepts/test-coverage-documentation-system.md, components/web-dashboard-control-interface.md, concepts/test-aware-documentation-generation.md]
+related: [components/dashboard-control-interface.md, concepts/production-ready-server-configuration.md, concepts/web-dashboard-architecture.md, components/dashboard-controller.md, concepts/context-enriched-documentation-generation.md]
 updated: 2025-11-23
 ---
 
-# Configuration Guide
-
-This guide covers how to configure CodeWiki-Generator for different environments and use cases.
-
-## Server Configuration
-
-### Basic Configuration
-
-The **[Production-ready server configuration](../concepts/production-ready-server-configuration.md)** supports multiple environments:
-
-```javascript
-// Default configuration
+<h1>Configuration Guide</h1>
+<p>This guide covers how to configure CodeWiki-Generator for different environments and use cases.</p>
+<h2>Server Configuration</h2>
+<h3>Basic Configuration</h3>
+<p>The <strong><a href="../concepts/production-ready-server-configuration.md">[Production-ready server configuration](../concepts/production-ready-server-configuration.md)</a></strong> supports multiple environments:</p>
+<pre><code class="language-javascript">// Default configuration
 {
   port: 3000,
-  host: 'localhost',
-  environment: 'development'
+  host: &#39;localhost&#39;,
+  environment: &#39;development&#39;
 }
-```
-
-### Environment Variables
-
-```bash
-# Server settings
+</code></pre>
+<h3>Environment Variables</h3>
+<pre><code class="language-bash"># Server settings
 PORT=3000
 HOST=localhost
 NODE_ENV=production
@@ -37,88 +28,66 @@ DOCS_TEMPLATE_DIR=./templates
 # Test coverage settings
 COVERAGE_THRESHOLD=80
 COVERAGE_REPORTS=true
-```
-
-## Dashboard Configuration
-
-### Web Dashboard Architecture Settings
-
-**[Dashboard Control Interface](../components/dashboard-control-interface.md)** options:
-
-```javascript
-{
+</code></pre>
+<h2>Dashboard Configuration</h2>
+<h3>[Web Dashboard Architecture](../concepts/web-dashboard-architecture.md) Settings</h3>
+<p><strong><a href="../components/dashboard-control-interface.md">[Dashboard Control Interface](../components/dashboard-control-interface.md)</a></strong> options:</p>
+<pre><code class="language-javascript">{
   dashboard: {
     enabled: true,
-    theme: 'default',
+    theme: &#39;default&#39;,
     realTimeUpdates: true,
     statusMonitoring: true
   }
 }
-```
-
-### DashboardController Configuration
-
-```javascript
-{
+</code></pre>
+<h3>[DashboardController](../components/dashboard-controller.md) Configuration</h3>
+<pre><code class="language-javascript">{
   controller: {
     autoGenerate: false,
     batchSize: 10,
-    processingMode: 'stepwise',
-    errorHandling: 'graceful'
+    processingMode: &#39;stepwise&#39;,
+    errorHandling: &#39;graceful&#39;
   }
 }
-```
-
-## Documentation Generation Settings
-
-### Context-enriched Documentation Generation
-
-```javascript
-{
+</code></pre>
+<h2>Documentation Generation Settings</h2>
+<h3>[Context-enriched Documentation Generation](../concepts/context-enriched-documentation-generation.md)</h3>
+<pre><code class="language-javascript">{
   documentation: {
-    contextLevel: 'detailed',    // basic, detailed, comprehensive
+    contextLevel: &#39;detailed&#39;,    // basic, detailed, comprehensive
     includeTests: true,
     includeMetadata: true,
-    outputFormat: 'markdown'
+    outputFormat: &#39;markdown&#39;
   }
 }
-```
-
-### Wiki Integration Options
-
-```javascript
-{
+</code></pre>
+<h3>[Wiki Integration](../components/wiki-integration.md) Options</h3>
+<pre><code class="language-javascript">{
   wiki: {
     structure: {
-      concepts: './concepts/',
-      components: './components/',
-      index: './index.md'
+      concepts: &#39;./concepts/&#39;,
+      components: &#39;./components/&#39;,
+      index: &#39;./index.md&#39;
     },
     autoUpdate: true,
     versionTracking: true
   }
 }
-```
-
-## Test Configuration
-
-### TestCoverageAnalyzer Settings
-
-```javascript
-{
+</code></pre>
+<h2>Test Configuration</h2>
+<h3>TestCoverageAnalyzer Settings</h3>
+<pre><code class="language-javascript">{
   testCoverage: {
     threshold: 80,
-    reportFormat: ['html', 'json'],
+    reportFormat: [&#39;html&#39;, &#39;json&#39;],
     includeUntested: true,
     realTimeAnalysis: true
   }
 }
-```
-
-### Test Coverage Integration
-
-```javascript
-{
+</code></pre>
+<h3>[Test Coverage Integration](../concepts/test-coverage-integration.md)</h3>
+<pre><code class="language-javascript">{
   coverage: {
     integration: {
       documentationSync: true,
@@ -127,18 +96,14 @@ COVERAGE_REPORTS=true
     }
   }
 }
-```
-
-## Monitoring Configuration
-
-### Real-time Status Monitoring
-
-```javascript
-{
+</code></pre>
+<h2>Monitoring Configuration</h2>
+<h3>[Real-time Status Monitoring](../concepts/real-time-status-monitoring.md)</h3>
+<pre><code class="language-javascript">{
   monitoring: {
     enabled: true,
     interval: 5000,        // 5 seconds
-    endpoints: ['health', 'coverage', 'docs'],
+    endpoints: [&#39;health&#39;, &#39;coverage&#39;, &#39;docs&#39;],
     alerting: {
       enabled: true,
       thresholds: {
@@ -148,12 +113,9 @@ COVERAGE_REPORTS=true
     }
   }
 }
-```
-
-### Source File Metadata Tracking
-
-```javascript
-{
+</code></pre>
+<h3>[Source File Metadata Tracking](../components/source-file-metadata-tracking.md)</h3>
+<pre><code class="language-javascript">{
   metadata: {
     tracking: {
       fileChanges: true,
@@ -163,88 +125,72 @@ COVERAGE_REPORTS=true
     }
   }
 }
-```
-
-## Processing Configuration
-
-### Step-wise Processing Control
-
-```javascript
-{
+</code></pre>
+<h2>Processing Configuration</h2>
+<h3>[Step-wise Processing Control](../concepts/step-wise-processing-control.md)</h3>
+<pre><code class="language-javascript">{
   processing: {
-    mode: 'stepwise',     // batch, stepwise, realtime
+    mode: &#39;stepwise&#39;,     // batch, stepwise, realtime
     steps: [
-      'analyze',
-      'generate',
-      'test',
-      'document'
+      &#39;analyze&#39;,
+      &#39;generate&#39;,
+      &#39;test&#39;,
+      &#39;document&#39;
     ],
-    errorHandling: 'continue',  // stop, continue, retry
+    errorHandling: &#39;continue&#39;,  // stop, continue, retry
     parallelism: 4
   }
 }
-```
-
-## Configuration File Locations
-
-### Default Configuration Files
-
-- `config/default.json` - Base configuration
-- `config/development.json` - Development overrides
-- `config/production.json` - Production settings
-- `config/test.json` - Test environment settings
-
-### Express Web Interface Configuration
-
-```javascript
-{
+</code></pre>
+<h2>Configuration File Locations</h2>
+<h3>Default Configuration Files</h3>
+<ul>
+<li><code>config/default.json</code> - Base configuration</li>
+<li><code>config/development.json</code> - Development overrides</li>
+<li><code>config/production.json</code> - Production settings</li>
+<li><code>config/test.json</code> - Test environment settings</li>
+</ul>
+<h3>Express Web Interface Configuration</h3>
+<pre><code class="language-javascript">{
   express: {
     middleware: {
       cors: true,
       compression: true,
-      logging: 'combined'
+      logging: &#39;combined&#39;
     },
     static: {
-      path: './public',
-      maxAge: '1d'
+      path: &#39;./public&#39;,
+      maxAge: &#39;1d&#39;
     }
   }
 }
-```
-
-## Configuration Validation
-
-### Startup Validation
-
-The system validates configuration on startup:
-
-1. **[Test Coverage Documentation System](../concepts/test-coverage-documentation-system.md)** checks coverage thresholds
-2. **[Web Dashboard Control Interface](../components/web-dashboard-control-interface.md)** validates dashboard settings
-3. **[Test-aware Documentation Generation](../concepts/test-aware-documentation-generation.md)** verifies test integration
-
-### Runtime Configuration Updates
-
-Some settings can be updated via the **[Dashboard Control Interface](../components/dashboard-control-interface.md)**:
-
-- Documentation generation frequency
-- Test coverage thresholds
-- Monitoring intervals
-- Processing batch sizes
-
-## Environment-Specific Examples
-
-### Development
-```bash
-NODE_ENV=development
+</code></pre>
+<h2>Configuration Validation</h2>
+<h3>Startup Validation</h3>
+<p>The system validates configuration on startup:</p>
+<ol>
+<li><strong><a href="../concepts/test-coverage-documentation-system.md">[Test Coverage Documentation System](../concepts/test-coverage-documentation-system.md)</a></strong> checks coverage thresholds</li>
+<li><strong><a href="../components/web-dashboard-control-interface.md">[Web Dashboard Control Interface](../components/web-dashboard-control-interface.md)</a></strong> validates dashboard settings</li>
+<li><strong><a href="../concepts/test-aware-documentation-generation.md">[Test-aware Documentation Generation](../concepts/test-aware-documentation-generation.md)</a></strong> verifies test integration</li>
+</ol>
+<h3>Runtime Configuration Updates</h3>
+<p>Some settings can be updated via the <strong><a href="../components/dashboard-control-interface.md">[Dashboard Control Interface](../components/dashboard-control-interface.md)</a></strong>:</p>
+<ul>
+<li>Documentation generation frequency</li>
+<li>Test coverage thresholds</li>
+<li>Monitoring intervals</li>
+<li>Processing batch sizes</li>
+</ul>
+<h2>Environment-Specific Examples</h2>
+<h3>Development</h3>
+<pre><code class="language-bash">NODE_ENV=development
 PORT=3000
 COVERAGE_THRESHOLD=70
 REAL_TIME_UPDATES=true
-```
-
-### Production
-```bash
-NODE_ENV=production
+</code></pre>
+<h3>Production</h3>
+<pre><code class="language-bash">NODE_ENV=production
 PORT=8080
 COVERAGE_THRESHOLD=85
 ERROR_LOGGING=detailed
-```
+</code></pre>

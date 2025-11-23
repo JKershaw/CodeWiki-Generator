@@ -1,72 +1,70 @@
 ---
-related: [concepts/web-dashboard-architecture.md, concepts/test-coverage-integration.md, concepts/real-time-status-monitoring.md, components/dashboard-controller.md, components/test-coverage-analyzer-class.md]
+related: [components/dashboard-control-interface.md, concepts/web-dashboard-architecture.md, concepts/test-coverage-integration.md, concepts/real-time-status-monitoring.md, components/dashboard-controller.md]
 updated: 2025-11-23
 ---
 
-# Getting Started with CodeWiki-Generator
-
-This guide will help you set up and run the CodeWiki-Generator locally for development or usage.
-
-## Prerequisites
-
-- Node.js 14+ installed
-- npm package manager
-- Git for cloning the repository
-
-## Installation
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-org/CodeWiki-Generator.git
-   cd CodeWiki-Generator
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-## Running the Application
-
-1. **Start the development server**:
-   ```bash
-   npm start
-   ```
-
-2. **Access the web dashboard**:
-   - Open your browser and navigate to `http://localhost:3000`
-   - You should see the Dashboard Control Interface
-
-3. **Expected output**:
-   ```
-   Server running on http://localhost:3000
-   Documentation generator initialized
-   Test coverage analyzer ready
-   ```
-
-## Running Tests
-
-1. **Run the test suite**:
-   ```bash
-   npm test
-   ```
-
-2. **Run tests with coverage**:
-   ```bash
-   npm run test:coverage
-   ```
-
-## Next Steps
-
-- Explore the **[Web Dashboard Architecture](../concepts/web-dashboard-architecture.md)** to understand the interface
-- Check out **[Test Coverage Integration](../concepts/test-coverage-integration.md)** for testing documentation
-- Review **[Real-time Status Monitoring](../concepts/real-time-status-monitoring.md)** concepts for system health
-- Use the **[DashboardController](../components/dashboard-controller.md)** to manage documentation generation
-
-## Quick Verification
-
-To verify everything is working:
-1. Start the server with `npm start`
-2. Visit `http://localhost:3000`
-3. Run tests with `npm test`
-4. Check that the [TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md) is functioning in the dashboard
+<h1>Getting Started with CodeWiki-Generator</h1>
+<p>This guide will help you set up and run the CodeWiki-Generator locally for development or usage.</p>
+<h2>Prerequisites</h2>
+<ul>
+<li>Node.js 14+ installed</li>
+<li>npm package manager</li>
+<li>Git for cloning the repository</li>
+</ul>
+<h2>Installation</h2>
+<ol>
+<li><p><strong>Clone the repository</strong>:</p>
+<pre><code class="language-bash">git clone https://github.com/your-org/CodeWiki-Generator.git
+cd CodeWiki-Generator
+</code></pre>
+</li>
+<li><p><strong>Install dependencies</strong>:</p>
+<pre><code class="language-bash">npm install
+</code></pre>
+</li>
+</ol>
+<h2>Running the Application</h2>
+<ol>
+<li><p><strong>Start the development server</strong>:</p>
+<pre><code class="language-bash">npm start
+</code></pre>
+</li>
+<li><p><strong>Access the web dashboard</strong>:</p>
+<ul>
+<li>Open your browser and navigate to <code>http://localhost:3000</code></li>
+<li>You should see the [Dashboard Control Interface](../components/dashboard-control-interface.md)</li>
+</ul>
+</li>
+<li><p><strong>Expected output</strong>:</p>
+<pre><code>Server running on http://localhost:3000
+Documentation generator initialized
+Test coverage analyzer ready
+</code></pre>
+</li>
+</ol>
+<h2>Running Tests</h2>
+<ol>
+<li><p><strong>Run the test suite</strong>:</p>
+<pre><code class="language-bash">npm test
+</code></pre>
+</li>
+<li><p><strong>Run tests with coverage</strong>:</p>
+<pre><code class="language-bash">npm run test:coverage
+</code></pre>
+</li>
+</ol>
+<h2>Next Steps</h2>
+<ul>
+<li>Explore the <strong><a href="../concepts/web-dashboard-architecture.md">[Web Dashboard Architecture](../concepts/web-dashboard-architecture.md)</a></strong> to understand the interface</li>
+<li>Check out <strong><a href="../concepts/test-coverage-integration.md">[Test Coverage Integration](../concepts/test-coverage-integration.md)</a></strong> for testing documentation</li>
+<li>Review <strong><a href="../concepts/real-time-status-monitoring.md">[Real-time Status Monitoring](../concepts/real-time-status-monitoring.md)</a></strong> concepts for system health</li>
+<li>Use the <strong><a href="../components/dashboard-controller.md">[DashboardController](../components/dashboard-controller.md)</a></strong> to manage documentation generation</li>
+</ul>
+<h2>Quick Verification</h2>
+<p>To verify everything is working:</p>
+<ol>
+<li>Start the server with <code>npm start</code></li>
+<li>Visit <code>http://localhost:3000</code></li>
+<li>Run tests with <code>npm test</code></li>
+<li>Check that the <a href="../components/test-coverage-analyzer-class.md">[TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md)</a> is functioning in the dashboard</li>
+</ol>

@@ -1,90 +1,54 @@
 ---
-related: [concepts/test-coverage-integration.md]
+related: [concepts/context-enriched-documentation-generation.md, concepts/production-ready-server-configuration.md, concepts/real-time-status-monitoring.md, concepts/step-wise-processing-control.md, concepts/test-aware-documentation-generation.md]
 updated: 2025-11-23
 ---
 
-# CodeWiki-Generator
-
-CodeWiki-Generator is an intelligent documentation system that combines automated code analysis with [test coverage integration](../concepts/test-coverage-integration.md) to generate comprehensive, context-enriched documentation. It features a web-based dashboard for real-time monitoring and control of the documentation generation process.
-
-## Meta (Philosophy & Vision)
-
-High-level context explaining the "why" behind the project:
-
-- [Core Philosophy & Vision](meta/philosophy.md) - The fundamental ideas and philosophy driving this project
-- [Technical Specification](meta/specification.md) - Comprehensive technical requirements and architecture specification
-
-## Concepts
-
-Core architectural and design concepts that drive the system's functionality:
-
-- [Context-enriched documentation generation](concepts/context-enriched-documentation-generation.md) - Enhanced documentation through intelligent context analysis and integration
-- [Production-ready server configuration](concepts/production-ready-server-configuration.md) - Robust server setup and deployment configurations for production environments
-- [Real-time Status Monitoring](concepts/real-time-status-monitoring.md) - Live tracking and monitoring of system status and documentation generation progress
-- [Step-wise processing control](concepts/step-wise-processing-control.md) - Granular control over documentation generation workflow stages
-- [Test-aware documentation generation](concepts/test-aware-documentation-generation.md) - Documentation generation that leverages test information for enhanced context
-- [Test coverage documentation system](concepts/test-coverage-documentation-system.md) - Comprehensive system for documenting and tracking code coverage metrics
-- [Test Coverage Integration](concepts/test-coverage-integration.md) - Seamless integration of test coverage data into documentation workflows
-- [Test-driven documentation enrichment](concepts/test-driven-documentation-enrichment.md) - Using test insights to create more meaningful and accurate documentation
-- [Web Dashboard Architecture](concepts/web-dashboard-architecture.md) - Design and structure of the web-based management interface
-
-## Components
-
-Key system components and their implementations:
-
-- [Dashboard Control Interface](components/dashboard-control-interface.md) - User interface components for dashboard interaction and control
-- [DashboardController](components/dashboard-controller.md) - Main controller managing dashboard operations and user interactions
-- [Express web interface for documentation management](components/express-web-interface-for-documentation-management.md) - Web-based interface built on Express.js for managing documentation processes
-- [Source file metadata tracking](components/source-file-metadata-tracking.md) - System for tracking and managing metadata associated with source files
-- [TestCoverageAnalyzer class](components/test-coverage-analyzer-class.md) - Core class responsible for analyzing and processing test coverage data
-- [Web dashboard control interface](components/web-dashboard-control-interface.md) - Browser-based interface for controlling documentation generation workflows
-- [Wiki Integration](components/wiki-integration.md) - Integration layer for connecting with wiki systems and platforms
-
-## Guides
-
-Practical guides for using and developing with the system:
-
-- [Architecture](concepts/architecture.md) - System architecture overview and design principles
-- [Configuration](guides/configuration.md) - Setup and configuration instructions for various deployment scenarios
-- [Development Workflow](guides/development-workflow.md) - Guidelines and best practices for contributing to the project
-- [Getting Started](guides/getting-started.md) - Quick start guide for new users and developers
-- [Testing Approach](guides/testing-approach.md) - Testing strategies and methodologies used in the project
-
-## History (Project Evolution)
-
-Historical context showing how the project evolved:
-
-- [Project History and Achievement Analysis](history/progress-report.md) - Comprehensive progress report documenting achievements and current status
-
-## Quality (Testing & Validation)
-
-Information about how the system is tested and validated:
-
-- [Testing Strategy](guides/testing-approach.md) - Detailed testing methodologies and practices
-
-## Navigation
-
-- **New users**: Start with [Getting Started](guides/getting-started.md) to set up the system
-- **Understanding the vision**: Read [Core Philosophy & Vision](meta/philosophy.md) to understand why this project exists
-- **Developers**: Review [Architecture](concepts/architecture.md) and [Development Workflow](guides/development-workflow.md)
-- **Configuration**: See [Configuration](guides/configuration.md) for deployment options
-- **Technical specs**: Check [Technical Specification](meta/specification.md) for detailed requirements
-- **Core concepts**: Explore the Concepts section to understand system design principles
-- **Project history**: See [Project History](history/progress-report.md) for achievements and evolution
-
-## Using the /context Command
-
-This wiki is designed to be searchable via the `/context` slash command in Claude Code:
-
-```bash
-# Example: Get context for implementing a new feature
-/context implement MCP server for Claude Code integration
-
-# Example: Understand the project philosophy
-/context what is the core philosophy of this project?
-
-# Example: Debug an issue
-/context fix failing tests in the processor
-```
-
-The context command searches across all layers (meta, code, history, quality) to provide comprehensive information for your task.
+<h1>CodeWiki-Generator Documentation</h1>
+<p>CodeWiki-Generator is an intelligent documentation system that automatically generates comprehensive, context-enriched documentation from codebases. It combines automated code analysis with test coverage insights and provides a real-time web dashboard for managing and monitoring the documentation generation process.</p>
+<h2>Quick Navigation</h2>
+<ul>
+<li><strong>New to the project?</strong> Start with <a href="guides/getting-started.md">Getting Started</a></li>
+<li><strong>Looking for setup details?</strong> Check <a href="guides/configuration.md">Configuration Guide</a></li>
+<li><strong>Understanding the system?</strong> Review <a href="concepts/architecture.md">Architecture Overview</a></li>
+</ul>
+<h2>Concepts</h2>
+<p>Core architectural patterns and design principles behind the documentation system:</p>
+<ul>
+<li><a href="concepts/architecture.md">Architecture Overview</a> - High-level system design and component relationships</li>
+<li><a href="concepts/context-enriched-documentation-generation.md">[Context-enriched Documentation Generation](../concepts/context-enriched-documentation-generation.md)</a> - Intelligent documentation that understands code relationships and context</li>
+<li><a href="concepts/production-ready-server-configuration.md">[Production-ready Server Configuration](../concepts/production-ready-server-configuration.md)</a> - Scalable and robust server setup for production environments</li>
+<li><a href="concepts/real-time-status-monitoring.md">[Real-time Status Monitoring](../concepts/real-time-status-monitoring.md)</a> - Live tracking and monitoring of documentation generation processes</li>
+<li><a href="concepts/step-wise-processing-control.md">[Step-wise Processing Control](../concepts/step-wise-processing-control.md)</a> - Granular control over documentation generation pipeline stages</li>
+<li><a href="concepts/test-aware-documentation-generation.md">[Test-aware Documentation Generation](../concepts/test-aware-documentation-generation.md)</a> - Documentation generation that incorporates testing insights</li>
+<li><a href="concepts/test-coverage-documentation-system.md">[Test Coverage Documentation System](../concepts/test-coverage-documentation-system.md)</a> - Comprehensive documentation of code test coverage</li>
+<li><a href="concepts/test-coverage-integration.md">[Test Coverage Integration](../concepts/test-coverage-integration.md)</a> - Integration patterns for incorporating test metrics</li>
+<li><a href="concepts/test-driven-documentation-enrichment.md">[Test-driven Documentation Enrichment](../concepts/test-driven-documentation-enrichment.md)</a> - Using test data to enhance documentation quality</li>
+<li><a href="concepts/web-dashboard-architecture.md">[Web Dashboard Architecture](../concepts/web-dashboard-architecture.md)</a> - Design principles for the web-based management interface</li>
+</ul>
+<h2>Components</h2>
+<p>Individual system components and their implementation details:</p>
+<ul>
+<li><a href="components/dashboard-control-interface.md">[Dashboard Control Interface](../components/dashboard-control-interface.md)</a> - User interface components for dashboard control</li>
+<li><a href="components/dashboard-controller.md">[DashboardController](../components/dashboard-controller.md)</a> - Main controller handling dashboard logic and routing</li>
+<li><a href="components/express-web-interface-for-documentation-management.md">[Express Web Interface for Documentation Management](../components/express-web-interface-for-documentation-management.md)</a> - Express.js-based web interface for managing documentation workflows</li>
+<li><a href="components/source-file-metadata-tracking.md">[Source File Metadata Tracking](../components/source-file-metadata-tracking.md)</a> - System for tracking and managing source file metadata</li>
+<li><a href="components/test-coverage-analyzer-class.md">[TestCoverageAnalyzer Class](../components/test-coverage-analyzer-class.md)</a> - Core class responsible for analyzing test coverage data</li>
+<li><a href="components/web-dashboard-control-interface.md">[Web Dashboard Control Interface](../components/web-dashboard-control-interface.md)</a> - Web-based interface for controlling dashboard functionality</li>
+<li><a href="components/wiki-integration.md">[Wiki Integration](../components/wiki-integration.md)</a> - Components for integrating with wiki systems</li>
+</ul>
+<h2>Guides</h2>
+<p>Practical guides for using and developing with the system:</p>
+<ul>
+<li><a href="guides/getting-started.md">Getting Started</a> - Quick start guide for new users and developers</li>
+<li><a href="guides/configuration.md">Configuration Guide</a> - Detailed configuration options and setup instructions</li>
+<li><a href="guides/development-workflow.md">Development Workflow</a> - Best practices and workflows for contributing to the project</li>
+<li><a href="guides/testing-approach.md">Testing Approach</a> - Testing strategies and methodologies used in the project</li>
+</ul>
+<h2>Navigation Tips</h2>
+<ul>
+<li>Browse <strong>Concepts</strong> to understand the theoretical foundations</li>
+<li>Explore <strong>Components</strong> for implementation specifics</li>
+<li>Follow <strong>Guides</strong> for hands-on instructions</li>
+<li>Use the search functionality to quickly find specific topics</li>
+<li>Check the configuration guide before diving into development</li>
+</ul>
