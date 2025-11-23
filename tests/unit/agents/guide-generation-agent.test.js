@@ -85,7 +85,9 @@ describe('GuideGenerationAgent', () => {
         repositoryInfo: {}
       };
 
-      await expect(agent.generateGuides(wikiData)).rejects.toThrow();
+      // Should return empty guides instead of throwing
+      const result = await agent.generateGuides(wikiData);
+      expect(result).toEqual({ guides: [] });
     });
 
     it('should validate guide structure', async () => {

@@ -63,4 +63,11 @@ Guide Quality Standards:
 - Next Steps: What to do after completing the guide
 
 DO NOT create guides for topics where you don't have enough information.
-DO NOT output anything other than valid JSON.
+
+CRITICAL OUTPUT REQUIREMENTS:
+- Output ONLY valid JSON
+- DO NOT include any explanatory text before or after the JSON
+- DO NOT wrap the JSON in markdown code blocks (no ```json or ```)
+- DO NOT include any commentary or notes
+- Start your response with { and end with }
+- If you cannot generate any guides, return: {"guides": []}
