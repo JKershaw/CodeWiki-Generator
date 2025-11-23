@@ -1,35 +1,44 @@
 # CodeWiki-Generator
 
-This repository contains an automated wiki generation system that uses multi-agent architecture to analyze codebases and create comprehensive documentation. The system employs specialized agents to generate different types of content, from architectural overviews to detailed component guides.
+A comprehensive documentation generation system that leverages AI agents to automatically create and maintain technical documentation for software repositories. This system provides intelligent analysis of codebases and generates structured wikis with architectural overviews, operational guides, and detailed component documentation.
 
-## Concepts
+## 📋 Navigation
 
-Core ideas and architectural patterns that drive the wiki generation system:
+### Concepts
 
-- **[Agent-based wiki automation](concepts/agent-based-wiki-automation.md)** - Automated documentation generation using intelligent agents
-- **[Architecture documentation synthesis](concepts/architecture-documentation-synthesis.md)** - Combining multiple sources to create unified architectural views
-- **[Category-based page classification](concepts/category-based-page-classification.md)** - Organizing wiki pages by content type and purpose
-- **[Category-driven content organization](concepts/category-driven-content-organization.md)** - Structuring documentation based on predefined content categories
-- **[Centralized metadata tracking system](concepts/centralized-metadata-tracking-system.md)** - Managing page metadata from a single control point
-- **[Global metadata tracking system](concepts/global-metadata-tracking-system.md)** - Cross-repository metadata management and synchronization
-- **[Guide generation system](concepts/guide-generation-system.md)** - Automated creation of step-by-step documentation guides
-- **[LLM response sanitization](concepts/llm-response-sanitization.md)** - Cleaning and validating AI-generated content for documentation
-- **[Multi-agent documentation system](concepts/multi-agent-documentation-system.md)** - Coordinating multiple specialized agents for comprehensive documentation
-- **[Repository Analysis and Detection](concepts/repository-analysis-and-detection.md)** - Automated codebase analysis and technology stack identification
-- **[Repository introspection pattern](concepts/repository-introspection-pattern.md)** - Self-analyzing repository structure and generating meta-documentation
-- **[System-level documentation generation](concepts/system-level-documentation-generation.md)** - Creating high-level system overview documentation
-- **[Architecture](concepts/architecture.md)** - Overall system architecture and design principles
+Core principles and patterns that drive the documentation generation system:
 
-## Components
+- **[Architecture synthesis agent pattern](concepts/architecture-synthesis-agent-pattern.md)** - Agent-based approach for analyzing and synthesizing system architecture documentation
+- **[Category-based content organization](concepts/category-based-content-organization.md)** - Systematic approach to organizing documentation content into logical categories
+- **[JSON response cleaning for LLM APIs](concepts/json-response-cleaning-for-llm-apis.md)** - Techniques for sanitizing and validating JSON responses from language model APIs
+- **[Operational documentation generation](concepts/operational-documentation-generation.md)** - Automated creation of operational guides and procedural documentation
+- **[Operational Guide Generation](concepts/operational-guide-generation.md)** - System for generating comprehensive operational procedures and workflows
+- **[Repository fingerprinting](concepts/repository-fingerprinting.md)** - Method for creating unique identifiers and signatures for code repositories
+- **[Resilient LLM response parsing](concepts/resilient-llm-response-parsing.md)** - Robust strategies for handling and parsing variable language model outputs
+- **[System-level documentation generation](concepts/system-level-documentation-generation.md)** - Comprehensive approach to documenting entire system architectures
+- **[Wiki index generation system](concepts/wiki-index-generation-system.md)** - Automated system for creating and maintaining wiki navigation indexes
+- **[Wiki index generation with auto-navigation](concepts/wiki-index-generation-with-auto-navigation.md)** - Enhanced wiki indexing with intelligent navigation structure generation
 
-Individual modules and agents that power the documentation system:
+### Components
 
-- **[GuideGenerationAgent](components/guide-generation-agent.md)** - Agent responsible for creating structured documentation guides
-- **[Wiki index generation](components/wiki-index-generation.md)** - Component for creating navigation and index pages
+Key technical components and implementation details:
 
-## Navigation
+- **[ArchitectureOverviewAgent](components/architecture-overview-agent.md)** - AI agent responsible for analyzing and documenting system architecture
+- **[GuideGenerationAgent](components/guide-generation-agent.md)** - Specialized agent for creating step-by-step operational guides
+- **[Progressive JSON repair strategy](components/progressive-json-repair-strategy.md)** - Multi-stage approach for repairing malformed JSON responses from AI systems
+- **[Repository Structure Analysis](components/repository-structure-analysis.md)** - Component for analyzing and mapping repository organization and dependencies
+- **[Architecture Overview](concepts/architecture.md)** - High-level architectural documentation and system design principles
 
-- Browse **Concepts** to understand the theoretical foundation and design patterns
-- Check **Components** for implementation details of specific system modules
-- All pages are cross-linked for easy navigation between related topics
-- Use the repository file structure to explore the actual implementation code
+## 🚀 Getting Started
+
+1. **Start with Concepts** - Review the core concepts to understand the system's approach to documentation generation
+2. **Explore Components** - Dive into specific technical components for implementation details
+3. **Architecture First** - Begin with the [Architecture Overview](concepts/architecture.md) for a system-wide perspective
+4. **Agent Patterns** - Understand the [Architecture synthesis agent pattern](concepts/architecture-synthesis-agent-pattern.md) for the foundational approach
+
+## 💡 Navigation Tips
+
+- Use the category organization above to find relevant documentation quickly
+- Start with concepts if you're new to the system
+- Reference components for technical implementation details
+- Each page contains detailed information with code examples and usage patterns

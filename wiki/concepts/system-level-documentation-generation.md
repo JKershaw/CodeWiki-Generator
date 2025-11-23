@@ -8,42 +8,40 @@ updated: 2025-11-23
 
 # System-level Documentation Generation
 
-## Purpose and Overview
-
-System-level documentation generation creates comprehensive architecture overviews by synthesizing information from all individual component documentation within the codebase wiki. This capability transforms isolated component knowledge into cohesive system understanding, providing developers with high-level architectural insights that emerge from the collective documentation.
+System-level documentation generation synthesizes individual component documentation into comprehensive architectural overviews. This capability transforms isolated documentation pieces into cohesive system understanding by analyzing existing wiki content and generating high-level architectural insights.
 
 ## Key Functionality
 
-The system operates through the `ArchitectureOverviewAgent`, which performs cross-wiki synthesis rather than analyzing individual source files. The agent:
+The system operates through the `ArchitectureOverviewAgent` which performs three core functions:
 
-- **Categorizes existing documentation** into concepts, components, and guides from all wiki pages
-- **Identifies architectural patterns** that span multiple components
-- **Generates system-wide insights** about relationships, dependencies, and design decisions
-- **Creates unified architecture documentation** that connects disparate parts of the system
+1. **Content Categorization** - Retrieves all existing wiki pages and organizes them into concepts, components, and guides based on their location and content type
+2. **Synthesis Analysis** - Analyzes categorized content to identify system patterns, relationships, and architectural themes
+3. **Overview Generation** - Creates comprehensive architecture documentation that captures system-wide understanding in `concepts/architecture.md`
+
+The agent integrates into the post-processing workflow, executing after individual component documentation is complete but before final wiki indexing.
+
+### Processing Workflow
+
+```
+Individual Components → Documentation Generation → Architecture Analysis → System Overview
+```
 
 The `generateArchitectureOverview` function orchestrates this process by:
-1. Retrieving all existing wiki content through the WikiManager
-2. Analyzing and categorizing the collective documentation
-3. Synthesizing cross-component relationships and patterns
-4. Generating comprehensive architecture overview content
+- Querying WikiManager for all existing documentation pages
+- Categorizing content by directory structure and content type
+- Generating synthesized documentation using the same LLM infrastructure as other agents
 
 ## Relationships
 
-This system extends the existing agent-based documentation architecture:
+**Integration Points:**
+- Executes alongside `DocumentationWriterAgent` and other agents in the main processor workflow
+- Depends on `WikiManager` for accessing all existing wiki content
+- Runs in post-processing phase with guide generation and wiki indexing
+- Outputs follow established wiki structure conventions
 
-- **Consumes from all documentation agents** - Uses output from component analyzers, concept extractors, and guide generators as input
-- **Integrates with WikiManager** - Accesses the complete wiki content repository to perform system-wide analysis
-- **Extends the wiki generation pipeline** - Adds a synthesis layer that operates after individual component documentation is complete
-- **Follows established agent patterns** - Maintains consistency with the existing agent-based architecture while operating at a higher abstraction level
+**Data Flow:**
+- Consumes: All existing wiki documentation pages
+- Processes: Content categorization and architectural synthesis
+- Produces: System-level architecture overview documentation
 
-## Usage Examples
-
-```javascript
-// Generate architecture overview after all component docs exist
-const overview = await architectureAgent.generateArchitectureOverview({
-  wikiPages: allExistingPages,
-  focusAreas: ['data flow', 'component relationships', 'architectural patterns']
-});
-```
-
-The system automatically categorizes and synthesizes content, producing architecture documentation that reveals system-wide patterns invisible at the individual component level.
+The architecture overview agent represents the culmination of the documentation generation pipeline, transforming component-level understanding into system-wide architectural knowledge that helps users understand how all pieces fit together.

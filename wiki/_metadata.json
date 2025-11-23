@@ -1,18 +1,34 @@
 {
-  "generated": "2025-11-23T08:37:06.018Z",
+  "generated": "2025-11-23T08:50:20.259Z",
   "pages": {
-    "concepts/multi-agent-documentation-system.md": {
-      "title": "Multi-agent documentation system",
+    "concepts/resilient-llm-response-parsing.md": {
+      "title": "Resilient LLM response parsing",
       "created": "2025-11-23",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-23"
     },
-    "concepts/architecture-documentation-synthesis.md": {
-      "title": "Architecture documentation synthesis",
+    "components/progressive-json-repair-strategy.md": {
+      "title": "Progressive JSON repair strategy",
+      "created": "2025-11-23",
+      "category": "component",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/architecture-synthesis-agent-pattern.md": {
+      "title": "Architecture synthesis agent pattern",
       "created": "2025-11-23",
       "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/architecture-overview-agent.md": {
+      "title": "ArchitectureOverviewAgent",
+      "created": "2025-11-23",
+      "category": "component",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-23"
@@ -25,8 +41,32 @@
       "outgoingLinks": [],
       "updated": "2025-11-23"
     },
-    "concepts/llm-response-sanitization.md": {
-      "title": "LLM response sanitization",
+    "concepts/category-based-content-organization.md": {
+      "title": "Category-based content organization",
+      "created": "2025-11-23",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/json-response-cleaning-for-llm-apis.md": {
+      "title": "JSON response cleaning for LLM APIs",
+      "created": "2025-11-23",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/operational-documentation-generation.md": {
+      "title": "Operational documentation generation",
+      "created": "2025-11-23",
+      "category": "concept",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/repository-fingerprinting.md": {
+      "title": "Repository fingerprinting",
       "created": "2025-11-23",
       "category": "concept",
       "incomingLinks": [],
@@ -41,72 +81,32 @@
       "outgoingLinks": [],
       "updated": "2025-11-23"
     },
-    "concepts/repository-analysis-and-detection.md": {
-      "title": "Repository Analysis and Detection",
+    "concepts/operational-guide-generation.md": {
+      "title": "Operational Guide Generation",
       "created": "2025-11-23",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-23"
     },
-    "concepts/guide-generation-system.md": {
-      "title": "Guide generation system",
-      "created": "2025-11-23",
-      "category": "concept",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-23"
-    },
-    "concepts/repository-introspection-pattern.md": {
-      "title": "Repository introspection pattern",
-      "created": "2025-11-23",
-      "category": "concept",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-23"
-    },
-    "concepts/agent-based-wiki-automation.md": {
-      "title": "Agent-based wiki automation",
-      "created": "2025-11-23",
-      "category": "concept",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-23"
-    },
-    "concepts/category-driven-content-organization.md": {
-      "title": "Category-driven content organization",
-      "created": "2025-11-23",
-      "category": "concept",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-23"
-    },
-    "components/wiki-index-generation.md": {
-      "title": "Wiki index generation",
+    "components/repository-structure-analysis.md": {
+      "title": "Repository Structure Analysis",
       "created": "2025-11-23",
       "category": "component",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-23"
     },
-    "concepts/global-metadata-tracking-system.md": {
-      "title": "Global metadata tracking system",
+    "concepts/wiki-index-generation-system.md": {
+      "title": "Wiki index generation system",
       "created": "2025-11-23",
       "category": "concept",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-23"
     },
-    "concepts/centralized-metadata-tracking-system.md": {
-      "title": "Centralized metadata tracking system",
-      "created": "2025-11-23",
-      "category": "concept",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-23"
-    },
-    "concepts/category-based-page-classification.md": {
-      "title": "Category-based page classification",
+    "concepts/wiki-index-generation-with-auto-navigation.md": {
+      "title": "Wiki index generation with auto-navigation",
       "created": "2025-11-23",
       "category": "concept",
       "incomingLinks": [],
@@ -116,8 +116,8 @@
   },
   "statistics": {
     "totalPages": 14,
-    "concepts": 12,
-    "components": 2,
+    "concepts": 10,
+    "components": 4,
     "guides": 0,
     "totalCommitsProcessed": 0,
     "orphanedPages": []
