@@ -11,6 +11,9 @@ package-lock.json
 # Processing state
 state.json
 
+# MCP server metrics
+mcp-metrics.json
+
 # IDE
 .vscode/
 .idea/
