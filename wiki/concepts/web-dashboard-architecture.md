@@ -1,8 +1,8 @@
 ---
 title: Web Dashboard Architecture
 category: concept
-sourceFile: Not specified
-related: [components/nested-wiki-routing.md, components/dashboard-controller.md]
+sourceFile: server.js
+related: [components/wiki-integration.md, components/dashboard-controller.md]
 created: 2025-11-23
 updated: 2025-11-23
 ---
@@ -11,46 +11,47 @@ updated: 2025-11-23
 
 ## Purpose and Overview
 
-The Web Dashboard Architecture provides a comprehensive web-based control interface that transforms the application from a CLI tool into a full-stack web application. It enables real-time monitoring of processing status and manual control over documentation generation workflows through an intuitive dashboard interface.
+The Web Dashboard Architecture transforms the application from a CLI-only system into a web-accessible interface, providing centralized monitoring and control capabilities through a browser. This architecture implements a comprehensive dashboard that integrates system status reporting, processing control, and documentation viewing into a single web interface.
 
 ## Key Functionality
 
-- **Real-time Status Monitoring**: The `DashboardController` provides API endpoints for live system status updates, allowing users to monitor processing state, progress, and system health
-- **Process Control**: Offers manual control over automated workflows with endpoints for starting, pausing, single-step processing, and batch operations
-- **Dynamic Wiki Rendering**: Implements [nested wiki routing](../components/nested-wiki-routing.md) that handles arbitrary URL paths using middleware, enabling flexible content organization without hardcoded routes
-- **Dashboard Interface**: Serves the main dashboard UI at the root path with integrated controls for all system operations
-- **API Integration**: Provides RESTful endpoints (`/api/status`, `/api/start`, `/api/pause`, `/api/step`, `/api/batch`) for programmatic access to all dashboard functionality
+The dashboard provides several core capabilities:
 
-The controller acts as the central hub connecting the web interface with the underlying processing engine, providing both human-friendly UI and machine-readable APIs.
+- **System Monitoring**: Real-time status reporting through API endpoints that display current system state and health metrics
+- **Processing Control**: Web-based controls for starting, pausing, stepping through, and batch processing operations that were previously only available via CLI
+- **[Wiki Integration](../components/wiki-integration.md)**: Seamless viewing of documentation and wiki content through nested URL patterns like `/wiki/concepts/architecture`
+- **Dashboard Interface**: A centralized web UI that consolidates all system operations and information into an accessible format
+
+The `DashboardController` class serves as the primary orchestrator, handling HTTP routes and business logic for all dashboard operations. The architecture supports both interactive dashboard rendering and API endpoints for programmatic access.
 
 ## Relationships
 
-- Integrates with the existing Express server infrastructure to extend basic health checks into a full web application
-- Connects to the core processing logic through API endpoints, allowing dashboard controls to trigger actual workflow operations
-- Complements static file serving with dynamic wiki content rendering, creating a unified documentation viewing experience
-- Works alongside the documentation generation system to provide real-time feedback and manual override capabilities
+The Web Dashboard Architecture integrates with several existing system components:
+
+- **Health Check System**: Builds upon existing health monitoring endpoints to provide web-accessible status information
+- **CLI Processing Engine**: Exposes existing CLI functionality through web endpoints, maintaining the same underlying processing logic
+- **Documentation System**: Connects the wiki and documentation viewing capabilities directly within the dashboard interface
+- **Express Server Infrastructure**: Utilizes the established server framework with additional middleware for dashboard-specific routing and static file serving
 
 ## Usage Example
 
 ```javascript
-const DashboardController = require('./controllers/DashboardController');
 const express = require('express');
+const DashboardController = require('./server');
 
+// Initialize dashboard with Express app
 const app = express();
-const dashboard = new [DashboardController](../components/dashboard-controller.md)();
+const dashboard = new [DashboardController](../components/dashboard-controller.md)(app);
 
-// Set up dashboard routes
+// Access dashboard endpoints
 app.get('/', dashboard.renderDashboard);
 app.get('/api/status', dashboard.getStatus);
 app.post('/api/start', dashboard.startProcessing);
-app.post('/api/pause', dashboard.pauseProcessing);
-app.post('/api/step', dashboard.processStep);
-app.post('/api/batch', dashboard.processBatch);
-
-// Dynamic wiki routing
-app.get('/wiki/*', dashboard.renderWikiPage);
 ```
 
 ## Testing
 
-No automated tests are currently available for this component. Testing should focus on API endpoint responses, dashboard rendering functionality, wiki routing behavior, and integration with the underlying processing system.
+**Test Coverage**: Comprehensive integration testing in `tests/integration/server.test.js`
+- **11 test cases** across **6 test suites**
+- **Test Categories**: Express Server configuration, Health Check endpoints, Static File Serving, View Engine setup, Error Handling, and Middleware Configuration
+- Tests ensure proper server initialization, route handling, and integration between dashboard components and existing system infrastructure

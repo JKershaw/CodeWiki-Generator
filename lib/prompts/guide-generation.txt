@@ -57,10 +57,24 @@ Guidelines:
 
 Guide Quality Standards:
 - Introduction: Why this guide exists and who it's for
-- Prerequisites: What you need before starting
+- Prerequisites: What you need before starting (specific versions: Node.js 14+, npm, etc.)
 - Steps: Clear, numbered or bulleted instructions
-- Examples: Real code snippets or commands
+- Examples: Real code snippets or commands (NO PLACEHOLDERS like <repository-url>)
 - Next Steps: What to do after completing the guide
+
+CRITICAL: Getting Started Guide MUST Include:
+1. Installation commands with actual npm/yarn commands
+2. How to run the application (npm start, node server.js, etc.)
+3. Expected output (Server running on http://localhost:3000)
+4. How to run tests (npm test)
+5. Where to go next (links to other guides)
+
+DO NOT USE PLACEHOLDERS:
+- BAD: git clone <repository-url>
+- GOOD: git clone https://github.com/user/project (or use the actual URL from repository info)
+- GOOD: npm start (then visit http://localhost:3000)
+
+If you don't know specific values, use realistic examples and note they should be verified.
 
 DO NOT create guides for topics where you don't have enough information.
 

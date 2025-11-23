@@ -1,102 +1,103 @@
 ---
-related: [components/link-discovery-agent.md, concepts/cross-linking-system.md]
+related: [concepts/test-driven-documentation-enrichment.md, components/dashboard-controller.md, components/test-coverage-analyzer-class.md, concepts/test-coverage-documentation-system.md, components/wiki-integration.md]
 updated: 2025-11-23
 ---
 
 # Testing Approach
 
-This guide explains how to work with tests in the CodeWiki-Generator project.
+CodeWiki-Generator uses Jest as its testing framework with a focus on [test-driven documentation enrichment](../concepts/test-driven-documentation-enrichment.md) and comprehensive test coverage analysis.
 
-## Who This Guide Is For
+## Test Structure
 
-Developers who need to:
-- Run existing tests
-- Write new tests for features
-- Understand the testing patterns used in the codebase
+The project follows these testing patterns:
 
-## Test Framework
-
-The project uses **Jest** as the primary testing framework, providing:
-- Unit testing capabilities
-- Test coverage reporting
-- Mocking and assertion utilities
+- **Unit Tests**: Individual component testing ([DashboardController](../components/dashboard-controller.md), TestCoverageAnalyzer)
+- **Integration Tests**: Testing component interactions
+- **Test-aware Documentation**: Tests that validate generated documentation
 
 ## Running Tests
 
-### Run All Tests
+### Basic Test Execution
 ```bash
+# Run all tests
 npm test
+
+# Run tests in watch mode
+npm test -- --watch
+
+# Run specific test files
+npm test -- TestCoverageAnalyzer
 ```
 
-### Run Tests with Coverage
+### Test Coverage Analysis
 ```bash
+# Generate coverage report
 npm run test:coverage
+
+# View coverage in browser
+npm run test:coverage -- --open
 ```
 
-### Run Tests in Watch Mode
-```bash
-npm run test:watch
-```
+## Test Coverage Integration
 
-## Testing Patterns
+The **[TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md)** provides:
 
-### Test-Driven Code Example Extraction
-The project includes a component for extracting code examples from tests, which means:
-- Tests serve dual purposes: validation and documentation
-- Code examples in documentation are derived from actual test cases
-- This ensures documentation examples are always working and up-to-date
+- Real-time test coverage tracking
+- Integration with documentation generation
+- Coverage reports for wiki content
+- Source file metadata correlation
 
-### [Test-Aware Documentation Generation](../concepts/test-aware-documentation-generation.md)
-The system integrates test information into documentation:
-- Test coverage data influences documentation completeness
-- Test cases become examples in generated documentation
-- Missing test coverage is highlighted in documentation
+### Coverage-Driven Documentation
+
+1. **[Test Coverage Documentation System](../concepts/test-coverage-documentation-system.md)** automatically:
+   - Tracks which components are tested
+   - Generates coverage badges for wiki pages
+   - Links test files to documentation
+
+2. **[Test-driven Documentation Enrichment](../concepts/test-driven-documentation-enrichment.md)**:
+   - Tests validate documentation examples
+   - Code samples are verified against actual implementation
+   - Documentation stays synchronized with codebase
 
 ## Writing Tests
 
-### Test Structure
-Follow these patterns when writing new tests:
+### Testing Dashboard Components
+```javascript
+// Example test structure for DashboardController
+describe('DashboardController', () => {
+  test('should initialize with proper configuration', () => {
+    // Test dashboard initialization
+  });
+  
+  test('should handle documentation generation requests', () => {
+    // Test request handling
+  });
+});
+```
 
-1. **Arrange**: Set up test data and dependencies
-2. **Act**: Execute the code being tested
-3. **Assert**: Verify the expected outcomes
+### Testing Documentation Generation
+```javascript
+// Test documentation output
+describe('[Wiki Integration](../components/wiki-integration.md)', () => {
+  test('should generate accurate component documentation', () => {
+    // Validate generated wiki content
+  });
+});
+```
 
-### Testing Components
+## Test-Aware Documentation Generation
 
-When testing core components like:
-- **[WikiManager integration](../components/wiki-manager-integration.md)**: Test documentation generation workflows
-- **[LinkDiscoveryAgent](../components/link-discovery-agent.md)**: Verify link discovery and relationship mapping
-- **[Cross-linking system](../concepts/cross-linking-system.md)**: Ensure proper page connections are created
+The system uses **[Step-wise processing control](../concepts/step-wise-processing-control.md)** to:
 
-### Test Coverage Goals
-- Aim for high coverage of core functionality
-- Focus on testing public APIs and integration points
-- Include edge cases and error conditions
-
-## [Test Coverage Discovery and Analysis](../concepts/test-coverage-discovery-and-analysis.md)
-
-The project includes sophisticated test coverage analysis:
-- Coverage data is integrated into generated documentation
-- Uncovered code sections are identified and highlighted
-- Coverage metrics help guide documentation completeness
-
-## Integration with Documentation
-
-Tests play a crucial role in documentation generation:
-1. **Code Examples**: Real test cases become documentation examples
-2. **Coverage Analysis**: Test coverage data informs documentation quality
-3. **Validation**: Tests ensure documented features actually work
+1. Run tests before documentation generation
+2. Include test results in generated docs
+3. Flag untested components in documentation
+4. Generate test coverage summaries
 
 ## Best Practices
 
-- Write tests before implementing new features
-- Use descriptive test names that explain the expected behavior
-- Keep tests focused and independent
-- Mock external dependencies appropriately
-- Update tests when refactoring code
-
-## Next Steps
-
-- Review existing test files to understand current patterns
-- Check the [Development Workflow](development-workflow.md) for testing requirements
-- Explore how the [test-aware documentation generation](../concepts/test-aware-documentation-generation.md) works in practice
+- Write tests before adding new features
+- Ensure documentation examples are testable
+- Use the TestCoverageAnalyzer for coverage insights
+- Integrate tests with the [Web Dashboard Architecture](../concepts/web-dashboard-architecture.md)
+- Maintain test coverage above 80% for core components

@@ -1,5 +1,5 @@
 ---
-related: [concepts/context-enriched-documentation-generation.md, concepts/web-dashboard-architecture.md, components/test-driven-code-example-extraction.md, concepts/test-coverage-discovery-and-analysis.md, components/production-ready-server-setup.md]
+related: [components/test-coverage-analyzer-class.md, concepts/step-wise-processing-control.md, components/dashboard-controller.md, components/dashboard-control-interface.md, components/source-file-metadata-tracking.md]
 updated: 2025-11-23
 ---
 
@@ -7,151 +7,121 @@ updated: 2025-11-23
 
 This guide outlines the recommended development process for contributing to CodeWiki-Generator.
 
-## Who This Guide Is For
+## Development Setup
 
-Developers who want to:
-- Contribute new features or bug fixes
-- Understand the development and testing cycle
-- Follow project conventions and best practices
+1. **Initial Setup**:
+   ```bash
+   npm install
+   npm start
+   ```
 
-## Prerequisites
+2. **Start Development Mode**:
+   - Server runs with hot reload
+   - Test coverage monitoring active
+   - Real-time Status Monitoring enabled
 
-- Completed the [Getting Started](getting-started.md) guide
-- Familiarity with the [Testing Approach](testing-approach.md)
-- Understanding of the core concepts like context-enriched documentation and cross-linking systems
+## Feature Development Process
 
-## Development Cycle
+### 1. Planning Phase
+- Review existing **Components** and **Concepts**
+- Check **[Web Dashboard Architecture](../concepts/web-dashboard-architecture.md)** for integration points
+- Plan test coverage using **[TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md)**
 
-### 1. Feature Planning
+### 2. Development Phase
 
-Before starting development:
-- Identify how your feature fits into the existing architecture
-- Consider impact on core components:
-  - [WikiManager integration](../components/wiki-manager-integration.md)
-  - [LinkDiscoveryAgent](../components/link-discovery-agent.md)
-  - [Cross-linking system](../concepts/cross-linking-system.md)
-  - [Test-aware documentation generation](../concepts/test-aware-documentation-generation.md)
+**[Step-wise Processing Control](../concepts/step-wise-processing-control.md)** approach:
 
-### 2. Setup Development Environment
+1. **Write Tests First**:
+   ```bash
+   npm test -- --watch
+   ```
 
+2. **Implement Feature**:
+   - Follow existing patterns from **[DashboardController](../components/dashboard-controller.md)**
+   - Integrate with **[Dashboard Control Interface](../components/dashboard-control-interface.md)**
+   - Use **[Source file metadata tracking](../components/source-file-metadata-tracking.md)**
+
+3. **Test Integration**:
+   ```bash
+   npm test
+   npm run test:coverage
+   ```
+
+### 3. Documentation Phase
+
+**[Test-driven Documentation Enrichment](../concepts/test-driven-documentation-enrichment.md)**:
+
+1. **Generate Documentation**:
+   - Use the web interface at `http://localhost:3000`
+   - Leverage **[Context-enriched documentation generation](../concepts/context-enriched-documentation-generation.md)**
+   - Update relevant **concepts/architecture.md**
+
+2. **Validate Documentation**:
+   - Ensure **[Test-aware documentation generation](../concepts/test-aware-documentation-generation.md)** passes
+   - Check **[Test Coverage Integration](../concepts/test-coverage-integration.md)** reports
+   - Update **index.md** if needed
+
+## Development Tools
+
+### Web Dashboard
+- Access at `http://localhost:3000`
+- Monitor development progress
+- Generate documentation in real-time
+- View test coverage metrics
+
+### Command Line Tools
 ```bash
-# Install dependencies
-npm install
+# Development server
+npm run dev
 
-# Verify tests pass
-npm test
-
-# Start development with test watching
-npm run test:watch
-```
-
-### 3. Implementation Process
-
-#### Test-Driven Development
-1. **Write failing tests first**
-   - Follow the [test-driven code example extraction](../components/test-driven-code-example-extraction.md) pattern
-   - Tests will become part of the documentation
-
-2. **Implement the feature**
-   - Focus on making tests pass
-   - Consider integration with existing systems
-
-3. **Refactor and optimize**
-   - Ensure code quality and maintainability
-   - Update related components as needed
-
-#### Key Integration Points
-
-**[WikiManager Integration](../components/wiki-manager-integration.md)**
-- Ensure new features work with the documentation generation workflow
-- Test integration with existing metadata systems
-
-**[Cross-Linking System](../concepts/cross-linking-system.md)**
-- Consider how new features affect the [two-phase cross-linking system](../concepts/two-phase-cross-linking-system.md)
-- Ensure proper relationship discovery and page connections
-
-**Enhanced Documentation Metadata**
-- Add appropriate metadata for new components
-- Support the [related pages discovery system](../concepts/related-pages-discovery-system.md)
-
-### 4. Testing Requirements
-
-- **Unit Tests**: Test individual components and functions
-- **Integration Tests**: Verify interaction with existing systems
-- **Coverage**: Maintain high test coverage for new code
-- **Documentation Tests**: Ensure code examples work correctly
-
-```bash
-# Run full test suite
-npm test
-
-# Check coverage
+# Test with coverage
 npm run test:coverage
+
+# Generate documentation
+npm run docs:generate
+
+# Check system status
+npm run status:check
 ```
 
-### 5. Documentation Updates
+## Production Deployment
 
-- Update relevant concept documentation
-- Add or modify component documentation
-- Ensure the [web dashboard architecture](../concepts/web-dashboard-architecture.md) reflects new features
-- Test the [context-enriched documentation generation](../concepts/context-enriched-documentation-generation.md) with your changes
+**[Production-ready Server Configuration](../concepts/production-ready-server-configuration.md)**:
+
+1. **Environment Setup**:
+   ```bash
+   NODE_ENV=production npm start
+   ```
+
+2. **Verification**:
+   - **[Real-time Status Monitoring](../concepts/real-time-status-monitoring.md)** shows healthy status
+   - All tests pass with `npm test`
+   - Documentation generation works via **Express web interface**
 
 ## Code Quality Standards
 
-### Architecture Alignment
-- Follow established patterns in the codebase
-- Maintain separation between core systems
-- Respect the [production-ready server setup](../components/production-ready-server-setup.md) requirements
+### Before Committing
+1. Run full test suite: `npm test`
+2. Check test coverage: `npm run test:coverage`
+3. Validate documentation generation
+4. Ensure **[Real-time Status Monitoring](../concepts/real-time-status-monitoring.md)** reports no issues
 
-### Testing Standards
-- Write comprehensive tests using Jest
-- Include edge cases and error scenarios
-- Ensure tests contribute to documentation through [test-driven code example extraction](../components/test-driven-code-example-extraction.md)
+### Review Checklist
+- Tests cover new functionality
+- Documentation updated via **[Wiki Integration](../components/wiki-integration.md)**
+- **[DashboardController](../components/dashboard-controller.md)** integration tested
+- **[TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md)** metrics acceptable
+- No breaking changes to **[Web dashboard control interface](../components/web-dashboard-control-interface.md)**
 
-### Documentation Standards
-- Update concept and component documentation
-- Ensure [cross-page linking system](../concepts/cross-page-linking-system.md) can discover your content
-- Add metadata to support the [enhanced documentation metadata system](../concepts/enhanced-documentation-metadata-system.md)
+## Debugging
 
-## Common Development Tasks
+### Development Issues
+1. Check server logs in terminal
+2. Use **[Dashboard Control Interface](../components/dashboard-control-interface.md)** for diagnostics
+3. Review **[Source file metadata tracking](../components/source-file-metadata-tracking.md)** for data issues
+4. Verify **[Test Coverage Documentation system](../concepts/test-coverage-documentation-system.md)** functionality
 
-### Adding New Documentation Generation Features
-1. Extend the [WikiManager integration](../components/wiki-manager-integration.md)
-2. Update the [LinkDiscoveryAgent](../components/link-discovery-agent.md) if needed
-3. Ensure compatibility with [test coverage discovery and analysis](../concepts/test-coverage-discovery-and-analysis.md)
-4. Test with the [web dashboard architecture](../concepts/web-dashboard-architecture.md)
-
-### Extending Cross-Linking Capabilities
-1. Understand the [two-phase cross-linking system](../concepts/two-phase-cross-linking-system.md)
-2. Modify the [LinkDiscoveryAgent](../components/link-discovery-agent.md) as needed
-3. Update the [related pages discovery system](../concepts/related-pages-discovery-system.md)
-4. Test cross-page linking functionality
-
-### Improving Test Integration
-1. Enhance [test-aware documentation generation](../concepts/test-aware-documentation-generation.md)
-2. Extend [test-driven code example extraction](../components/test-driven-code-example-extraction.md)
-3. Improve [test coverage discovery and analysis](../concepts/test-coverage-discovery-and-analysis.md)
-4. Validate with existing test patterns
-
-## Before Submitting Changes
-
-1. **Run full test suite**
-   ```bash
-   npm test
-   ```
-
-2. **Verify documentation generation**
-   - Test with sample repositories
-   - Ensure cross-linking works correctly
-   - Validate metadata enhancement
-
-3. **Check integration points**
-   - [WikiManager integration](../components/wiki-manager-integration.md)
-   - Web dashboard compatibility
-   - [Production-ready server setup](../components/production-ready-server-setup.md)
-
-## Next Steps
-
-- Review the [Architecture](../concepts/architecture.md) for deeper understanding
-- Explore existing components to understand implementation patterns
-- Consider how your changes affect the overall [context-enriched documentation generation](../concepts/context-enriched-documentation-generation.md) system
+### Documentation Issues
+1. Use **[Context-enriched documentation generation](../concepts/context-enriched-documentation-generation.md)** debug mode
+2. Check **[Step-wise processing control](../concepts/step-wise-processing-control.md)** logs
+3. Validate test coverage with **[TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md)**

@@ -1,75 +1,72 @@
 ---
-related: [components/wiki-manager-integration.md, concepts/web-dashboard-architecture.md, concepts/two-phase-cross-linking-system.md, components/link-discovery-agent.md, concepts/cross-linking-system.md]
+related: [concepts/web-dashboard-architecture.md, concepts/test-coverage-integration.md, concepts/real-time-status-monitoring.md, components/dashboard-controller.md, components/test-coverage-analyzer-class.md]
 updated: 2025-11-23
 ---
 
-# Getting Started
+# Getting Started with CodeWiki-Generator
 
-This guide will help you set up and run the CodeWiki-Generator for the first time.
-
-## Who This Guide Is For
-
-Developers who want to:
-- Set up the CodeWiki-Generator locally
-- Generate documentation for their code repositories
-- Understand the basic workflow
+This guide will help you set up and run the CodeWiki-Generator locally for development or usage.
 
 ## Prerequisites
 
-- Node.js (version 14 or higher)
+- Node.js 14+ installed
 - npm package manager
-- A code repository you want to generate documentation for
+- Git for cloning the repository
 
 ## Installation
 
-1. **Clone the repository**
+1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/your-org/CodeWiki-Generator.git
    cd CodeWiki-Generator
    ```
 
-2. **Install dependencies**
+2. **Install dependencies**:
    ```bash
    npm install
    ```
 
-3. **Verify installation**
+## Running the Application
+
+1. **Start the development server**:
+   ```bash
+   npm start
+   ```
+
+2. **Access the web dashboard**:
+   - Open your browser and navigate to `http://localhost:3000`
+   - You should see the Dashboard Control Interface
+
+3. **Expected output**:
+   ```
+   Server running on http://localhost:3000
+   Documentation generator initialized
+   Test coverage analyzer ready
+   ```
+
+## Running Tests
+
+1. **Run the test suite**:
    ```bash
    npm test
    ```
-   This runs the Jest test suite to ensure everything is working correctly.
 
-## First Run
-
-1. **Generate documentation for a sample repository**
-   The [WikiManager integration](../components/wiki-manager-integration.md) is the core component that orchestrates documentation generation.
-
-2. **Start the web dashboard** (if available)
-   The [web dashboard architecture](../concepts/web-dashboard-architecture.md) provides a user interface for viewing generated documentation.
-
-3. **Explore the output**
-   Generated documentation will include:
-   - Context-enriched documentation with enhanced metadata
-   - Cross-linked pages using the [two-phase cross-linking system](../concepts/two-phase-cross-linking-system.md)
-   - Test-aware documentation with coverage analysis
-
-## Key Features You'll Use
-
-- **[LinkDiscoveryAgent](../components/link-discovery-agent.md)**: Automatically discovers relationships between code components
-- **[Cross-linking system](../concepts/cross-linking-system.md)**: Creates navigable connections between documentation pages
-- **Test coverage discovery**: Integrates test information into documentation
-- **Related pages discovery**: Suggests relevant documentation sections
+2. **Run tests with coverage**:
+   ```bash
+   npm run test:coverage
+   ```
 
 ## Next Steps
 
-- Review the [Testing Approach](testing-approach.md) to understand how to run and write tests
-- Check out [Development Workflow](development-workflow.md) for contribution guidelines
-- Explore the [Architecture](../concepts/architecture.md) to understand the system design
+- Explore the **[Web Dashboard Architecture](../concepts/web-dashboard-architecture.md)** to understand the interface
+- Check out **[Test Coverage Integration](../concepts/test-coverage-integration.md)** for testing documentation
+- Review **[Real-time Status Monitoring](../concepts/real-time-status-monitoring.md)** concepts for system health
+- Use the **[DashboardController](../components/dashboard-controller.md)** to manage documentation generation
 
-## Troubleshooting
+## Quick Verification
 
-If you encounter issues during setup:
-1. Ensure Node.js and npm are properly installed
-2. Check that all dependencies installed without errors
-3. Run `npm test` to verify the test suite passes
-4. Review any error messages for missing dependencies or configuration issues
+To verify everything is working:
+1. Start the server with `npm start`
+2. Visit `http://localhost:3000`
+3. Run tests with `npm test`
+4. Check that the [TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md) is functioning in the dashboard

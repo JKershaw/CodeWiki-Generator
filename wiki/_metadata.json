@@ -117,7 +117,7 @@
       "title": "Web Dashboard Architecture",
       "created": "2025-11-23",
       "category": "concept",
-      "sourceFile": "Not specified",
+      "sourceFile": "server.js",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-23"
@@ -135,7 +135,7 @@
       "title": "Test-aware documentation generation",
       "created": "2025-11-23",
       "category": "concept",
-      "sourceFile": "Not specified",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-23"
@@ -153,7 +153,7 @@
       "title": "Context-enriched documentation generation",
       "created": "2025-11-23",
       "category": "concept",
-      "sourceFile": "Not specified",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-23"
@@ -279,7 +279,7 @@
       "title": "DashboardController",
       "created": "2025-11-23",
       "category": "component",
-      "sourceFile": "Not specified",
+      "sourceFile": "server.js",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-23"
@@ -400,12 +400,120 @@
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-23"
+    },
+    "components/web-dashboard-control-interface.md": {
+      "title": "Web dashboard control interface",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "lib/dashboard-controller.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/step-wise-processing-control.md": {
+      "title": "Step-wise processing control",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/dashboard-controller.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/dashboard-control-interface.md": {
+      "title": "Dashboard Control Interface",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "public/app.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/real-time-status-monitoring.md": {
+      "title": "Real-time Status Monitoring",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "public/app.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/wiki-integration.md": {
+      "title": "Wiki Integration",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/express-web-interface-for-documentation-management.md": {
+      "title": "Express web interface for documentation management",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/production-ready-server-configuration.md": {
+      "title": "Production-ready server configuration",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-coverage-integration.md": {
+      "title": "Test Coverage Integration",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-coverage-documentation-system.md": {
+      "title": "Test coverage documentation system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/test-coverage-analyzer.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/test-coverage-analyzer-class.md": {
+      "title": "TestCoverageAnalyzer class",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "lib/test-coverage-analyzer.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-driven-documentation-enrichment.md": {
+      "title": "Test-driven documentation enrichment",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/source-file-metadata-tracking.md": {
+      "title": "Source file metadata tracking",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
     }
   },
   "statistics": {
-    "totalPages": 46,
-    "concepts": 28,
-    "components": 17,
+    "totalPages": 58,
+    "concepts": 34,
+    "components": 23,
     "guides": 1,
     "totalCommitsProcessed": 0,
     "orphanedPages": []

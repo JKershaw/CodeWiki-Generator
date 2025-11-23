@@ -1,8 +1,8 @@
 ---
 title: DashboardController
 category: component
-sourceFile: Not specified
-related: []
+sourceFile: server.js
+related: [components/wiki-integration.md]
 created: 2025-11-23
 updated: 2025-11-23
 ---
@@ -11,54 +11,52 @@ updated: 2025-11-23
 
 ## Purpose and Overview
 
-The DashboardController transforms the application from a CLI tool into a full-stack web application by providing a comprehensive web dashboard interface. It serves as the central controller for real-time system monitoring, manual process control, and dynamic wiki content management through a unified web interface.
+The DashboardController is the primary web interface controller that transforms the application from CLI-only to web-accessible. It provides a centralized dashboard for system monitoring and control, enabling users to manage processing operations through a browser interface.
 
 ## Key Functionality
 
-The DashboardController provides several core capabilities:
+The DashboardController handles all dashboard-related HTTP routes and business logic through several key capabilities:
 
-- **Dashboard Interface**: Renders the main web dashboard at the root path for system overview and controls
-- **Status Monitoring**: Exposes real-time system status through API endpoints for live dashboard updates
-- **Process Control**: Provides manual control over processing operations including start, pause, single-step, and batch processing
-- **Dynamic Wiki Routing**: Handles arbitrary nested wiki paths using flexible middleware, enabling content organization without hardcoded routes
-- **Web API Integration**: Transforms existing processing logic into web-accessible endpoints for remote management
+**Web Interface Management**
+- Renders the main dashboard interface at the root path
+- Provides real-time system status through API endpoints
+- Serves as the primary entry point for web-based operations
 
-The controller uses a RESTful API design pattern, separating rendering endpoints from control APIs to support both human users and programmatic access.
+**Processing Control**
+- **Start/Pause Operations**: Initiates and pauses processing operations via web interface
+- **Step Processing**: Executes single processing steps for granular control
+- **Batch Processing**: Handles multiple items in batch mode for efficient bulk operations
+
+**[Wiki Integration](../components/wiki-integration.md)**
+- Renders wiki pages through nested URL patterns (e.g., `/wiki/concepts/architecture`)
+- Integrates documentation viewing directly within the dashboard interface
+- Provides seamless navigation between operational controls and documentation
 
 ## Relationships
 
-The DashboardController integrates deeply with the existing application architecture:
+The DashboardController connects several system components:
 
-- **Express Server Enhancement**: Builds upon the basic Express server setup, extending it from simple health checks to a full web application
-- **Processing Logic Integration**: Connects with existing processing components to provide web-based control over automated workflows
-- **Wiki Management**: Complements static file serving with dynamic wiki content rendering and nested path resolution
-- **Real-time Communication**: Likely coordinates with WebSocket or polling mechanisms for live status updates in the dashboard interface
+- **Health Check Integration**: Builds upon existing health check endpoints to provide system status
+- **Wiki System**: Connects the documentation viewing system with the dashboard interface
+- **CLI Functionality**: Provides web access to processing operations previously only available through command line
+- **Static File Serving**: Works with Express middleware for serving dashboard assets and views
 
 ## Usage Example
 
 ```javascript
-const express = require('express');
-const DashboardController = require('./controllers/DashboardController');
-
-const app = express();
-const dashboard = new DashboardController();
-
-// Set up dashboard routes
-app.get('/', dashboard.renderDashboard);
-app.get('/api/status', dashboard.getStatus);
-app.post('/api/start', dashboard.startProcessing);
-app.post('/api/pause', dashboard.pauseProcessing);
-app.post('/api/step', dashboard.processStep);
-app.post('/api/batch', dashboard.processBatch);
-
-// Dynamic wiki routing
-app.get('/wiki/*', dashboard.renderWikiPage);
-
-app.listen(3000, () => {
-  console.log('Dashboard available at http://localhost:3000');
-});
+// Dashboard controller handles Express routes
+app.get('/', dashboardController.renderDashboard);
+app.get('/status', dashboardController.getStatus);
+app.post('/start', dashboardController.startProcessing);
+app.post('/pause', dashboardController.pauseProcessing);
+app.post('/step', dashboardController.processStep);
+app.post('/batch', dashboardController.processBatch);
+app.get('/wiki/*', dashboardController.renderWikiPage);
 ```
 
 ## Testing
 
-No automated tests are currently available for the DashboardController. Testing should cover API endpoint responses, wiki routing functionality, and integration with underlying processing components.
+**Test Coverage**: `tests/integration/server.test.js`
+- 11 test cases across 6 test suites
+- **Test Categories**: Express Server, Health Check, Static File Serving, View Engine, Error Handling, Middleware Configuration
+- Comprehensive integration testing ensures dashboard functionality works correctly with the Express server infrastructure

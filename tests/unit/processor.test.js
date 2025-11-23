@@ -204,6 +204,7 @@ describe('Processor', () => {
 
       mockCodeAnalysisAgent.isSignificantFile.mockReturnValue(true);
       mockCodeAnalysisAgent.analyzeCode.mockResolvedValue({
+        filePath: 'src/auth.js',
         concepts: ['AuthService'],
         codeElements: [{ name: 'AuthService', type: 'class', purpose: 'Enhanced' }],
         relationships: []
@@ -228,7 +229,8 @@ describe('Processor', () => {
         expect.stringContaining('Updated'),
         {
           title: 'AuthService',
-          category: 'components'
+          category: 'components',
+          sourceFile: 'src/auth.js'
         }
       );
     });

@@ -26,10 +26,13 @@ Required Sections:
 5. **Testing** (if test coverage information is available, include it at the end)
 
 Guidelines for Usage Examples:
-- ALWAYS include a concrete code example showing typical usage
-- Use code examples from tests if provided above
-- If no test examples provided, create a realistic example based on the code analysis
-- Show imports, initialization, and basic usage
+- If code examples from tests are provided above, USE THEM as the primary source
+- If no test examples are provided, you may create a simple example BUT:
+  * DO NOT invent method names, parameters, or APIs that aren't in the code analysis
+  * Only show patterns that are clearly evident in the code analysis
+  * Use generic variable names and keep it minimal
+  * If you cannot create an accurate example from the code analysis alone, state "No usage examples available - see source code for implementation details"
+- Show imports, initialization, and basic usage patterns
 - Keep examples concise but complete (3-10 lines)
 - Use JavaScript/TypeScript code blocks with proper syntax highlighting
 
