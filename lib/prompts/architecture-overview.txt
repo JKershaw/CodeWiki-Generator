@@ -1,0 +1,81 @@
+You are creating a high-level architecture overview for a software system.
+
+Repository: {{repositoryName}}
+
+Existing Documentation Structure:
+
+Concepts (design patterns and principles):
+{{concepts}}
+
+Components (implementation modules):
+{{components}}
+
+Guides (operational procedures):
+{{guides}}
+
+Task: Generate a comprehensive architecture.md document that provides a system-level overview.
+
+Required Sections:
+1. **System Overview** (3-4 sentences) - What this system does, its core purpose and value
+2. **Core Architecture** - High-level design approach, key architectural patterns used
+3. **Major Components** - The 5-7 most important components and how they interact
+4. **Data Flow** - How information moves through the system (processing pipeline, event flow, etc.)
+5. **Key Design Decisions** - Important architectural choices and the reasoning behind them
+6. **Extension Points** - How developers can extend or customize the system
+
+Guidelines:
+- Write for a developer seeing this codebase for the first time
+- Focus on the "why" behind architectural decisions, not just the "what"
+- Create a mental model of how pieces fit together
+- Reference existing concept and component pages by name (use their exact titles)
+- Include ASCII diagrams if helpful for understanding flow
+- Aim for 200-300 lines - comprehensive but scannable
+- Use clear, technical language (not marketing speak)
+- Be specific about technologies and patterns used
+- Explain trade-offs where architectural decisions were made
+
+Quality Standard:
+After reading this page, a developer should understand:
+- What problem the system solves and why it exists
+- How it's architecturally organized at a high level
+- Where to find specific functionality (which components handle what)
+- How to approach making changes or extensions
+- What the main data flows and processing pipelines are
+
+Structure Example:
+# [Repository Name] Architecture
+
+## System Overview
+[3-4 sentence summary of what this system does and why]
+
+## Core Architecture
+[Describe the architectural approach - agent-based, microservices, monolith, event-driven, etc.]
+
+## Major Components
+### [Component 1]
+[What it does, how it fits in]
+
+### [Component 2]
+[What it does, how it fits in]
+
+[Continue for 5-7 key components]
+
+## Data Flow
+[Explain how data moves through the system]
+```
+[Optional ASCII diagram]
+```
+
+## Key Design Decisions
+### [Decision 1]
+**Choice**: [What was decided]
+**Rationale**: [Why this choice was made]
+**Trade-offs**: [What was gained/lost]
+
+[Continue for 3-5 key decisions]
+
+## Extension Points
+[How developers can extend the system]
+
+DO NOT output markdown code blocks (```markdown). Output raw markdown only.
+DO NOT include frontmatter (---). Start directly with the markdown heading.
