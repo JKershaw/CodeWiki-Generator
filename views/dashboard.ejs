@@ -45,13 +45,27 @@
         </form>
       </section>
 
+      <section class="project-panel">
+        <h2>Wiki Project</h2>
+        <div class="form-group">
+          <label for="project">Select Project:</label>
+          <select id="project" class="project-selector">
+            <% projects.forEach(function(project) { %>
+              <option value="<%= project %>" <%= project === defaultProject ? 'selected' : '' %>>
+                <%= project.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') %>
+              </option>
+            <% }); %>
+          </select>
+        </div>
+      </section>
+
       <section class="wiki-panel">
         <h2>Generated Wiki</h2>
         <p>View generated documentation:</p>
-        <ul>
-          <li><a href="/wiki/index">Wiki Index</a></li>
-          <li><a href="/wiki/concepts/architecture">Architecture</a></li>
-          <li><a href="/wiki/guides/getting-started">Getting Started</a></li>
+        <ul id="wiki-links">
+          <li><a href="/wiki/<%= defaultProject %>/index" class="wiki-link">Wiki Index</a></li>
+          <li><a href="/wiki/<%= defaultProject %>/concepts/architecture" class="wiki-link">Architecture</a></li>
+          <li><a href="/wiki/<%= defaultProject %>/guides/getting-started" class="wiki-link">Getting Started</a></li>
         </ul>
       </section>
     </main>

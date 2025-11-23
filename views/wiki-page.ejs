@@ -12,7 +12,7 @@
       <h1><%= title %></h1>
       <nav class="breadcrumb">
         <a href="/">Dashboard</a> /
-        <a href="/wiki/index">Wiki</a> /
+        <a href="/wiki/<%= project %>/index">Wiki</a> /
         <span><%= title %></span>
       </nav>
     </header>
@@ -27,7 +27,7 @@
         <h3>Related Pages</h3>
         <ul>
           <% page.metadata.related.forEach(relatedPath => { %>
-            <li><a href="/wiki/<%= relatedPath.replace('.md', '') %>"><%= relatedPath %></a></li>
+            <li><a href="/wiki/<%= project %>/<%= relatedPath.replace('.md', '') %>"><%= relatedPath %></a></li>
           <% }); %>
         </ul>
       </aside>

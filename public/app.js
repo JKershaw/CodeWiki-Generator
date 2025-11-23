@@ -94,4 +94,35 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 5000);
   }
+
+  // Project selector functionality
+  const projectSelector = document.getElementById('project');
+  if (projectSelector) {
+    // Load saved project selection from localStorage
+    const savedProject = localStorage.getItem('selectedProject');
+    if (savedProject) {
+      projectSelector.value = savedProject;
+      updateWikiLinks(savedProject);
+    }
+
+    // Handle project selection change
+    projectSelector.addEventListener('change', function(e) {
+      const selectedProject = e.target.value;
+      localStorage.setItem('selectedProject', selectedProject);
+      updateWikiLinks(selectedProject);
+    });
+  }
+
+  // Update all wiki links with the selected project
+  function updateWikiLinks(project) {
+    document.querySelectorAll('.wiki-link').forEach(link => {
+      const href = link.getAttribute('href');
+      const parts = href.split('/');
+      if (parts.length >= 3 && parts[1] === 'wiki') {
+        // Replace project in /wiki/PROJECT/page
+        parts[2] = project;
+        link.setAttribute('href', parts.join('/'));
+      }
+    });
+  }
 });
