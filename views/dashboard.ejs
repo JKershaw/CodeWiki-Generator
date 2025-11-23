@@ -5,12 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CodeWiki Generator Dashboard</title>
   <link rel="stylesheet" href="/public/style.css">
+  <link rel="stylesheet" href="/public/activity-feed.css">
+  <link rel="stylesheet" href="/public/suggestions.css">
 </head>
 <body>
   <div class="container">
     <header>
       <h1>CodeWiki Generator Dashboard</h1>
       <p class="version">v<%= version %></p>
+      <nav class="header-nav">
+        <a href="/" class="nav-link active">Dashboard</a>
+        <a href="/planning" class="nav-link">Planning</a>
+        <a href="/projects" class="nav-link">Projects</a>
+        <a href="/analytics" class="nav-link">Analytics</a>
+      </nav>
     </header>
 
     <main>
@@ -21,6 +29,86 @@
           <p><strong>Repository:</strong> <%= state.repoUrl || 'None' %></p>
           <p><strong>Progress:</strong> <%= state.currentCommit %> / <%= state.totalCommits %> commits</p>
           <p><strong>Pages:</strong> <%= state.pagesCreated %> created, <%= state.pagesUpdated %> updated</p>
+        </div>
+      </section>
+
+      <section class="research-panel">
+        <div class="panel-header">
+          <h2>Context Research</h2>
+          <button type="button" id="toggleResearch" class="toggle-btn" aria-expanded="true">
+            <span class="toggle-icon">−</span>
+          </button>
+        </div>
+        <div id="researchContent" class="panel-content">
+          <p class="panel-description">Research wiki context to understand features, patterns, and implementation details.</p>
+          <form id="research-form">
+            <div class="form-group">
+              <label for="researchQuery">What would you like to research?</label>
+              <textarea
+                id="researchQuery"
+                name="query"
+                rows="3"
+                placeholder="e.g., 'how does the wiki linking system work' or 'implement test coverage tracking'"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="researchBtn">
+              <span class="btn-text">Research</span>
+              <span class="btn-loading" style="display: none;">Researching...</span>
+            </button>
+          </form>
+
+          <div id="researchResults" class="research-results" style="display: none;">
+            <div class="results-header">
+              <h3>Research Results</h3>
+              <button type="button" id="clearResults" class="btn-clear">Clear</button>
+            </div>
+
+            <div class="result-section">
+              <h4 class="section-title">Summary</h4>
+              <div id="resultSummary" class="result-content"></div>
+            </div>
+
+            <div class="result-section expandable">
+              <div class="section-header" data-target="relevantPages">
+                <h4 class="section-title">Relevant Pages <span class="page-count"></span></h4>
+                <span class="expand-icon">▼</span>
+              </div>
+              <div id="relevantPages" class="result-content collapsible"></div>
+            </div>
+
+            <div class="result-section expandable">
+              <div class="section-header" data-target="keyComponents">
+                <h4 class="section-title">Key Components <span class="component-count"></span></h4>
+                <span class="expand-icon">▼</span>
+              </div>
+              <div id="keyComponents" class="result-content collapsible"></div>
+            </div>
+
+            <div class="result-section expandable">
+              <div class="section-header" data-target="keyConcepts">
+                <h4 class="section-title">Key Concepts <span class="concept-count"></span></h4>
+                <span class="expand-icon">▼</span>
+              </div>
+              <div id="keyConcepts" class="result-content collapsible"></div>
+            </div>
+
+            <div class="result-section expandable">
+              <div class="section-header" data-target="implementationSteps">
+                <h4 class="section-title">Implementation Steps</h4>
+                <span class="expand-icon">▼</span>
+              </div>
+              <div id="implementationSteps" class="result-content collapsible"></div>
+            </div>
+
+            <div class="result-section expandable">
+              <div class="section-header" data-target="relatedFiles">
+                <h4 class="section-title">Related Files <span class="file-count"></span></h4>
+                <span class="expand-icon">▼</span>
+              </div>
+              <div id="relatedFiles" class="result-content collapsible"></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -59,6 +147,57 @@
         </div>
       </section>
 
+      <section class="suggestions-panel">
+        <div class="panel-header">
+          <h2>Smart Suggestions</h2>
+          <button type="button" id="toggleSuggestions" class="toggle-btn" aria-expanded="true">
+            <span class="toggle-icon">−</span>
+          </button>
+        </div>
+        <div id="suggestionsContent" class="panel-content">
+          <p class="panel-description">AI-powered suggestions to improve your documentation quality.</p>
+
+          <div class="suggestions-controls">
+            <button type="button" id="generateSuggestionsBtn" class="btn-generate">
+              <span class="btn-text">Generate Suggestions</span>
+              <span class="btn-loading" style="display: none;">Generating...</span>
+            </button>
+            <div class="form-group">
+              <label for="typeFilter">Filter by Type:</label>
+              <select id="typeFilter">
+                <option value="all">All Types</option>
+                <option value="short-page">Short Pages</option>
+                <option value="orphaned-page">Orphaned Pages</option>
+                <option value="broken-reference">Broken Links</option>
+                <option value="missing-related">Missing Related Pages</option>
+                <option value="missing-tags">Missing Tags</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="suggestions-statistics">
+            <div class="stat-item">
+              <span class="stat-label">Total Suggestions</span>
+              <span class="stat-value" id="statTotalSuggestions">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Pending</span>
+              <span class="stat-value" id="statPending">0</span>
+            </div>
+            <div class="stat-item stat-types">
+              <span class="stat-label">By Type</span>
+              <span class="stat-value" id="statByType">None</span>
+            </div>
+          </div>
+
+          <div id="emptyState" class="empty-state" style="display: block;">
+            <p>No suggestions yet. Click "Generate Suggestions" to analyze your wiki.</p>
+          </div>
+
+          <div id="suggestionsContainer" class="suggestions-container"></div>
+        </div>
+      </section>
+
       <section class="wiki-panel">
         <h2>Generated Wiki</h2>
         <p>View generated documentation:</p>
@@ -68,6 +207,50 @@
           <li><a href="/wiki/<%= defaultProject %>/guides/getting-started" class="wiki-link">Getting Started</a></li>
         </ul>
       </section>
+
+      <section class="activity-panel">
+        <div class="panel-header">
+          <h2>Activity Feed</h2>
+          <button type="button" id="toggleActivity" class="toggle-btn" aria-expanded="true">
+            <span class="toggle-icon">−</span>
+          </button>
+        </div>
+        <div id="activityContent" class="panel-content">
+          <div class="activity-controls">
+            <div class="filter-buttons">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="COMMIT_START">Commits</button>
+              <button class="filter-btn" data-filter="FILE_ANALYSIS">Analysis</button>
+              <button class="filter-btn" data-filter="WIKI_UPDATE">Updates</button>
+              <button class="filter-btn" data-filter="ERROR">Errors</button>
+            </div>
+            <div class="action-buttons">
+              <button id="exportActivity" class="btn-action" title="Export to JSON">
+                <span>📥 Export</span>
+              </button>
+              <button id="clearActivity" class="btn-action btn-danger" title="Clear history">
+                <span>🗑️ Clear</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="activity-status">
+            <div class="connection-status" id="connectionStatus">
+              <span class="status-indicator"></span>
+              <span class="status-text">Connecting...</span>
+            </div>
+            <div class="event-count">
+              <span id="eventCount">0</span> events
+            </div>
+          </div>
+
+          <div class="activity-feed" id="activityFeed">
+            <div class="empty-state">
+              <p>No activity yet. Start processing to see real-time updates.</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -76,5 +259,7 @@
   </div>
 
   <script src="/public/app.js"></script>
+  <script src="/public/activity-feed.js"></script>
+  <script src="/public/suggestions.js"></script>
 </body>
 </html>
