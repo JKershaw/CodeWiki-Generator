@@ -8,8 +8,21 @@ updated: 2025-11-23
 <h2>Quick Navigation</h2>
 <ul>
 <li><strong>New to the project?</strong> Start with <a href="guides/getting-started.md">Getting Started</a></li>
+<li><strong>Understanding the vision?</strong> Read <a href="meta/philosophy.md">Core Philosophy &amp; Vision</a></li>
 <li><strong>Looking for setup details?</strong> Check <a href="guides/configuration.md">Configuration Guide</a></li>
 <li><strong>Understanding the system?</strong> Review <a href="concepts/architecture.md">Architecture Overview</a></li>
+<li><strong>Technical requirements?</strong> See <a href="meta/specification.md">Technical Specification</a></li>
+</ul>
+<h2>Meta (Philosophy &amp; Vision)</h2>
+<p>High-level context explaining the "why" behind the project:</p>
+<ul>
+<li><a href="meta/philosophy.md">Core Philosophy &amp; Vision</a> - The fundamental ideas and philosophy driving this project: <em>"Code tells you what. Documentation tells you why. History tells you how."</em></li>
+<li><a href="meta/specification.md">Technical Specification</a> - Comprehensive technical requirements, architecture, and development phases including the MCP server roadmap</li>
+</ul>
+<h2>History (Project Evolution)</h2>
+<p>Historical context showing how the project evolved:</p>
+<ul>
+<li><a href="history/progress-report.md">Project History and Achievement Analysis</a> - Comprehensive progress report documenting all achievements, current status (87-90% quality rating), and what has been completed across Phases 1-5</li>
 </ul>
 <h2>Concepts</h2>
 <p>Core architectural patterns and design principles behind the documentation system:</p>
@@ -46,9 +59,21 @@ updated: 2025-11-23
 </ul>
 <h2>Navigation Tips</h2>
 <ul>
-<li>Browse <strong>Concepts</strong> to understand the theoretical foundations</li>
-<li>Explore <strong>Components</strong> for implementation specifics</li>
-<li>Follow <strong>Guides</strong> for hands-on instructions</li>
-<li>Use the search functionality to quickly find specific topics</li>
-<li>Check the configuration guide before diving into development</li>
+<li><strong>Start with WHY</strong>: Read <a href="meta/philosophy.md">Philosophy</a> to understand the vision</li>
+<li><strong>Then WHAT</strong>: Browse <strong>Concepts</strong> for theoretical foundations and <strong>Components</strong> for implementation</li>
+<li><strong>Then HOW</strong>: Follow <strong>Guides</strong> for hands-on instructions</li>
+<li><strong>See progress</strong>: Check <a href="history/progress-report.md">Project History</a> for what's been achieved</li>
+<li><strong>Technical details</strong>: Review <a href="meta/specification.md">Technical Specification</a> for requirements and roadmap</li>
 </ul>
+<h2>Using the /context Command</h2>
+<p>This wiki is designed to be searchable via the <code>/context</code> slash command in Claude Code:</p>
+<pre><code class="language-bash"># Example: Get context for implementing a new feature
+/context implement MCP server for Claude Code integration
+
+# Example: Understand the project philosophy
+/context what is the core philosophy of this project?
+
+# Example: Debug an issue
+/context fix failing tests in the processor
+</code></pre>
+<p>The context command searches across all layers (meta, code, history, quality) to provide comprehensive information for your task.</p>
