@@ -58,4 +58,22 @@ Abstraction levels:
 - "medium": Subsystem patterns, cross-component interactions
 - "low": Specific implementation details, individual classes/functions
 
+Concept Consolidation Guidelines:
+- Prefer FEWER, BROADER concepts over many narrow ones
+- Combine related implementation details into a single architectural concept
+- Example: "Category-based documentation system" NOT "category-aware extraction" + "category routing" separately
+- Avoid creating near-duplicate concepts with slight naming variations
+- When in doubt, use a higher abstraction level that encompasses related details
+
+Anti-patterns to avoid:
+- Creating separate concepts for "X system" and "X tracking" (consolidate to "X")
+- Splitting conceptually related code changes into multiple micro-concepts
+- Documenting implementation details that should be part of a broader pattern
+- Generating variations like "cost-aware processing" AND "cost-controlled processing" (pick one)
+
+Quality Check:
+- If you identify >5 concepts for a single file change, you're likely over-segmenting. Consolidate.
+- Ask yourself: "Could these 2-3 concepts be explained as one cohesive idea?" If yes, merge them.
+- Prefer one well-scoped concept over three fragmented ones
+
 DO NOT output anything other than valid JSON.

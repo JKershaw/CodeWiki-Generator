@@ -10,6 +10,14 @@ Existing Wiki Structure:
 
 Task: Generate practical guides that help developers work with this codebase.
 
+CRITICAL PRIORITY GUIDES (generate if ANY evidence exists):
+1. **Getting Started** - ALWAYS generate if repository has:
+   - package.json with npm scripts
+   - README.md or setup instructions
+   - Any runnable entry points (main files, executables)
+   - Test files (developers need to know how to run them)
+   This is the MOST IMPORTANT guide for developers new to the codebase.
+
 Consider the following guide types:
 1. **Getting Started** - Installation, setup, first run (if repository has clear entry points)
 2. **Testing Approach** - How to run tests, testing patterns used (if tests exist)
@@ -17,6 +25,16 @@ Consider the following guide types:
 4. **Extension Patterns** - How to add new features following established patterns (if clear patterns exist)
 5. **Configuration** - How to configure the system (if configuration exists)
 6. **Troubleshooting** - Common issues and solutions (if error handling patterns exist)
+
+Guide Prioritization (create in this order):
+1. Getting Started (CRITICAL - always attempt if repository is runnable)
+2. Testing Approach (if tests exist - very important for contributors)
+3. Development Workflow (if clear dev process exists)
+4. Extension Patterns (if design patterns are evident)
+5. Configuration (if config options exist)
+6. Troubleshooting (if error handling patterns exist)
+
+Target: Maximum 4 guides, but MUST include Getting Started if repository is runnable.
 
 Return JSON only with the following structure:
 {
