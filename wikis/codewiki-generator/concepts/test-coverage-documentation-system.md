@@ -1,11 +1,23 @@
 ---
 title: Test coverage documentation system
 category: concept
-sourceFile: lib/test-coverage-analyzer.js
+layer: code
+tags: [architecture, design-pattern, testing, code-coverage]
 related: []
-created: 2025-11-23
 updated: 2025-11-23
+created: 2025-11-23
+sourceFile: lib/test-coverage-analyzer.js
 ---
+[Home](../index.md) > [Concepts](../concepts) > Test Coverage Documentation System
+
+## Table of Contents
+
+- [Purpose and Overview](#purpose-and-overview)
+- [Key Functionality](#key-functionality)
+- [Relationships](#relationships)
+- [Usage Example](#usage-example)
+- [Testing](#testing)
+- [See Also](#see-also)
 
 # Test Coverage Analyzer
 
@@ -58,3 +70,14 @@ const summary = analyzer.generateSummary(result);
 - 42 test cases across 19 test suites
 - Comprehensive coverage of core functionality including file analysis, test discovery, and summary generation
 - Test categories include: TestCoverageAnalyzer, analyzeFile, Processor, Component methods, Creation, Usage, generateSummary, _findTestFile, _extractTestStats
+
+## See Also
+
+**Project Context:**
+- [Core Philosophy & Vision](../meta/philosophy.md)
+- [Technical Specification](../meta/specification.md)
+- [Project History and Achievement Analysis](../history/progress-report.md)
+
+**Related Topics:**
+- [Dashboard Control Interface](../components/dashboard-control-interface.md)
+- [architecture](../concepts/architecture.md)

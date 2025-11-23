@@ -2,14 +2,48 @@
 title: Technical Specification
 category: meta
 layer: meta
+tags: [philosophy, vision]
+related: [components/dashboard-control-interface.md, concepts/architecture.md, guides/getting-started.md, guides/development-workflow.md, concepts/step-wise-processing-control.md]
+updated: 2025-11-23
+created: 2025-11-23
 sourceFile: Specification.md
 sourceType: imported
-created: 2025-11-23
-updated: 2025-11-23
-related: [components/dashboard-control-interface.md, concepts/architecture.md, guides/getting-started.md, guides/development-workflow.md, concepts/step-wise-processing-control.md]
 themes: [autonomous documentation, git history analysis, AI-powered documentation, progressive processing, human-in-the-loop control]
 mentions: [Dashboard, Processor, WikiManager, AI Agents, GitHub Integration]
 ---
+[Home](../index.md) > [Meta](../meta) > Specification
+
+## Table of Contents
+
+- [Context & Goals](#context-goals)
+- [Technical Stack](#technical-stack)
+- [Architecture Overview](#architecture-overview)
+- [Core Components](#core-components)
+  - [1. Dashboard (Express + EJS)](#1-dashboard-express-ejs)
+  - [2. Processor](#2-processor)
+  - [3. AI Agents](#3-ai-agents)
+  - [4. Wiki Manager](#4-wiki-manager)
+  - [5. GitHub Integration](#5-github-integration)
+- [Data Models](#data-models)
+  - [State File (`state.json`)](#state-file-statejson)
+  - [Agent Output (Code Analysis)](#agent-output-code-analysis)
+- [User Workflows](#user-workflows)
+  - [Initial Setup](#initial-setup)
+  - [Manual Stepping (Phase 1)](#manual-stepping-phase-1)
+  - [Batch Processing (Phase 2)](#batch-processing-phase-2)
+  - [MCP Server Integration (Phase 3)](#mcp-server-integration-phase-3)
+- [Error Handling](#error-handling)
+- [Cost Control](#cost-control)
+- [Development Phases](#development-phases)
+  - [Phase 1: Manual Stepping (MVP)](#phase-1-manual-stepping-mvp)
+  - [Phase 2: Supervised Automation](#phase-2-supervised-automation)
+  - [Phase 3: MCP Server](#phase-3-mcp-server)
+- [Self-Referential Development](#self-referential-development)
+- [API Key Management](#api-key-management)
+- [File Structure](#file-structure)
+- [Success Metrics](#success-metrics)
+- [Implementation Notes](#implementation-notes)
+- [See Also](#see-also)
 
 # Technical Specification
 
@@ -37,7 +71,7 @@ mentions: [Dashboard, Processor, WikiManager, AI Agents, GitHub Integration]
 - **AI Processing**: Anthropic SDK 0.70.0
 - **Wiki Storage**: Local markdown files (git-friendly)
 
-## Architecture Overview
+## [Architecture](../concepts/architecture.md) Overview
 
 ```
 Repository → Git History Walker → AI Agents → Wiki (Markdown)
@@ -109,7 +143,7 @@ wiki/
 ├── concepts/         # High-level abstractions
 ├── components/       # Classes, modules, services
 ├── guides/          # How-to documentation
-├── index.md         # Entry point
+├── [index](../index.md).md         # Entry point
 └── _metadata.json   # Page relationships, stats
 ```
 
@@ -260,7 +294,7 @@ wiki/
 **Process**:
 1. Initialize empty wiki in `./docs/wiki`
 2. As you build features, run processor on the codebase itself
-3. Use generated wiki to understand your own architecture
+3. Use generated wiki to understand your own [architecture](../concepts/architecture.md)
 4. If wiki is confusing, prompts need improvement
 5. Edit prompts, reprocess, verify improvement
 
@@ -349,3 +383,12 @@ codewiki-generator/
   }
 }
 ```
+
+## See Also
+
+**Related Topics:**
+- [Dashboard Control Interface](../components/dashboard-control-interface.md)
+- [architecture](../concepts/architecture.md)
+- [getting-started](../guides/getting-started.md)
+- [development-workflow](../guides/development-workflow.md)
+- [Step-wise processing control](../concepts/step-wise-processing-control.md)

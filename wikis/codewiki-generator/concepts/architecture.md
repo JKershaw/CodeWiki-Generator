@@ -1,7 +1,15 @@
 ---
+category: concepts
+layer: code
+tags: [architecture, design-pattern]
 related: [concepts/context-enriched-documentation-generation.md, concepts/step-wise-processing-control.md, concepts/real-time-status-monitoring.md, components/test-coverage-analyzer-class.md, components/source-file-metadata-tracking.md]
 updated: 2025-11-23
 ---
+[Home](../index.md) > [Concepts](../concepts) > Architecture
+
+## Table of Contents
+
+- [See Also](#see-also)
 
 <h1>CodeWiki-Generator Architecture</h1>
 <h2>System Overview</h2>
@@ -22,15 +30,29 @@ updated: 2025-11-23
 <p>The output layer component responsible for formatting and publishing generated documentation to various wiki platforms. It handles the translation from internal documentation formats to platform-specific markup and manages the publishing workflow.</p>
 <h3>[Web Dashboard Control Interface](../components/web-dashboard-control-interface.md)</h3>
 <p>A service layer that bridges the web interface with the core processing components. It provides RESTful APIs for dashboard operations and implements the real-time communication protocols needed for <strong>[real-time status monitoring](../concepts/real-time-status-monitoring.md)</strong>.</p>
-<h3>[Production-Ready Server Configuration](../concepts/production-ready-server-configuration.md)</h3>
-<p>Infrastructure components that handle deployment concerns, monitoring, logging, and scaling. This includes health check endpoints, configuration management, and operational tooling needed for <strong>[production-ready server configuration](../concepts/production-ready-server-configuration.md)</strong>.</p>
+<h3>[Production-Ready Server Configuration](../concepts/production-ready-server-[configuration](../guides/configuration.md).md)</h3>
+<p>Infrastructure components that handle deployment concerns, monitoring, logging, and scaling. This includes health check endpoints, [configuration](../guides/configuration.md) management, and operational tooling needed for <strong>[production-ready server configuration](../concepts/production-ready-server-[configuration](../guides/configuration.md).md)</strong>.</p>
 <h2>Data Flow</h2>
 <p>The system processes information through a multi-stage pipeline that enriches documentation at each step:</p>
-<pre><code>Source Code → Metadata Extraction → Test Analysis → Coverage Integration → Documentation Generation → Wiki Publishing
 
-                    ↓                           ↑
-            Dashboard Monitoring ←→ Real-time Status Updates
-</code></pre>
+```mermaid
+graph LR
+    A[Source Code] --> B[Metadata Extraction]
+    B --> C[Test Analysis]
+    C --> D[Coverage Integration]
+    D --> E[Documentation Generation]
+    E --> F[Wiki Publishing]
+
+    G[Dashboard Monitoring] <--> B
+    G <--> C
+    G <--> D
+    G <--> E
+    G <--> F
+
+    style A fill:#e1f5ff
+    style F fill:#d4edda
+    style G fill:#fff3cd
+```
 <ol>
 <li><strong>Ingestion Phase</strong>: Source files are scanned and metadata is extracted using <strong>[source file metadata tracking](../components/source-file-metadata-tracking.md)</strong></li>
 <li><strong>Analysis Phase</strong>: The <strong>[TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md)</strong> processes test files and generates coverage reports</li>
@@ -69,3 +91,12 @@ updated: 2025-11-23
 <p><strong>Dashboard Widgets</strong>: The <strong>[web dashboard architecture](../concepts/web-dashboard-architecture.md)</strong> supports custom monitoring widgets and control interfaces that can be added to provide specialized functionality for specific workflows.</p>
 <p><strong>Processing Hooks</strong>: The <strong>[step-wise processing control](../concepts/step-wise-processing-control.md)</strong> system provides hook points where custom logic can be inserted at any stage of the documentation generation pipeline.</p>
 <p><strong>Metadata Extractors</strong>: The <strong>[source file metadata tracking](../components/source-file-metadata-tracking.md)</strong> system can be extended with custom extractors that understand additional file types, frameworks, or development patterns specific to particular technology stacks.</p>
+
+## See Also
+
+**Related Topics:**
+- [Context-enriched documentation generation](../concepts/context-enriched-documentation-generation.md)
+- [Step-wise processing control](../concepts/step-wise-processing-control.md)
+- [Real-time Status Monitoring](../concepts/real-time-status-monitoring.md)
+- [TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md)
+- [Source file metadata tracking](../components/source-file-metadata-tracking.md)

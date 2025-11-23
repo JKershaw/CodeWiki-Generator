@@ -1,11 +1,18 @@
 ---
 title: Real-time Status Monitoring
 category: concept
-sourceFile: public/app.js
+layer: code
+tags: [architecture, design-pattern]
 related: [components/dashboard-control-interface.md]
-created: 2025-11-23
 updated: 2025-11-23
+created: 2025-11-23
+sourceFile: public/app.js
 ---
+[Home](../index.md) > [Concepts](../concepts) > Real Time Status Monitoring
+
+## Table of Contents
+
+- [See Also](#see-also)
 
 <h1>Real-time Status Monitoring</h1>
 <h2>Purpose and Overview</h2>
@@ -23,7 +30,7 @@ updated: 2025-11-23
 <li><strong>Process Control Integration</strong>: Works alongside <a href="../components/dashboard-control-interface.md">[Dashboard Control Interface](../components/dashboard-control-interface.md)</a> to provide complete process management</li>
 <li><strong>API Communication</strong>: Connects to <code>/api/status</code> endpoint for status retrieval</li>
 <li><strong>UI Updates</strong>: Synchronizes with HTML dashboard elements to display current state</li>
-<li><strong>Event-Driven Architecture</strong>: Responds to processing lifecycle events (start, pause, step, complete)</li>
+<li><strong>Event-Driven [Architecture](../concepts/architecture.md)</strong>: Responds to processing lifecycle events (start, pause, step, complete)</li>
 </ul>
 <h2>Usage Example</h2>
 <p>The monitoring system initializes automatically when the dashboard loads:</p>
@@ -46,3 +53,14 @@ document.getElementById(&#39;start-form&#39;).addEventListener(&#39;submit&#39;,
 </code></pre>
 <h2>Testing</h2>
 <p>No automated tests found for this component. Testing would benefit from verifying polling behavior, status update accuracy, and UI synchronization during different processing states.</p>
+
+## See Also
+
+**Project Context:**
+- [Core Philosophy & Vision](../meta/philosophy.md)
+- [Technical Specification](../meta/specification.md)
+- [Project History and Achievement Analysis](../history/progress-report.md)
+
+**Related Topics:**
+- [Dashboard Control Interface](../components/dashboard-control-interface.md)
+- [architecture](../concepts/architecture.md)

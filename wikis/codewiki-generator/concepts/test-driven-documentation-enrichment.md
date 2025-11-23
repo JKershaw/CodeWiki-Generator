@@ -1,11 +1,18 @@
 ---
 title: Test-driven documentation enrichment
 category: concept
-sourceFile: lib/processor.js
+layer: code
+tags: [architecture, design-pattern, testing]
 related: [components/source-file-metadata-tracking.md]
-created: 2025-11-23
 updated: 2025-11-23
+created: 2025-11-23
+sourceFile: lib/processor.js
 ---
+[Home](../index.md) > [Concepts](../concepts) > Test Driven Documentation Enrichment
+
+## Table of Contents
+
+- [See Also](#see-also)
 
 <h1>Test-driven Documentation Enrichment</h1>
 <h2>Purpose and Overview</h2>
@@ -53,3 +60,14 @@ const isSignificant = processor.isSignificantFile(&#39;lib/component.js&#39;);
 <li>Test categories: Processor initialization, processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository</li>
 <li>Comprehensive mocking of dependencies including wiki manager, state manager, and analysis agents</li>
 </ul>
+
+## See Also
+
+**Project Context:**
+- [Core Philosophy & Vision](../meta/philosophy.md)
+- [Technical Specification](../meta/specification.md)
+- [Project History and Achievement Analysis](../history/progress-report.md)
+
+**Related Topics:**
+- [Source file metadata tracking](../components/source-file-metadata-tracking.md)
+- [architecture](../concepts/architecture.md)

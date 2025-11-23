@@ -1,11 +1,23 @@
 ---
 title: TestCoverageAnalyzer class
 category: component
-sourceFile: lib/test-coverage-analyzer.js
+layer: code
+tags: [implementation, code, testing, code-coverage]
 related: []
-created: 2025-11-23
 updated: 2025-11-23
+created: 2025-11-23
+sourceFile: lib/test-coverage-analyzer.js
 ---
+[Home](../index.md) > [Components](../components) > Test Coverage Analyzer Class
+
+## Table of Contents
+
+- [Purpose and Overview](#purpose-and-overview)
+- [Key Functionality](#key-functionality)
+- [Relationships](#relationships)
+- [Usage Example](#usage-example)
+- [Testing](#testing)
+- [See Also](#see-also)
 
 # TestCoverageAnalyzer Class
 
@@ -57,3 +69,14 @@ The `analyzeFile` method returns an object with test coverage details including:
 - 42 test cases across 19 test suites
 - Comprehensive coverage including edge cases like missing source files and various test file patterns
 - Test categories cover core functionality: TestCoverageAnalyzer, analyzeFile, _findTestFile, _extractTestStats, generateSummary, and various processing methods
+
+## See Also
+
+**Project Context:**
+- [Core Philosophy & Vision](../meta/philosophy.md)
+- [Technical Specification](../meta/specification.md)
+- [Project History and Achievement Analysis](../history/progress-report.md)
+
+**Related Topics:**
+- [Dashboard Control Interface](../components/dashboard-control-interface.md)
+- [DashboardController](../components/dashboard-controller.md)

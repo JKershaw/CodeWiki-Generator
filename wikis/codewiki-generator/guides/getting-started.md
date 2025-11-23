@@ -1,7 +1,15 @@
 ---
+category: guides
+layer: code
+tags: [tutorial, how-to]
 related: [components/dashboard-control-interface.md, concepts/web-dashboard-architecture.md, concepts/test-coverage-integration.md, concepts/real-time-status-monitoring.md, components/dashboard-controller.md]
 updated: 2025-11-23
 ---
+[Home](../index.md) > [Guides](../guides) > Getting Started
+
+## Table of Contents
+
+- [See Also](#see-also)
 
 <h1>Getting Started with CodeWiki-Generator</h1>
 <p>This guide will help you set up and run the CodeWiki-Generator locally for development or usage.</p>
@@ -55,7 +63,7 @@ Test coverage analyzer ready
 </ol>
 <h2>Next Steps</h2>
 <ul>
-<li>Explore the <strong><a href="../concepts/web-dashboard-architecture.md">[Web Dashboard Architecture](../concepts/web-dashboard-architecture.md)</a></strong> to understand the interface</li>
+<li>Explore the <strong><a href="../concepts/web-dashboard-[architecture](../concepts/architecture.md).md">[Web Dashboard Architecture](../concepts/web-dashboard-[architecture](../concepts/architecture.md).md)</a></strong> to understand the interface</li>
 <li>Check out <strong><a href="../concepts/test-coverage-integration.md">[Test Coverage Integration](../concepts/test-coverage-integration.md)</a></strong> for testing documentation</li>
 <li>Review <strong><a href="../concepts/real-time-status-monitoring.md">[Real-time Status Monitoring](../concepts/real-time-status-monitoring.md)</a></strong> concepts for system health</li>
 <li>Use the <strong><a href="../components/dashboard-controller.md">[DashboardController](../components/dashboard-controller.md)</a></strong> to manage documentation generation</li>
@@ -68,3 +76,12 @@ Test coverage analyzer ready
 <li>Run tests with <code>npm test</code></li>
 <li>Check that the <a href="../components/test-coverage-analyzer-class.md">[TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md)</a> is functioning in the dashboard</li>
 </ol>
+
+## See Also
+
+**Related Topics:**
+- [Dashboard Control Interface](../components/dashboard-control-interface.md)
+- [Web Dashboard Architecture](../concepts/web-dashboard-architecture.md)
+- [Test Coverage Integration](../concepts/test-coverage-integration.md)
+- [Real-time Status Monitoring](../concepts/real-time-status-monitoring.md)
+- [DashboardController](../components/dashboard-controller.md)

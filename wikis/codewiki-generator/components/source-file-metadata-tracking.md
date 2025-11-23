@@ -1,11 +1,18 @@
 ---
 title: Source file metadata tracking
 category: component
-sourceFile: lib/processor.js
+layer: code
+tags: [implementation, code]
 related: [concepts/test-driven-documentation-enrichment.md]
-created: 2025-11-23
 updated: 2025-11-23
+created: 2025-11-23
+sourceFile: lib/processor.js
 ---
+[Home](../index.md) > [Components](../components) > Source File Metadata Tracking
+
+## Table of Contents
+
+- [See Also](#see-also)
 
 <h1>Source File Metadata Tracking</h1>
 <h2>Purpose and Overview</h2>
@@ -46,3 +53,14 @@ await processor.processCommit(commitData);
 <li>Comprehensive testing of processor functionality including <code>processCommit</code>, <code>isSignificantFile</code>, <code>getRelevantContext</code>, <code>determinePagePath</code>, and <code>processRepository</code> methods</li>
 <li>Tests validate metadata tracking integration with mock wiki manager and state management systems</li>
 </ul>
+
+## See Also
+
+**Project Context:**
+- [Core Philosophy & Vision](../meta/philosophy.md)
+- [Technical Specification](../meta/specification.md)
+- [Project History and Achievement Analysis](../history/progress-report.md)
+
+**Related Topics:**
+- [Test-driven documentation enrichment](../concepts/test-driven-documentation-enrichment.md)
+- [Dashboard Control Interface](../components/dashboard-control-interface.md)

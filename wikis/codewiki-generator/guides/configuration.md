@@ -1,7 +1,15 @@
 ---
+category: guides
+layer: code
+tags: [tutorial, how-to]
 related: [components/dashboard-control-interface.md, concepts/production-ready-server-configuration.md, concepts/web-dashboard-architecture.md, components/dashboard-controller.md, concepts/context-enriched-documentation-generation.md]
 updated: 2025-11-23
 ---
+[Home](../index.md) > [Guides](../guides) > Configuration
+
+## Table of Contents
+
+- [See Also](#see-also)
 
 <h1>Configuration Guide</h1>
 <p>This guide covers how to configure CodeWiki-Generator for different environments and use cases.</p>
@@ -30,7 +38,7 @@ COVERAGE_THRESHOLD=80
 COVERAGE_REPORTS=true
 </code></pre>
 <h2>Dashboard Configuration</h2>
-<h3>[Web Dashboard Architecture](../concepts/web-dashboard-architecture.md) Settings</h3>
+<h3>[Web Dashboard Architecture](../concepts/web-dashboard-[architecture](../concepts/architecture.md).md) Settings</h3>
 <p><strong><a href="../components/dashboard-control-interface.md">[Dashboard Control Interface](../components/dashboard-control-interface.md)</a></strong> options:</p>
 <pre><code class="language-javascript">{
   dashboard: {
@@ -68,7 +76,7 @@ COVERAGE_REPORTS=true
     structure: {
       concepts: &#39;./concepts/&#39;,
       components: &#39;./components/&#39;,
-      index: &#39;./index.md&#39;
+      [index](../index.md): &#39;./[index](../index.md).md&#39;
     },
     autoUpdate: true,
     versionTracking: true
@@ -194,3 +202,12 @@ PORT=8080
 COVERAGE_THRESHOLD=85
 ERROR_LOGGING=detailed
 </code></pre>
+
+## See Also
+
+**Related Topics:**
+- [Dashboard Control Interface](../components/dashboard-control-interface.md)
+- [Production-ready server configuration](../concepts/production-ready-server-configuration.md)
+- [Web Dashboard Architecture](../concepts/web-dashboard-architecture.md)
+- [DashboardController](../components/dashboard-controller.md)
+- [Context-enriched documentation generation](../concepts/context-enriched-documentation-generation.md)

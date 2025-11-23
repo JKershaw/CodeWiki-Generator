@@ -1,11 +1,18 @@
 ---
 title: DashboardController
 category: component
-sourceFile: server.js
+layer: code
+tags: [implementation, code, dashboard, ui]
 related: [components/wiki-integration.md]
-created: 2025-11-23
 updated: 2025-11-23
+created: 2025-11-23
+sourceFile: server.js
 ---
+[Home](../index.md) > [Components](../components) > Dashboard Controller
+
+## Table of Contents
+
+- [See Also](#see-also)
 
 <h1>DashboardController</h1>
 <h2>Purpose and Overview</h2>
@@ -26,7 +33,7 @@ updated: 2025-11-23
 </ul>
 <p><strong><a href="../components/wiki-integration.md">[Wiki Integration](../components/wiki-integration.md)</a></strong></p>
 <ul>
-<li>Renders wiki pages through nested URL patterns (e.g., <code>/wiki/concepts/architecture</code>)</li>
+<li>Renders wiki pages through nested URL patterns (e.g., <code>/wiki/concepts/[architecture](../concepts/architecture.md)</code>)</li>
 <li>Integrates documentation viewing directly within the dashboard interface</li>
 <li>Provides seamless navigation between operational controls and documentation</li>
 </ul>
@@ -52,6 +59,17 @@ app.get(&#39;/wiki/*&#39;, dashboardController.renderWikiPage);
 <p><strong>Test Coverage</strong>: <code>tests/integration/server.test.js</code></p>
 <ul>
 <li>11 test cases across 6 test suites</li>
-<li><strong>Test Categories</strong>: Express Server, Health Check, Static File Serving, View Engine, Error Handling, Middleware Configuration</li>
+<li><strong>Test Categories</strong>: Express Server, Health Check, Static File Serving, View Engine, Error Handling, Middleware [Configuration](../guides/configuration.md)</li>
 <li>Comprehensive integration testing ensures dashboard functionality works correctly with the Express server infrastructure</li>
 </ul>
+
+## See Also
+
+**Project Context:**
+- [Core Philosophy & Vision](../meta/philosophy.md)
+- [Technical Specification](../meta/specification.md)
+- [Project History and Achievement Analysis](../history/progress-report.md)
+
+**Related Topics:**
+- [Wiki Integration](../components/wiki-integration.md)
+- [Dashboard Control Interface](../components/dashboard-control-interface.md)

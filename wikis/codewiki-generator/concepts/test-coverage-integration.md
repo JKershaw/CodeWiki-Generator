@@ -1,11 +1,23 @@
 ---
 title: Test Coverage Integration
 category: concept
-sourceFile: lib/processor.js
+layer: code
+tags: [architecture, design-pattern, testing, code-coverage]
 related: []
-created: 2025-11-23
 updated: 2025-11-23
+created: 2025-11-23
+sourceFile: lib/processor.js
 ---
+[Home](../index.md) > [Concepts](../concepts) > Test Coverage Integration
+
+## Table of Contents
+
+- [Purpose and Overview](#purpose-and-overview)
+- [Key Functionality](#key-functionality)
+- [Relationships](#relationships)
+- [Usage Example](#usage-example)
+- [Testing](#testing)
+- [See Also](#see-also)
 
 # Test Coverage Integration
 
@@ -58,3 +70,14 @@ const coverageContext = processor.testCoverage;
 - 26 test cases across 6 test suites
 - Comprehensive testing of core processor functionality including coverage integration
 - Test categories cover: Processor initialization, processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository methods
+
+## See Also
+
+**Project Context:**
+- [Core Philosophy & Vision](../meta/philosophy.md)
+- [Technical Specification](../meta/specification.md)
+- [Project History and Achievement Analysis](../history/progress-report.md)
+
+**Related Topics:**
+- [Dashboard Control Interface](../components/dashboard-control-interface.md)
+- [architecture](../concepts/architecture.md)

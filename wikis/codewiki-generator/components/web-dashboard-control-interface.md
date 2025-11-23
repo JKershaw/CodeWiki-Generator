@@ -1,11 +1,18 @@
 ---
 title: Web dashboard control interface
 category: component
-sourceFile: lib/dashboard-controller.js
+layer: code
+tags: [implementation, code, dashboard, ui]
 related: [components/dashboard-controller.md]
-created: 2025-11-23
 updated: 2025-11-23
+created: 2025-11-23
+sourceFile: lib/dashboard-controller.js
 ---
+[Home](../index.md) > [Components](../components) > Web Dashboard Control Interface
+
+## Table of Contents
+
+- [See Also](#see-also)
 
 <h1>Web Dashboard Control Interface</h1>
 <h2>Purpose and Overview</h2>
@@ -54,3 +61,14 @@ await controller.processBatch(5);
 </code></pre>
 <h2>Testing</h2>
 <p>No automated tests found for this component.</p>
+
+## See Also
+
+**Project Context:**
+- [Core Philosophy & Vision](../meta/philosophy.md)
+- [Technical Specification](../meta/specification.md)
+- [Project History and Achievement Analysis](../history/progress-report.md)
+
+**Related Topics:**
+- [DashboardController](../components/dashboard-controller.md)
+- [Dashboard Control Interface](../components/dashboard-control-interface.md)

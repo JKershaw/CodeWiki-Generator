@@ -1,11 +1,23 @@
 ---
 title: Context-enriched documentation generation
 category: concept
-sourceFile: lib/agents/documentation-writer-agent.js
+layer: code
+tags: [architecture, design-pattern]
 related: []
-created: 2025-11-23
 updated: 2025-11-23
+created: 2025-11-23
+sourceFile: lib/agents/documentation-writer-agent.js
 ---
+[Home](../index.md) > [Concepts](../concepts) > Context Enriched Documentation Generation
+
+## Table of Contents
+
+- [Purpose and Overview](#purpose-and-overview)
+- [Key Functionality](#key-functionality)
+- [Relationships](#relationships)
+- [Usage Example](#usage-example)
+- [Testing](#testing)
+- [See Also](#see-also)
 
 # Context-enriched documentation generation
 
@@ -47,3 +59,14 @@ const documentation = await agent.writeDocumentation({
 ## Testing
 
 No automated tests found for this component. Test coverage should be implemented to verify context integration and documentation quality output.
+
+## See Also
+
+**Project Context:**
+- [Core Philosophy & Vision](../meta/philosophy.md)
+- [Technical Specification](../meta/specification.md)
+- [Project History and Achievement Analysis](../history/progress-report.md)
+
+**Related Topics:**
+- [Dashboard Control Interface](../components/dashboard-control-interface.md)
+- [architecture](../concepts/architecture.md)

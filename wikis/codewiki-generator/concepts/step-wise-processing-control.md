@@ -1,11 +1,18 @@
 ---
 title: Step-wise processing control
 category: concept
-sourceFile: lib/dashboard-controller.js
+layer: code
+tags: [architecture, design-pattern]
 related: [components/dashboard-controller.md]
-created: 2025-11-23
 updated: 2025-11-23
+created: 2025-11-23
+sourceFile: lib/dashboard-controller.js
 ---
+[Home](../index.md) > [Concepts](../concepts) > Step Wise Processing Control
+
+## Table of Contents
+
+- [See Also](#see-also)
 
 <h1>Step-wise Processing Control</h1>
 <h2>Purpose and Overview</h2>
@@ -28,6 +35,31 @@ updated: 2025-11-23
 <li><strong>WikiManager</strong>: Handles wiki page generation and content management</li>
 <li><strong>Web Interface Layer</strong>: Provides the user-facing dashboard above the core processing system</li>
 </ul>
+
+```mermaid
+graph LR
+    User[User/Dashboard] --> DC[DashboardController]
+
+    DC -->|Single Step| Step[Process One Commit]
+    DC -->|Batch N| Batch[Process N Commits]
+    DC -->|Start/Continue| Auto[Continuous Processing]
+
+    Step --> Proc[Processor]
+    Batch --> Proc
+    Auto --> Proc
+
+    Proc --> State[StateManager]
+    Proc --> Wiki[WikiManager]
+
+    State -->|Track Progress| Storage[(State File)]
+    Wiki -->|Generate Pages| Pages[(Wiki Pages)]
+
+    style User fill:#e1f5ff
+    style DC fill:#fff3cd
+    style Storage fill:#d4edda
+    style Pages fill:#d4edda
+```
+
 <h2>Usage Example</h2>
 <pre><code class="language-javascript">const [DashboardController](../components/dashboard-controller.md) = require(&#39;./lib/dashboard-controller&#39;);
 
@@ -50,3 +82,14 @@ const status = await dashboard.getStatus();
 </code></pre>
 <h2>Testing</h2>
 <p>No automated tests found for this component. Testing coverage should be implemented to verify processing control flows, state management, and error handling scenarios.</p>
+
+## See Also
+
+**Project Context:**
+- [Core Philosophy & Vision](../meta/philosophy.md)
+- [Technical Specification](../meta/specification.md)
+- [Project History and Achievement Analysis](../history/progress-report.md)
+
+**Related Topics:**
+- [DashboardController](../components/dashboard-controller.md)
+- [architecture](../concepts/architecture.md)

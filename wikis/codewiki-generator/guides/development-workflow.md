@@ -1,7 +1,15 @@
 ---
+category: guides
+layer: code
+tags: [tutorial, how-to]
 related: [concepts/real-time-status-monitoring.md, components/test-coverage-analyzer-class.md, concepts/step-wise-processing-control.md, components/dashboard-controller.md, components/dashboard-control-interface.md]
 updated: 2025-11-23
 ---
+[Home](../index.md) > [Guides](../guides) > Development Workflow
+
+## Table of Contents
+
+- [See Also](#see-also)
 
 <h1>Development Workflow</h1>
 <p>This guide outlines the recommended development process for contributing to CodeWiki-Generator.</p>
@@ -24,7 +32,7 @@ npm start
 <h3>1. Planning Phase</h3>
 <ul>
 <li>Review existing <strong>Components</strong> and <strong>Concepts</strong></li>
-<li>Check <strong><a href="../concepts/web-dashboard-architecture.md">[Web Dashboard Architecture](../concepts/web-dashboard-architecture.md)</a></strong> for integration points</li>
+<li>Check <strong><a href="../concepts/web-dashboard-[architecture](../concepts/architecture.md).md">[Web Dashboard Architecture](../concepts/web-dashboard-[architecture](../concepts/architecture.md).md)</a></strong> for integration points</li>
 <li>Plan test coverage using <strong><a href="../components/test-coverage-analyzer-class.md">[TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md)</a></strong></li>
 </ul>
 <h3>2. Development Phase</h3>
@@ -54,14 +62,14 @@ npm run test:coverage
 <ul>
 <li>Use the web interface at <code>http://localhost:3000</code></li>
 <li>Leverage <strong><a href="../concepts/context-enriched-documentation-generation.md">[Context-enriched documentation generation](../concepts/context-enriched-documentation-generation.md)</a></strong></li>
-<li>Update relevant <strong>concepts/architecture.md</strong></li>
+<li>Update relevant <strong>concepts/[architecture](../concepts/architecture.md).md</strong></li>
 </ul>
 </li>
 <li><p><strong>Validate Documentation</strong>:</p>
 <ul>
 <li>Ensure <strong><a href="../concepts/test-aware-documentation-generation.md">[Test-aware documentation generation](../concepts/test-aware-documentation-generation.md)</a></strong> passes</li>
 <li>Check <strong><a href="../concepts/test-coverage-integration.md">[Test Coverage Integration](../concepts/test-coverage-integration.md)</a></strong> reports</li>
-<li>Update <strong>index.md</strong> if needed</li>
+<li>Update <strong>[index](../index.md).md</strong> if needed</li>
 </ul>
 </li>
 </ol>
@@ -87,7 +95,7 @@ npm run docs:generate
 npm run status:check
 </code></pre>
 <h2>Production Deployment</h2>
-<p><strong><a href="../concepts/production-ready-server-configuration.md">[Production-ready Server Configuration](../concepts/production-ready-server-configuration.md)</a></strong>:</p>
+<p><strong><a href="../concepts/production-ready-server-[configuration](../guides/configuration.md).md">[Production-ready Server Configuration](../concepts/production-ready-server-[configuration](../guides/configuration.md).md)</a></strong>:</p>
 <ol>
 <li><p><strong>Environment Setup</strong>:</p>
 <pre><code class="language-bash">NODE_ENV=production npm start
@@ -131,3 +139,12 @@ npm run status:check
 <li>Check <strong><a href="../concepts/step-wise-processing-control.md">[Step-wise processing control](../concepts/step-wise-processing-control.md)</a></strong> logs</li>
 <li>Validate test coverage with <strong><a href="../components/test-coverage-analyzer-class.md">[TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md)</a></strong></li>
 </ol>
+
+## See Also
+
+**Related Topics:**
+- [Real-time Status Monitoring](../concepts/real-time-status-monitoring.md)
+- [TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md)
+- [Step-wise processing control](../concepts/step-wise-processing-control.md)
+- [DashboardController](../components/dashboard-controller.md)
+- [Dashboard Control Interface](../components/dashboard-control-interface.md)
