@@ -20,7 +20,7 @@ The GuideGenerationAgent transforms descriptive wiki content into actionable ope
 - Generates guides tailored to specific project contexts and technology stacks
 
 ### Repository Analysis
-- **Repository fingerprinting**: Automatically detects project characteristics from file structure
+- **[Repository fingerprinting](../concepts/repository-fingerprinting.md)**: Automatically detects project characteristics from file structure
 - Identifies technology stack, frameworks, and development tools
 - Customizes guide generation based on detected project conventions and tooling
 

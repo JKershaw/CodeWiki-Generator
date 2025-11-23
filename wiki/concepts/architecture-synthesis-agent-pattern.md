@@ -14,7 +14,7 @@ The architecture synthesis agent pattern enables automatic generation of high-le
 
 ## Key Functionality
 
-### ArchitectureOverviewAgent
+### [ArchitectureOverviewAgent](../components/architecture-overview-agent.md)
 
 The `ArchitectureOverviewAgent` serves as the primary implementation of this pattern, generating system-wide architecture documentation by:
 

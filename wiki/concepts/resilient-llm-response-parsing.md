@@ -14,7 +14,7 @@ Resilient LLM response parsing addresses the common challenge of extracting stru
 
 ## Key Functionality
 
-The system employs a **Progressive JSON repair strategy** that attempts multiple repair techniques in sequence:
+The system employs a **[Progressive JSON repair strategy](../components/progressive-json-repair-strategy.md)** that attempts multiple repair techniques in sequence:
 
 1. **Content Extraction** - Strips markdown code blocks, removes wrapper text, and isolates potential JSON content
 2. **String Repair** - Fixes common JSON formatting issues like unescaped quotes, trailing commas, and malformed strings  
@@ -32,7 +32,7 @@ The `_cleanJSON` function serves as the primary entry point for the repair proce
 
 ## Relationships
 
-- **GuideGenerationAgent**: Integrated into the response processing pipeline to ensure reliable parsing of generated guide content
+- **[GuideGenerationAgent](../components/guide-generation-agent.md)**: Integrated into the response processing pipeline to ensure reliable parsing of generated guide content
 - **Claude API Integration**: Specifically addresses parsing reliability issues when working with Anthropic's Claude API responses
 - **Error Handling System**: Connects to broader application error handling to provide meaningful feedback when parsing fails
 

@@ -17,12 +17,12 @@ The operational documentation generation system automatically transforms descrip
 The `GuideGenerationAgent` serves as the core orchestrator, combining multiple data sources to create comprehensive operational guides:
 
 - **Wiki Content Analysis**: Processes existing wiki pages and structure to understand documented concepts, procedures, and relationships
-- **Repository Fingerprinting**: Automatically detects technology stack, tools, and project conventions by analyzing file patterns and project structure
+- **[Repository Fingerprinting](../concepts/repository-fingerprinting.md)**: Automatically detects technology stack, tools, and project conventions by analyzing file patterns and project structure
 - **LLM-Powered Synthesis**: Uses Claude AI to transform the combined context into structured, actionable guides tailored to the specific repository
 
 ### Repository Detection
 
-The `detectRepositoryInfo` function implements intelligent repository fingerprinting by scanning for characteristic files and patterns:
+The `detectRepositoryInfo` function implements intelligent [repository fingerprinting](../concepts/repository-fingerprinting.md) by scanning for characteristic files and patterns:
 
 - Framework detection (package.json, requirements.txt, etc.)
 - Build tool identification (Makefile, docker-compose.yml, etc.)

@@ -62,8 +62,8 @@ Category-based organization integrates deeply with the documentation generation 
 
 - **WikiManager** uses categories to organize and retrieve content systematically
 - **WikiIndexAgent** processes categorized pages to create navigational index files
-- **GuideGenerationAgent** processes categorized content to create operational guides
-- **ArchitectureOverviewAgent** relies on categorization to identify and synthesize concept-level documentation
+- **[GuideGenerationAgent](../components/guide-generation-agent.md)** processes categorized content to create operational guides
+- **[ArchitectureOverviewAgent](../components/architecture-overview-agent.md)** relies on categorization to identify and synthesize concept-level documentation
 - **DocumentationWriterAgent** assigns categories during initial content creation
 - **ClaudeClient** and **PromptManager** power the AI-driven index generation process
 
