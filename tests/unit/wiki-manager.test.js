@@ -38,7 +38,8 @@ describe('WikiManager', () => {
 
       expect(page).toBeDefined();
       expect(page.metadata).toEqual({});
-      expect(page.content).toBe('Just content without frontmatter.\n');
+      // Content should be HTML (mocked marked.parse wraps in <p> tags)
+      expect(page.content).toBe('<p>Just content without frontmatter.\n</p>');
     });
 
     it('should return null for non-existent file', async () => {

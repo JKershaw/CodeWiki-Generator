@@ -43,7 +43,8 @@ describe('WikiManager - Write Operations', () => {
       const page = await wikiManager.getPage('new-page.md');
       expect(page).toBeDefined();
       expect(page.metadata.title).toBe('New Page');
-      expect(page.content.trim()).toBe('This is new content.');
+      // Content is HTML from marked.parse mock
+      expect(page.content.trim()).toBe('<p>This is new content.</p>');
     });
 
     it('should auto-generate timestamps if not provided', async () => {
@@ -107,7 +108,8 @@ describe('WikiManager - Write Operations', () => {
       await wikiManager.updatePage('update-test.md', newContent);
 
       const page = await wikiManager.getPage('update-test.md');
-      expect(page.content.trim()).toBe('Updated content');
+      // Content is HTML from marked.parse mock
+      expect(page.content.trim()).toBe('<p>Updated content</p>');
     });
 
     it('should preserve existing frontmatter when updating content', async () => {
@@ -221,7 +223,8 @@ describe('WikiManager - Write Operations', () => {
       await wikiManager.updatePage('concurrent.md', 'Content 3');
 
       const page = await wikiManager.getPage('concurrent.md');
-      expect(page.content.trim()).toBe('Content 3');
+      // Content is HTML from marked.parse mock
+      expect(page.content.trim()).toBe('<p>Content 3</p>');
     });
   });
 });
