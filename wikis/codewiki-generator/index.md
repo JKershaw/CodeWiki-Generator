@@ -7,6 +7,13 @@ updated: 2025-11-23
 
 CodeWiki-Generator is an intelligent documentation system that combines automated code analysis with [test coverage integration](../concepts/test-coverage-integration.md) to generate comprehensive, context-enriched documentation. It features a web-based dashboard for real-time monitoring and control of the documentation generation process.
 
+## Meta (Philosophy & Vision)
+
+High-level context explaining the "why" behind the project:
+
+- [Core Philosophy & Vision](meta/philosophy.md) - The fundamental ideas and philosophy driving this project
+- [Technical Specification](meta/specification.md) - Comprehensive technical requirements and architecture specification
+
 ## Concepts
 
 Core architectural and design concepts that drive the system's functionality:
@@ -43,9 +50,41 @@ Practical guides for using and developing with the system:
 - [Getting Started](guides/getting-started.md) - Quick start guide for new users and developers
 - [Testing Approach](guides/testing-approach.md) - Testing strategies and methodologies used in the project
 
+## History (Project Evolution)
+
+Historical context showing how the project evolved:
+
+- [Project History and Achievement Analysis](history/progress-report.md) - Comprehensive progress report documenting achievements and current status
+
+## Quality (Testing & Validation)
+
+Information about how the system is tested and validated:
+
+- [Testing Strategy](guides/testing-approach.md) - Detailed testing methodologies and practices
+
 ## Navigation
 
 - **New users**: Start with [Getting Started](guides/getting-started.md) to set up the system
+- **Understanding the vision**: Read [Core Philosophy & Vision](meta/philosophy.md) to understand why this project exists
 - **Developers**: Review [Architecture](concepts/architecture.md) and [Development Workflow](guides/development-workflow.md)
 - **Configuration**: See [Configuration](guides/configuration.md) for deployment options
+- **Technical specs**: Check [Technical Specification](meta/specification.md) for detailed requirements
 - **Core concepts**: Explore the Concepts section to understand system design principles
+- **Project history**: See [Project History](history/progress-report.md) for achievements and evolution
+
+## Using the /context Command
+
+This wiki is designed to be searchable via the `/context` slash command in Claude Code:
+
+```bash
+# Example: Get context for implementing a new feature
+/context implement MCP server for Claude Code integration
+
+# Example: Understand the project philosophy
+/context what is the core philosophy of this project?
+
+# Example: Debug an issue
+/context fix failing tests in the processor
+```
+
+The context command searches across all layers (meta, code, history, quality) to provide comprehensive information for your task.
