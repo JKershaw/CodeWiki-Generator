@@ -10,6 +10,9 @@ Code Analysis:
 Code Examples from Tests:
 {{codeExamples}}
 
+Test Coverage:
+{{testCoverage}}
+
 Existing documentation (if any):
 {{existingContent}}
 
@@ -20,6 +23,7 @@ Required Sections:
 2. **Key Functionality** (what it does, how it works)
 3. **Relationships** (how it connects to other components)
 4. **Usage Example** (REQUIRED - show how to use this component)
+5. **Testing** (if test coverage information is available, include it at the end)
 
 Guidelines for Usage Examples:
 - ALWAYS include a concrete code example showing typical usage
