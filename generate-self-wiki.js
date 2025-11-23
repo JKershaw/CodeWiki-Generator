@@ -1,6 +1,6 @@
 /**
  * Generate wiki documentation for this repository
- * Outputs to wiki/ directory for inclusion in repo
+ * Outputs to wikis/codewiki-generator/ directory for inclusion in repo
  */
 
 const Processor = require('./lib/processor');
@@ -84,7 +84,7 @@ async function main() {
   console.log('=== CodeWiki Generator - Self Documentation ===\n');
   console.log('Generating wiki from recent git history...\n');
 
-  const processor = new Processor('./wiki');
+  const processor = new Processor('./wikis/codewiki-generator');
 
   // Get recent commits (limit to 10 to keep costs reasonable)
   const commits = getLocalCommits(10);
@@ -118,7 +118,7 @@ async function main() {
       console.log('\n✓ Successfully generated wiki documentation');
     }
 
-    console.log('\nGenerated documentation is in ./wiki/');
+    console.log('\nGenerated documentation is in ./wikis/codewiki-generator/');
     console.log('Review and commit to repository.');
 
   } catch (error) {

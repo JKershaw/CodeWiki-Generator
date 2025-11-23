@@ -40,6 +40,7 @@ app.get('/health', (req, res) => {
 // Dashboard routes
 app.get('/', (req, res) => dashboardController.renderDashboard(req, res));
 app.get('/api/status', (req, res) => dashboardController.getStatus(req, res));
+app.get('/api/projects', (req, res) => dashboardController.listProjects(req, res));
 app.post('/process/start', (req, res) => dashboardController.startProcessing(req, res));
 app.post('/process/pause', (req, res) => dashboardController.pauseProcessing(req, res));
 app.post('/process/step', (req, res) => dashboardController.processStep(req, res));
