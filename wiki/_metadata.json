@@ -112,12 +112,129 @@
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-23"
+    },
+    "concepts/web-dashboard-architecture.md": {
+      "title": "Web dashboard architecture",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/production-ready-server-setup.md": {
+      "title": "Production-ready server setup",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-aware-documentation-generation.md": {
+      "title": "Test-aware documentation generation",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-coverage-discovery-and-analysis.md": {
+      "title": "Test coverage discovery and analysis",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/context-enriched-documentation-generation.md": {
+      "title": "Context-enriched documentation generation",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/enhanced-documentation-metadata-system.md": {
+      "title": "Enhanced documentation metadata system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/test-driven-code-example-extraction.md": {
+      "title": "Test-driven code example extraction",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/cross-page-linking-system.md": {
+      "title": "Cross-page linking system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/cross-linking-system.md": {
+      "title": "Cross-linking system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/related-pages-discovery-system.md": {
+      "title": "Related pages discovery system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/wiki-manager-integration.md": {
+      "title": "WikiManager integration",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/link-discovery-agent.md": {
+      "title": "LinkDiscoveryAgent",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/two-phase-cross-linking-system.md": {
+      "title": "Two-phase cross-linking system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
     }
   },
   "statistics": {
-    "totalPages": 14,
-    "concepts": 10,
-    "components": 4,
+    "totalPages": 27,
+    "concepts": 19,
+    "components": 8,
     "guides": 0,
     "totalCommitsProcessed": 0,
     "orphanedPages": []

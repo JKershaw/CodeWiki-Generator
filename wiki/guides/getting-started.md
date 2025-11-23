@@ -1,19 +1,24 @@
 ---
-related: [components/guide-generation-agent.md]
+related: [components/wiki-manager-integration.md, concepts/web-dashboard-architecture.md, concepts/two-phase-cross-linking-system.md, components/link-discovery-agent.md, concepts/cross-linking-system.md]
 updated: 2025-11-23
 ---
 
 # Getting Started
 
-## Introduction
+This guide will help you set up and run the CodeWiki-Generator for the first time.
 
-This guide helps you set up and run the CodeWiki-Generator for the first time. This tool automatically generates comprehensive documentation wikis for code repositories using AI agents.
+## Who This Guide Is For
+
+Developers who want to:
+- Set up the CodeWiki-Generator locally
+- Generate documentation for their code repositories
+- Understand the basic workflow
 
 ## Prerequisites
 
 - Node.js (version 14 or higher)
 - npm package manager
-- Access to repository you want to document
+- A code repository you want to generate documentation for
 
 ## Installation
 
@@ -32,32 +37,39 @@ This guide helps you set up and run the CodeWiki-Generator for the first time. T
    ```bash
    npm test
    ```
+   This runs the Jest test suite to ensure everything is working correctly.
 
 ## First Run
 
-1. **Configure your target repository**
-   - Ensure the repository you want to document is accessible
-   - The system uses Repository Structure Analysis to fingerprint codebases
+1. **Generate documentation for a sample repository**
+   The [WikiManager integration](../components/wiki-manager-integration.md) is the core component that orchestrates documentation generation.
 
-2. **Generate documentation**
-   - The [ArchitectureOverviewAgent](../components/architecture-overview-agent.md) will analyze your repository structure
-   - The [GuideGenerationAgent](../components/guide-generation-agent.md) will create operational guides
-   - Wiki index generation will create auto-navigation
+2. **Start the web dashboard** (if available)
+   The [web dashboard architecture](../concepts/web-dashboard-architecture.md) provides a user interface for viewing generated documentation.
 
-3. **Review output**
-   - Generated documentation follows the [category-based content organization](../concepts/category-based-content-organization.md) pattern
-   - Check for concepts/architecture.md and index.md files
+3. **Explore the output**
+   Generated documentation will include:
+   - Context-enriched documentation with enhanced metadata
+   - Cross-linked pages using the [two-phase cross-linking system](../concepts/two-phase-cross-linking-system.md)
+   - Test-aware documentation with coverage analysis
 
-## Understanding the Output
+## Key Features You'll Use
 
-The generator creates:
-- **Concepts**: Architecture patterns and design principles
-- **Components**: Code structure documentation
-- **Guides**: Operational documentation (like this guide)
+- **[LinkDiscoveryAgent](../components/link-discovery-agent.md)**: Automatically discovers relationships between code components
+- **[Cross-linking system](../concepts/cross-linking-system.md)**: Creates navigable connections between documentation pages
+- **Test coverage discovery**: Integrates test information into documentation
+- **Related pages discovery**: Suggests relevant documentation sections
 
 ## Next Steps
 
-- Review the generated concepts/architecture.md for system overview
-- Check the index.md for navigation structure
-- Explore the Testing Approach guide to contribute improvements
-- See Extension Patterns guide to add new documentation types
+- Review the [Testing Approach](testing-approach.md) to understand how to run and write tests
+- Check out [Development Workflow](development-workflow.md) for contribution guidelines
+- Explore the [Architecture](../concepts/architecture.md) to understand the system design
+
+## Troubleshooting
+
+If you encounter issues during setup:
+1. Ensure Node.js and npm are properly installed
+2. Check that all dependencies installed without errors
+3. Run `npm test` to verify the test suite passes
+4. Review any error messages for missing dependencies or configuration issues

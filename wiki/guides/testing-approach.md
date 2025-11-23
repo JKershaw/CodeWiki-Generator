@@ -1,85 +1,102 @@
 ---
-related: []
+related: [concepts/test-aware-documentation-generation.md, components/wiki-manager-integration.md, components/link-discovery-agent.md, concepts/cross-linking-system.md, concepts/test-coverage-discovery-and-analysis.md]
 updated: 2025-11-23
 ---
 
 # Testing Approach
 
-## Introduction
+This guide explains how to work with tests in the CodeWiki-Generator project.
 
-This guide explains how to run tests and understand the testing patterns used in CodeWiki-Generator. The project uses Jest as its testing framework.
+## Who This Guide Is For
 
-## Prerequisites
+Developers who need to:
+- Run existing tests
+- Write new tests for features
+- Understand the testing patterns used in the codebase
 
-- Repository set up (see Getting Started guide)
-- Node.js and npm installed
+## Test Framework
+
+The project uses **Jest** as the primary testing framework, providing:
+- Unit testing capabilities
+- Test coverage reporting
+- Mocking and assertion utilities
 
 ## Running Tests
 
-1. **Run all tests**
-   ```bash
-   npm test
-   ```
+### Run All Tests
+```bash
+npm test
+```
 
-2. **Run tests in watch mode**
-   ```bash
-   npm run test:watch
-   ```
+### Run Tests with Coverage
+```bash
+npm run test:coverage
+```
 
-3. **Run tests with coverage**
-   ```bash
-   npm run test:coverage
-   ```
+### Run Tests in Watch Mode
+```bash
+npm run test:watch
+```
 
 ## Testing Patterns
 
-### Agent Testing
-Tests for ArchitectureOverviewAgent and GuideGenerationAgent focus on:
-- Input validation and [repository structure analysis](../components/repository-structure-analysis.md)
-- Output format validation (proper markdown generation)
-- LLM response handling and JSON cleaning
+### Test-Driven Code Example Extraction
+The project includes a component for extracting code examples from tests, which means:
+- Tests serve dual purposes: validation and documentation
+- Code examples in documentation are derived from actual test cases
+- This ensures documentation examples are always working and up-to-date
 
-### JSON Response Testing
-Given the system's reliance on LLM APIs:
-- Tests validate [resilient LLM response parsing](../concepts/resilient-llm-response-parsing.md)
-- [Progressive JSON repair strategy](../components/progressive-json-repair-strategy.md) is tested with malformed inputs
-- JSON response cleaning is verified for various edge cases
+### [Test-Aware Documentation Generation](../concepts/test-aware-documentation-generation.md)
+The system integrates test information into documentation:
+- Test coverage data influences documentation completeness
+- Test cases become examples in generated documentation
+- Missing test coverage is highlighted in documentation
 
-### Repository Analysis Testing
-- [Repository fingerprinting](../concepts/repository-fingerprinting.md) accuracy
-- Structure analysis correctness
-- Pattern recognition for different project types
+## Writing Tests
 
-## Writing New Tests
+### Test Structure
+Follow these patterns when writing new tests:
 
-1. **Follow the existing pattern**
-   ```javascript
-   describe('ComponentName', () => {
-     test('should handle expected behavior', () => {
-       // Test implementation
-     });
-   });
-   ```
+1. **Arrange**: Set up test data and dependencies
+2. **Act**: Execute the code being tested
+3. **Assert**: Verify the expected outcomes
 
-2. **Mock LLM responses**
-   - Test with various response formats
-   - Include malformed JSON scenarios
-   - Test timeout and error conditions
+### Testing Components
 
-3. **Test documentation output**
-   - Validate markdown structure
-   - Check link generation
-   - Verify category organization
+When testing core components like:
+- **[WikiManager integration](../components/wiki-manager-integration.md)**: Test documentation generation workflows
+- **[LinkDiscoveryAgent](../components/link-discovery-agent.md)**: Verify link discovery and relationship mapping
+- **[Cross-linking system](../concepts/cross-linking-system.md)**: Ensure proper page connections are created
 
-## Common Test Scenarios
+### Test Coverage Goals
+- Aim for high coverage of core functionality
+- Focus on testing public APIs and integration points
+- Include edge cases and error conditions
 
-- Repository structure variations
-- LLM API response variations
-- JSON parsing edge cases
-- Documentation generation completeness
+## [Test Coverage Discovery and Analysis](../concepts/test-coverage-discovery-and-analysis.md)
+
+The project includes sophisticated test coverage analysis:
+- Coverage data is integrated into generated documentation
+- Uncovered code sections are identified and highlighted
+- Coverage metrics help guide documentation completeness
+
+## Integration with Documentation
+
+Tests play a crucial role in documentation generation:
+1. **Code Examples**: Real test cases become documentation examples
+2. **Coverage Analysis**: Test coverage data informs documentation quality
+3. **Validation**: Tests ensure documented features actually work
+
+## Best Practices
+
+- Write tests before implementing new features
+- Use descriptive test names that explain the expected behavior
+- Keep tests focused and independent
+- Mock external dependencies appropriately
+- Update tests when refactoring code
 
 ## Next Steps
 
-- Run the full test suite before making changes
-- Add tests for new agents or patterns
-- See Development Workflow for integration testing
+- Review existing test files to understand current patterns
+- Check the [Development Workflow](development-workflow.md) for testing requirements
+- Explore how the [test-aware documentation generation](../concepts/test-aware-documentation-generation.md) works in practice

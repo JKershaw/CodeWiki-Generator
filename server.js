@@ -6,9 +6,13 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
+const DashboardController = require('./lib/dashboard-controller');
 
 // Initialize Express app
 const app = express();
+
+// Initialize controller
+const dashboardController = new DashboardController();
 
 // Configuration
 const PORT = process.env.PORT || 3000;
@@ -31,6 +35,21 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString(),
     version: '1.0.0'
   });
+});
+
+// Dashboard routes
+app.get('/', (req, res) => dashboardController.renderDashboard(req, res));
+app.get('/api/status', (req, res) => dashboardController.getStatus(req, res));
+app.post('/process/start', (req, res) => dashboardController.startProcessing(req, res));
+app.post('/process/pause', (req, res) => dashboardController.pauseProcessing(req, res));
+app.post('/process/step', (req, res) => dashboardController.processStep(req, res));
+app.post('/process/batch', (req, res) => dashboardController.processBatch(req, res));
+// Wiki page viewer - matches nested paths like /wiki/concepts/architecture
+app.use('/wiki', (req, res, next) => {
+  if (req.method !== 'GET') {
+    return next();
+  }
+  dashboardController.renderWikiPage(req, res);
 });
 
 // 404 handler

@@ -1,121 +1,166 @@
 ---
-related: []
+related: [concepts/enhanced-documentation-metadata-system.md, components/test-driven-code-example-extraction.md, concepts/web-dashboard-architecture.md, components/wiki-manager-integration.md, concepts/test-aware-documentation-generation.md]
 updated: 2025-11-23
 ---
 
 # Extension Patterns
 
-## Introduction
+This guide explains how to extend CodeWiki-Generator by following established architectural patterns.
 
-This guide shows how to extend CodeWiki-Generator by adding new agents, documentation types, or analysis patterns. The system follows the [architecture synthesis agent pattern](../concepts/architecture-synthesis-agent-pattern.md).
+## Who This Guide Is For
+
+Developers who want to:
+- Add new documentation generation features
+- Extend existing components following project patterns
+- Maintain architectural consistency when building new functionality
 
 ## Prerequisites
 
-- Understanding of the existing codebase (see Getting Started)
-- Familiarity with the agent pattern used
-- Knowledge of LLM API integration
+- Understanding of the core [Architecture](../concepts/architecture.md)
+- Familiarity with the [Development Workflow](development-workflow.md)
+- Knowledge of existing components and concepts
 
-## Adding New Documentation Agents
+## Core Extension Points
 
-### 1. Create Agent Class
-Follow the pattern established by [ArchitectureOverviewAgent](../components/architecture-overview-agent.md) and [GuideGenerationAgent](../components/guide-generation-agent.md):
+### 1. [WikiManager Integration](../components/wiki-manager-integration.md) Pattern
 
+The WikiManager serves as the central orchestrator for documentation generation.
+
+**When to extend:**
+- Adding new documentation output formats
+- Implementing new content processing pipelines
+- Integrating additional data sources
+
+**Extension pattern:**
 ```javascript
-class NewDocumentationAgent {
-  constructor(config) {
-    this.config = config;
-  }
-  
-  async generateDocumentation(repositoryContext) {
-    // Implement generation logic
-    // Use [resilient LLM response parsing](../concepts/resilient-llm-response-parsing.md)
-    // Apply JSON response cleaning
+// Extend WikiManager with new processors
+class CustomWikiManager extends WikiManager {
+  addProcessor(processor) {
+    // Follow existing processor integration pattern
+    // Ensure compatibility with context-enriched documentation
   }
 }
 ```
 
-### 2. Implement Response Handling
-Use the established patterns for LLM integration:
-- Apply progressive JSON repair strategy
-- Implement [resilient LLM response parsing](../concepts/resilient-llm-response-parsing.md)
-- Use JSON response cleaning utilities
+### 2. LinkDiscoveryAgent Pattern
 
-### 3. Follow Category Organization
-Ensure your agent outputs follow [category-based content organization](../concepts/category-based-content-organization.md):
-- Concepts: Abstract patterns and principles
-- Components: Concrete code elements
-- Guides: Operational documentation
+Handles relationship discovery and cross-reference generation.
 
-## Adding New Repository Analysis
+**When to extend:**
+- Adding new types of code relationships
+- Implementing custom link discovery algorithms
+- Supporting new programming languages or frameworks
 
-### 1. Extend [Repository Fingerprinting](../concepts/repository-fingerprinting.md)
-```javascript
-// Add new analysis patterns
-const analyzeNewPattern = (repositoryStructure) => {
-  // Implement pattern recognition
-  // Return structured analysis
-};
-```
+**Extension pattern:**
+- Create specialized discovery agents for different content types
+- Integrate with the two-phase cross-linking system
+- Support the [enhanced documentation metadata system](../concepts/enhanced-documentation-metadata-system.md)
 
-### 2. Update Structure Analysis
-- Identify new file patterns
-- Recognize framework-specific structures
-- Extract configuration patterns
+### 3. [Test-Aware Documentation Generation](../concepts/test-aware-documentation-generation.md) Pattern
 
-## Adding Documentation Categories
+**When to extend:**
+- Adding support for new testing frameworks
+- Implementing custom test coverage analysis
+- Extending [test-driven code example extraction](../components/test-driven-code-example-extraction.md)
 
-### 1. Define Category Structure
-```markdown
-## New Category
-- item1.md
-- item2.md
-```
+**Extension pattern:**
+- Follow the existing [test coverage discovery and analysis](../concepts/test-coverage-discovery-and-analysis.md) approach
+- Integrate with Jest-based patterns
+- Ensure examples remain executable and valid
 
-### 2. Update Index Generation
-- Modify wiki index generation logic
-- Ensure auto-navigation includes new categories
-- Update cross-references
+## Common Extension Scenarios
 
-## Integration Patterns
+### Adding New Content Processors
 
-### 1. Agent Coordination
-- Agents should work independently
-- Share repository context through standardized interface
-- Avoid tight coupling between agents
+1. **Create processor following established interface**
+2. **Integrate with WikiManager**
+3. **Support cross-linking system integration**
+4. **Add appropriate metadata for discovery**
 
-### 2. Output Coordination
-- Follow consistent markdown formatting
-- Use standard linking conventions
-- Maintain category boundaries
+### Extending Cross-Linking Capabilities
 
-### 3. Error Handling
-- Implement graceful degradation
-- Use progressive JSON repair for LLM responses
-- Provide meaningful error messages
+1. **Understand the [two-phase cross-linking system](../concepts/two-phase-cross-linking-system.md)**
+   - Phase 1: Content discovery and analysis
+   - Phase 2: Link generation and insertion
 
-## Testing New Extensions
+2. **Extend LinkDiscoveryAgent**
+   - Add new relationship types
+   - Implement custom discovery algorithms
+   - Maintain compatibility with existing cross-page linking
 
-1. **Unit Tests**
-   - Test agent logic independently
-   - Mock LLM responses
-   - Validate output format
+3. **Update related pages discovery system**
+   - Ensure new relationships are discoverable
+   - Add appropriate scoring and ranking logic
 
-2. **Integration Tests**
-   - Test with real repository structures
-   - Validate cross-agent coordination
-   - Check documentation completeness
+### Building New Dashboard Components
 
-## Best Practices
+For extending the [web dashboard architecture](../concepts/web-dashboard-architecture.md):
 
-- Follow the established agent pattern
-- Use [repository fingerprinting](../concepts/repository-fingerprinting.md) for context
-- Implement resilient parsing for LLM responses
-- Maintain category-based organization
-- Write comprehensive tests
+1. **Follow modular component design**
+2. **Integrate with existing data flows**
+3. **Support production-ready server setup requirements**
+4. **Ensure compatibility with context-enriched documentation display**
+
+## Architectural Principles to Follow
+
+### Context-Enriched Documentation
+- Always consider how new features enhance documentation context
+- Integrate with existing metadata systems
+- Support rich, interconnected documentation experiences
+
+### [Enhanced Documentation Metadata System](../concepts/enhanced-documentation-metadata-system.md)
+- Add appropriate metadata for all new content types
+- Follow established metadata schemas
+- Ensure discoverability through the related pages system
+
+### Test-Driven Development
+- Implement [test-driven code example extraction](../components/test-driven-code-example-extraction.md) for new features
+- Ensure test coverage discovery works with extensions
+- Maintain the pattern of tests becoming documentation examples
+
+## Implementation Guidelines
+
+### 1. Start with Core Interfaces
+
+Before implementing:
+- Study existing component interfaces
+- Understand integration points
+- Plan for backward compatibility
+
+### 2. Maintain System Cohesion
+
+- Ensure new components work with the [production-ready server setup](../components/production-ready-server-setup.md)
+- Test integration with existing cross-linking systems
+- Validate compatibility with the [web dashboard architecture](../concepts/web-dashboard-architecture.md)
+
+### 3. Follow Testing Patterns
+
+- Write tests that serve as documentation examples
+- Integrate with existing Jest-based test coverage analysis
+- Ensure new features are discoverable through test-aware documentation
+
+## Extension Checklist
+
+Before implementing extensions:
+
+- [ ] Understand how the feature fits into existing architecture
+- [ ] Plan integration with WikiManager
+- [ ] Consider impact on cross-linking systems
+- [ ] Design appropriate metadata structure
+- [ ] Plan test coverage and example extraction
+- [ ] Ensure web dashboard compatibility
+- [ ] Validate production deployment requirements
+
+## Common Patterns to Avoid
+
+- **Breaking existing cross-linking**: Always test two-phase cross-linking compatibility
+- **Bypassing WikiManager**: Use established integration patterns
+- **Ignoring metadata requirements**: Ensure discoverability through related pages system
+- **Skipping test integration**: Maintain test-aware documentation patterns
 
 ## Next Steps
 
-- Study existing agents for implementation patterns
-- Review [system-level documentation generation](../concepts/system-level-documentation-generation.md) flow
-- Test extensions with various repository types
-- See Testing Approach for validation strategies
+- Review existing component implementations for pattern examples
+- Study the [Architecture](../concepts/architecture.md) for deeper understanding
+- Follow the [Development Workflow](development-workflow.md) when implementing extensions
+- Test extensions thoroughly with the [Testing Approach](testing-approach.md)
