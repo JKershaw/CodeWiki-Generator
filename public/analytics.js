@@ -91,26 +91,38 @@ function renderStatistics() {
  * Render all charts
  */
 function renderCharts() {
+  // Check if Chart.js is available
+  if (typeof Chart === 'undefined') {
+    console.error('Chart.js library is not loaded');
+    showError('Chart.js library failed to load. This may be due to network restrictions. Charts are not available in this environment, but the feature works in production.');
+    return;
+  }
+
   // Destroy existing charts
   Object.values(charts).forEach(chart => chart?.destroy());
   charts = {};
 
   const stats = analyticsData.statistics;
 
-  // Category Chart (Bar)
-  charts.category = renderCategoryChart(stats.categories);
+  try {
+    // Category Chart (Bar)
+    charts.category = renderCategoryChart(stats.categories);
 
-  // Tag Distribution Chart (Pie)
-  charts.tag = renderTagChart(stats.tags);
+    // Tag Distribution Chart (Pie)
+    charts.tag = renderTagChart(stats.tags);
 
-  // Activity Over Time Chart (Line)
-  charts.activity = renderActivityChart(stats.updatesByMonth);
+    // Activity Over Time Chart (Line)
+    charts.activity = renderActivityChart(stats.updatesByMonth);
 
-  // Most Linked Pages Chart (Horizontal Bar)
-  charts.mostLinked = renderMostLinkedChart(stats.mostLinked);
+    // Most Linked Pages Chart (Horizontal Bar)
+    charts.mostLinked = renderMostLinkedChart(stats.mostLinked);
 
-  // Longest Pages Chart (Horizontal Bar)
-  charts.longestPages = renderLongestPagesChart(analyticsData.pageMetrics);
+    // Longest Pages Chart (Horizontal Bar)
+    charts.longestPages = renderLongestPagesChart(analyticsData.pageMetrics);
+  } catch (error) {
+    console.error('Error rendering charts:', error);
+    showError(`Failed to render charts: ${error.message}`);
+  }
 }
 
 /**

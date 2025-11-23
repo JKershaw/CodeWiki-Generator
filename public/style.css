@@ -173,6 +173,9 @@ input[type="text"]:focus {
 
 .wiki-content {
   line-height: 1.8;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .wiki-content h1,
@@ -181,6 +184,16 @@ input[type="text"]:focus {
   margin-top: 1.5em;
   margin-bottom: 0.5em;
   color: #1e40af;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.wiki-content p {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .wiki-content code {
@@ -197,12 +210,17 @@ input[type="text"]:focus {
   border-radius: 4px;
   overflow-x: auto;
   margin: 15px 0;
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .wiki-content pre code {
   background: none;
   padding: 0;
   color: #f3f4f6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .breadcrumb {
