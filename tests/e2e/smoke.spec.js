@@ -95,18 +95,18 @@ test.describe('Smoke Tests', () => {
     // Verify welcome message
     await expect(page.locator('text=Welcome to the Demo Wiki')).toBeVisible();
 
-    // Verify navigation sections are present
-    await expect(page.locator('text=Components')).toBeVisible();
-    await expect(page.locator('text=Concepts')).toBeVisible();
-    await expect(page.locator('text=Guides')).toBeVisible();
+    // Verify navigation sections are present (use more specific selectors)
+    await expect(page.locator('h3:has-text("Components")')).toBeVisible();
+    await expect(page.locator('h3:has-text("Concepts")')).toBeVisible();
+    await expect(page.locator('h3:has-text("Guides")')).toBeVisible();
 
     // Verify links to demo pages work
     await expect(page.locator('a[href*="/wiki/demo/components/calculator"]')).toBeVisible();
     await expect(page.locator('a[href*="/wiki/demo/concepts/test-driven-development"]')).toBeVisible();
 
-    // Verify breadcrumb navigation
+    // Verify breadcrumb navigation (use more specific selector to avoid strict mode)
     await expect(page.locator('nav.breadcrumb')).toBeVisible();
-    await expect(page.locator('a[href="/"]')).toContainText('Dashboard');
+    await expect(page.locator('nav.breadcrumb a[href="/"]')).toContainText('Dashboard');
 
     // Take screenshot of demo wiki index
     await page.screenshot({
@@ -171,8 +171,8 @@ test.describe('Demo Wiki Navigation', () => {
     await page.click('a[href*="/wiki/demo/components/calculator"]');
     await page.waitForLoadState('networkidle');
 
-    // Verify we're on the calculator page
-    await expect(page.locator('h1')).toContainText('Calculator Component');
+    // Verify we're on the calculator page (use first h1 to avoid strict mode)
+    await expect(page.locator('h1').first()).toContainText('Calculator Component');
 
     // Take screenshot
     await page.screenshot({
@@ -191,8 +191,8 @@ test.describe('Demo Wiki Navigation', () => {
     await page.click('nav.breadcrumb a[href*="/wiki/demo/index"]');
     await page.waitForLoadState('networkidle');
 
-    // Verify we're back at index
-    await expect(page.locator('h1')).toContainText('Demo Wiki');
+    // Verify we're back at index (use first h1 to avoid strict mode)
+    await expect(page.locator('h1').first()).toContainText('Demo Wiki');
 
     // Take screenshot
     await page.screenshot({

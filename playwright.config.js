@@ -11,10 +11,10 @@ module.exports = defineConfig({
   timeout: 30 * 1000,
 
   // Test execution settings
-  fullyParallel: true,
+  fullyParallel: false,  // Run serially to avoid resource issues in sandbox
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  retries: 1,  // Handle occasional flakiness in sandboxed environment
+  workers: 1,  // Run tests serially to avoid resource contention
 
   // Reporter configuration
   reporter: [
@@ -35,6 +35,20 @@ module.exports = defineConfig({
 
     // Video on failure
     video: 'retain-on-failure',
+
+    // Browser launch options - CRITICAL for sandbox environment
+    launchOptions: {
+      args: [
+        '--no-sandbox',                 // CRITICAL: Bypass sandbox restrictions
+        '--disable-setuid-sandbox',     // CRITICAL: Disable setuid sandbox
+        '--disable-dev-shm-usage',      // Use /tmp instead of /dev/shm
+        '--disable-gpu',                // Disable GPU acceleration
+        '--no-first-run',               // Skip first run tasks
+        '--no-zygote',                  // Disable zygote process
+        '--single-process',             // Run in single process mode
+        '--disable-extensions'          // Disable extensions
+      ]
+    }
   },
 
   // Test projects for different browsers
