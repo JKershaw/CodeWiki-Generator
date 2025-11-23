@@ -1,5 +1,5 @@
 ---
-related: [concepts/enhanced-documentation-metadata-system.md, components/test-driven-code-example-extraction.md, concepts/web-dashboard-architecture.md, components/wiki-manager-integration.md, concepts/test-aware-documentation-generation.md]
+related: [concepts/test-aware-documentation-generation.md]
 updated: 2025-11-23
 ---
 

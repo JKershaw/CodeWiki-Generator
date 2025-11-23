@@ -11,54 +11,49 @@ updated: 2025-11-23
 
 ## Purpose and Overview
 
-Test-aware documentation generation enhances the standard documentation pipeline by incorporating test coverage data and testing insights directly into the generated documentation. This approach ensures that documentation reflects not only the intended functionality but also the actual tested behavior and coverage patterns of the codebase.
+Test-aware documentation generation integrates test coverage analysis directly into the documentation pipeline, creating documentation that reflects actual testing status and code reliability. This approach ensures developers can understand not only what code is supposed to do, but how well it's actually tested and validated.
 
 ## Key Functionality
 
-The `TestCoverageAnalyzer` class serves as the core component that analyzes test coverage information for files during documentation generation. It extracts comprehensive testing insights including:
+The `TestCoverageAnalyzer` class analyzes test coverage information during documentation generation, providing:
 
-- **Coverage Metrics**: Line, branch, and function coverage percentages to highlight well-tested vs. untested code paths
-- **Test Patterns**: Analysis of how components are actually used in test scenarios
-- **Quality Indicators**: Integration of coverage data to inform documentation quality and completeness
-- **Context Enrichment**: Augments the standard code analysis with testing-specific information
+- **Coverage Metrics**: Extracts line, branch, and function coverage percentages to highlight tested vs. untested code paths
+- **Test Pattern Analysis**: Identifies how components are actually used in test scenarios, revealing real-world usage patterns
+- **Quality Indicators**: Incorporates coverage data as documentation quality signals, helping prioritize documentation efforts
+- **Context Enhancement**: Enriches standard code analysis with testing-specific insights for more comprehensive documentation
 
-The system automatically integrates this coverage data into the documentation generation context, allowing agents like `WikiDocumentationAgent` and `ArchitectureOverviewAgent` to produce more comprehensive and accurate documentation that reflects real-world usage patterns.
+The analyzer integrates seamlessly into the existing agent-based architecture through the `testCoverageAnalyzer` constant, feeding coverage data into both page creation and update workflows. Documentation agents can then include testing status, coverage warnings, and reliability indicators alongside traditional API documentation.
 
 ## Relationships
 
-This component seamlessly integrates with the existing agent-based documentation infrastructure:
+This component extends the existing documentation infrastructure:
 
-- **Documentation Agents**: Extends context passed to `WikiDocumentationAgent` and `ArchitectureOverviewAgent` with test coverage insights
-- **Code Analysis Pipeline**: Works alongside existing code example extraction to provide a complete picture of component behavior
-- **Agent-based Processing**: Integrates with the established `Processor` class workflow through the `testCoverageAnalyzer` instance
+- **Documentation Agents**: Provides enhanced context to `WikiDocumentationAgent` and other agents with test coverage data
+- **Code Analysis Pipeline**: Works alongside existing code example extraction to create complete component profiles
+- **Processor Integration**: Integrates through the main `Processor` workflow via the `testCoverageAnalyzer` instance
+- **Quality Assessment**: Feeds into documentation quality metrics and helps identify areas needing better test coverage
 
 ## Usage Example
 
 ```javascript
 const { TestCoverageAnalyzer } = require('./test-coverage-analyzer');
-const { Processor } = require('./processor');
 
-// Initialize test coverage analysis
-const testCoverageAnalyzer = new TestCoverageAnalyzer();
+// Initialize the coverage analyzer
+const testCoverageAnalyzer = new TestCoverageAnalyzer({
+  coverageThreshold: 80,
+  includeUncoveredLines: true
+});
 
 // Analyze coverage for a specific file
-const coverageData = await testCoverageAnalyzer.analyze({
+const coverageData = await testCoverageAnalyzer.analyze('./src/user-service.js');
+
+// Coverage data is automatically integrated into documentation generation
+const enhancedDocs = await processor.generateDocumentation({
   filePath: './src/user-service.js',
-  includeMetrics: true,
-  includePatterns: true
-});
-
-// Generate documentation with test awareness
-const processor = new Processor({
-  testCoverageAnalyzer: testCoverageAnalyzer
-});
-
-const documentation = await processor.generateDocumentation({
-  file: './src/user-service.js',
-  includeTestCoverage: true
+  includeCoverage: true
 });
 ```
 
 ## Testing
 
-No automated tests are currently available for this component. Recommended test coverage should include verification of coverage data extraction accuracy, integration testing with documentation agents, and validation of enhanced documentation quality metrics.
+No automated tests are currently available for this component. Testing should focus on coverage data accuracy, integration with documentation agents, and validation that generated documentation correctly reflects testing status and quality indicators.

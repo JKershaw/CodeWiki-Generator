@@ -1,5 +1,5 @@
 ---
-related: [components/wiki-manager-integration.md, components/link-discovery-agent.md, components/test-driven-code-example-extraction.md, concepts/cross-linking-system.md, concepts/test-aware-documentation-generation.md]
+related: [concepts/context-enriched-documentation-generation.md, concepts/web-dashboard-architecture.md, components/test-driven-code-example-extraction.md, concepts/test-coverage-discovery-and-analysis.md, components/production-ready-server-setup.md]
 updated: 2025-11-23
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: Web dashboard architecture
+title: Web Dashboard Architecture
 category: concept
 sourceFile: Not specified
-related: []
+related: [components/nested-wiki-routing.md, components/dashboard-controller.md]
 created: 2025-11-23
 updated: 2025-11-23
 ---
@@ -11,54 +11,46 @@ updated: 2025-11-23
 
 ## Purpose and Overview
 
-The web dashboard architecture provides an Express-based web interface for monitoring and controlling documentation generation processes. It establishes a production-ready server foundation with comprehensive middleware configuration, health monitoring, and graceful shutdown capabilities.
+The Web Dashboard Architecture provides a comprehensive web-based control interface that transforms the application from a CLI tool into a full-stack web application. It enables real-time monitoring of processing status and manual control over documentation generation workflows through an intuitive dashboard interface.
 
 ## Key Functionality
 
-- **Express Server Setup**: Configures an Express application with JSON parsing, static file serving, and EJS templating engine
-- **Health Monitoring**: Provides `/health` endpoint for deployment health checks and service monitoring
-- **Error Handling**: Implements comprehensive error handling with environment-aware error responses
-- **Production Features**: Includes graceful shutdown handling for SIGTERM signals and request timeout management
-- **Static Assets**: Serves static files from public directory for dashboard UI components
+- **Real-time Status Monitoring**: The `DashboardController` provides API endpoints for live system status updates, allowing users to monitor processing state, progress, and system health
+- **Process Control**: Offers manual control over automated workflows with endpoints for starting, pausing, single-step processing, and batch operations
+- **Dynamic Wiki Rendering**: Implements [nested wiki routing](../components/nested-wiki-routing.md) that handles arbitrary URL paths using middleware, enabling flexible content organization without hardcoded routes
+- **Dashboard Interface**: Serves the main dashboard UI at the root path with integrated controls for all system operations
+- **API Integration**: Provides RESTful endpoints (`/api/status`, `/api/start`, `/api/pause`, `/api/step`, `/api/batch`) for programmatic access to all dashboard functionality
 
-The server automatically detects the environment and adjusts error verbosity accordingly, showing detailed stack traces in development while providing sanitized responses in production.
+The controller acts as the central hub connecting the web interface with the underlying processing engine, providing both human-friendly UI and machine-readable APIs.
 
 ## Relationships
 
-- Serves as the foundation layer for all dashboard views and API endpoints
-- Integrates with the documentation generation system to provide real-time monitoring capabilities
-- Uses EJS templating engine for server-side rendering of dashboard interfaces
-- Connects to static asset pipeline for CSS, JavaScript, and image resources
+- Integrates with the existing Express server infrastructure to extend basic health checks into a full web application
+- Connects to the core processing logic through API endpoints, allowing dashboard controls to trigger actual workflow operations
+- Complements static file serving with dynamic wiki content rendering, creating a unified documentation viewing experience
+- Works alongside the documentation generation system to provide real-time feedback and manual override capabilities
 
 ## Usage Example
 
 ```javascript
+const DashboardController = require('./controllers/DashboardController');
 const express = require('express');
-const path = require('path');
 
-// Basic server setup following the architecture pattern
 const app = express();
+const dashboard = new [DashboardController](../components/dashboard-controller.md)();
 
-// Configure middleware
-app.use(express.json());
-app.use(express.static('public'));
-app.set('view engine', 'ejs');
+// Set up dashboard routes
+app.get('/', dashboard.renderDashboard);
+app.get('/api/status', dashboard.getStatus);
+app.post('/api/start', dashboard.startProcessing);
+app.post('/api/pause', dashboard.pauseProcessing);
+app.post('/api/step', dashboard.processStep);
+app.post('/api/batch', dashboard.processBatch);
 
-// Add health check endpoint
-app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'healthy', 
-    timestamp: new Date().toISOString() 
-  });
-});
-
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Dashboard server running on port ${PORT}`);
-});
+// Dynamic wiki routing
+app.get('/wiki/*', dashboard.renderWikiPage);
 ```
 
 ## Testing
 
-No automated tests are currently available for this component. Testing should focus on server startup, health endpoint responses, error handling middleware, and graceful shutdown behavior.
+No automated tests are currently available for this component. Testing should focus on API endpoint responses, dashboard rendering functionality, wiki routing behavior, and integration with the underlying processing system.

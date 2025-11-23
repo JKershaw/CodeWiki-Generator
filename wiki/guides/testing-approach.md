@@ -1,5 +1,5 @@
 ---
-related: [concepts/test-aware-documentation-generation.md, components/wiki-manager-integration.md, components/link-discovery-agent.md, concepts/cross-linking-system.md, concepts/test-coverage-discovery-and-analysis.md]
+related: [components/link-discovery-agent.md, concepts/cross-linking-system.md]
 updated: 2025-11-23
 ---
 

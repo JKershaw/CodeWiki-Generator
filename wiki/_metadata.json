@@ -114,7 +114,7 @@
       "updated": "2025-11-23"
     },
     "concepts/web-dashboard-architecture.md": {
-      "title": "Web dashboard architecture",
+      "title": "Web Dashboard Architecture",
       "created": "2025-11-23",
       "category": "concept",
       "sourceFile": "Not specified",
@@ -229,13 +229,184 @@
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-23"
+    },
+    "concepts/web-dashboard-control-interface.md": {
+      "title": "Web Dashboard Control Interface",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/asynchronous-background-processing.md": {
+      "title": "Asynchronous Background Processing",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/state-based-process-control.md": {
+      "title": "State-based Process Control",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/interactive-web-dashboard.md": {
+      "title": "Interactive Web Dashboard",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/process-control-api-integration.md": {
+      "title": "Process Control API Integration",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/dashboard-controller.md": {
+      "title": "DashboardController",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/nested-wiki-routing.md": {
+      "title": "Nested Wiki Routing",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/express-web-interface-architecture.md": {
+      "title": "Express web interface architecture",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/dashboard-server-implementation.md": {
+      "title": "Dashboard server implementation",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/test-coverage-integration-in-documentation-generation.md": {
+      "title": "Test coverage integration in documentation generation",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-driven-documentation-system.md": {
+      "title": "Test-driven documentation system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/test-coverage-analyzer-component.md": {
+      "title": "TestCoverageAnalyzer component",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/enhanced-documentation-generation-system.md": {
+      "title": "Enhanced documentation generation system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/test-integrated-documentation-system.md": {
+      "title": "Test-integrated documentation system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/source-file-tracking-in-documentation.md": {
+      "title": "Source file tracking in documentation",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/standalone-processing-scripts.md": {
+      "title": "Standalone processing scripts",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/cross-linking-debugging-framework.md": {
+      "title": "Cross-linking debugging framework",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "guides/debug-scripts-pattern.md": {
+      "title": "Debug scripts pattern",
+      "created": "2025-11-23",
+      "category": "guide",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/sequential-cross-linking-pipeline.md": {
+      "title": "Sequential cross-linking pipeline",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "Not specified",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
     }
   },
   "statistics": {
-    "totalPages": 27,
-    "concepts": 19,
-    "components": 8,
-    "guides": 0,
+    "totalPages": 46,
+    "concepts": 28,
+    "components": 17,
+    "guides": 1,
     "totalCommitsProcessed": 0,
     "orphanedPages": []
   }
