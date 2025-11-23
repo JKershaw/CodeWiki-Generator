@@ -508,13 +508,247 @@
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-23"
+    },
+    "concepts/content-aware-link-enhancement.md": {
+      "title": "Content-aware link enhancement",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "enhance-wiki-linking.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/html-to-markdown-conversion-system.md": {
+      "title": "HTML to Markdown conversion system",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "lib/agents/wiki-index-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/ai-powered-wiki-research-system.md": {
+      "title": "AI-powered wiki research system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "wiki-context.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/structured-wiki-content-analysis.md": {
+      "title": "Structured wiki content analysis",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "wiki-context.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/contextual-research-cli-interface.md": {
+      "title": "Contextual research CLI interface",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "wiki-context.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/wiki-navigation-and-metadata-enhancement-system.md": {
+      "title": "Wiki navigation and metadata enhancement system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "add-breadcrumbs-and-tags.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/category-based-content-classification.md": {
+      "title": "Category-based content classification",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "add-breadcrumbs-and-tags.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/semantic-cross-referencing-system.md": {
+      "title": "Semantic Cross-Referencing System",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "add-see-also-sections.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/multi-dimensional-page-relationship-analysis.md": {
+      "title": "Multi-Dimensional Page Relationship Analysis",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "add-see-also-sections.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/intelligent-documentation-enhancement.md": {
+      "title": "Intelligent documentation enhancement",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "add-table-of-contents.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/markdown-processing-pipeline.md": {
+      "title": "Markdown processing pipeline",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "add-table-of-contents.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/wikipedia-style-bidirectional-linking.md": {
+      "title": "Wikipedia-style bidirectional linking",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "enhance-wiki-linking.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/meta-document-ingestion-system.md": {
+      "title": "Meta-document ingestion system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "ingest-meta-docs.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/category-based-document-classification.md": {
+      "title": "Category-based document classification",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "ingest-meta-docs.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/cli-based-document-processing-tool.md": {
+      "title": "CLI-based document processing tool",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "ingest-meta-docs.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/meta-document-transformation-pipeline.md": {
+      "title": "Meta-document transformation pipeline",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/agents/meta-document-ingestion-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/multi-layer-wiki-architecture.md": {
+      "title": "Multi-layer wiki architecture",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/agents/meta-document-ingestion-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/meta-document-ingestion-agent.md": {
+      "title": "MetaDocumentIngestionAgent",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "lib/agents/meta-document-ingestion-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/multi-layer-wiki-research-system.md": {
+      "title": "Multi-layer wiki research system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/wiki-researcher.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/context-aware-task-optimization.md": {
+      "title": "Context-aware task optimization",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/wiki-researcher.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/wiki-researcher-component.md": {
+      "title": "WikiResearcher component",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "lib/wiki-researcher.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/context-driven-wiki-research-system.md": {
+      "title": "Context-driven wiki research system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "test-context.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "guides/test-driven-context-validation.md": {
+      "title": "Test-driven context validation",
+      "created": "2025-11-23",
+      "category": "guide",
+      "sourceFile": "test-context.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/multi-layer-wiki-expansion-verification-system.md": {
+      "title": "Multi-layer wiki expansion verification system",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "verify-wiki-expansion.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "components/context-research-system-integration.md": {
+      "title": "Context research system integration",
+      "created": "2025-11-23",
+      "category": "component",
+      "sourceFile": "verify-wiki-expansion.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
+    },
+    "concepts/progressive-json-repair-with-truncation-recovery.md": {
+      "title": "Progressive JSON repair with truncation recovery",
+      "created": "2025-11-23",
+      "category": "concept",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-23"
     }
   },
   "statistics": {
-    "totalPages": 58,
-    "concepts": 34,
-    "components": 23,
-    "guides": 1,
+    "totalPages": 84,
+    "concepts": 49,
+    "components": 33,
+    "guides": 2,
     "totalCommitsProcessed": 0,
     "orphanedPages": []
   }
