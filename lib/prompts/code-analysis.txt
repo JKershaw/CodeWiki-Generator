@@ -13,12 +13,14 @@ Task: Identify new concepts, classes, functions, and patterns in this code chang
 
 Return JSON only with the following structure:
 {
+  "filePath": "{{filePath}}",
   "concepts": [
     {
       "name": "concept name",
       "category": "concept|component|guide",
       "abstraction": "high|medium|low",
-      "reason": "why this concept is important"
+      "reason": "why this concept is important",
+      "sourceFile": "{{filePath}}"
     }
   ],
   "codeElements": [

@@ -2,21 +2,41 @@ You are writing documentation for a codebase wiki.
 
 Concept/Component: {{conceptName}}
 
+File Location: {{filePath}}
+
 Code Analysis:
 {{codeAnalysis}}
+
+Code Examples from Tests:
+{{codeExamples}}
 
 Existing documentation (if any):
 {{existingContent}}
 
 Task: Write clear, concise documentation in markdown format.
 
-Include:
-- **Purpose and Overview** (2-3 sentences explaining what this is and why it exists)
-- **Key Functionality** (what it does, how it works)
-- **Relationships** (how it connects to other components)
-- **Usage Examples** (if relevant and not obvious)
+Required Sections:
+1. **Purpose and Overview** (2-3 sentences explaining what this is and why it exists)
+2. **Key Functionality** (what it does, how it works)
+3. **Relationships** (how it connects to other components)
+4. **Usage Example** (REQUIRED - show how to use this component)
 
-Guidelines:
+Guidelines for Usage Examples:
+- ALWAYS include a concrete code example showing typical usage
+- Use code examples from tests if provided above
+- If no test examples provided, create a realistic example based on the code analysis
+- Show imports, initialization, and basic usage
+- Keep examples concise but complete (3-10 lines)
+- Use JavaScript/TypeScript code blocks with proper syntax highlighting
+
+Example Format:
+```javascript
+const Component = require('./path/to/component');
+const instance = new Component(options);
+const result = instance.method(args);
+```
+
+General Guidelines:
 - Write in present tense
 - Be specific and accurate - avoid vague descriptions
 - Keep it under 500 words unless complexity requires more
