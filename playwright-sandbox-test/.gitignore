@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+
+# Test results and artifacts
+test-results/
+playwright-report/
+screenshots/
+*.log
+
+# Package manager
+package-lock.json

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Dashboard</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .widget { border: 1px solid #ccc; padding: 10px; margin: 10px 0; }
+        button { padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Test Dashboard</h1>
+    <button id="add-widget" data-testid="add-widget">Add Widget</button>
+    <div id="widgets"></div>
+
+    <script>
+        document.getElementById('add-widget').addEventListener('click', () => {
+            const widget = document.createElement('div');
+            widget.className = 'widget';
+            widget.textContent = 'Widget ' + (document.querySelectorAll('.widget').length + 1);
+            document.getElementById('widgets').appendChild(widget);
+        });
+    </script>
+</body>
+</html>

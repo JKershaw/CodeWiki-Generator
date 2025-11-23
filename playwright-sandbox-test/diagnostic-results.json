@@ -1,0 +1,27 @@
+[
+  {
+    "success": false,
+    "config": "Baseline (no flags)",
+    "error": "page.goto: Page crashed\nCall log:\n  - navigating to \"http://localhost:8080/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "success": false,
+    "config": "No proxy server",
+    "error": "page.goto: Page crashed\nCall log:\n  - navigating to \"http://localhost:8080/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "success": false,
+    "config": "Bypass localhost",
+    "error": "page.goto: Page crashed\nCall log:\n  - navigating to \"http://localhost:8080/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "success": false,
+    "config": "Combined approach",
+    "error": "page.goto: Page crashed\nCall log:\n  - navigating to \"http://localhost:8080/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "success": false,
+    "config": "All flags",
+    "error": "page.goto: Page crashed\nCall log:\n  - navigating to \"http://localhost:8080/\", waiting until \"networkidle\"\n"
+  }
+]

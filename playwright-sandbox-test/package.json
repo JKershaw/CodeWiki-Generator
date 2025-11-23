@@ -1,0 +1,25 @@
+{
+  "name": "playwright-sandbox-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "server": "http-server server -p 8080",
+    "test:baseline": "playwright test --config=playwright.config.base.js",
+    "test:no-proxy": "playwright test --config=playwright.config.no-proxy.js",
+    "test:bypass": "playwright test --config=playwright.config.bypass.js",
+    "test:both": "playwright test --config=playwright.config.both.js",
+    "test:working": "playwright test --config=playwright.config.working.js",
+    "test:diagnostic": "node run-diagnostics.js",
+    "test:all": "npm run test:baseline || npm run test:no-proxy || npm run test:bypass || npm run test:both"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "http-server": "^14.1.1",
+    "playwright": "^1.56.1"
+  }
+}
