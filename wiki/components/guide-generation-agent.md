@@ -2,69 +2,72 @@
 title: GuideGenerationAgent
 category: component
 related: []
-created: 2025-11-22
-updated: 2025-11-22
+created: 2025-11-23
+updated: 2025-11-23
 ---
 
-# GuideGenerationAgent
+# Guide Generation Agent
 
 ## Purpose and Overview
 
-The GuideGenerationAgent automatically transforms existing wiki documentation into actionable operational guides by analyzing repository structure and leveraging AI processing. It bridges the gap between conceptual documentation and practical implementation by generating step-by-step procedures tailored to the actual technology stack in use.
+The GuideGenerationAgent automates the creation of operational guides by analyzing repository structure and existing wiki documentation. It transforms technical concepts into actionable documentation that helps developers understand how to work with specific codebases based on their detected characteristics.
 
 ## Key Functionality
 
-### Guide Generation Workflow
+### Orchestrated Guide Generation
 
-The agent operates through a coordinated process:
+The `generateWikiGuides` function coordinates the complete guide generation workflow:
 
-1. **Repository Analysis** - `detectRepositoryInfo()` recursively scans the codebase using `scanDir()` to identify technologies, frameworks, build tools, and infrastructure patterns
-2. **Content Processing** - Formats wiki components and concepts into structured input for AI analysis
-3. **AI-Powered Generation** - Uses Claude AI with specialized prompts to create operational guides based on detected repository characteristics
-4. **Structured Output** - Returns guides in standardized JSON format for integration with existing documentation workflows
+1. **Wiki Content Collection**: Gathers existing documentation pages from the wiki system
+2. **Repository Scanning**: Uses `scanDir` to recursively analyze directory structure and collect file information
+3. **AI-Powered Generation**: Delegates to the GuideGenerationAgent instance for intelligent guide creation
 
 ### Repository Introspection
 
-The `detectRepositoryInfo` method provides intelligent codebase analysis by:
-- Detecting programming languages and frameworks from file patterns
-- Identifying build tools, package managers, and dependency configurations  
-- Recognizing infrastructure setup (Docker, Kubernetes, cloud configs)
-- Finding testing frameworks and CI/CD pipeline definitions
+The agent implements automatic repository detection through file system analysis:
 
-This contextual awareness enables generation of guides specific to the actual technology stack rather than generic documentation.
+```javascript
+// scanDir recursively builds repository structure
+const repoStructure = await scanDir(repositoryPath);
+// Agent analyzes structure to detect frameworks, tools, patterns
+```
 
-### Core Integration Points
+This introspection enables context-aware guide generation that matches the actual project setup rather than generic recommendations.
 
-- **`generateWikiGuides()`** - Main orchestration function that coordinates the complete guide generation process from wiki analysis through final output
-- **`generateGuides(wikiData, repositoryPath)`** - Core processing engine that combines wiki content with repository context for AI generation
-- **`detectRepositoryInfo(repositoryPath)`** - Standalone repository analysis that can inform other documentation processes
+### Content Processing Pipeline
+
+- **Structure Analysis**: Processes wiki concepts and components to understand existing documentation patterns
+- **Context Integration**: Combines repository characteristics with documented concepts
+- **Guide Synthesis**: Generates practical operational guides through AI analysis
+- **Category Organization**: Leverages existing category-based page organization for structured output
 
 ## Relationships
 
-The GuideGenerationAgent integrates seamlessly with the existing documentation ecosystem:
-
-- **Agent Architecture** - Extends the established agent-based pattern used by other documentation processors, sharing initialization and error handling conventions
-- **Wiki Workflow Integration** - Operates after initial documentation generation but before index creation, consuming the same structured wiki format produced by other agents
-- **Shared Infrastructure** - Leverages ClaudeClient for AI processing and PromptManager for template-based prompt engineering
-- **Content Categorization** - Works with the existing component/concept separation established by other documentation agents to generate targeted operational procedures
+- **Integrates** with the multi-agent architecture alongside CodeAnalysisAgent and DocumentationWriterAgent
+- **Consumes** wiki pages from WikiManager for content analysis
+- **Follows** established agent patterns for specialized documentation tasks
+- **Utilizes** the category-based organization system for consistent content structure
 
 ## Usage Examples
 
 ### Complete Guide Generation
 
 ```javascript
-const agent = new GuideGenerationAgent();
-const guides = await agent.generateWikiGuides(wikiData, repositoryPath);
-// Returns structured guides based on wiki content + repo analysis
+import { generateWikiGuides } from './guide-generation';
+
+// Generates guides from repository and existing wiki content
+const guides = await generateWikiGuides({
+  repositoryPath: '/path/to/repo',
+  wikiManager: wikiManagerInstance
+});
 ```
 
-### Repository Analysis for Context
+### Repository Analysis
 
 ```javascript
-const repoInfo = await agent.detectRepositoryInfo('/path/to/repo');
-console.log(repoInfo.languages);   // ['JavaScript', 'TypeScript'] 
-console.log(repoInfo.frameworks);  // ['React', 'Node.js']
-console.log(repoInfo.tools);       // ['Docker', 'Jest', 'Webpack']
+// Scans directory structure for repository characteristics
+const structure = await scanDir('./src');
+// Returns file tree used for context-aware guide generation
 ```
 
-The generated guides transform static wiki documentation into dynamic operational knowledge that teams can immediately apply for implementation, deployment, and maintenance tasks.
+The agent serves as a bridge between raw repository data and actionable documentation, ensuring generated guides are both comprehensive and practically relevant to the specific development environment.
