@@ -16,12 +16,12 @@
 const readline = require('readline');
 const path = require('path');
 const fs = require('fs').promises;
-const WikiResearcher = require('./lib/wiki-researcher');
+const WikiContextAgent = require('./lib/agents/wiki-context-agent');
 
 class MCPServer {
   constructor(wikiPath = './wikis/codewiki-generator') {
     this.wikiPath = path.resolve(wikiPath);
-    this.researcher = new WikiResearcher(this.wikiPath);
+    this.contextAgent = new WikiContextAgent(this.wikiPath);
 
     // Metrics tracking
     this.metrics = {
@@ -263,58 +263,52 @@ class MCPServer {
    * Query the wiki for relevant context
    */
   async queryWiki(args) {
-    const { query, taskType, maxResults = 5 } = args;
+    const { query, maxResults = 5 } = args;
 
-    this.log(`Querying wiki: "${query}" (type: ${taskType || 'default'})`);
+    this.log(`Querying wiki: "${query}"`);
 
-    // Use WikiResearcher for intelligent context gathering
-    let context;
-    if (taskType) {
-      context = await this.researcher.getContextForTaskType(taskType, query);
-    } else {
-      context = await this.researcher.gatherContext(query);
-    }
-
-    // Extract relevant pages from context
-    const relevantPages = [];
-    const seenPaths = new Set();
-
-    // Helper to add unique pages
-    const addPage = (page) => {
-      if (page && page.path && !seenPaths.has(page.path)) {
-        seenPaths.add(page.path);
-        relevantPages.push({
-          path: page.path,
-          title: page.metadata?.title || page.path,
-          category: page.metadata?.category || 'unknown',
-          summary: this.extractSummary(page),
-          relevanceScore: page.relevanceScore || 0
-        });
-      }
-    };
-
-    // Collect pages from different context sections
-    context.highLevelContext?.forEach(addPage);
-    context.codeContext?.forEach(addPage);
-    context.guides?.forEach(addPage);
-    context.historicalContext?.forEach(addPage);
-    context.qualityContext?.forEach(addPage);
-
-    // Limit results
-    const limitedPages = relevantPages
-      .sort((a, b) => b.relevanceScore - a.relevanceScore)
-      .slice(0, maxResults);
+    // Use WikiContextAgent for AI-powered research
+    const results = await this.contextAgent.research(query, {
+      maxIterations: 3 // Quick responses for MCP
+    });
 
     // Format response
     return {
       content: [
         {
           type: 'text',
-          text: this.formatWikiResponse(query, limitedPages, context)
+          text: this.formatAgenticResponse(query, results)
         }
       ],
       isError: false
     };
+  }
+
+  /**
+   * Format agentic results for MCP response
+   */
+  formatAgenticResponse(query, results) {
+    let response = `# Wiki Context for: "${query}"\n\n`;
+
+    // Include the synthesized guidance
+    response += `## Guidance\n\n${results.finalContext}\n\n`;
+
+    // List pages that were analyzed
+    if (results.pagesRead && results.pagesRead.length > 0) {
+      response += `## Pages Analyzed\n\n`;
+      for (const page of results.pagesRead) {
+        response += `- **${page.title}** (\`${page.path}\`)\n`;
+      }
+      response += `\n`;
+    }
+
+    // Add research stats
+    response += `## Research Stats\n`;
+    response += `- Iterations: ${results.iterationCount}\n`;
+    response += `- Pages read: ${results.pagesRead?.length || 0}\n`;
+    response += `- Cost: $${(results.cost || 0).toFixed(4)}\n`;
+
+    return response;
   }
 
   /**
@@ -426,7 +420,7 @@ class MCPServer {
    * Handle resources/list request
    */
   async handleResourcesList() {
-    const allPages = await this.researcher.wikiManager.getAllPages();
+    const allPages = await this.contextAgent.wikiManager.getAllPages();
 
     return {
       resources: allPages.map(page => ({
@@ -447,7 +441,7 @@ class MCPServer {
     // Extract path from URI (wiki:///path/to/page.md)
     const path = uri.replace('wiki:///', '');
 
-    const page = await this.researcher.wikiManager.getPage(path);
+    const page = await this.contextAgent.wikiManager.getPage(path);
 
     if (!page) {
       throw new Error(`Page not found: ${path}`);
