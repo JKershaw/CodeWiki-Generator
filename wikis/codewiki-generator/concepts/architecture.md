@@ -1,98 +1,111 @@
+---
+related: [components/wiki-to-ai-query-bridge.md, components/interactive-mcp-client.md, components/documentation-gap-tracking-system.md, components/mcp-json-rpc-testing-framework.md, components/interactive-mcp-communication-pattern.md]
+updated: 2025-11-24
+---
+
 # CodeWiki-Generator Architecture
 
 ## System Overview
 
-CodeWiki-Generator is an AI-powered documentation enhancement system that transforms static codebases into dynamic, interconnected wikis. The system automatically discovers relationships between code files, generates contextual documentation, and creates bidirectional links to enable Wikipedia-style navigation through technical content. By combining automated content analysis with intelligent cross-referencing, it bridges the gap between code structure and human-readable documentation.
+CodeWiki-Generator is a documentation automation system that bridges the gap between code repositories and AI-assisted development workflows. The system automatically generates, maintains, and exposes repository documentation through a Model Context Protocol (MCP) server, enabling AI agents to understand and interact with codebases more effectively. It combines wiki-style documentation generation with real-time MCP communication to create a living documentation system that evolves with the code.
 
 ## Core Architecture
 
-The system follows a **multi-layer agent-based architecture** with progressive enhancement capabilities. At its core, it implements a pipeline-driven approach where specialized agents handle distinct transformation phases: ingestion, analysis, enhancement, and output generation. The architecture emphasizes modularity through clear separation of concerns, with each layer building upon the previous one's output while maintaining independence for testing and development.
+The system follows a modular, event-driven architecture centered around MCP server integration. The core design separates documentation generation (wiki processing) from documentation consumption (MCP serving), with a request-response communication layer bridging AI agents and repository knowledge. The architecture emphasizes defensive programming patterns to handle the inherent unpredictability of AI interactions and dynamic repository states.
 
-The design leverages the **Meta-document transformation pipeline** concept, treating all content as structured metadata that can be progressively enriched. This approach enables the system to handle diverse input formats while maintaining consistent internal representations.
+Key architectural patterns include:
+- **Agent-Server Communication**: MCP JSON-RPC protocol for structured AI interactions
+- **Pipeline Processing**: Sequential documentation generation and normalization
+- **Gap-Driven Updates**: Reactive documentation maintenance based on identified knowledge gaps
+- **Bridge Pattern**: Clean separation between wiki generation and AI query interfaces
 
 ## Major Components
 
-### MetaDocumentIngestionAgent
-The primary entry point for processing content into the system's internal format. This component handles HTML to Markdown conversion, source file metadata extraction, and initial document structure analysis. It serves as the foundation for all downstream processing by establishing standardized document representations.
+### Model Context Protocol (MCP) Server Integration
+The central communication hub that exposes repository knowledge to AI agents through standardized JSON-RPC protocols. Handles authentication, request routing, and response formatting while maintaining session state across interactions.
 
-### WikiResearcher Component
-Implements the **Context-driven wiki research system** that discovers semantic relationships between documents. This component performs contextual research, identifies potential link targets, and generates research data that informs the linking process. It integrates with external knowledge sources to enrich content understanding.
+### [Wiki-to-AI Query Bridge](../components/wiki-to-ai-query-bridge.md)
+Translates between human-readable wiki documentation and AI-consumable data structures. Processes natural language queries from AI agents and maps them to specific documentation sections, code components, or architectural concepts.
 
-### Semantic Cross-Referencing System
-The core intelligence layer that implements **Wikipedia-style bidirectional linking** by analyzing document content and metadata. It performs multi-dimensional page relationship analysis to identify conceptual connections, maintains link integrity across document changes, and ensures bidirectional relationship consistency.
+### [Interactive MCP client](../components/interactive-mcp-client.md)
+Provides the user-facing interface for real-time interaction with the MCP server. Supports both direct queries and guided exploration of repository documentation, enabling developers to test and validate the AI integration.
 
-### TestCoverageAnalyzer Class
-Specializes in **Test coverage documentation system** integration, analyzing test files and their relationships to source code. This component enables test-driven documentation enrichment by mapping test coverage to documentation completeness and identifying gaps in both testing and documentation.
+### [Documentation Gap Tracking System](../components/documentation-gap-tracking-system.md)
+Monitors documentation completeness by analyzing query patterns, failed lookups, and code changes. Automatically identifies areas where documentation is missing, outdated, or insufficient for AI understanding.
 
-### DashboardController
-Manages the **Express web interface for documentation management** and provides real-time system monitoring capabilities. This component handles user interactions, displays processing status, and enables manual control over automated processes through the dashboard control interface.
+### [Interactive MCP Communication Pattern](../components/interactive-mcp-communication-pattern.md)
+Implements the bidirectional communication flow between AI agents and the documentation system. Manages conversation context, query disambiguation, and progressive disclosure of information based on agent capabilities.
 
-### Category-based Content Classification
-Implements intelligent content organization through **Category-based document classification**. This component analyzes document characteristics, assigns appropriate categories, and maintains classification metadata that drives navigation structure and content discovery.
+### [Markdown link normalization](../components/markdown-link-normalization.md)
+Ensures consistency and validity of cross-references within generated documentation. Handles relative paths, broken links, and cross-component references to maintain navigable documentation structure.
 
-### Markdown Processing Pipeline
-Handles the final transformation of enriched content back into consumable formats. This component generates table of contents, applies link enhancements, and ensures output quality through progressive JSON repair and validation mechanisms.
+### [MCP JSON-RPC Testing Framework](../components/mcp-json-rpc-testing-framework.md)
+Provides comprehensive testing infrastructure for MCP protocol compliance, message validation, and integration scenarios. Enables automated verification of AI agent interactions and protocol conformance.
 
 ## Data Flow
 
-The system processes content through a sequential transformation pipeline with feedback loops:
+The system operates through two primary data flows: documentation generation and AI query processing.
 
 ```
-Source Files → Ingestion → Classification → Research → Cross-Reference → Enhancement → Output
-     ↓              ↓            ↓            ↓             ↓             ↓
-  Metadata → Meta-Documents → Categories → Link Data → Relationships → Enhanced Wiki
-                                                          ↑
-                                                    Validation Loop
+Repository Changes → Gap Detection → Wiki Generation → Link Normalization → MCP Server
+
+AI Agent Query → MCP Client → Query Bridge → Documentation Lookup → Response Formatting → Agent
 ```
 
-1. **Ingestion Phase**: Raw content enters through the MetaDocumentIngestionAgent, which converts formats and extracts initial metadata
-2. **Classification Phase**: Documents are categorized and analyzed for structural patterns
-3. **Research Phase**: The WikiResearcher component gathers contextual information and identifies potential relationships
-4. **Cross-Reference Phase**: Semantic analysis creates bidirectional links and relationship mappings
-5. **Enhancement Phase**: Content is enriched with generated links, navigation aids, and metadata
-6. **Output Phase**: Final documents are generated with complete wiki functionality
+**Documentation Generation Flow**:
+1. Repository changes trigger gap analysis
+2. Missing or outdated documentation identified
+3. Wiki content generated for gaps
+4. Markdown links normalized across components
+5. Updated content registered with MCP server
 
-The **Multi-layer wiki expansion verification system** provides continuous validation and quality assurance throughout the pipeline.
+**AI Query Processing Flow**:
+1. AI agent sends MCP JSON-RPC request
+2. [Interactive MCP client](../components/interactive-mcp-client.md) validates and routes request
+3. [Wiki-to-AI Query Bridge](../components/wiki-to-ai-query-bridge.md) processes natural language query
+4. Relevant documentation sections retrieved and formatted
+5. Response sent through MCP Communication Pattern
+6. Query patterns logged for gap analysis
 
 ## Key Design Decisions
 
-### Agent-Based Processing Model
-**Choice**: Implement specialized agents for each transformation phase rather than monolithic processing  
-**Rationale**: Enables independent testing, development, and scaling of each processing stage. Allows for easy extension and modification of specific capabilities without affecting the entire system.  
-**Trade-offs**: Increased complexity in orchestration and state management, but gained flexibility and maintainability.
+### MCP Protocol Adoption
+**Choice**: Standardized Model Context Protocol for AI communication
+**Rationale**: Ensures compatibility with multiple AI agents and provides structured, versioned communication interface
+**Trade-offs**: Added protocol complexity but gained interoperability and future-proofing
 
-### Meta-Document Internal Representation
-**Choice**: Convert all content to standardized meta-document format early in the pipeline  
-**Rationale**: Enables consistent processing regardless of input format and simplifies downstream component interfaces. Supports the **Step-wise processing control** pattern for debugging and optimization.  
-**Trade-offs**: Additional conversion overhead, but gained format-agnostic processing and easier testing.
+### [Defensive Chart Rendering](../concepts/defensive-chart-rendering.md)
+**Choice**: Robust error handling and graceful degradation for dynamic content
+**Rationale**: AI interactions are unpredictable; system must handle malformed queries, missing data, and edge cases
+**Trade-offs**: Increased code complexity but improved reliability and user experience
 
-### Bidirectional Relationship Management
-**Choice**: Maintain explicit bidirectional links rather than one-way references  
-**Rationale**: Enables true wiki-style navigation and ensures relationship integrity. Supports the **Wikipedia-style wiki enhancement automation** that users expect from wiki systems.  
-**Trade-offs**: Increased storage and processing requirements, but significantly improved navigation and discoverability.
+### Gap-Driven Documentation Updates
+**Choice**: Reactive documentation generation based on actual usage patterns
+**Rationale**: Prevents over-documentation while ensuring AI agents get needed information
+**Trade-offs**: Some delay in documentation availability but much more efficient resource usage
 
-### Web Dashboard Integration
-**Choice**: Provide both CLI and web interfaces rather than CLI-only operation  
-**Rationale**: Enables **Real-time Status Monitoring** and makes the system accessible to non-technical users. Supports **Context-aware task optimization** through visual feedback and control.  
-**Trade-offs**: Additional complexity and deployment requirements, but gained usability and monitoring capabilities.
+### Bridge Pattern for Query Translation
+**Choice**: Separate component for translating between AI queries and documentation structure
+**Rationale**: Allows independent evolution of wiki format and AI interaction patterns
+**Trade-offs**: Additional abstraction layer but cleaner separation of concerns
 
-### Progressive Enhancement Philosophy
-**Choice**: Build functionality in layers that can operate independently  
-**Rationale**: Enables partial processing, easier debugging, and graceful degradation when components fail. Supports the **Multi-layer wiki architecture** concept for scalable complexity management.  
-**Trade-offs**: More complex state management, but gained robustness and development velocity.
+### [MCP Documentation Request System](../concepts/mcp-documentation-request-system.md)
+**Choice**: Structured request/response system with defined schemas
+**Rationale**: Enables reliable communication between diverse AI agents and documentation system
+**Trade-offs**: More rigid than free-form queries but provides consistency and validation
 
 ## Extension Points
 
-The system provides several well-defined extension mechanisms:
+Developers can extend the system through several well-defined interfaces:
 
-**Custom Research Sources**: Extend the WikiResearcher component by implementing additional context providers that integrate with external knowledge bases or APIs. The **Context research system integration** pattern provides standard interfaces for new sources.
+**Custom Documentation Generators**: Implement new wiki content generators by extending the gap detection system. Add domain-specific documentation types (API specs, architectural diagrams, test coverage reports) that integrate with the existing normalization pipeline.
 
-**Content Classification**: Add new document types and classification rules through the **Document category mapping configuration**. The system supports custom categorization logic and metadata extraction rules.
+**AI Agent Integrations**: Create new MCP client implementations for different AI platforms by implementing the Interactive MCP Communication Pattern. The standardized JSON-RPC interface allows integration with any agent supporting MCP.
 
-**Link Enhancement Strategies**: Implement new relationship detection algorithms by extending the semantic cross-referencing system. The **Content-aware link enhancement** framework provides hooks for custom relationship types.
+**Query Processing Extensions**: Extend the [Wiki-to-AI Query Bridge](../components/wiki-to-ai-query-bridge.md) with custom query handlers for specialized documentation types or domain-specific knowledge extraction patterns.
 
-**Output Formats**: Add new output generators to the Markdown processing pipeline. The system's meta-document format enables transformation to any structured output format while preserving relationship data.
+**Testing Framework Plugins**: Add new test scenarios to the [MCP JSON-RPC Testing Framework](../components/mcp-json-rpc-testing-framework.md) for custom protocols, edge cases, or integration patterns specific to your AI agents.
 
-**Dashboard Extensions**: Extend the web interface through the **Dashboard Control Interface** to add custom monitoring, control panels, or integration with external tools.
+**Gap Detection Strategies**: Implement custom gap detection algorithms in the [Documentation Gap Tracking System](../components/documentation-gap-tracking-system.md) based on code analysis, user feedback, or external documentation standards.
 
-**Testing Integration**: Enhance the **Test-driven context validation** system by adding new test analysis capabilities or integrating with additional testing frameworks beyond the current coverage analysis.
+The modular architecture ensures extensions can be developed independently while leveraging the existing MCP infrastructure and defensive programming patterns.
