@@ -36,15 +36,21 @@ Guide Prioritization (create in this order):
 
 Target: Maximum 4 guides, but MUST include Getting Started if repository is runnable.
 
-Return JSON only with the following structure:
-{
-  "guides": [
-    {
-      "title": "Guide Title",
-      "content": "Full markdown content for the guide including:\n- Clear introduction\n- Step-by-step instructions\n- Code examples where helpful\n- Links to relevant components or concepts"
-    }
-  ]
-}
+Return guides using the following delimiter format:
+
+---GUIDE: Getting Started---
+# Getting Started
+
+[Full markdown content for the guide including:
+- Clear introduction
+- Step-by-step instructions
+- Code examples where helpful
+- Links to relevant components or concepts]
+
+---GUIDE: Testing Approach---
+# Testing Approach
+
+[Full markdown content...]
 
 Guidelines:
 - Only create guides that would genuinely help developers
@@ -79,9 +85,11 @@ If you don't know specific values, use realistic examples and note they should b
 DO NOT create guides for topics where you don't have enough information.
 
 CRITICAL OUTPUT REQUIREMENTS:
-- Output ONLY valid JSON
-- DO NOT include any explanatory text before or after the JSON
-- DO NOT wrap the JSON in markdown code blocks (no ```json or ```)
+- Output guides using the delimiter format shown above
+- Each guide must start with: ---GUIDE: Title---
+- Follow immediately with the markdown content (starting with # heading)
+- Separate multiple guides with the delimiter
+- DO NOT include any explanatory text before or after the guides
+- DO NOT wrap output in markdown code blocks (no ``` or ```markdown)
 - DO NOT include any commentary or notes
-- Start your response with { and end with }
-- If you cannot generate any guides, return: {"guides": []}
+- If you cannot generate any guides, return nothing (empty response)
