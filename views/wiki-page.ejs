@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %> - CodeWiki</title>
   <link rel="stylesheet" href="/public/style.css">
-  <link rel="stylesheet" href="/public/comments.css">
 </head>
 <body>
   <div class="wiki-layout">
@@ -133,44 +132,6 @@
           </div>
         </section>
 
-        <!-- Comments Section -->
-        <section id="comments-section" class="comments-section">
-          <h2 class="comments-title">Comments</h2>
-
-          <!-- Add Comment Form -->
-          <div class="comment-form-container">
-            <form id="add-comment-form" class="comment-form">
-              <div class="form-group">
-                <label for="comment-author">Your Name:</label>
-                <input
-                  type="text"
-                  id="comment-author"
-                  name="author"
-                  placeholder="Anonymous"
-                  class="form-input"
-                />
-              </div>
-              <div class="form-group">
-                <label for="comment-content">Comment:</label>
-                <textarea
-                  id="comment-content"
-                  name="content"
-                  rows="4"
-                  placeholder="Share your thoughts, questions, or feedback..."
-                  class="form-textarea"
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Add Comment</button>
-            </form>
-          </div>
-
-          <!-- Comments List -->
-          <div id="comments-list" class="comments-list">
-            <div class="comments-loading">Loading comments...</div>
-          </div>
-        </section>
-
         <!-- Back to Top Button -->
         <button id="back-to-top" class="back-to-top" style="display: none;">
           ↑ Top
@@ -195,7 +156,6 @@
     };
   </script>
   <script src="/public/wiki-browser.js"></script>
-  <script src="/public/comments.js"></script>
   <script src="/public/git-history.js"></script>
 </body>
 </html>
