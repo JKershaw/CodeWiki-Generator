@@ -125,6 +125,7 @@ async function main() {
     console.log('\n=== Generation Complete ===');
     console.log(`Commits processed: ${stats.commitsProcessed}`);
     console.log(`Files processed: ${stats.filesProcessed} (skipped: ${stats.filesSkipped})`);
+    console.log(`Meta-documents processed: ${stats.metaDocumentsProcessed || 0}`);
     console.log(`Pages created: ${stats.pagesCreated}`);
     console.log(`Pages updated: ${stats.pagesUpdated}`);
     console.log(`Meta-analysis runs: ${stats.metaAnalysisRuns}`);
