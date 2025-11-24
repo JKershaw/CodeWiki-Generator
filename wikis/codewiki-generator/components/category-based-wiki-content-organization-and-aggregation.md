@@ -2,12 +2,12 @@
 title: Category-based wiki content organization and aggregation
 category: component
 sourceFile: lib/processor.js
-related: []
+related: [_history/components/category-based-wiki-content-organization-and-aggregation/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Category-based Wiki Content Organization and Aggregation
+# [Category-based Wiki Content Organization and Aggregation](../_history/components/category-based-wiki-content-organization-and-aggregation/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
@@ -29,7 +29,7 @@ The component orchestrates the following operations:
 
 ## Relationships
 
-- **Agent Pattern**: `ArchitectureOverviewAgent` follows the same architecture as existing agents (DocumentationWriterAgent, MetaAnalysisAgent, WikiIndexAgent, GuideGenerationAgent), maintaining consistency in the multi-agent documentation pipeline
+- **Agent Pattern**: `ArchitectureOverviewAgent` follows the same architecture as existing agents (DocumentationWriterAgent, MetaAnalysisAgent, WikiIndexAgent, GuideGenerationAgent), maintaining consistency in the [multi-agent documentation pipeline](../concepts/multi-agent-documentation-pipeline.md)
 
 - **WikiManager Dependency**: Relies on `WikiManager.getAllPages()` to retrieve pages with category metadata, enabling downstream organization and aggregation
 

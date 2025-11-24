@@ -2,16 +2,16 @@
 title: Cross-page link discovery and extraction
 category: component
 sourceFile: lib/agents/link-discovery-agent.js
-related: []
+related: [_history/components/cross-page-link-discovery-and-extraction/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Cross-Page Link Discovery and Extraction
+# [Cross-Page Link Discovery and Extraction](../_history/components/cross-page-link-discovery-and-extraction/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The `LinkDiscoveryAgent` automatically detects and extracts hyperlink opportunities between wiki pages by analyzing page content for mentions of other page titles. It enables dynamic relationship mapping and automated wiki interconnectedness without manual curation, while preventing false positives through markup-aware pattern matching and mention prioritization.
+The `LinkDiscoveryAgent` automatically detects and extracts hyperlink opportunities between wiki pages by analyzing page content for mentions of other page titles. It enables dynamic relationship mapping and automated wiki interconnectedness without manual curation, while preventing false positives through [markup-aware pattern matching](../components/markup-aware-pattern-matching.md) and mention prioritization.
 
 ## Key Functionality
 

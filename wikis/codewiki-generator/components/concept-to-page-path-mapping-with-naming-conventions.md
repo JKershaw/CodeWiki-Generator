@@ -2,12 +2,12 @@
 title: Concept-to-page path mapping with naming conventions
 category: component
 sourceFile: lib/processor.js
-related: []
+related: [_history/components/concept-to-page-path-mapping-with-naming-conventions/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Concept-to-Page Path Mapping with Naming Conventions
+# [Concept-to-Page Path Mapping with Naming Conventions](../_history/components/concept-to-page-path-mapping-with-naming-conventions/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
@@ -41,7 +41,7 @@ const processor = new Processor(wikiManager, codeAnalysisAgent, docWriterAgent, 
 
 // Internally, processConceptDocumentation calls determinePagePath:
 const concept = {
-  name: "Agent-based code analysis and documentation generation",
+  name: "[Agent-based code analysis and documentation generation](../concepts/agent-based-code-analysis-and-documentation-generation.md)",
   category: "concept"
 };
 

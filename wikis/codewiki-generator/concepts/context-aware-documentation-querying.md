@@ -2,23 +2,23 @@
 title: Context-aware Documentation Querying
 category: concept
 sourceFile: mcp-server.js
-related: []
+related: [_history/concepts/context-aware-documentation-querying/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Context-aware Documentation Querying
+# [Context-aware Documentation Querying](../_history/concepts/context-aware-documentation-querying/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The Context-aware Documentation Querying system provides an MCP (Model Context Protocol) server that enables AI tools like Claude Code to intelligently search and retrieve documentation from the project wiki. It implements JSON-RPC 2.0 over stdio to facilitate seamless integration with AI development workflows, allowing tools to gather contextual documentation based on specific tasks and queries.
+The [Context-aware Documentation Querying](../_history/concepts/context-aware-documentation-querying/2025-11-24T14-38-57.md) system provides an MCP (Model Context Protocol) server that enables AI tools like Claude Code to intelligently search and retrieve documentation from the project wiki. It implements JSON-RPC 2.0 over stdio to facilitate seamless integration with AI development workflows, allowing tools to gather contextual documentation based on specific tasks and queries.
 
 ## Key Functionality
 
 The system centers around the `MCPServer` class which handles JSON-RPC communication and routes requests to specialized handlers:
 
-- **Intelligent Wiki Search**: Uses WikiResearcher to perform context-aware searches with task-type optimization and relevance scoring
-- **Documentation Request Tracking**: Captures and prioritizes requests for missing documentation to identify gaps in the knowledge base
+- **Intelligent Wiki Search**: Uses WikiResearcher to perform context-aware searches with [task-type optimization](../concepts/task-type-optimization.md) and relevance scoring
+- **[Documentation Request Tracking](../components/documentation-request-tracking.md)**: Captures and prioritizes requests for missing documentation to identify gaps in the knowledge base
 - **Structured Response Formatting**: Transforms search results into structured formats optimized for AI tool consumption
 - **Real-time Communication**: Maintains persistent stdio connection for efficient query processing
 

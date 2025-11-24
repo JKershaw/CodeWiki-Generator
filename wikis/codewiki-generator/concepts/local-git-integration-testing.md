@@ -2,12 +2,12 @@
 title: Local Git Integration Testing
 category: concept
 sourceFile: test-run-local.js
-related: []
+related: [_history/concepts/local-git-integration-testing/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Local Git Integration Testing
+# [Local Git Integration Testing](../_history/concepts/local-git-integration-testing/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
@@ -15,7 +15,7 @@ updated: 2025-11-24
 
 ## Key Functionality
 
-### Git History Extraction
+### [Git History Extraction](../components/git-history-extraction.md)
 
 The `getLocalCommits()` function extracts detailed commit metadata from your local repository:
 
@@ -26,7 +26,7 @@ The `getLocalCommits()` function extracts detailed commit metadata from your loc
 
 This extracted data is formatted into commit objects compatible with the Processor's expected input format.
 
-### Mock GitHub Client Pattern
+### [Mock GitHub Client Pattern](../components/mock-git-hub-client-pattern.md)
 
 Rather than calling the GitHub API, the test injects a mock client that returns locally-sourced commit data. This decouples the Processor from external dependencies while maintaining the same interface, allowing you to test the complete workflow in isolation.
 

@@ -2,20 +2,20 @@
 title: Activity feed tracking
 category: component
 sourceFile: server.js
-related: []
+related: [_history/components/activity-feed-tracking/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Activity Feed Tracking
+# [Activity Feed Tracking](../_history/components/activity-feed-tracking/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The activity feed tracking component provides real-time monitoring of wiki processing activities with persistent history and management capabilities. It enables users to track all operations across wiki projects, maintaining a comprehensive audit trail of content changes, project modifications, and user interactions within the dashboard system.
+The [activity feed tracking](../_history/components/activity-feed-tracking/2025-11-24T14-38-56.md) component provides real-time monitoring of wiki processing activities with persistent history and management capabilities. It enables users to track all operations across wiki projects, maintaining a comprehensive audit trail of content changes, project modifications, and user interactions within the dashboard system.
 
 ## Key Functionality
 
-The activity feed tracking component operates through several key functions that capture and manage wiki activities:
+The [activity feed tracking](../_history/components/activity-feed-tracking/2025-11-24T14-38-56.md) component operates through several key functions that capture and manage wiki activities:
 
 - **Real-time Activity Monitoring**: Captures all major wiki operations including page edits, project creation, comment additions, and search activities
 - **Persistent Activity History**: Maintains a comprehensive log of activities that can be retrieved and displayed in the dashboard
@@ -26,10 +26,10 @@ The component works by intercepting calls to major wiki operations and logging r
 
 ## Relationships
 
-The activity feed tracking component serves as a central monitoring hub that connects to multiple system components:
+The [activity feed tracking](../_history/components/activity-feed-tracking/2025-11-24T14-38-56.md) component serves as a central monitoring hub that connects to multiple system components:
 
 - **Links to Wiki Operations**: Integrates with `saveWikiEdit`, `searchWiki`, and content management functions to track user interactions
-- **Project Management Integration**: Connects with `createProject` and project lifecycle management to monitor project-level activities  
+- **Project Management Integration**: Connects with `createProject` and [project lifecycle management](../components/project-lifecycle-management.md) to monitor project-level activities  
 - **Collaborative Features**: Tracks activities from `addComment` and suggestion generation for team collaboration monitoring
 - **Dashboard Controller Extension**: Extends the existing dashboardController to provide activity data for the main dashboard interface
 - **Git Version Control**: Works alongside `getPageHistory` to provide activity context for version-controlled changes
@@ -54,4 +54,4 @@ console.log('Recent activities:', activities);
 **Test Coverage**: tests/integration/server.test.js
 - 11 test cases across 6 test suites
 - Coverage includes Express Server integration, Health Check endpoints, Static File Serving, View Engine configuration, Error Handling, and Middleware Configuration
-- Tests validate the server infrastructure that supports the activity feed tracking system
+- Tests validate the server infrastructure that supports the [activity feed tracking](../_history/components/activity-feed-tracking/2025-11-24T14-38-56.md) system

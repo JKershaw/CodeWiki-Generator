@@ -2,16 +2,16 @@
 title: REST API for Process Control
 category: component
 sourceFile: server.js
-related: []
+related: [_history/components/rest-api-for-process-control/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# REST API for Process Control
+# [REST API for Process Control](../_history/components/rest-api-for-process-control/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The REST API for Process Control provides a set of HTTP endpoints that enable external control of processing operations through both the web dashboard UI and programmatic requests. It establishes a standardized interface for managing core processing workflows (start, pause, step, batch operations), abstracting the control layer from the underlying process logic and allowing multiple interaction modes with the system.
+The [REST API for Process Control](../_history/components/rest-api-for-process-control/2025-11-24T14-38-56.md) provides a set of HTTP endpoints that enable external control of processing operations through both the web dashboard UI and programmatic requests. It establishes a standardized interface for managing core processing workflows (start, pause, step, batch operations), abstracting the control layer from the underlying process logic and allowing multiple interaction modes with the system.
 
 ## Key Functionality
 
@@ -30,10 +30,10 @@ These endpoints are centrally managed through the `DashboardController` class, w
 
 ## Relationships
 
-The REST API for Process Control integrates with several other system components:
+The [REST API for Process Control](../_history/components/rest-api-for-process-control/2025-11-24T14-38-56.md) integrates with several other system components:
 
 - **DashboardController** - Acts as the central handler for all process control requests, abstracting presentation logic from Express route handlers
-- **Web Dashboard Architecture** - Consumes process control endpoints to drive UI interactions and reflect real-time system state
+- **[Web Dashboard Architecture](../concepts/web-dashboard-architecture.md)** - Consumes process control endpoints to drive UI interactions and reflect real-time system state
 - **Core Processing System** - The endpoints provide the primary interface for triggering and managing actual processing operations
 
 The API design follows a layered architecture pattern where routing is separated from business logic, allowing the same endpoints to serve both dashboard requests and external integrations.

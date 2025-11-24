@@ -2,16 +2,16 @@
 title: Sandboxed E2E Testing Configuration
 category: concept
 sourceFile: playwright.config.js
-related: []
+related: [_history/concepts/sandboxed-e2e-testing-configuration/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Sandboxed E2E Testing Configuration
+# [Sandboxed E2E Testing Configuration](../_history/concepts/sandboxed-e2e-testing-configuration/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The Sandboxed E2E Testing Configuration provides a specialized Playwright setup optimized for running end-to-end tests in restricted environments such as Docker containers and CI/CD pipelines. It disables Chrome's sandbox security features and resource-intensive functionality to ensure reliable test execution in constrained environments.
+The [Sandboxed E2E Testing Configuration](../_history/concepts/sandboxed-e2e-testing-configuration/2025-11-24T14-38-57.md) provides a specialized Playwright setup optimized for running end-to-end tests in restricted environments such as Docker containers and CI/CD pipelines. It disables Chrome's sandbox security features and resource-intensive functionality to ensure reliable test execution in constrained environments.
 
 ## Key Functionality
 
@@ -26,7 +26,7 @@ The configuration includes specific Chrome flags in `launchOptions.args` that di
 
 ## Relationships
 
-- **E2E Testing Infrastructure**: Serves as the foundation configuration for the project's end-to-end testing framework
+- **[E2E Testing Infrastructure](../components/e2e-testing-infrastructure.md)**: Serves as the foundation configuration for the project's end-to-end testing framework
 - **CI/CD Pipeline Integration**: Enables automated testing in deployment workflows by handling environment constraints
 - **Browser Automation**: Configures Playwright's browser launch behavior to work within system limitations
 - **Resource Management**: Coordinates with system resources by preventing parallel execution and reducing browser overhead

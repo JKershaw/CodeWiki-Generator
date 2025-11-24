@@ -2,12 +2,12 @@
 title: Resilient API Request Handling
 category: component
 sourceFile: lib/github.js
-related: []
+related: [_history/components/resilient-api-request-handling/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Resilient API Request Handling
+# [Resilient API Request Handling](../_history/components/resilient-api-request-handling/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
@@ -15,7 +15,7 @@ The `lib/github.js` module provides a resilient wrapper around the GitHub API th
 
 ## Key Functionality
 
-### GitHub API Integration Layer
+### [GitHub API Integration Layer](../components/git-hub-api-integration-layer.md)
 The `GitHubClient` class serves as the primary interface for all GitHub API interactions, encapsulating authentication via the config module and normalizing API responses into simplified internal data structures.
 
 ### Core Methods

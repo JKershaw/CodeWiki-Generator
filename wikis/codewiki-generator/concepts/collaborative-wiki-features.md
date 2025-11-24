@@ -2,16 +2,16 @@
 title: Collaborative wiki features
 category: concept
 sourceFile: lib/dashboard-controller.js
-related: []
+related: [_history/concepts/collaborative-wiki-features/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Collaborative Wiki Features
+# [Collaborative Wiki Features](../_history/concepts/collaborative-wiki-features/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The collaborative wiki features provide a comprehensive suite of team-based functionality for wiki development, including real-time activity tracking, commenting systems, content suggestions, and project planning management. This system extends the existing WikiManager with specialized services that enable multiple users to collaborate effectively on wiki content creation and maintenance.
+The [collaborative wiki features](../_history/concepts/collaborative-wiki-features/2025-11-24T14-38-57.md) provide a comprehensive suite of team-based functionality for wiki development, including real-time activity tracking, commenting systems, content suggestions, and project planning management. This system extends the existing WikiManager with specialized services that enable multiple users to collaborate effectively on wiki content creation and maintenance.
 
 ## Key Functionality
 
@@ -23,7 +23,7 @@ The collaborative features are implemented through a multi-service architecture 
 - **Project Planning**: Task management system for organizing wiki development with lifecycle management and metadata handling
 - **Analytics Dashboard**: Comprehensive metrics for wiki usage, content analysis, and team collaboration insights
 - **Search Integration**: Full-text indexing with relevance scoring for efficient content discovery
-- **Git History Integration**: Version tracking and change analysis through git repository integration
+- **[Git History Integration](../concepts/git-history-integration.md)**: Version tracking and change analysis through git repository integration
 - **Research Context**: AI-powered research functionality for content analysis and exploration
 
 ## Relationships
@@ -32,7 +32,7 @@ The collaborative features integrate with several core components:
 
 - **Extends WikiManager**: Builds upon existing wiki functionality while maintaining backward compatibility
 - **ActivityEventEmitter**: Coordinates real-time event broadcasting across all collaborative features
-- **Specialized Services**: Orchestrates 10 service classes (WikiContextService, WikiSearchService, PlanningManager, SuggestionEngine, WikiAnalytics, ProjectManager, CommentsManager, GitHistoryService, etc.)
+- **Specialized Services**: Orchestrates 10 service classes ([WikiContextService](../components/wiki-context-service.md), WikiSearchService, PlanningManager, SuggestionEngine, WikiAnalytics, ProjectManager, CommentsManager, GitHistoryService, etc.)
 - **RESTful API**: Implements standardized API patterns for all collaborative endpoints
 - **Git Integration**: Connects with version control systems for change tracking and history analysis
 

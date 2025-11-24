@@ -2,16 +2,16 @@
 title: Meta-document ingestion system
 category: concept
 sourceFile: lib/agents/meta-document-ingestion-agent.js
-related: []
+related: [_history/concepts/meta-document-ingestion-system/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Meta-document Ingestion System
+# [Meta-document Ingestion System](../_history/concepts/meta-document-ingestion-system/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The Meta-document Ingestion System transforms root-level markdown files (philosophy documents, specifications, progress reports) into structured wiki pages with intelligent content analysis and cross-referencing capabilities. It serves as a bridge between raw documentation and the organized wiki system, extracting metadata and relationships while preserving document structure through smart truncation strategies.
+The [Meta-document Ingestion System](../_history/concepts/meta-document-ingestion-system/2025-11-24T14-38-57.md) transforms root-level markdown files (philosophy documents, specifications, progress reports) into structured wiki pages with intelligent content analysis and cross-referencing capabilities. It serves as a bridge between raw documentation and the organized wiki system, extracting metadata and relationships while preserving document structure through smart truncation strategies.
 
 ## Key Functionality
 
@@ -19,7 +19,7 @@ The Meta-document Ingestion System transforms root-level markdown files (philoso
 
 **Progressive JSON Repair**: Implements robust parsing of LLM responses with multiple fallback mechanisms to handle malformed JSON, code blocks, and response wrapper text that commonly occur in AI-generated output.
 
-**Intelligent Content Truncation**: When documents exceed token limits, the system preserves context by keeping the first 60% and last 40% of content, maintaining both introduction and conclusion while respecting processing constraints.
+**[Intelligent Content Truncation](../components/intelligent-content-truncation.md)**: When documents exceed token limits, the system preserves context by keeping the first 60% and last 40% of content, maintaining both introduction and conclusion while respecting processing constraints.
 
 **Structured Output Generation**: Creates wiki-ready pages with proper frontmatter, category mapping to the multi-layer wiki system, and cross-reference data for linking related content.
 

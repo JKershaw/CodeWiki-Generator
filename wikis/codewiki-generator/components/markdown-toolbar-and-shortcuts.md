@@ -2,16 +2,16 @@
 title: Markdown toolbar and shortcuts
 category: component
 sourceFile: public/wiki-editor.js
-related: []
+related: [_history/components/markdown-toolbar-and-shortcuts/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Markdown Toolbar and Shortcuts
+# [Markdown Toolbar and Shortcuts](../_history/components/markdown-toolbar-and-shortcuts/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The markdown toolbar and shortcuts component provides rich text editing helpers for wiki content creation, offering both clickable toolbar buttons and keyboard shortcuts for common markdown formatting operations. It enables users to easily insert markdown syntax like bold, italic, headings, and lists without memorizing markdown syntax.
+The [markdown toolbar and shortcuts](../_history/components/markdown-toolbar-and-shortcuts/2025-11-24T14-38-56.md) component provides rich text editing helpers for wiki content creation, offering both clickable toolbar buttons and keyboard shortcuts for common markdown formatting operations. It enables users to easily insert markdown syntax like bold, italic, headings, and lists without memorizing markdown syntax.
 
 ## Key Functionality
 
@@ -27,7 +27,7 @@ The toolbar supports standard markdown formatting including bold, italic, headin
 
 This component integrates tightly with the broader wiki editor system:
 
-- **Wiki Editor Core**: Works as part of the real-time wiki editor with auto-save functionality
+- **Wiki Editor Core**: Works as part of the [real-time wiki editor with auto-save](../concepts/real-time-wiki-editor-with-auto-save.md) functionality
 - **Live Preview**: Formatting changes are immediately reflected in the markdown preview pane via the `updatePreview` function
 - **Auto-save System**: Toolbar actions trigger content changes that are automatically saved to local storage
 - **Markdown Parser**: Relies on marked.js library for converting the inserted markdown to HTML in the preview

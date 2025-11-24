@@ -2,20 +2,20 @@
 title: Client-side wiki enhancement system
 category: concept
 sourceFile: public/wiki-browser.js
-related: []
+related: [_history/concepts/client-side-wiki-enhancement-system/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Client-side Wiki Enhancement System
+# [Client-side Wiki Enhancement System](../_history/concepts/client-side-wiki-enhancement-system/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The client-side wiki enhancement system provides interactive features and improved user experience for wiki pages through progressive JavaScript enhancements. It adds real-time search, dynamic table of contents generation, scroll tracking, and navigation improvements without requiring changes to the base wiki rendering system.
+The [client-side wiki enhancement system](../_history/concepts/client-side-wiki-enhancement-system/2025-11-24T14-38-57.md) provides interactive features and improved user experience for wiki pages through progressive JavaScript enhancements. It adds real-time search, dynamic table of contents generation, scroll tracking, and navigation improvements without requiring changes to the base wiki rendering system.
 
 ## Key Functionality
 
-**Progressive Search with Live Results**
+**[Progressive Search with Live Results](../components/progressive-search-with-live-results.md)**
 - Implements real-time search functionality with dropdown results as users type
 - Handles API calls to search endpoints with error handling and loading states
 - Displays paginated results with snippets and metadata

@@ -2,23 +2,23 @@
 title: Bidirectional wiki linking system
 category: concept
 sourceFile: enhance-wiki-linking.js
-related: []
+related: [_history/concepts/bidirectional-wiki-linking-system/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Bidirectional Wiki Linking System
+# [Bidirectional Wiki Linking System](../_history/concepts/bidirectional-wiki-linking-system/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The bidirectional wiki linking system transforms isolated markdown files into a connected knowledge graph by automatically inserting cross-references between related pages. It implements Wikipedia-style automatic linking, creating a web of connections that helps users discover related content across the wiki.
+The [bidirectional wiki linking system](../_history/concepts/bidirectional-wiki-linking-system/2025-11-24T14-38-57.md) transforms isolated markdown files into a connected knowledge graph by automatically inserting cross-references between related pages. It implements Wikipedia-style automatic linking, creating a web of connections that helps users discover related content across the wiki.
 
 ## Key Functionality
 
 This system processes all wiki pages to identify mentions of other page titles within content and converts them into proper markdown links. The core functionality includes:
 
 - **Intelligent mention detection**: Uses the `LinkDiscoveryAgent` class to find references to other page titles within markdown content
-- **Context-aware link insertion**: Prevents duplicate links by checking if text is already part of existing markdown links through `isAlreadyLinked()`
+- **[Context-aware link insertion](../components/context-aware-link-insertion.md)**: Prevents duplicate links by checking if text is already part of existing markdown links through `isAlreadyLinked()`
 - **Format preservation**: Maintains original text formatting (like bold text) when creating new cross-references via `createMarkdownLink()`
 - **Relative path handling**: Generates proper relative markdown links that work within the wiki structure
 

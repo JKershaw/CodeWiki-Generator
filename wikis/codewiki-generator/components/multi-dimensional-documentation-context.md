@@ -2,12 +2,12 @@
 title: Multi-dimensional documentation context
 category: component
 sourceFile: lib/agents/documentation-writer-agent.js
-related: []
+related: [_history/components/multi-dimensional-documentation-context/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Multi-dimensional Documentation Context
+# [Multi-dimensional Documentation Context](../_history/components/multi-dimensional-documentation-context/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
@@ -15,7 +15,7 @@ The documentation-writer-agent integrates multiple information sources—code an
 
 ## Key Functionality
 
-The agent implements a **fallback-driven context enrichment** pattern that gracefully handles optional input parameters:
+The agent implements a **[fallback-driven context enrichment](../concepts/fallback-driven-context-enrichment.md)** pattern that gracefully handles optional input parameters:
 
 - **Test Coverage Integration**: Captures test coverage information from the options object with a sensible default (`"No test coverage information available"`) when coverage data is unavailable
 - **Context Pipeline**: Combines three independent context sources—`codeAnalysis`, `codeExamples`, and `testCoverage`—into a single enriched prompt context

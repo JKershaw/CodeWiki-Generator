@@ -2,20 +2,20 @@
 title: Multi-layer Wiki Architecture
 category: concept
 sourceFile: lib/wiki-researcher.js
-related: []
+related: [_history/concepts/multi-layer-wiki-architecture/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Multi-layer Wiki Architecture
+# [Multi-layer Wiki Architecture](../_history/concepts/multi-layer-wiki-architecture/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The Multi-layer Wiki Architecture provides intelligent context retrieval from structured documentation organized across distinct functional layers (meta, concepts, components, guides, history, quality). This system enables AI agents and developers to gather relevant documentation dynamically based on task requirements, with specialized optimization for different types of work including features, bugs, architectural changes, and onboarding.
+The [Multi-layer Wiki Architecture](../_history/concepts/multi-layer-wiki-architecture/2025-11-24T14-38-57.md) provides intelligent context retrieval from structured documentation organized across distinct functional layers (meta, concepts, components, guides, history, quality). This system enables AI agents and developers to gather relevant documentation dynamically based on task requirements, with specialized optimization for different types of work including features, bugs, architectural changes, and onboarding.
 
 ## Key Functionality
 
-The `WikiResearcher` class implements a context-aware research system that:
+The `WikiResearcher` class implements a [context-aware research system](../concepts/context-aware-research-system.md) that:
 
 - **Extracts keywords** from task descriptions to guide documentation searches
 - **Searches across layers** using configurable priorities based on task type

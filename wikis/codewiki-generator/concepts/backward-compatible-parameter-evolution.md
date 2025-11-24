@@ -2,12 +2,12 @@
 title: Backward-compatible parameter evolution
 category: concept
 sourceFile: lib/processor.js
-related: []
+related: [_history/concepts/backward-compatible-parameter-evolution/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Backward-compatible Parameter Evolution
+# [Backward-compatible Parameter Evolution](../_history/concepts/backward-compatible-parameter-evolution/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
@@ -15,7 +15,7 @@ This pattern enables the `lib/processor.js` module to gracefully evolve its API 
 
 ## Key Functionality
 
-The backward-compatible parameter evolution pattern is implemented through two key functions:
+The [backward-compatible parameter evolution](../_history/concepts/backward-compatible-parameter-evolution/2025-11-24T14-38-57.md) pattern is implemented through two key functions:
 
 ### `processConceptDocumentation(concept, ...)`
 Accepts concept parameters in two formats:
@@ -70,4 +70,4 @@ The processor detects the parameter type and routes the documentation appropriat
 The implementation is covered by comprehensive test suites in `tests/unit/processor.test.js`:
 - **26 test cases** across **6 test suites**
 - Coverage includes: Processor initialization, `processCommit()`, `isSignificantFile()`, `getRelevantContext()`, `determinePagePath()`, and `processRepository()`
-- The `determinePagePath` test suite specifically validates routing logic for category-based documentation organization
+- The `determinePagePath` test suite specifically validates routing logic for [category-based documentation organization](../components/category-based-documentation-organization.md)

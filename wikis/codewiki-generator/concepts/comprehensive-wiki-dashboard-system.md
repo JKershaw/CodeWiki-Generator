@@ -2,22 +2,22 @@
 title: Comprehensive wiki dashboard system
 category: concept
 sourceFile: server.js
-related: []
+related: [_history/concepts/comprehensive-wiki-dashboard-system/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Comprehensive Wiki Dashboard System
+# [Comprehensive Wiki Dashboard System](../_history/concepts/comprehensive-wiki-dashboard-system/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The comprehensive wiki dashboard system transforms a basic wiki processor into a full-featured project management platform with real-time activity tracking, collaborative editing, and analytics capabilities. It provides a centralized interface for managing wiki projects with advanced features like search, version control, and AI-powered content suggestions.
+The [comprehensive wiki dashboard system](../_history/concepts/comprehensive-wiki-dashboard-system/2025-11-24T14-38-57.md) transforms a basic wiki processor into a full-featured project management platform with real-time activity tracking, collaborative editing, and analytics capabilities. It provides a centralized interface for managing wiki projects with advanced features like search, version control, and AI-powered content suggestions.
 
 ## Key Functionality
 
 The system enhances wiki functionality through several integrated components:
 
-**Activity Feed Tracking**
+**[Activity Feed Tracking](../components/activity-feed-tracking.md)**
 - Monitors all wiki processing activities in real-time
 - Maintains persistent activity history for dashboard display
 - Provides management capabilities for activity streams
@@ -27,7 +27,7 @@ The system enhances wiki functionality through several integrated components:
 - Generates table of contents for improved navigation
 - Discovers related pages and content connections
 
-**Project Lifecycle Management**
+**[Project Lifecycle Management](../components/project-lifecycle-management.md)**
 - Handles complete project operations from creation to deletion
 - Manages project configuration and settings persistence
 - Supports project import and initialization workflows

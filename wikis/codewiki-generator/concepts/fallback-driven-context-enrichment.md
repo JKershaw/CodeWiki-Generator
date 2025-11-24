@@ -2,12 +2,12 @@
 title: Fallback-driven context enrichment
 category: concept
 sourceFile: lib/agents/documentation-writer-agent.js
-related: []
+related: [_history/concepts/fallback-driven-context-enrichment/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Fallback-driven Context Enrichment
+# [Fallback-driven Context Enrichment](../_history/concepts/fallback-driven-context-enrichment/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
@@ -28,7 +28,7 @@ This pattern treats each context source as optional but provides reasonable defa
 
 - **Extends prompt template context**: The `testCoverage` parameter joins existing context parameters (`codeAnalysis`, `codeExamples`, `existingContent`) in the prompt rendering pipeline
 - **Integrates with promptManager**: Uses `promptManager.render()` to build the final prompt with all enriched context
-- **Part of multi-dimensional documentation context**: Contributes to a broader system that layers multiple data sources to create comprehensive documentation
+- **Part of [multi-dimensional documentation context](../components/multi-dimensional-documentation-context.md)**: Contributes to a broader system that layers multiple data sources to create comprehensive documentation
 - **Follows established patterns**: Implements the same fallback approach already used for other optional parameters like `codeExamples` and `existingContent`
 
 ## Usage Example

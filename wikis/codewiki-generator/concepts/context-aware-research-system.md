@@ -2,7 +2,7 @@
 title: Context-aware Research System
 category: concept
 sourceFile: lib/wiki-researcher.js
-related: []
+related: [concepts/task-type-optimization.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
@@ -24,7 +24,7 @@ The WikiResearcher provides context-aware research capabilities for multi-layer 
 - Searches across distinct documentation layers: meta/, concepts/, components/, guides/, history/, and quality/
 - Provides structured access to different types of documentation based on task requirements
 
-**Task-type Optimization**
+**[Task-type Optimization](../concepts/task-type-optimization.md)**
 - Offers specialized context gathering for different task types (feature, bug, architectural, onboarding)
 - Applies tailored layer priorities and depth limits based on task characteristics
 - Optimizes search strategies for specific workflow patterns

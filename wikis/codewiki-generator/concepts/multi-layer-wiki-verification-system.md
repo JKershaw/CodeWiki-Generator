@@ -2,16 +2,16 @@
 title: Multi-layer wiki verification system
 category: concept
 sourceFile: verify-wiki-expansion.js
-related: []
+related: [_history/concepts/multi-layer-wiki-verification-system/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Multi-layer Wiki Verification System
+# [Multi-layer Wiki Verification System](../_history/concepts/multi-layer-wiki-verification-system/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The multi-layer wiki verification system provides comprehensive testing for hierarchical wiki structures with cross-layer relationships and context research capabilities. It validates the integration between wiki management components and ensures proper functionality across different wiki layers including metadata, history, and quality tracking.
+The [multi-layer wiki verification system](../_history/concepts/multi-layer-wiki-verification-system/2025-11-24T14-38-57.md) provides comprehensive testing for hierarchical wiki structures with cross-layer relationships and context research capabilities. It validates the integration between wiki management components and ensures proper functionality across different wiki layers including metadata, history, and quality tracking.
 
 ## Key Functionality
 
@@ -40,7 +40,7 @@ const { verifyWikiExpansion } = require('./verify-wiki-expansion.js');
 const verificationResult = await verifyWikiExpansion();
 
 // The verification tests WikiManager and WikiResearcher integration
-// and validates cross-layer wiki relationships
+// and validates [cross-layer wiki relationships](../concepts/cross-layer-wiki-relationships.md)
 ```
 
 ## Testing

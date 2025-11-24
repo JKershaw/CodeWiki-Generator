@@ -2,16 +2,16 @@
 title: Wiki-driven development pattern
 category: concept
 sourceFile: examples/wiki-context-service-example.js
-related: []
+related: [_history/concepts/wiki-driven-development-pattern/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Wiki-driven Development Pattern
+# [Wiki-driven Development Pattern](../_history/concepts/wiki-driven-development-pattern/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The Wiki-driven development pattern demonstrates how to use wiki content as a source of truth for automated development guidance and context retrieval. This example shows how to integrate WikiContextService into both CLI tools and web applications for programmatic wiki research.
+The [Wiki-driven development pattern](../_history/concepts/wiki-driven-development-pattern/2025-11-24T14-38-57.md) demonstrates how to use wiki content as a source of truth for automated development guidance and context retrieval. This example shows how to integrate [WikiContextService](../components/wiki-context-service.md) into both CLI tools and web applications for programmatic wiki research.
 
 ## Key Functionality
 
@@ -22,7 +22,7 @@ This pattern provides two integration approaches:
 - **Context Extraction**: Retrieves and structures wiki content into actionable development context
 - **Cost Monitoring**: Tracks API usage and provides cost monitoring capabilities
 
-The WikiContextService researches wiki content and extracts structured information that can guide development decisions and provide contextual understanding of codebases.
+The [WikiContextService](../components/wiki-context-service.md) researches wiki content and extracts structured information that can guide development decisions and provide contextual understanding of codebases.
 
 ## Relationships
 
@@ -38,7 +38,7 @@ The WikiContextService researches wiki content and extracts structured informati
 const { WikiContextService } = require('../lib/wiki-context-service');
 
 async function main() {
-  const wikiService = new WikiContextService();
+  const wikiService = new [WikiContextService](../components/wiki-context-service.md)();
   const result = await wikiService.research('development topic');
   
   console.log('Summary:', result.summary);
@@ -50,11 +50,11 @@ async function main() {
 ### Web Application Integration
 ```javascript
 const express = require('express');
-const { WikiContextService } = require('../lib/wiki-context-service');
+const { [WikiContextService](../components/wiki-context-service.md) } = require('../lib/wiki-context-service');
 
 async function webAppExample() {
   const app = express();
-  const wikiService = new WikiContextService();
+  const wikiService = new [WikiContextService](../components/wiki-context-service.md)();
   
   app.get('/research/:topic', async (req, res) => {
     const context = await wikiService.research(req.params.topic);

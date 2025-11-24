@@ -2,16 +2,16 @@
 title: Wiki Query Interface
 category: component
 sourceFile: mcp-server.js
-related: []
+related: [_history/components/wiki-query-interface/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Wiki Query Interface
+# [Wiki Query Interface](../_history/components/wiki-query-interface/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The Wiki Query Interface is a Model Context Protocol (MCP) server that enables Claude Code to query wiki documentation in real-time through a standardized JSON-RPC 2.0 interface over stdio. It bridges AI development workflows with the codebase documentation system, allowing Claude to search for relevant information and request missing documentation during development sessions.
+The [Wiki Query Interface](../_history/components/wiki-query-interface/2025-11-24T14-38-56.md) is a [Model Context Protocol (MCP) server](../concepts/model-context-protocol-(mcp)-server.md) that enables Claude Code to query wiki documentation in real-time through a standardized JSON-RPC 2.0 interface over stdio. It bridges AI development workflows with the codebase documentation system, allowing Claude to search for relevant information and request missing documentation during development sessions.
 
 ## Key Functionality
 
@@ -24,7 +24,7 @@ The MCPServer class handles all JSON-RPC communication, routing requests to appr
 
 ## Relationships
 
-The Wiki Query Interface integrates tightly with several existing components:
+The [Wiki Query Interface](../_history/components/wiki-query-interface/2025-11-24T14-38-56.md) integrates tightly with several existing components:
 
 - **WikiResearcher** - Leverages intelligent context gathering capabilities for comprehensive search results
 - **Documentation Generation Pipeline** - Feeds documentation gap analysis from AI usage patterns back into the content creation process

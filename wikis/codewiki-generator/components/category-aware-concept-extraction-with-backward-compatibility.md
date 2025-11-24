@@ -2,12 +2,12 @@
 title: Category-aware concept extraction with backward compatibility
 category: component
 sourceFile: lib/agents/code-analysis-agent.js
-related: []
+related: [_history/components/category-aware-concept-extraction-with-backward-compatibility/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Category-aware Concept Extraction with Backward Compatibility
+# [Category-aware Concept Extraction with Backward Compatibility](../_history/components/category-aware-concept-extraction-with-backward-compatibility/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
@@ -15,7 +15,7 @@ This component implements structured concept extraction with optional categoriza
 
 ## Key Functionality
 
-The `_validateResponse` function handles response normalization and validation:
+The `_validateResponse` function handles [response normalization and validation](../components/response-normalization-and-validation.md):
 
 - **Legacy Format Conversion**: Transforms legacy concept arrays (strings) into structured objects with metadata fields
 - **Metadata Enrichment**: Adds category, abstraction level, and reasoning information to extracted concepts

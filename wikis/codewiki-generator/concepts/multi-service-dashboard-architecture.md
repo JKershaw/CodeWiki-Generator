@@ -2,20 +2,20 @@
 title: Multi-service dashboard architecture
 category: concept
 sourceFile: lib/dashboard-controller.js
-related: []
+related: [_history/concepts/multi-service-dashboard-architecture/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Multi-service Dashboard Architecture
+# [Multi-service Dashboard Architecture](../_history/concepts/multi-service-dashboard-architecture/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The dashboard controller implements a comprehensive service-oriented architecture that coordinates 10 specialized services for wiki management, real-time collaboration, and project lifecycle management. It serves as the central orchestrator for features including real-time activity tracking, collaborative editing, project planning, analytics, and git-based version control.
+The dashboard controller implements a comprehensive service-oriented architecture that coordinates 10 specialized services for wiki management, real-time collaboration, and [project lifecycle management](../components/project-lifecycle-management.md). It serves as the central orchestrator for features including real-time activity tracking, collaborative editing, project planning, analytics, and git-based version control.
 
 ## Key Functionality
 
-**Service Coordination**: Manages WikiContextService, WikiSearchService, ActivityEventEmitter, PlanningManager, SuggestionEngine, WikiAnalytics, ProjectManager, CommentsManager, and GitHistoryService through a unified controller interface.
+**Service Coordination**: Manages [WikiContextService](../components/wiki-context-service.md), WikiSearchService, ActivityEventEmitter, PlanningManager, SuggestionEngine, WikiAnalytics, ProjectManager, CommentsManager, and GitHistoryService through a unified controller interface.
 
 **Real-time Activity Tracking**: Implements Server-Sent Events (SSE) for live activity monitoring with automatic keepalive mechanisms and proper connection cleanup. The system emits events for wiki changes, user actions, and system activities.
 

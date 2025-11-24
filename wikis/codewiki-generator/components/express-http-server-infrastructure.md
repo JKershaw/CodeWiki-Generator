@@ -2,16 +2,16 @@
 title: Express HTTP Server Infrastructure
 category: component
 sourceFile: server.js
-related: []
+related: [_history/components/express-http-server-infrastructure/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Express HTTP Server Infrastructure
+# [Express HTTP Server Infrastructure](../_history/components/express-http-server-infrastructure/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The Express HTTP Server Infrastructure (`server.js`) establishes the foundational web server that powers the CodeWiki Dashboard, handling HTTP requests, routing, middleware configuration, and responses. This component serves as the entry point for all client interactions with the application, providing critical infrastructure for request validation, error handling, and graceful shutdown in production environments.
+The [Express HTTP Server Infrastructure](../_history/components/express-http-server-infrastructure/2025-11-24T14-38-56.md) (`server.js`) establishes the foundational web server that powers the CodeWiki Dashboard, handling HTTP requests, routing, middleware configuration, and responses. This component serves as the entry point for all client interactions with the application, providing critical infrastructure for request validation, error handling, and graceful shutdown in production environments.
 
 ## Key Functionality
 
@@ -38,7 +38,7 @@ Implements a centralized error handling pipeline:
   - In development: Includes detailed error messages and stack traces for debugging
   - In production: Returns minimal error information to avoid exposing sensitive details
 
-### Graceful Shutdown Pattern
+### [Graceful Shutdown Pattern](../concepts/graceful-shutdown-pattern.md)
 Registers a SIGTERM signal handler that:
 - Cleanly closes the server when receiving termination signals
 - Ensures proper resource cleanup before process exit
