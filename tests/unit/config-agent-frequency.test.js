@@ -43,10 +43,13 @@ describe('Config - Agent Frequency', () => {
         expect(config.shouldRunAgent('wikiIndex', 18, 20)).toBe(false); // commit 19
       });
 
-      it('should run crossLinking every 5th commit', () => {
-        expect(config.shouldRunAgent('crossLinking', 0, 20)).toBe(false);
-        expect(config.shouldRunAgent('crossLinking', 4, 20)).toBe(true);
-        expect(config.shouldRunAgent('crossLinking', 9, 20)).toBe(true);
+      it('should run crossLinking every 5th commit (within recent window)', () => {
+        // With 20 commits and recent limit of 10, only commits 11-20 are eligible
+        expect(config.shouldRunAgent('crossLinking', 0, 20)).toBe(false);   // commit 1: too old
+        expect(config.shouldRunAgent('crossLinking', 4, 20)).toBe(false);   // commit 5: too old
+        expect(config.shouldRunAgent('crossLinking', 9, 20)).toBe(false);   // commit 10: too old
+        expect(config.shouldRunAgent('crossLinking', 14, 20)).toBe(true);  // commit 15: recent + multiple of 5
+        expect(config.shouldRunAgent('crossLinking', 19, 20)).toBe(true);  // commit 20: last commit
       });
     });
 
@@ -95,17 +98,51 @@ describe('Config - Agent Frequency', () => {
       });
     });
 
+    describe('historical cross-linking optimization', () => {
+      it('should skip cross-linking on old commits (beyond recent limit)', () => {
+        // With 100 commits and limit of 10, skip commits 0-89
+        expect(config.shouldRunAgent('crossLinking', 0, 100)).toBe(false);
+        expect(config.shouldRunAgent('crossLinking', 50, 100)).toBe(false);
+        expect(config.shouldRunAgent('crossLinking', 89, 100)).toBe(false);
+      });
+
+      it('should run cross-linking on recent commits (within limit)', () => {
+        // With 100 commits and limit of 10, run on commits 90-99 (if frequency allows)
+        // Commit 95 (index 94) is within last 10 and multiple of 5
+        expect(config.shouldRunAgent('crossLinking', 94, 100)).toBe(true);
+        // Commit 99 is last commit, always runs
+        expect(config.shouldRunAgent('crossLinking', 99, 100)).toBe(true);
+      });
+
+      it('should respect frequency within recent commits', () => {
+        // Commit 91 (index 90) is within last 10 but not multiple of 5
+        expect(config.shouldRunAgent('crossLinking', 90, 100)).toBe(false);
+        // Commit 95 (index 94) is within last 10 AND multiple of 5
+        expect(config.shouldRunAgent('crossLinking', 94, 100)).toBe(true);
+      });
+
+      it('should not affect other agents', () => {
+        // Other agents should run normally regardless of position
+        expect(config.shouldRunAgent('wikiIndex', 0, 100)).toBe(false);
+        expect(config.shouldRunAgent('wikiIndex', 4, 100)).toBe(true); // commit 5
+        expect(config.shouldRunAgent('architectureOverview', 9, 100)).toBe(true); // commit 10
+      });
+    });
+
     describe('edge cases', () => {
       it('should handle single commit correctly', () => {
         // With only 1 commit (index 0), it's also the last commit
         expect(config.shouldRunAgent('architectureOverview', 0, 1)).toBe(true);
         expect(config.shouldRunAgent('guideGeneration', 0, 1)).toBe(true);
+        expect(config.shouldRunAgent('crossLinking', 0, 1)).toBe(true);
       });
 
       it('should handle first commit (index 0) correctly', () => {
         // First commit is not a multiple of frequency (commit number = 1)
         expect(config.shouldRunAgent('wikiIndex', 0, 20)).toBe(false);
         expect(config.shouldRunAgent('architectureOverview', 0, 20)).toBe(false);
+        // Cross-linking on old commit should be skipped
+        expect(config.shouldRunAgent('crossLinking', 0, 20)).toBe(false);
       });
     });
 
