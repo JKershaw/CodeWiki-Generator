@@ -2,14 +2,14 @@
 title: Mock credential injection for testing
 category: component
 sourceFile: tests/setup.js
-related: []
+related: [meta/overview.md, guides/test-isolation-through-environment-configuration.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Mock Credential Injection for Testing
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 Mock credential injection substitutes real API credentials with test values during test execution to prevent unintended external service calls and maintain cost control. This component is part of the test setup infrastructure that ensures tests run safely in isolation without accessing production resources.
 
@@ -28,7 +28,7 @@ The injection occurs during test setup, before any test code executes, establish
 
 This component is closely integrated with:
 
-- **Test isolation through environment configuration** - Works together to create isolated test environments with controlled dependencies
+- **[Test isolation through environment configuration](../guides/test-isolation-through-environment-configuration.md)** - Works together to create isolated test environments with controlled dependencies
 - **Test setup infrastructure** - Part of the broader test initialization process that prepares the testing environment
 - **External service integrations** - Specifically targets components that interact with third-party APIs requiring authentication
 

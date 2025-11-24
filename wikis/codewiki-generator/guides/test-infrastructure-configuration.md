@@ -2,14 +2,14 @@
 title: Test infrastructure configuration
 category: guide
 sourceFile: jest.config.js
-related: []
+related: [meta/overview.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Test Infrastructure Configuration
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 The Jest configuration file establishes the testing framework setup for the project, defining how tests are discovered, executed, and coverage is measured. This configuration is foundational for enabling comprehensive test coverage across the wiki manager codebase.
 

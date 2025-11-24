@@ -2,14 +2,14 @@
 title: Wiki Page Write Operations
 category: component
 sourceFile: lib/wiki-manager.js
-related: []
+related: [meta/overview.md, components/frontmatter-based-page-serialization.md, concepts/automatic-metadata-lifecycle-management.md, guides/safe-file-operation-pattern.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Wiki Page Write Operations
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 Wiki Page Write Operations provides a complete CRUD interface for managing wiki pages with automatic metadata handling and frontmatter serialization. This component extends the WikiManager's read capabilities with create, update, and delete operations while maintaining consistent metadata lifecycle management across all wiki pages.
 
@@ -21,17 +21,17 @@ Wiki Page Write Operations provides a complete CRUD interface for managing wiki 
 - Deletes pages with safe file operation handling
 - Complements existing read operations (getPage, getAllPages, searchPages)
 
-**Frontmatter-based Page Serialization**
+**[Frontmatter-based Page Serialization](../components/frontmatter-based-page-serialization.md)**
 - Implements bidirectional conversion between metadata objects and markdown frontmatter
 - Uses `_serializePage` method that mirrors existing `_parseFrontmatter` functionality
 - Maintains markdown readability while enabling structured metadata storage
 
-**Automatic Metadata Lifecycle Management**
+**[Automatic Metadata Lifecycle Management](../concepts/automatic-metadata-lifecycle-management.md)**
 - Automatically manages temporal metadata (created/updated timestamps)
 - Ensures audit trail consistency across all write operations
 - Eliminates need for explicit caller metadata management
 
-**Safe File Operation Pattern**
+**[Safe File Operation Pattern](../guides/safe-file-operation-pattern.md)**
 - Performs existence checks before file creation
 - Handles missing files gracefully during deletion
 - Creates directories recursively as needed

@@ -2,14 +2,14 @@
 title: Test environment setup and initialization
 category: guide
 sourceFile: jest.config.js
-related: []
+related: [meta/overview.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Test Environment Setup and Initialization
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 The test environment setup and initialization component provides centralized configuration of the Jest testing environment before tests execute. This setup file pattern enables shared test utilities, mock initialization, and environment configuration to be consistently applied across all test suites in the codebase.
 

@@ -2,14 +2,14 @@
 title: Frontmatter-based Page Serialization
 category: component
 sourceFile: lib/wiki-manager.js
-related: []
+related: [meta/overview.md, components/wiki-page-write-operations.md, concepts/automatic-metadata-lifecycle-management.md, guides/safe-file-operation-pattern.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Frontmatter-based Page Serialization
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 Frontmatter-based Page Serialization implements bidirectional conversion between metadata objects and markdown frontmatter format for wiki pages. The `_serializePage` method complements the existing `_parseFrontmatter` functionality, enabling structured metadata storage while maintaining markdown readability and human-editability.
 
@@ -28,9 +28,9 @@ The serialization process structures pages with frontmatter containing metadata 
 
 This component is tightly integrated with other WikiManager components:
 
-- **Wiki Page Write Operations**: Used by create, update, and delete operations to persist pages to disk
-- **Automatic Metadata Lifecycle Management**: Serializes automatically managed timestamps and metadata
-- **Safe File Operation Pattern**: Works within the defensive file operation framework for robust persistence
+- **[Wiki Page Write Operations](../components/wiki-page-write-operations.md)**: Used by create, update, and delete operations to persist pages to disk
+- **[Automatic Metadata Lifecycle Management](../concepts/automatic-metadata-lifecycle-management.md)**: Serializes automatically managed timestamps and metadata
+- **[Safe File Operation Pattern](../guides/safe-file-operation-pattern.md)**: Works within the defensive file operation framework for robust persistence
 - **Frontmatter Parser**: Provides the inverse operation to `_parseFrontmatter` for complete page lifecycle management
 
 ## Usage Example

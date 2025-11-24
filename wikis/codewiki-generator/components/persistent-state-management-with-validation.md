@@ -2,14 +2,14 @@
 title: Persistent State Management with Validation
 category: component
 sourceFile: lib/state-manager.js
-related: []
+related: [meta/overview.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Persistent State Management with Validation
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 The StateManager provides centralized persistence of application state to disk with comprehensive validation, enabling recovery and resumability of long-running processes across application restarts. It implements a robust state management pattern that ensures data integrity through strict schema validation before persistence.
 

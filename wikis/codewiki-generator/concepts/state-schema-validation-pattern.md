@@ -2,14 +2,14 @@
 title: State Schema Validation Pattern
 category: concept
 sourceFile: lib/state-manager.js
-related: []
+related: [meta/overview.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # State Schema Validation Pattern
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 The State Schema Validation Pattern provides a centralized mechanism for persisting application state to disk with comprehensive validation. It ensures data integrity through strict schema validation while enabling recovery and resumability of long-running processes across application restarts.
 

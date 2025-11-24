@@ -2,14 +2,14 @@
 title: Test isolation through environment configuration
 category: guide
 sourceFile: tests/setup.js
-related: []
+related: [meta/overview.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Test Isolation Through Environment Configuration
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 Test isolation through environment configuration establishes a setup pattern that ensures tests run in isolation with mocked dependencies, preventing accidental API calls and maintaining test reliability. This is a critical testing practice for systems integrating with external services, providing cost control and preventing unintended side effects during test execution.
 

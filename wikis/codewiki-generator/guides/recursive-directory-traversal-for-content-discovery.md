@@ -2,14 +2,14 @@
 title: Recursive Directory Traversal for Content Discovery
 category: guide
 sourceFile: lib/wiki-manager.js
-related: []
+related: [meta/overview.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Recursive Directory Traversal for Content Discovery
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 This guide demonstrates a systematic approach to recursively discovering and indexing markdown files across nested directory structures while parsing metadata during traversal. It establishes the foundation for wiki page enumeration and search functionality by building a complete inventory of available content.
 

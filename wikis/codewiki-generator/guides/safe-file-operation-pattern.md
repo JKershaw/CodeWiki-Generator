@@ -2,14 +2,14 @@
 title: Safe File Operation Pattern
 category: guide
 sourceFile: lib/wiki-manager.js
-related: []
+related: [meta/overview.md, components/wiki-page-write-operations.md, components/frontmatter-based-page-serialization.md, concepts/automatic-metadata-lifecycle-management.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Safe File Operation Pattern
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 The Safe File Operation Pattern demonstrates defensive programming practices for file system operations in wiki management. This pattern provides robust error handling, existence checks, and graceful fallbacks to prevent common file operation failures and ensure data integrity.
 
@@ -28,9 +28,9 @@ The pattern complements the frontmatter-based serialization and metadata lifecyc
 ## Relationships
 
 This pattern serves as the foundation for:
-- **Wiki Page Write Operations** - Provides the safe file handling needed for CRUD operations
-- **Frontmatter-based Page Serialization** - Ensures serialized content is safely written to disk
-- **Automatic Metadata Lifecycle Management** - Enables reliable persistence of temporal metadata
+- **[Wiki Page Write Operations](../components/wiki-page-write-operations.md)** - Provides the safe file handling needed for CRUD operations
+- **[Frontmatter-based Page Serialization](../components/frontmatter-based-page-serialization.md)** - Ensures serialized content is safely written to disk
+- **[Automatic Metadata Lifecycle Management](../concepts/automatic-metadata-lifecycle-management.md)** - Enables reliable persistence of temporal metadata
 
 It integrates with the broader wiki persistence layer to create a robust file-based storage system.
 

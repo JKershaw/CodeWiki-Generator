@@ -171,12 +171,21 @@
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-24"
+    },
+    "components/singleton-configuration-module.md": {
+      "title": "Singleton configuration module",
+      "created": "2025-11-24",
+      "category": "component",
+      "sourceFile": "lib/config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-24"
     }
   },
   "statistics": {
-    "totalPages": 19,
+    "totalPages": 20,
     "concepts": 3,
-    "components": 10,
+    "components": 11,
     "guides": 6,
     "totalCommitsProcessed": 0,
     "orphanedPages": []

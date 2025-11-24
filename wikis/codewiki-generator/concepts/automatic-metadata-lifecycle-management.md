@@ -2,14 +2,14 @@
 title: Automatic Metadata Lifecycle Management
 category: concept
 sourceFile: lib/wiki-manager.js
-related: []
+related: [meta/overview.md, components/wiki-page-write-operations.md, components/frontmatter-based-page-serialization.md, guides/safe-file-operation-pattern.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Automatic Metadata Lifecycle Management
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 Automatically manages temporal metadata (created and updated timestamps) during wiki page operations without requiring explicit caller management. This concept ensures consistency across all write operations and maintains a complete audit trail for page lifecycle tracking.
 
@@ -28,9 +28,9 @@ The system integrates with frontmatter-based serialization to persist metadata a
 
 This concept depends on and integrates with:
 
-- **Wiki Page Write Operations**: Provides the metadata management layer for all CRUD write operations
-- **Frontmatter-based Page Serialization**: Ensures temporal metadata is properly serialized and persisted in markdown frontmatter
-- **Safe File Operation Pattern**: Works within the defensive programming pattern to handle metadata even when file operations encounter edge cases
+- **[Wiki Page Write Operations](../components/wiki-page-write-operations.md)**: Provides the metadata management layer for all CRUD write operations
+- **[Frontmatter-based Page Serialization](../components/frontmatter-based-page-serialization.md)**: Ensures temporal metadata is properly serialized and persisted in markdown frontmatter
+- **[Safe File Operation Pattern](../guides/safe-file-operation-pattern.md)**: Works within the defensive programming pattern to handle metadata even when file operations encounter edge cases
 
 ## Usage Example
 

@@ -2,14 +2,14 @@
 title: Content Search with Context Extraction
 category: component
 sourceFile: lib/wiki-manager.js
-related: []
+related: [meta/overview.md, components/frontmatter-parsing-pattern.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Content Search with Context Extraction
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 This component implements keyword search across wiki content with snippet extraction showing surrounding context. It combines full-text search capabilities with relevance display to enhance user experience when searching through markdown-based wiki pages.
 
@@ -30,7 +30,7 @@ The search algorithm scans through parsed markdown content, identifies keyword m
 This component is part of the larger WikiManager system and connects to:
 
 - **WikiManager class** - Acts as the primary interface for search operations
-- **Frontmatter Parsing Pattern** - Leverages parsed metadata in search results
+- **[Frontmatter Parsing Pattern](../components/frontmatter-parsing-pattern.md)** - Leverages parsed metadata in search results
 - **Recursive Directory Traversal** - Uses the indexed content for comprehensive search
 - **Graceful Error Handling** - Implements consistent error handling patterns for search operations
 

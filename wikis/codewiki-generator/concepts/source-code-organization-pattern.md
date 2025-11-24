@@ -2,14 +2,14 @@
 title: Source code organization pattern
 category: concept
 sourceFile: jest.config.js
-related: []
+related: [meta/overview.md, guides/test-infrastructure-configuration.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Source Code Organization Pattern
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 The source code organization pattern establishes a standardized project structure that separates library code into a dedicated `lib/` directory while keeping test files alongside their corresponding source files. This pattern promotes clear separation of concerns while maintaining close proximity between implementation and test code for better maintainability.
 
@@ -24,7 +24,7 @@ The pattern supports efficient test discovery and execution through the Jest tes
 
 ## Relationships
 
-This organization pattern directly supports the test infrastructure configuration defined in `jest.config.js`, which relies on the standardized file naming conventions for test discovery. The pattern enables the testing framework to automatically locate test files and establish proper coverage reporting for the codebase, particularly supporting wiki manager functionality testing.
+This organization pattern directly supports the [test infrastructure configuration](../guides/test-infrastructure-configuration.md) defined in `jest.config.js`, which relies on the standardized file naming conventions for test discovery. The pattern enables the testing framework to automatically locate test files and establish proper coverage reporting for the codebase, particularly supporting wiki manager functionality testing.
 
 ## Usage Example
 

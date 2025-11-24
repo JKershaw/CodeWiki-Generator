@@ -2,14 +2,14 @@
 title: File-based State Persistence with Directory Handling
 category: component
 sourceFile: lib/state-manager.js
-related: []
+related: [meta/overview.md, components/persistent-state-management-with-validation.md, concepts/state-schema-validation-pattern.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # File-based State Persistence with Directory Handling
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 Handles JSON serialization to disk with automatic directory creation and graceful handling of missing files, providing reliable state durability across application lifecycle. This component ensures that application state can be safely persisted and recovered across restarts by managing file system operations transparently.
 
@@ -25,8 +25,8 @@ The component works by accepting a file path during initialization and managing 
 
 ## Relationships
 
-This component is part of the larger **Persistent State Management with Validation** system and works closely with:
-- **State Schema Validation Pattern**: Provides the persistence layer after validation occurs
+This component is part of the larger **[Persistent State Management with Validation](../components/persistent-state-management-with-validation.md)** system and works closely with:
+- **[State Schema Validation Pattern](../concepts/state-schema-validation-pattern.md)**: Provides the persistence layer after validation occurs
 - **StateManager**: Acts as the underlying file handling mechanism for state operations
 - Application lifecycle management systems that require state recovery
 

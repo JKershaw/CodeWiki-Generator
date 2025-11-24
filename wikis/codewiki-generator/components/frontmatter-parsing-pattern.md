@@ -2,14 +2,14 @@
 title: Frontmatter Parsing Pattern
 category: component
 sourceFile: lib/wiki-manager.js
-related: []
+related: [meta/overview.md, components/wiki-markdown-management-system.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Frontmatter Parsing Pattern
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 The Frontmatter Parsing Pattern implements custom YAML-like frontmatter parsing with support for metadata key-value pairs and array syntax. It enables structured metadata extraction from markdown files without external dependencies, providing a lightweight solution for parsing document headers in wiki systems.
 
@@ -29,7 +29,7 @@ The parser processes frontmatter by:
 
 ## Relationships
 
-This pattern is a core component of the **Wiki Markdown Management System**, working closely with:
+This pattern is a core component of the **[Wiki Markdown Management System](../components/wiki-markdown-management-system.md)**, working closely with:
 - **WikiManager class**: Primary consumer that uses frontmatter parsing for all markdown file processing
 - **Recursive Directory Traversal**: Parsing occurs during content discovery and indexing operations
 - **Content Search**: Metadata extracted via frontmatter parsing enables enhanced search functionality

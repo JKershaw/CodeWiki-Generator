@@ -11,7 +11,7 @@ related: [meta/philosophy.md]
 
 An intelligent documentation automation system that analyzes software repositories and generates comprehensive wiki-style documentation using Large Language Model (LLM) agents.
 
-## Core Philosophy
+## Core [Philosophy](../meta/philosophy.md)
 
 **Code tells you what. Documentation tells you why. History tells you how.**
 

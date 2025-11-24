@@ -2,14 +2,14 @@
 title: Wiki Markdown Management System
 category: component
 sourceFile: lib/wiki-manager.js
-related: []
+related: [meta/overview.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Wiki Markdown Management System
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 The Wiki Markdown Management System provides a cohesive abstraction for reading, parsing, and searching wiki content stored as markdown files with YAML frontmatter. It establishes the core data access layer for wiki functionality, enabling structured metadata extraction and content discovery across nested directory structures.
 

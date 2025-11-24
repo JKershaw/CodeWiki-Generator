@@ -2,14 +2,14 @@
 title: Graceful Error Handling for File Operations
 category: guide
 sourceFile: lib/wiki-manager.js
-related: []
+related: [meta/overview.md, components/frontmatter-parsing-pattern.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Graceful Error Handling for File Operations
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 This guide demonstrates a pattern for handling file operation errors in wiki content management, specifically distinguishing between expected scenarios (missing files) and genuine errors. The pattern ensures predictable behavior when wiki pages don't exist while still surfacing actual I/O failures that require attention.
 
@@ -29,7 +29,7 @@ This approach prevents missing wiki pages from crashing the application while en
 This error handling pattern integrates with several wiki management components:
 
 - **WikiManager class**: Implements this pattern across all file reading methods (`getPage`, `getAllPages`)
-- **Frontmatter Parsing Pattern**: Gracefully handles malformed YAML metadata without breaking page loading
+- **[Frontmatter Parsing Pattern](../components/frontmatter-parsing-pattern.md)**: Gracefully handles malformed YAML metadata without breaking page loading
 - **Recursive Directory Traversal**: Continues processing when individual files are inaccessible while reporting genuine errors
 - **Content Search**: Skips problematic files during search operations without terminating the entire search
 

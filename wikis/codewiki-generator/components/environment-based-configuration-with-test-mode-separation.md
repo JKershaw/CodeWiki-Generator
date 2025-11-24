@@ -2,14 +2,14 @@
 title: Environment-based configuration with test mode separation
 category: component
 sourceFile: lib/config.js
-related: []
+related: [meta/overview.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
 # Environment-based Configuration with Test Mode Separation
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
 Provides a centralized configuration system that loads environment variables with sensible defaults and includes explicit test mode detection. This enables flexible development and testing workflows by allowing mock usage without API keys when running in test mode.
 
