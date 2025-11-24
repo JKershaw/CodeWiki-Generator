@@ -34,3 +34,6 @@ test-results/
 # Logs
 logs/
 *.log
+
+# Wiki history (local versioning, not needed in git)
+**/_history/
