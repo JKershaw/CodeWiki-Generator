@@ -260,5 +260,44 @@ Content`;
       expect(result).toContain('[Architecture Overview](concepts/architecture.md)');
       expect(result).not.toContain('<a href=');
     });
+
+    it('should fix doubly-encoded links (HTML anchor wrapping markdown link)', async () => {
+      // This is the actual pattern we saw in the generated index.md
+      const doubleEncodedHtml = `
+<h1>CodeWiki-Generator</h1>
+<h2>Concepts</h2>
+<ul>
+<li><a href="concepts/activity-driven-event-system.md">[Activity-driven event system](../concepts/activity-driven-event-system.md)</a> - Event-based architecture</li>
+<li><a href="concepts/architecture.md">Architecture</a> - Overall system architecture</li>
+</ul>`;
+
+      mockClaudeClient.sendMessage.mockResolvedValue(doubleEncodedHtml);
+
+      const wikiData = {
+        repositoryName: 'Test',
+        pages: []
+      };
+
+      const result = await agent.generateIndex(wikiData);
+
+      // Should produce clean markdown links without double encoding
+      expect(result).toContain('[Activity-driven event system](concepts/activity-driven-event-system.md)');
+      expect(result).toContain('[Architecture](concepts/architecture.md)');
+
+      // Should NOT have HTML tags
+      expect(result).not.toContain('<a href=');
+      expect(result).not.toContain('<h1>');
+      expect(result).not.toContain('<h2>');
+      expect(result).not.toContain('<ul>');
+      expect(result).not.toContain('<li>');
+
+      // Should NOT have ../ in paths (relative to root)
+      expect(result).not.toContain('../concepts/');
+
+      // Should be proper markdown with no HTML
+      expect(result).toMatch(/^# CodeWiki-Generator/m);
+      expect(result).toMatch(/^## Concepts/m);
+      expect(result).toMatch(/^- \[Activity-driven event system\]/m);
+    });
   });
 });
