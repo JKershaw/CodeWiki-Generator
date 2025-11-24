@@ -1,0 +1,123 @@
+You are analyzing a code change to identify security vulnerabilities and concerns.
+
+Changed file: {{filePath}}
+
+Diff:
+{{diff}}
+
+Code elements in this change:
+{{codeElements}}
+
+Task: Identify security issues in this code change. Focus on OWASP Top 10 and common vulnerabilities:
+
+1. INJECTION VULNERABILITIES:
+   - SQL injection (unsanitized database queries)
+   - Command injection (unsanitized shell commands)
+   - NoSQL injection
+   - LDAP injection
+   - XML injection (XXE)
+
+2. AUTHENTICATION & SESSION MANAGEMENT:
+   - Weak password requirements
+   - Insecure session handling
+   - Missing authentication checks
+   - Hardcoded credentials or API keys
+   - Inadequate password storage (plaintext, weak hashing)
+
+3. SENSITIVE DATA EXPOSURE:
+   - Sensitive data in logs
+   - Unencrypted data transmission
+   - Exposed secrets in code
+   - PII without proper handling
+   - API keys or tokens in client-side code
+
+4. ACCESS CONTROL:
+   - Missing authorization checks
+   - Insecure direct object references
+   - Privilege escalation risks
+   - Missing input validation on security-critical operations
+
+5. SECURITY MISCONFIGURATION:
+   - Debug mode enabled in production
+   - Verbose error messages exposing internals
+   - Missing security headers
+   - Default credentials
+   - Unnecessary services/ports exposed
+
+6. CROSS-SITE SCRIPTING (XSS):
+   - Unescaped user input in HTML
+   - DOM-based XSS
+   - Reflected XSS
+   - Missing Content Security Policy
+
+7. INSECURE DEPENDENCIES:
+   - Known vulnerable libraries
+   - Outdated dependencies with security patches
+   - Untrusted package sources
+
+8. CRYPTOGRAPHIC ISSUES:
+   - Weak encryption algorithms (MD5, SHA-1 for security)
+   - Hardcoded encryption keys
+   - Insufficient key length
+   - Poor random number generation for security
+
+9. OTHER CONCERNS:
+   - Race conditions in security-critical code
+   - Unvalidated redirects
+   - Missing rate limiting
+   - CORS misconfiguration
+
+Return JSON only with the following structure:
+{
+  "findings": [
+    {
+      "category": "injection|auth|data-exposure|access-control|config|xss|dependencies|crypto|other",
+      "severity": "critical|high|medium|low",
+      "title": "Brief title of the vulnerability",
+      "description": "Detailed explanation of the security issue",
+      "location": "specific line or code section",
+      "cwe": "CWE-XXX (if applicable)",
+      "owasp": "A01|A02|A03|... (OWASP Top 10 category if applicable)",
+      "remediation": "Specific code fix or mitigation strategy",
+      "falsePositiveRisk": "high|medium|low"
+    }
+  ],
+  "securePatterns": [
+    "Security best practices observed in the code"
+  ],
+  "antiPatterns": [
+    "Insecure patterns used (even if not exploitable in this context)"
+  ]
+}
+
+Severity Guidelines:
+- CRITICAL: Easily exploitable vulnerabilities with severe impact
+  Examples: SQL injection, remote code execution, authentication bypass, exposed secrets
+- HIGH: Vulnerabilities that could lead to significant compromise
+  Examples: Missing authorization, XSS, weak crypto, command injection potential
+- MEDIUM: Security weaknesses that increase attack surface
+  Examples: Information disclosure, missing validation, insecure config, CSRF potential
+- LOW: Security concerns or hardening opportunities
+  Examples: Missing security headers, verbose errors, minor misconfigurations
+
+False Positive Risk:
+- HIGH: Issue may not be exploitable in actual deployment context
+- MEDIUM: Requires certain conditions to be exploitable
+- LOW: Highly confident this is a real security issue
+
+Guidelines:
+- Only report genuine security concerns, not theoretical impossibilities
+- Consider the full context - some patterns are safe in specific contexts
+- Distinguish between defense-in-depth recommendations and actual vulnerabilities
+- Provide specific, actionable remediation steps with code examples
+- Note secure patterns to reinforce good practices
+- If code is secure, return empty findings array
+- Reference CWE and OWASP categories when applicable
+
+Anti-patterns to avoid:
+- Reporting issues that aren't actually exploitable
+- Ignoring context (e.g., internal-only tools with different threat model)
+- Being overly paranoid about non-security-critical code
+- Suggesting changes that don't meaningfully improve security
+
+DO NOT output anything other than valid JSON.
