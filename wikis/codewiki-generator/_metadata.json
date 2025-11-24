@@ -1,5 +1,5 @@
 {
-  "generated": "2025-11-24T08:52:40.504Z",
+  "generated": "2025-11-24T09:25:07.531Z",
   "pages": {
     "components/markdown-link-normalization.md": {
       "title": "Markdown link normalization",
@@ -10,8 +10,8 @@
       "outgoingLinks": [],
       "updated": "2025-11-24"
     },
-    "concepts/defensive-programming-for-external-dependencies.md": {
-      "title": "Defensive programming for external dependencies",
+    "concepts/defensive-chart-rendering.md": {
+      "title": "Defensive Chart Rendering",
       "created": "2025-11-24",
       "category": "concept",
       "sourceFile": "public/analytics.js",
@@ -19,8 +19,8 @@
       "outgoingLinks": [],
       "updated": "2025-11-24"
     },
-    "guides/mcp-server-demonstration-framework.md": {
-      "title": "MCP server demonstration framework",
+    "guides/mcp-protocol-demonstration.md": {
+      "title": "MCP protocol demonstration",
       "created": "2025-11-24",
       "category": "guide",
       "sourceFile": "demo-mcp-query.js",
@@ -28,8 +28,8 @@
       "outgoingLinks": [],
       "updated": "2025-11-24"
     },
-    "components/json-rpc-mcp-protocol-implementation.md": {
-      "title": "JSON-RPC MCP protocol implementation",
+    "components/interactive-mcp-client.md": {
+      "title": "Interactive MCP client",
       "created": "2025-11-24",
       "category": "component",
       "sourceFile": "demo-mcp-query.js",
@@ -37,8 +37,8 @@
       "outgoingLinks": [],
       "updated": "2025-11-24"
     },
-    "concepts/mcp-client-server-interaction-patterns.md": {
-      "title": "MCP client-server interaction patterns",
+    "concepts/mcp-documentation-request-system.md": {
+      "title": "MCP Documentation Request System",
       "created": "2025-11-24",
       "category": "concept",
       "sourceFile": "demo-mcp-request-docs.js",
@@ -46,17 +46,17 @@
       "outgoingLinks": [],
       "updated": "2025-11-24"
     },
-    "concepts/documentation-request-tracking-system.md": {
-      "title": "Documentation request tracking system",
+    "components/interactive-mcp-communication-pattern.md": {
+      "title": "Interactive MCP Communication Pattern",
       "created": "2025-11-24",
-      "category": "concept",
+      "category": "component",
       "sourceFile": "demo-mcp-request-docs.js",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-24"
     },
-    "concepts/mcp-(model-context-protocol)-integration.md": {
-      "title": "MCP (Model Context Protocol) integration",
+    "concepts/model-context-protocol-(mcp)-server-integration.md": {
+      "title": "Model Context Protocol (MCP) Server Integration",
       "created": "2025-11-24",
       "category": "concept",
       "sourceFile": "mcp-server.js",
@@ -64,551 +64,38 @@
       "outgoingLinks": [],
       "updated": "2025-11-24"
     },
-    "concepts/task-oriented-context-retrieval.md": {
-      "title": "Task-oriented context retrieval",
+    "components/wiki-to-ai-query-bridge.md": {
+      "title": "Wiki-to-AI Query Bridge",
       "created": "2025-11-24",
-      "category": "concept",
+      "category": "component",
       "sourceFile": "mcp-server.js",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-24"
     },
-    "concepts/documentation-gap-tracking.md": {
-      "title": "Documentation gap tracking",
+    "components/documentation-gap-tracking-system.md": {
+      "title": "Documentation Gap Tracking System",
       "created": "2025-11-24",
-      "category": "concept",
+      "category": "component",
       "sourceFile": "mcp-server.js",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-24"
     },
     "components/mcp-json-rpc-testing-framework.md": {
-      "title": "MCP JSON-RPC testing framework",
+      "title": "MCP JSON-RPC Testing Framework",
       "created": "2025-11-24",
       "category": "component",
       "sourceFile": "test-mcp-server.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/asynchronous-request-response-testing-pattern.md": {
-      "title": "Asynchronous request-response testing pattern",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "test-mcp-server.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/activity-feed-demo-system.md": {
-      "title": "Activity Feed Demo System",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "demo-activity-feed.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/event-simulation-workflow.md": {
-      "title": "Event Simulation Workflow",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "demo-activity-feed.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/wiki-context-service-programmatic-interface.md": {
-      "title": "WikiContextService programmatic interface",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "examples/wiki-context-service-example.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/wiki-research-results-structure.md": {
-      "title": "Wiki research results structure",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "examples/wiki-context-service-example.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/api-usage-tracking-and-cost-monitoring.md": {
-      "title": "API usage tracking and cost monitoring",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "examples/wiki-context-service-example.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/real-time-activity-monitoring-system.md": {
-      "title": "Real-time activity monitoring system",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "public/activity-feed.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/activity-event-emitter-component.md": {
-      "title": "ActivityEventEmitter component",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "lib/activity-event-emitter.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/file-based-comment-system.md": {
-      "title": "File-based comment system",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/comments-manager.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/page-centric-comment-organization.md": {
-      "title": "Page-centric comment organization",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/comments-manager.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/comments-manager-class.md": {
-      "title": "CommentsManager class",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "lib/comments-manager.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/multi-service-dashboard-architecture.md": {
-      "title": "Multi-service dashboard architecture",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/dashboard-controller.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/activity-driven-event-system.md": {
-      "title": "Activity-driven event system",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/dashboard-controller.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/project-scoped-resource-management.md": {
-      "title": "Project-scoped resource management",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/dashboard-controller.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/git-history-integration-for-wiki-systems.md": {
-      "title": "Git history integration for wiki systems",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/git-history-service.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/task-based-documentation-planning-system.md": {
-      "title": "Task-based documentation planning system",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/planning-manager.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/activity-event-system.md": {
-      "title": "Activity Event System",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/processor.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/wiki-project-lifecycle-management.md": {
-      "title": "Wiki project lifecycle management",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/project-manager.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/structured-wiki-organization-system.md": {
-      "title": "Structured wiki organization system",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/project-manager.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/wiki-quality-analysis-system.md": {
-      "title": "Wiki Quality Analysis System",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/suggestion-engine.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/suggestion-engine-component.md": {
-      "title": "SuggestionEngine Component",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "lib/suggestion-engine.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/wiki-health-analytics-system.md": {
-      "title": "Wiki Health Analytics System",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/wiki-analytics.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/link-graph-analysis.md": {
-      "title": "Link Graph Analysis",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "lib/wiki-analytics.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/wiki-analytics-class.md": {
-      "title": "WikiAnalytics class",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "lib/wiki-analytics.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/ai-powered-contextual-documentation-research.md": {
-      "title": "AI-powered contextual documentation research",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/wiki-context-service.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/structured-context-synthesis.md": {
-      "title": "Structured context synthesis",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/wiki-context-service.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/multi-dimensional-wiki-search-system.md": {
-      "title": "Multi-dimensional wiki search system",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/wiki-search-service.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/content-relationship-discovery-system.md": {
-      "title": "Content relationship discovery system",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "lib/wiki-search-service.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/wiki-search-service-class.md": {
-      "title": "WikiSearchService class",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "lib/wiki-search-service.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/activity-feed-manager-component.md": {
-      "title": "ActivityFeedManager component",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/activity-feed.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/interactive-analytics-dashboard.md": {
-      "title": "Interactive analytics dashboard",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "public/analytics.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/chart.js-visualization-engine.md": {
-      "title": "Chart.js visualization engine",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/analytics.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/state-driven-ui-management.md": {
-      "title": "State-driven UI management",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "public/analytics.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/interactive-research-dashboard-system.md": {
-      "title": "Interactive research dashboard system",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "public/app.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/contextual-research-api-integration.md": {
-      "title": "Contextual research API integration",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/app.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/real-time-wiki-commenting-system.md": {
-      "title": "Real-time wiki commenting system",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "public/comments.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/client-side-comment-management.md": {
-      "title": "Client-side comment management",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/comments.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/git-integrated-wiki-history-system.md": {
-      "title": "Git-integrated wiki history system",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "public/git-history.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/timeline-based-commit-visualization.md": {
-      "title": "Timeline-based commit visualization",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/git-history.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/lazy-loaded-history-panel.md": {
-      "title": "Lazy-loaded history panel",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/git-history.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/kanban-task-management-system.md": {
-      "title": "Kanban Task Management System",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "public/planning.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/interactive-task-board-component.md": {
-      "title": "Interactive Task Board Component",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/planning.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/modal-based-project-management-ui.md": {
-      "title": "Modal-based project management UI",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/projects.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/project-comparison-dashboard.md": {
-      "title": "Project comparison dashboard",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/projects.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/async-ui-state-management.md": {
-      "title": "Async UI state management",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "public/projects.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/smart-documentation-improvement-suggestions-system.md": {
-      "title": "Smart documentation improvement suggestions system",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "public/suggestions.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/suggestion-lifecycle-management.md": {
-      "title": "Suggestion lifecycle management",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/suggestions.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/interactive-wiki-browser.md": {
-      "title": "Interactive wiki browser",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "public/wiki-browser.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/client-side-wiki-navigation-system.md": {
-      "title": "Client-side wiki navigation system",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/wiki-browser.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/wiki-search-and-discovery.md": {
-      "title": "Wiki search and discovery",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/wiki-browser.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/rich-markdown-editor-with-live-preview.md": {
-      "title": "Rich markdown editor with live preview",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/wiki-editor.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/auto-save-and-draft-recovery-system.md": {
-      "title": "Auto-save and draft recovery system",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "public/wiki-editor.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/wiki-metadata-management.md": {
-      "title": "Wiki metadata management",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "public/wiki-editor.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "concepts/multi-modal-dashboard-architecture.md": {
-      "title": "Multi-modal Dashboard Architecture",
-      "created": "2025-11-24",
-      "category": "concept",
-      "sourceFile": "server.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/activity-feed-system.md": {
-      "title": "Activity Feed System",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "server.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/intelligent-content-enhancement.md": {
-      "title": "Intelligent Content Enhancement",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "server.js",
-      "incomingLinks": [],
-      "outgoingLinks": [],
-      "updated": "2025-11-24"
-    },
-    "components/collaborative-wiki-management.md": {
-      "title": "Collaborative Wiki Management",
-      "created": "2025-11-24",
-      "category": "component",
-      "sourceFile": "server.js",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-24"
     }
   },
   "statistics": {
-    "totalPages": 67,
-    "concepts": 37,
-    "components": 29,
+    "totalPages": 10,
+    "concepts": 3,
+    "components": 6,
     "guides": 1,
     "totalCommitsProcessed": 0,
     "orphanedPages": []

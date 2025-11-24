@@ -11,37 +11,38 @@ updated: 2025-11-24
 
 ## Purpose and Overview
 
-The markdown link normalization component handles the sanitization and conversion of HTML anchor tags to properly formatted markdown links within the WikiIndexAgent's content processing pipeline. It specifically addresses edge cases where nested markdown syntax or malformed URLs could break the HTML-to-markdown conversion process.
+The markdown link normalization component implements defensive parsing to handle malformed HTML-to-markdown conversion where links may already contain markdown syntax. It prevents double-encoding and broken link structures that can occur during wiki document processing.
 
 ## Key Functionality
 
-This component implements regex-based parsing logic that:
+This component provides three main normalization functions:
 
-- **Extracts clean URLs**: Removes nested markdown link syntax from href attributes that may contain malformed or duplicate markup
-- **Sanitizes link text**: Processes anchor tag content to ensure proper markdown formatting
-- **Prevents duplicate extensions**: Removes redundant file extensions that could appear during conversion
-- **Handles nested markup**: Resolves cases where markdown links are embedded within HTML anchor tags
+- **HTML link regex with markdown extraction**: Uses pattern matching to extract URLs from markdown syntax that may be embedded within HTML href attributes
+- **Double extension cleanup**: Removes duplicate `.md.md` extensions that commonly occur during iterative link processing
+- **Text content markdown cleanup**: Strips markdown link syntax from link text content to prevent nested markdown structures like `[text [link](url) more text](outer-url)`
 
-The sanitization process uses pattern matching to identify and clean problematic link structures before they're converted to markdown format, ensuring the final output maintains valid markdown syntax.
+The normalization process handles edge cases where HTML-to-markdown converters encounter links that have already been partially processed or contain mixed formatting.
 
 ## Relationships
 
-- **Part of WikiIndexAgent**: Integrated into the wiki indexing agent's HTML-to-markdown conversion workflow
-- **Content processing pipeline**: Works alongside other sanitization and normalization components
-- **Edge case handler**: Specifically addresses malformed content that could break standard conversion processes
+This component integrates with:
+
+- **WikiIndexAgent HTML-to-markdown conversion pipeline**: Serves as a preprocessing step to clean malformed links before final markdown generation
+- **Wiki document link processing**: Ensures consistent link formatting across wiki pages during indexing operations
 
 ## Usage Example
 
 ```javascript
-// This component is used internally by WikiIndexAgent during HTML-to-markdown conversion
-// The normalization is applied automatically when processing wiki content
-const WikiIndexAgent = require('./lib/agents/wiki-index-agent.js');
+// Pattern for extracting URLs from markdown syntax in HTML attributes
+const htmlLinkRegex = /<a\s+href="([^"]*\[.*?\]\(([^)]+)\)[^"]*)"[^>]*>/g;
 
-const agent = new WikiIndexAgent();
-// Link normalization happens internally during content processing
-const processedContent = agent.convertHtmlToMarkdown(htmlContent);
+// Clean up double extensions
+const cleanedUrl = url.replace(/\.md\.md$/, '.md');
+
+// Remove markdown syntax from link text content
+const cleanText = linkText.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
 ```
 
 ## Testing
 
-No automated tests found for this component. Testing would be valuable to verify the regex patterns handle various edge cases in nested markdown link structures and malformed HTML anchor tags.
+No automated tests are currently available for this component. Manual testing should verify proper handling of malformed HTML links containing markdown syntax and prevention of double-encoding scenarios.

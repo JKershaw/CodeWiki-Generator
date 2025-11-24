@@ -1,68 +1,111 @@
 ---
-related: [components/intelligent-content-enhancement.md, concepts/multi-modal-dashboard-architecture.md, concepts/activity-driven-event-system.md, concepts/structured-context-synthesis.md, components/activity-event-emitter-component.md]
+related: [components/wiki-to-ai-query-bridge.md, components/interactive-mcp-client.md, components/documentation-gap-tracking-system.md, components/mcp-json-rpc-testing-framework.md, components/interactive-mcp-communication-pattern.md]
 updated: 2025-11-24
 ---
 
-<h1>CodeWiki-Generator Architecture</h1>
-<h2>System Overview</h2>
-<p>CodeWiki-Generator is an intelligent documentation system that transforms traditional code wikis into dynamic, AI-enhanced knowledge platforms. The system automatically generates contextual documentation, tracks documentation gaps, and provides real-time collaboration tools while maintaining seamless integration with Git workflows. It combines structured wiki organization with [intelligent content enhancement](../components/intelligent-content-enhancement.md) to create self-improving documentation ecosystems that evolve with codebases.</p>
-<h2>Core Architecture</h2>
-<p>The system follows an <strong>event-driven microservice architecture</strong> built around the [Activity-driven event system](../concepts/activity-driven-event-system.md) pattern. Core services communicate through a centralized event bus, enabling loose coupling and real-time responsiveness. The architecture emphasizes <strong>[defensive programming for external dependencies](../concepts/defensive-programming-for-external-dependencies.md)</strong> and implements <strong>[async UI state management](../concepts/async-ui-state-management.md)</strong> to handle the inherent latency of AI-powered operations and Git integrations.</p>
-<p>The design separates concerns into three primary layers: a presentation layer handling interactive dashboards and real-time UI updates, a service layer managing business logic and external integrations, and a persistence layer combining Git history with structured metadata storage.</p>
-<h2>Major Components</h2>
-<h3>WikiContextService and Content Intelligence Layer</h3>
-<p>The [WikiContextService programmatic interface](../components/wiki-context-service-programmatic-interface.md) serves as the central orchestrator for [AI-powered contextual documentation research](../concepts/ai-powered-contextual-documentation-research.md). It coordinates with the [Intelligent Content Enhancement](../components/intelligent-content-enhancement.md) system and [SuggestionEngine Component](../components/suggestion-engine-component.md) to analyze code context, identify documentation gaps, and generate improvement recommendations. This layer implements the [structured context synthesis](../concepts/structured-context-synthesis.md) pattern to transform raw code analysis into actionable documentation insights.</p>
-<h3>Real-time Activity and Event Management</h3>
-<p>Built on the [ActivityEventEmitter component](../components/activity-event-emitter-component.md) and [ActivityFeedManager component](../components/activity-feed-manager-component.md), this subsystem implements comprehensive [real-time activity monitoring system](../concepts/real-time-activity-monitoring-system.md) capabilities. The [Activity Feed System](../components/activity-feed-system.md) tracks all documentation changes, user interactions, and system events, while the [Event Simulation Workflow](../concepts/event-simulation-workflow.md) enables testing and debugging of complex event flows. This forms the backbone for collaborative features and audit trails.</p>
-<h3>Interactive Dashboard and Analytics Platform</h3>
-<p>The [Multi-modal Dashboard Architecture](../concepts/multi-modal-dashboard-architecture.md) combines the [Interactive analytics dashboard](../concepts/interactive-analytics-dashboard.md), [Wiki Health Analytics System](../concepts/wiki-health-analytics-system.md), and [Project comparison dashboard](../components/project-comparison-dashboard.md) into a unified interface. The [Chart.js visualization engine](../components/chart.js-visualization-engine.md) powers real-time metrics display, while the [Interactive Task Board Component](../components/interactive-task-board-component.md) manages the [Task-based documentation planning system](../concepts/task-based-documentation-planning-system.md). This layer transforms raw system data into actionable insights for documentation maintainers.</p>
-<h3>Git Integration and History Management</h3>
-<p>The [Git-integrated wiki history system](../concepts/git-integrated-wiki-history-system.md) provides seamless version control integration through [Timeline-based commit visualization](../components/timeline-based-commit-visualization.md) and [Lazy-loaded history panel](../components/lazy-loaded-history-panel.md) components. This system maintains bidirectional synchronization between wiki content and Git repositories, enabling the [Documentation gap tracking](../concepts/documentation-gap-tracking.md) system to correlate code changes with documentation updates.</p>
-<h3>Search and Discovery Engine</h3>
-<p>The [Multi-dimensional wiki search system](../concepts/multi-dimensional-wiki-search-system.md), powered by the [WikiSearchService class](../components/wiki-search-service-class.md), implements advanced content discovery through [Link Graph Analysis](../components/link-graph-analysis.md) and [Content relationship discovery system](../concepts/content-relationship-discovery-system.md). The [Interactive wiki browser](../concepts/interactive-wiki-browser.md) provides contextual navigation while the [Wiki metadata management](../components/wiki-metadata-management.md) system maintains searchable indexes of all documentation artifacts.</p>
-<h3>MCP Integration Layer</h3>
-<p>The Model Context Protocol integration enables external AI service connectivity through [JSON-RPC MCP protocol implementation](../components/json-rpc-mcp-protocol-implementation.md). This layer abstracts AI provider differences and implements the [MCP client-server interaction patterns](../concepts/mcp-client-server-interaction-patterns.md) for reliable external service communication, supported by the [MCP JSON-RPC testing framework](../components/mcp-json-rpc-testing-framework.md) for quality assurance.</p>
-<h3>Comment and Collaboration System</h3>
-<p>The [Real-time wiki commenting system](../concepts/real-time-wiki-commenting-system.md) combines [Client-side comment management](../components/client-side-comment-management.md) with the [CommentsManager class](../components/comments-manager-class.md) to enable [Page-centric comment organization](../concepts/page-centric-comment-organization.md). This system supports the [File-based comment system](../concepts/file-based-comment-system.md) approach while maintaining real-time synchronization across collaborative sessions.</p>
-<h2>Data Flow</h2>
-<p>The system processes information through three primary pipelines:</p>
-<pre><code>Content Analysis Pipeline:
-Git Repository → Context Extraction → AI Analysis → Suggestion Generation → User Review → Documentation Update
+# CodeWiki-Generator Architecture
 
-Event Processing Pipeline:
-User Action → Event Emission → Activity Feed → Real-time Updates → Dashboard Refresh → Analytics Update
+## System Overview
 
-Research and Enhancement Pipeline:
-Documentation Gap Detection → Contextual Research → AI Enhancement → Quality Analysis → Approval Workflow → Content Integration
-</code></pre>
-<p>The [Activity Event System](../concepts/activity-event-system.md) serves as the central nervous system, with all major operations generating events that trigger downstream processing. The [WikiAnalytics class](../components/wiki-analytics-class.md) continuously processes these events to maintain system health metrics and user activity insights.</p>
-<h2>Key Design Decisions</h2>
-<h3>Event-Driven Architecture Over Direct Service Calls</h3>
-<p><strong>Choice</strong>: Implement comprehensive event-driven communication between components
-<strong>Rationale</strong>: Documentation systems require real-time collaboration features and audit trails. Events provide natural decoupling and enable features like activity feeds and real-time updates without tight component coupling.
-<strong>Trade-offs</strong>: Added complexity in debugging and testing, but gained scalability and feature flexibility for collaborative workflows.</p>
-<h3>Git-First Documentation Storage</h3>
-<p><strong>Choice</strong>: Store all documentation content in Git repositories rather than traditional databases
-<strong>Rationale</strong>: Developers already understand Git workflows, and documentation should version alongside code. The [Git history integration for wiki systems](../concepts/git-history-integration-for-wiki-systems.md) provides natural change tracking and collaboration patterns.
-<strong>Trade-offs</strong>: More complex querying and indexing requirements, but gained seamless developer workflow integration and natural backup/distribution.</p>
-<h3>AI-Powered Content Enhancement with Human Oversight</h3>
-<p><strong>Choice</strong>: Implement AI suggestions with mandatory human review rather than automatic content generation
-<strong>Rationale</strong>: Documentation quality requires domain expertise and context that AI cannot fully provide. The [Smart documentation improvement suggestions system](../concepts/smart-documentation-improvement-suggestions-system.md) enhances human productivity without replacing human judgment.
-<strong>Trade-offs</strong>: Slower content generation than fully automated systems, but maintained quality control and developer trust.</p>
-<h3>[Multi-Modal Dashboard Architecture](../concepts/multi-modal-dashboard-architecture.md)</h3>
-<p><strong>Choice</strong>: Combine analytics, task management, and content management in unified dashboard interfaces
-<strong>Rationale</strong>: Documentation maintainers need holistic views of system health, content gaps, and collaboration status. Separate interfaces create context-switching overhead and reduce actionable insights.
-<strong>Trade-offs</strong>: More complex UI state management requirements, but improved user experience and decision-making efficiency.</p>
-<h3>MCP Protocol Integration for AI Services</h3>
-<p><strong>Choice</strong>: Standardize on Model Context Protocol rather than direct API integrations
-<strong>Rationale</strong>: Documentation systems need to integrate multiple AI providers and models. MCP provides standardized interfaces and better testability through the [MCP JSON-RPC testing framework](../components/mcp-json-rpc-testing-framework.md).
-<strong>Trade-offs</strong>: Additional protocol layer complexity, but gained provider flexibility and improved testing capabilities.</p>
-<h2>Extension Points</h2>
-<p>The system provides several well-defined extension mechanisms:</p>
-<p><strong>Custom AI Providers</strong>: Implement new MCP server endpoints following the [MCP client-server interaction patterns](../concepts/mcp-client-server-interaction-patterns.md) to integrate additional AI services or specialized domain models.</p>
-<p><strong>Dashboard Widgets</strong>: Extend the [Multi-modal Dashboard Architecture](../concepts/multi-modal-dashboard-architecture.md) by creating new [Chart.js visualization engine](../components/chart.js-visualization-engine.md) components that consume the [WikiAnalytics class](../components/wiki-analytics-class.md) data streams.</p>
-<p><strong>Event Handlers</strong>: Hook into the [Activity-driven event system](../concepts/activity-driven-event-system.md) by registering custom event handlers with the [ActivityEventEmitter component](../components/activity-event-emitter-component.md) to implement new automation or notification workflows.</p>
-<p><strong>Content Analyzers</strong>: Extend the [Intelligent Content Enhancement](../components/intelligent-content-enhancement.md) system with domain-specific analyzers that implement the [structured context synthesis](../concepts/structured-context-synthesis.md) pattern for specialized content types.</p>
-<p><strong>Search Providers</strong>: Implement additional search backends for the [Multi-dimensional wiki search system](../concepts/multi-dimensional-wiki-search-system.md) to integrate external knowledge bases or specialized indexing systems.</p>
-<p><strong>Workflow Integrations</strong>: Extend the [Task-oriented context retrieval](../concepts/task-oriented-context-retrieval.md) system with custom workflow engines or project management integrations through the [Kanban Task Management System](../concepts/kanban-task-management-system.md) interfaces.</p>
-<p>The [Project-scoped resource management](../concepts/project-scoped-resource-management.md) system provides isolation boundaries for multi-tenant deployments, while the [State-driven UI management](../concepts/state-driven-ui-management.md) pattern ensures consistent extension point behavior across different system states.</p>
+CodeWiki-Generator is a documentation automation system that bridges the gap between code repositories and AI-assisted development workflows. The system automatically generates, maintains, and exposes repository documentation through a Model Context Protocol (MCP) server, enabling AI agents to understand and interact with codebases more effectively. It combines wiki-style documentation generation with real-time MCP communication to create a living documentation system that evolves with the code.
+
+## Core Architecture
+
+The system follows a modular, event-driven architecture centered around MCP server integration. The core design separates documentation generation (wiki processing) from documentation consumption (MCP serving), with a request-response communication layer bridging AI agents and repository knowledge. The architecture emphasizes defensive programming patterns to handle the inherent unpredictability of AI interactions and dynamic repository states.
+
+Key architectural patterns include:
+- **Agent-Server Communication**: MCP JSON-RPC protocol for structured AI interactions
+- **Pipeline Processing**: Sequential documentation generation and normalization
+- **Gap-Driven Updates**: Reactive documentation maintenance based on identified knowledge gaps
+- **Bridge Pattern**: Clean separation between wiki generation and AI query interfaces
+
+## Major Components
+
+### Model Context Protocol (MCP) Server Integration
+The central communication hub that exposes repository knowledge to AI agents through standardized JSON-RPC protocols. Handles authentication, request routing, and response formatting while maintaining session state across interactions.
+
+### [Wiki-to-AI Query Bridge](../components/wiki-to-ai-query-bridge.md)
+Translates between human-readable wiki documentation and AI-consumable data structures. Processes natural language queries from AI agents and maps them to specific documentation sections, code components, or architectural concepts.
+
+### [Interactive MCP client](../components/interactive-mcp-client.md)
+Provides the user-facing interface for real-time interaction with the MCP server. Supports both direct queries and guided exploration of repository documentation, enabling developers to test and validate the AI integration.
+
+### [Documentation Gap Tracking System](../components/documentation-gap-tracking-system.md)
+Monitors documentation completeness by analyzing query patterns, failed lookups, and code changes. Automatically identifies areas where documentation is missing, outdated, or insufficient for AI understanding.
+
+### [Interactive MCP Communication Pattern](../components/interactive-mcp-communication-pattern.md)
+Implements the bidirectional communication flow between AI agents and the documentation system. Manages conversation context, query disambiguation, and progressive disclosure of information based on agent capabilities.
+
+### [Markdown link normalization](../components/markdown-link-normalization.md)
+Ensures consistency and validity of cross-references within generated documentation. Handles relative paths, broken links, and cross-component references to maintain navigable documentation structure.
+
+### [MCP JSON-RPC Testing Framework](../components/mcp-json-rpc-testing-framework.md)
+Provides comprehensive testing infrastructure for MCP protocol compliance, message validation, and integration scenarios. Enables automated verification of AI agent interactions and protocol conformance.
+
+## Data Flow
+
+The system operates through two primary data flows: documentation generation and AI query processing.
+
+```
+Repository Changes → Gap Detection → Wiki Generation → Link Normalization → MCP Server
+
+AI Agent Query → MCP Client → Query Bridge → Documentation Lookup → Response Formatting → Agent
+```
+
+**Documentation Generation Flow**:
+1. Repository changes trigger gap analysis
+2. Missing or outdated documentation identified
+3. Wiki content generated for gaps
+4. Markdown links normalized across components
+5. Updated content registered with MCP server
+
+**AI Query Processing Flow**:
+1. AI agent sends MCP JSON-RPC request
+2. [Interactive MCP client](../components/interactive-mcp-client.md) validates and routes request
+3. [Wiki-to-AI Query Bridge](../components/wiki-to-ai-query-bridge.md) processes natural language query
+4. Relevant documentation sections retrieved and formatted
+5. Response sent through MCP Communication Pattern
+6. Query patterns logged for gap analysis
+
+## Key Design Decisions
+
+### MCP Protocol Adoption
+**Choice**: Standardized Model Context Protocol for AI communication
+**Rationale**: Ensures compatibility with multiple AI agents and provides structured, versioned communication interface
+**Trade-offs**: Added protocol complexity but gained interoperability and future-proofing
+
+### [Defensive Chart Rendering](../concepts/defensive-chart-rendering.md)
+**Choice**: Robust error handling and graceful degradation for dynamic content
+**Rationale**: AI interactions are unpredictable; system must handle malformed queries, missing data, and edge cases
+**Trade-offs**: Increased code complexity but improved reliability and user experience
+
+### Gap-Driven Documentation Updates
+**Choice**: Reactive documentation generation based on actual usage patterns
+**Rationale**: Prevents over-documentation while ensuring AI agents get needed information
+**Trade-offs**: Some delay in documentation availability but much more efficient resource usage
+
+### Bridge Pattern for Query Translation
+**Choice**: Separate component for translating between AI queries and documentation structure
+**Rationale**: Allows independent evolution of wiki format and AI interaction patterns
+**Trade-offs**: Additional abstraction layer but cleaner separation of concerns
+
+### [MCP Documentation Request System](../concepts/mcp-documentation-request-system.md)
+**Choice**: Structured request/response system with defined schemas
+**Rationale**: Enables reliable communication between diverse AI agents and documentation system
+**Trade-offs**: More rigid than free-form queries but provides consistency and validation
+
+## Extension Points
+
+Developers can extend the system through several well-defined interfaces:
+
+**Custom Documentation Generators**: Implement new wiki content generators by extending the gap detection system. Add domain-specific documentation types (API specs, architectural diagrams, test coverage reports) that integrate with the existing normalization pipeline.
+
+**AI Agent Integrations**: Create new MCP client implementations for different AI platforms by implementing the Interactive MCP Communication Pattern. The standardized JSON-RPC interface allows integration with any agent supporting MCP.
+
+**Query Processing Extensions**: Extend the [Wiki-to-AI Query Bridge](../components/wiki-to-ai-query-bridge.md) with custom query handlers for specialized documentation types or domain-specific knowledge extraction patterns.
+
+**Testing Framework Plugins**: Add new test scenarios to the [MCP JSON-RPC Testing Framework](../components/mcp-json-rpc-testing-framework.md) for custom protocols, edge cases, or integration patterns specific to your AI agents.
+
+**Gap Detection Strategies**: Implement custom gap detection algorithms in the [Documentation Gap Tracking System](../components/documentation-gap-tracking-system.md) based on code analysis, user feedback, or external documentation standards.
+
+The modular architecture ensures extensions can be developed independently while leveraging the existing MCP infrastructure and defensive programming patterns.
