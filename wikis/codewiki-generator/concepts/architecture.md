@@ -1,102 +1,98 @@
----
-category: concepts
-layer: code
-tags: [architecture, design-pattern]
-related: [concepts/context-enriched-documentation-generation.md, concepts/step-wise-processing-control.md, concepts/real-time-status-monitoring.md, components/test-coverage-analyzer-class.md, components/source-file-metadata-tracking.md]
-updated: 2025-11-23
----
-[Home](../index.md) > [Concepts](../concepts) > Architecture
+# CodeWiki-Generator Architecture
 
-## Table of Contents
+## System Overview
 
-- [See Also](#see-also)
+CodeWiki-Generator is an AI-powered documentation enhancement system that transforms static codebases into dynamic, interconnected wikis. The system automatically discovers relationships between code files, generates contextual documentation, and creates bidirectional links to enable Wikipedia-style navigation through technical content. By combining automated content analysis with intelligent cross-referencing, it bridges the gap between code structure and human-readable documentation.
 
-<h1>CodeWiki-Generator Architecture</h1>
-<h2>System Overview</h2>
-<p>CodeWiki-Generator is an intelligent documentation system that automatically generates comprehensive, test-aware wiki documentation from source code repositories. The system combines static code analysis with test coverage data to produce enriched documentation that stays synchronized with the actual codebase. It provides real-time monitoring capabilities and a web-based dashboard for managing the documentation generation process, making it suitable for production environments where documentation quality and accuracy are critical.</p>
-<h2>Core Architecture</h2>
-<p>The system follows a <strong>layered architecture</strong> with clear separation between data collection, processing, presentation, and control layers. It implements an <strong>event-driven processing pipeline</strong> that can handle documentation generation in discrete, monitorable steps. The architecture emphasizes <strong>[context-enriched documentation generation](../concepts/context-enriched-documentation-generation.md)</strong> where multiple data sources (source code, tests, coverage reports) are combined to create comprehensive documentation artifacts.</p>
-<p>The system is built around a <strong>[Web Dashboard Architecture](../concepts/web-dashboard-architecture.md)</strong> that provides centralized control while maintaining modularity in the underlying processing components. This approach enables both automated batch processing and interactive management of documentation workflows.</p>
-<h2>Major Components</h2>
-<h3>[DashboardController](../components/dashboard-controller.md)</h3>
-<p>The central orchestration component that implements the <strong>[Dashboard Control Interface](../components/dashboard-control-interface.md)</strong>. It manages the overall documentation generation workflow, coordinates between different processing stages, and provides the primary API for external interactions. This component embeds the business logic for <strong>[step-wise processing control](../concepts/step-wise-processing-control.md)</strong> and maintains the system&#39;s operational state.</p>
-<h3>[Express Web Interface for Documentation Management](../components/express-web-interface-for-documentation-management.md)</h3>
-<p>A full-featured web application that provides the user-facing dashboard for monitoring and controlling documentation generation. It implements <strong>[real-time status monitoring](../concepts/real-time-status-monitoring.md)</strong> capabilities and serves as the primary interaction point for users managing documentation projects. The interface provides visibility into processing pipelines and allows for manual intervention when needed.</p>
-<h3>[TestCoverageAnalyzer Class](../components/test-coverage-analyzer-class.md)</h3>
-<p>A specialized analysis component responsible for implementing the <strong>[test coverage documentation system](../concepts/test-coverage-documentation-system.md)</strong>. It parses test execution results, correlates them with source code, and generates coverage-aware documentation artifacts. This component is central to the system&#39;s <strong>[test-driven documentation enrichment](../concepts/test-driven-documentation-enrichment.md)</strong> capabilities.</p>
-<h3>[Source File Metadata Tracking](../components/source-file-metadata-tracking.md)</h3>
-<p>A data layer component that maintains comprehensive metadata about source files, their relationships, and their processing history. It supports the <strong>[context-enriched documentation generation](../concepts/context-enriched-documentation-generation.md)</strong> by providing historical and structural information that enriches the final documentation output.</p>
-<h3>[Wiki Integration](../components/wiki-integration.md)</h3>
-<p>The output layer component responsible for formatting and publishing generated documentation to various wiki platforms. It handles the translation from internal documentation formats to platform-specific markup and manages the publishing workflow.</p>
-<h3>[Web Dashboard Control Interface](../components/web-dashboard-control-interface.md)</h3>
-<p>A service layer that bridges the web interface with the core processing components. It provides RESTful APIs for dashboard operations and implements the real-time communication protocols needed for <strong>[real-time status monitoring](../concepts/real-time-status-monitoring.md)</strong>.</p>
-<h3>[Production-Ready Server Configuration](../concepts/production-ready-server-[configuration](../guides/configuration.md).md)</h3>
-<p>Infrastructure components that handle deployment concerns, monitoring, logging, and scaling. This includes health check endpoints, [configuration](../guides/configuration.md) management, and operational tooling needed for <strong>[production-ready server configuration](../concepts/production-ready-server-[configuration](../guides/configuration.md).md)</strong>.</p>
-<h2>Data Flow</h2>
-<p>The system processes information through a multi-stage pipeline that enriches documentation at each step:</p>
+## Core Architecture
 
-```mermaid
-graph LR
-    A[Source Code] --> B[Metadata Extraction]
-    B --> C[Test Analysis]
-    C --> D[Coverage Integration]
-    D --> E[Documentation Generation]
-    E --> F[Wiki Publishing]
+The system follows a **multi-layer agent-based architecture** with progressive enhancement capabilities. At its core, it implements a pipeline-driven approach where specialized agents handle distinct transformation phases: ingestion, analysis, enhancement, and output generation. The architecture emphasizes modularity through clear separation of concerns, with each layer building upon the previous one's output while maintaining independence for testing and development.
 
-    G[Dashboard Monitoring] <--> B
-    G <--> C
-    G <--> D
-    G <--> E
-    G <--> F
+The design leverages the **Meta-document transformation pipeline** concept, treating all content as structured metadata that can be progressively enriched. This approach enables the system to handle diverse input formats while maintaining consistent internal representations.
 
-    style A fill:#e1f5ff
-    style F fill:#d4edda
-    style G fill:#fff3cd
+## Major Components
+
+### MetaDocumentIngestionAgent
+The primary entry point for processing content into the system's internal format. This component handles HTML to Markdown conversion, source file metadata extraction, and initial document structure analysis. It serves as the foundation for all downstream processing by establishing standardized document representations.
+
+### WikiResearcher Component
+Implements the **Context-driven wiki research system** that discovers semantic relationships between documents. This component performs contextual research, identifies potential link targets, and generates research data that informs the linking process. It integrates with external knowledge sources to enrich content understanding.
+
+### Semantic Cross-Referencing System
+The core intelligence layer that implements **Wikipedia-style bidirectional linking** by analyzing document content and metadata. It performs multi-dimensional page relationship analysis to identify conceptual connections, maintains link integrity across document changes, and ensures bidirectional relationship consistency.
+
+### TestCoverageAnalyzer Class
+Specializes in **Test coverage documentation system** integration, analyzing test files and their relationships to source code. This component enables test-driven documentation enrichment by mapping test coverage to documentation completeness and identifying gaps in both testing and documentation.
+
+### DashboardController
+Manages the **Express web interface for documentation management** and provides real-time system monitoring capabilities. This component handles user interactions, displays processing status, and enables manual control over automated processes through the dashboard control interface.
+
+### Category-based Content Classification
+Implements intelligent content organization through **Category-based document classification**. This component analyzes document characteristics, assigns appropriate categories, and maintains classification metadata that drives navigation structure and content discovery.
+
+### Markdown Processing Pipeline
+Handles the final transformation of enriched content back into consumable formats. This component generates table of contents, applies link enhancements, and ensures output quality through progressive JSON repair and validation mechanisms.
+
+## Data Flow
+
+The system processes content through a sequential transformation pipeline with feedback loops:
+
 ```
-<ol>
-<li><strong>Ingestion Phase</strong>: Source files are scanned and metadata is extracted using <strong>[source file metadata tracking](../components/source-file-metadata-tracking.md)</strong></li>
-<li><strong>Analysis Phase</strong>: The <strong>[TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md)</strong> processes test files and generates coverage reports</li>
-<li><strong>Enrichment Phase</strong>: <strong>[Test coverage integration](../concepts/test-coverage-integration.md)</strong> combines source analysis with test data</li>
-<li><strong>Generation Phase</strong>: <strong>[Context-enriched documentation generation](../concepts/context-enriched-documentation-generation.md)</strong> produces wiki-ready content</li>
-<li><strong>Publishing Phase</strong>: <strong>[Wiki integration](../components/wiki-integration.md)</strong> handles output formatting and platform publishing</li>
-<li><strong>Monitoring Phase</strong>: <strong>[Real-time status monitoring](../concepts/real-time-status-monitoring.md)</strong> provides continuous feedback throughout the pipeline</li>
-</ol>
-<p>The <strong>[web dashboard control interface](../components/web-dashboard-control-interface.md)</strong> maintains bidirectional communication with all pipeline stages, enabling both monitoring and control operations.</p>
-<h2>Key Design Decisions</h2>
-<h3>Separation of Analysis and Presentation</h3>
-<p><strong>Choice</strong>: Distinct components for data analysis (TestCoverageAnalyzer) and web presentation (Express interface)
-<strong>Rationale</strong>: Enables the system to run analysis processes independently of the web interface, supporting both interactive and batch processing modes
-<strong>Trade-offs</strong>: Added complexity in coordination, but gained flexibility in deployment and scaling options</p>
-<h3>[Step-wise Processing Control](../concepts/step-wise-processing-control.md)</h3>
-<p><strong>Choice</strong>: Break documentation generation into discrete, controllable steps rather than monolithic processing
-<strong>Rationale</strong>: Provides better observability, enables partial regeneration, and allows for debugging of complex documentation workflows
-<strong>Trade-offs</strong>: Increased state management complexity, but improved reliability and user control</p>
-<h3>Test-Aware Documentation Architecture</h3>
-<p><strong>Choice</strong>: Make test coverage and test analysis first-class citizens in the documentation generation process
-<strong>Rationale</strong>: Ensures documentation stays synchronized with actual code behavior and provides quality metrics for documentation consumers
-<strong>Trade-offs</strong>: Requires more sophisticated analysis pipeline, but produces significantly more valuable documentation artifacts</p>
-<h3>Real-time Monitoring Integration</h3>
-<p><strong>Choice</strong>: Embed monitoring capabilities directly into the core architecture rather than adding them as an afterthought
-<strong>Rationale</strong>: Production environments require visibility into long-running documentation generation processes
-<strong>Trade-offs</strong>: Added complexity to all components, but essential for operational reliability</p>
-<h3>Dashboard-Centric Control Model</h3>
-<p><strong>Choice</strong>: Centralize system control through a web dashboard rather than CLI-only interfaces
-<strong>Rationale</strong>: Documentation generation often involves multiple stakeholders who need visual feedback and control capabilities
-<strong>Trade-offs</strong>: More complex deployment requirements, but significantly better user experience and collaboration support</p>
-<h2>Extension Points</h2>
-<p>The system provides several well-defined extension points for customization:</p>
-<p><strong>Custom Analyzers</strong>: The analysis pipeline can be extended with additional analyzer components that follow the same interface patterns as the [TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md). New analyzers can process different types of metadata or integrate with additional development tools.</p>
-<p><strong>Documentation Templates</strong>: The generation system supports custom documentation templates that can modify how <strong>[context-enriched documentation generation](../concepts/context-enriched-documentation-generation.md)</strong> formats output for specific use cases or organizational standards.</p>
-<p><strong>Wiki Platform Adapters</strong>: The <strong>[wiki integration](../components/wiki-integration.md)</strong> component can be extended with new platform adapters to support additional wiki systems or custom publishing targets.</p>
-<p><strong>Dashboard Widgets</strong>: The <strong>[web dashboard architecture](../concepts/web-dashboard-architecture.md)</strong> supports custom monitoring widgets and control interfaces that can be added to provide specialized functionality for specific workflows.</p>
-<p><strong>Processing Hooks</strong>: The <strong>[step-wise processing control](../concepts/step-wise-processing-control.md)</strong> system provides hook points where custom logic can be inserted at any stage of the documentation generation pipeline.</p>
-<p><strong>Metadata Extractors</strong>: The <strong>[source file metadata tracking](../components/source-file-metadata-tracking.md)</strong> system can be extended with custom extractors that understand additional file types, frameworks, or development patterns specific to particular technology stacks.</p>
+Source Files → Ingestion → Classification → Research → Cross-Reference → Enhancement → Output
+     ↓              ↓            ↓            ↓             ↓             ↓
+  Metadata → Meta-Documents → Categories → Link Data → Relationships → Enhanced Wiki
+                                                          ↑
+                                                    Validation Loop
+```
 
-## See Also
+1. **Ingestion Phase**: Raw content enters through the MetaDocumentIngestionAgent, which converts formats and extracts initial metadata
+2. **Classification Phase**: Documents are categorized and analyzed for structural patterns
+3. **Research Phase**: The WikiResearcher component gathers contextual information and identifies potential relationships
+4. **Cross-Reference Phase**: Semantic analysis creates bidirectional links and relationship mappings
+5. **Enhancement Phase**: Content is enriched with generated links, navigation aids, and metadata
+6. **Output Phase**: Final documents are generated with complete wiki functionality
 
-**Related Topics:**
-- [Context-enriched documentation generation](../concepts/context-enriched-documentation-generation.md)
-- [Step-wise processing control](../concepts/step-wise-processing-control.md)
-- [Real-time Status Monitoring](../concepts/real-time-status-monitoring.md)
-- [TestCoverageAnalyzer class](../components/test-coverage-analyzer-class.md)
-- [Source file metadata tracking](../components/source-file-metadata-tracking.md)
+The **Multi-layer wiki expansion verification system** provides continuous validation and quality assurance throughout the pipeline.
+
+## Key Design Decisions
+
+### Agent-Based Processing Model
+**Choice**: Implement specialized agents for each transformation phase rather than monolithic processing  
+**Rationale**: Enables independent testing, development, and scaling of each processing stage. Allows for easy extension and modification of specific capabilities without affecting the entire system.  
+**Trade-offs**: Increased complexity in orchestration and state management, but gained flexibility and maintainability.
+
+### Meta-Document Internal Representation
+**Choice**: Convert all content to standardized meta-document format early in the pipeline  
+**Rationale**: Enables consistent processing regardless of input format and simplifies downstream component interfaces. Supports the **Step-wise processing control** pattern for debugging and optimization.  
+**Trade-offs**: Additional conversion overhead, but gained format-agnostic processing and easier testing.
+
+### Bidirectional Relationship Management
+**Choice**: Maintain explicit bidirectional links rather than one-way references  
+**Rationale**: Enables true wiki-style navigation and ensures relationship integrity. Supports the **Wikipedia-style wiki enhancement automation** that users expect from wiki systems.  
+**Trade-offs**: Increased storage and processing requirements, but significantly improved navigation and discoverability.
+
+### Web Dashboard Integration
+**Choice**: Provide both CLI and web interfaces rather than CLI-only operation  
+**Rationale**: Enables **Real-time Status Monitoring** and makes the system accessible to non-technical users. Supports **Context-aware task optimization** through visual feedback and control.  
+**Trade-offs**: Additional complexity and deployment requirements, but gained usability and monitoring capabilities.
+
+### Progressive Enhancement Philosophy
+**Choice**: Build functionality in layers that can operate independently  
+**Rationale**: Enables partial processing, easier debugging, and graceful degradation when components fail. Supports the **Multi-layer wiki architecture** concept for scalable complexity management.  
+**Trade-offs**: More complex state management, but gained robustness and development velocity.
+
+## Extension Points
+
+The system provides several well-defined extension mechanisms:
+
+**Custom Research Sources**: Extend the WikiResearcher component by implementing additional context providers that integrate with external knowledge bases or APIs. The **Context research system integration** pattern provides standard interfaces for new sources.
+
+**Content Classification**: Add new document types and classification rules through the **Document category mapping configuration**. The system supports custom categorization logic and metadata extraction rules.
+
+**Link Enhancement Strategies**: Implement new relationship detection algorithms by extending the semantic cross-referencing system. The **Content-aware link enhancement** framework provides hooks for custom relationship types.
+
+**Output Formats**: Add new output generators to the Markdown processing pipeline. The system's meta-document format enables transformation to any structured output format while preserving relationship data.
+
+**Dashboard Extensions**: Extend the web interface through the **Dashboard Control Interface** to add custom monitoring, control panels, or integration with external tools.
+
+**Testing Integration**: Enhance the **Test-driven context validation** system by adding new test analysis capabilities or integrating with additional testing frameworks beyond the current coverage analysis.

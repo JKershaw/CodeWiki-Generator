@@ -18,8 +18,8 @@ CodeWiki Generator automatically analyzes your codebase, discovers architectural
 - ✅ **Resilient LLM Parsing**: Progressive JSON repair for handling unreliable LLM outputs
 - ✅ **Self-Documenting**: The system successfully documents its own architecture (meta-validation)
 - ✅ **Test-Driven Development**: 220+ passing tests with comprehensive coverage
+- ✅ **MCP Server**: Integration with Claude Code and other AI tools via Model Context Protocol
 - ⏸️ **Web Dashboard** (Phase 4 - Planned): Interactive UI for monitoring and control
-- ⏸️ **MCP Server** (Phase 6 - Planned): Integration with Claude Code for AI-assisted development
 
 ## Current Status
 
@@ -80,6 +80,69 @@ await processor.processRepository('https://github.com/owner/repo');
 ```
 
 **For detailed setup instructions**, see [wiki/guides/getting-started.md](wiki/guides/getting-started.md)
+
+## MCP Server (AI Assistant Integration)
+
+The MCP (Model Context Protocol) server enables AI assistants like Claude Code to query your generated wiki documentation for context while developing.
+
+### Starting the MCP Server
+
+```bash
+# Start the MCP server
+npm run mcp-server
+
+# Or with custom wiki path
+node mcp-server.js --wiki ./wikis/your-project
+```
+
+### Using with Claude Code
+
+Configure Claude Code to connect to the MCP server for intelligent wiki queries:
+
+```json
+{
+  "mcpServers": {
+    "codewiki": {
+      "command": "node",
+      "args": ["/path/to/CodeWiki-Generator/mcp-server.js"],
+      "cwd": "/path/to/CodeWiki-Generator"
+    }
+  }
+}
+```
+
+### Available Tools
+
+The MCP server exposes two tools:
+
+1. **query_wiki**: Search the wiki for relevant documentation
+   - Provides intelligent context gathering based on task descriptions
+   - Returns relevant wiki pages with summaries and links
+   - Example: "How do I implement authentication?"
+
+2. **request_documentation**: Request missing documentation
+   - Queues documentation requests for topics not yet covered
+   - Tracks priorities and reasons for documentation needs
+   - Generates metrics for documentation gaps
+
+### Example Usage
+
+Once configured, you can ask Claude Code questions like:
+- "How do I run tests?"
+- "What's the architecture of the wiki generator?"
+- "Help me implement a new agent"
+
+Claude Code will automatically query the MCP server and use the wiki context to provide informed answers.
+
+### Testing the MCP Server
+
+```bash
+# Run the test suite
+node test-mcp-server.js
+
+# Check metrics
+cat mcp-metrics.json
+```
 
 ## Prerequisites
 
@@ -197,13 +260,14 @@ See [WIKI_COMPARISON_ASSESSMENT.md](WIKI_COMPARISON_ASSESSMENT.md) for honest as
 **✅ Phase 5: Integration & Polish** (Partial)
 - Cross-page linking, code examples, error handling
 
+**✅ Phase 6: MCP Server** (Complete)
+- Claude Code integration via Model Context Protocol
+- Intelligent wiki querying for development context
+- Request queue for missing documentation
+- Basic metrics tracking
+
 **⏸️ Phase 4: Web Interface** (Next)
 - Dashboard, WebSocket updates, live preview
-
-**⏸️ Phase 6: MCP Server** (Future)
-- Claude Code integration
-- Query wiki for development context
-- AI-assisted development workflow
 
 ## Next Steps
 
@@ -219,8 +283,8 @@ See [WIKI_COMPARISON_ASSESSMENT.md](WIKI_COMPARISON_ASSESSMENT.md) for honest as
 
 **Long-Term** (8+ hours):
 - Web dashboard interface (Phase 4)
-- MCP server for Claude Code integration (Phase 6)
 - Incremental update mode (process only new commits)
+- Enhanced MCP server features (prompts, advanced metrics)
 
 ## How It Works
 

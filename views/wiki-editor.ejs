@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit: <%= title %> - CodeWiki</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <link rel="stylesheet" href="/public/wiki-editor.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="editor-container">
+    <header class="editor-header">
+      <div class="header-content">
+        <h1>Editing: <%= title %></h1>
+        <nav class="breadcrumb">
+          <a href="/">Dashboard</a> /
+          <a href="/wiki/<%= project %>/index">Wiki</a> /
+          <a href="/wiki/<%= project %>/<%= pagePath.replace('.md', '') %>"><%= title %></a> /
+          <span>Edit</span>
+        </nav>
+      </div>
+      <div class="editor-actions">
+        <span class="autosave-status" id="autosaveStatus"></span>
+        <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+        <button type="button" class="btn btn-primary" id="saveBtn">Save</button>
+      </div>
+    </header>
+
+    <div class="metadata-section">
+      <div class="metadata-field">
+        <label for="pageTitle">Title</label>
+        <input type="text" id="pageTitle" value="<%= metadata.title || '' %>" placeholder="Page title">
+      </div>
+      <div class="metadata-field">
+        <label for="pageCategory">Category</label>
+        <input type="text" id="pageCategory" value="<%= metadata.category || '' %>" placeholder="e.g., concept, component, guide">
+      </div>
+      <div class="metadata-field">
+        <label for="pageTags">Tags</label>
+        <input type="text" id="pageTags" value="<%= Array.isArray(metadata.tags) ? metadata.tags.join(', ') : (metadata.tags || '') %>" placeholder="comma, separated, tags">
+      </div>
+    </div>
+
+    <div class="editor-main">
+      <div class="editor-panel">
+        <div class="toolbar">
+          <button type="button" class="toolbar-btn" data-action="bold" title="Bold (Ctrl+B)">
+            <strong>B</strong>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="italic" title="Italic (Ctrl+I)">
+            <em>I</em>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="heading" title="Heading">
+            <strong>H</strong>
+          </button>
+          <span class="toolbar-separator"></span>
+          <button type="button" class="toolbar-btn" data-action="link" title="Insert Link">
+            Link
+          </button>
+          <button type="button" class="toolbar-btn" data-action="code" title="Code Block">
+            Code
+          </button>
+          <button type="button" class="toolbar-btn" data-action="list" title="Bullet List">
+            List
+          </button>
+        </div>
+        <textarea id="markdownEditor" class="markdown-textarea" placeholder="Write your markdown here..."><%= content %></textarea>
+      </div>
+
+      <div class="preview-panel">
+        <div class="preview-header">
+          <h3>Preview</h3>
+        </div>
+        <div id="markdownPreview" class="preview-content wiki-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <input type="hidden" id="projectName" value="<%= project %>">
+  <input type="hidden" id="pagePath" value="<%= pagePath %>">
+  <input type="hidden" id="createdDate" value="<%= metadata.created || '' %>">
+
+  <script src="/public/wiki-editor.js"></script>
+</body>
+</html>

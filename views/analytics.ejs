@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiki Analytics Dashboard</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <link rel="stylesheet" href="/public/analytics.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Wiki Analytics Dashboard</h1>
+      <p class="version">v<%= version %></p>
+      <nav class="header-nav">
+        <a href="/" class="nav-link">Dashboard</a>
+        <a href="/planning" class="nav-link">Planning</a>
+        <a href="/projects" class="nav-link">Projects</a>
+        <a href="/analytics" class="nav-link active">Analytics</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="analytics-controls">
+        <div class="form-group">
+          <label for="project">Select Project:</label>
+          <select id="project" class="project-selector">
+            <% projects.forEach(function(project) { %>
+              <option value="<%= project %>" <%= project === defaultProject ? 'selected' : '' %>>
+                <%= project.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') %>
+              </option>
+            <% }); %>
+          </select>
+        </div>
+        <button id="exportData" class="btn btn-secondary">
+          <span>📊 Export CSV</span>
+        </button>
+      </section>
+
+      <div id="loadingState" class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading analytics data...</p>
+      </div>
+
+      <div id="analyticsContent" style="display: none;">
+        <!-- Statistics Cards -->
+        <section class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">📄</div>
+            <div class="stat-content">
+              <h3 class="stat-label">Total Pages</h3>
+              <p class="stat-value" id="statTotalPages">0</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">📁</div>
+            <div class="stat-content">
+              <h3 class="stat-label">Categories</h3>
+              <p class="stat-value" id="statCategories">0</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">📝</div>
+            <div class="stat-content">
+              <h3 class="stat-label">Avg Page Length</h3>
+              <p class="stat-value" id="statAvgLength">0</p>
+              <span class="stat-unit">words</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">🔗</div>
+            <div class="stat-content">
+              <h3 class="stat-label">Total Links</h3>
+              <p class="stat-value" id="statTotalLinks">0</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Charts Grid -->
+        <section class="charts-grid">
+          <div class="chart-card">
+            <h3>Pages by Category</h3>
+            <div class="chart-container">
+              <canvas id="categoryChart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3>Tag Distribution</h3>
+            <div class="chart-container">
+              <canvas id="tagChart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card wide">
+            <h3>Update Activity Over Time</h3>
+            <div class="chart-container">
+              <canvas id="activityChart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3>Top 10 Most Linked Pages</h3>
+            <div class="chart-container">
+              <canvas id="mostLinkedChart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3>Top 10 Longest Pages</h3>
+            <div class="chart-container">
+              <canvas id="longestPagesChart"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tables Section -->
+        <section class="tables-grid">
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Orphaned Pages</h3>
+              <span class="badge" id="orphanedCount">0</span>
+            </div>
+            <div class="table-container">
+              <table id="orphanedTable">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Path</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="empty-row">
+                    <td colspan="3">No orphaned pages found</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Dead Links</h3>
+              <span class="badge" id="deadLinksCount">0</span>
+            </div>
+            <div class="table-container">
+              <table id="deadLinksTable">
+                <thead>
+                  <tr>
+                    <th>Source Page</th>
+                    <th>Dead Link</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="empty-row">
+                    <td colspan="3">No dead links found</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div id="errorState" class="error-state" style="display: none;">
+        <div class="error-icon">⚠️</div>
+        <h3>Failed to Load Analytics</h3>
+        <p id="errorMessage">An error occurred while loading analytics data.</p>
+        <button id="retryBtn" class="btn btn-primary">Retry</button>
+      </div>
+    </main>
+
+    <footer>
+      <p>CodeWiki Generator - Analytics Dashboard</p>
+    </footer>
+  </div>
+
+  <script src="/public/analytics.js"></script>
+</body>
+</html>

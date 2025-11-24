@@ -1,0 +1,11 @@
+{
+  "name": "demo",
+  "description": "",
+  "repository": "",
+  "createdAt": "2025-11-23T20:42:43.881Z",
+  "updatedAt": "2025-11-23T20:42:43.881Z",
+  "settings": {
+    "theme": "default",
+    "maxPageSize": 5000
+  }
+}

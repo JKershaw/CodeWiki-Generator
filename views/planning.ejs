@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planning & Roadmap - CodeWiki Generator</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <link rel="stylesheet" href="/public/planning.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Planning & Roadmap</h1>
+      <p class="version">v<%= version %></p>
+      <nav class="header-nav">
+        <a href="/" class="nav-link">Dashboard</a>
+        <a href="/planning" class="nav-link active">Planning</a>
+        <a href="/projects" class="nav-link">Projects</a>
+        <a href="/analytics" class="nav-link">Analytics</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="planning-controls">
+        <div class="controls-left">
+          <div class="form-group">
+            <label for="project">Project:</label>
+            <select id="project" class="project-selector">
+              <% projects.forEach(function(project) { %>
+                <option value="<%= project %>" <%= project === defaultProject ? 'selected' : '' %>>
+                  <%= project.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') %>
+                </option>
+              <% }); %>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="priorityFilter">Filter by Priority:</label>
+            <select id="priorityFilter" class="priority-filter">
+              <option value="all">All Priorities</option>
+              <option value="high">High Priority</option>
+              <option value="medium">Medium Priority</option>
+              <option value="low">Low Priority</option>
+            </select>
+          </div>
+        </div>
+        <div class="controls-right">
+          <button type="button" id="createTaskBtn" class="btn btn-primary">+ Create Task</button>
+        </div>
+      </section>
+
+      <section class="statistics-panel">
+        <div class="stat-card">
+          <div class="stat-label">Total Tasks</div>
+          <div class="stat-value" id="statTotal">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">To Do</div>
+          <div class="stat-value" id="statTodo">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">In Progress</div>
+          <div class="stat-value" id="statInProgress">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Completed</div>
+          <div class="stat-value" id="statCompleted">0</div>
+        </div>
+        <div class="stat-card highlight">
+          <div class="stat-label">Completion Rate</div>
+          <div class="stat-value" id="statCompletionRate">0%</div>
+        </div>
+      </section>
+
+      <section class="kanban-board">
+        <div class="kanban-column" data-status="todo">
+          <div class="column-header">
+            <h2>To Do</h2>
+            <span class="task-count" id="todoCount">0</span>
+          </div>
+          <div class="column-content" id="todoColumn" data-status="todo">
+            <div class="empty-state">No tasks yet. Create one to get started!</div>
+          </div>
+        </div>
+
+        <div class="kanban-column" data-status="in-progress">
+          <div class="column-header">
+            <h2>In Progress</h2>
+            <span class="task-count" id="inProgressCount">0</span>
+          </div>
+          <div class="column-content" id="inProgressColumn" data-status="in-progress">
+            <div class="empty-state">No tasks in progress</div>
+          </div>
+        </div>
+
+        <div class="kanban-column" data-status="done">
+          <div class="column-header">
+            <h2>Done</h2>
+            <span class="task-count" id="doneCount">0</span>
+          </div>
+          <div class="column-content" id="doneColumn" data-status="done">
+            <div class="empty-state">No completed tasks</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>CodeWiki Generator - Task Management System</p>
+    </footer>
+  </div>
+
+  <!-- Create/Edit Task Modal -->
+  <div id="taskModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Create Task</h2>
+        <button type="button" class="modal-close" id="closeModal">&times;</button>
+      </div>
+      <form id="taskForm">
+        <input type="hidden" id="taskId" name="id">
+
+        <div class="form-group">
+          <label for="taskTitle">Title <span class="required">*</span></label>
+          <input
+            type="text"
+            id="taskTitle"
+            name="title"
+            placeholder="Enter task title"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="taskDescription">Description</label>
+          <textarea
+            id="taskDescription"
+            name="description"
+            rows="4"
+            placeholder="Describe the task in detail"
+          ></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="taskPriority">Priority</label>
+            <select id="taskPriority" name="priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="taskStatus">Status</label>
+            <select id="taskStatus" name="status">
+              <option value="todo" selected>To Do</option>
+              <option value="in-progress">In Progress</option>
+              <option value="done">Done</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="taskPages">Assigned Pages</label>
+          <input
+            type="text"
+            id="taskPages"
+            name="assignedPages"
+            placeholder="e.g., concepts/architecture.md, guides/setup.md (comma-separated)"
+          >
+          <small>Enter wiki page paths separated by commas</small>
+        </div>
+
+        <div class="form-group">
+          <label for="taskNotes">Notes</label>
+          <textarea
+            id="taskNotes"
+            name="notes"
+            rows="3"
+            placeholder="Additional notes or context"
+          ></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveTaskBtn">
+            <span class="btn-text">Save Task</span>
+            <span class="btn-loading" style="display: none;">Saving...</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteModal" class="modal" style="display: none;">
+    <div class="modal-content modal-small">
+      <div class="modal-header">
+        <h2>Confirm Delete</h2>
+        <button type="button" class="modal-close" id="closeDeleteModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this task?</p>
+        <p class="warning-text">This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+          <span class="btn-text">Delete</span>
+          <span class="btn-loading" style="display: none;">Deleting...</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/public/planning.js"></script>
+</body>
+</html>
