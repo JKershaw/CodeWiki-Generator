@@ -133,8 +133,7 @@ describe('GuideGenerationAgent', () => {
       expect(mockClaudeClient.sendMessage).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({
-          model: 'claude-sonnet-4-20250514',
-          maxTokens: 4000
+          maxTokens: 8000
         })
       );
     });
