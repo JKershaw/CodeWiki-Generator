@@ -119,9 +119,9 @@ time node generate-self-wiki.js 10
 | Phase | Status | Time (10 commits) | Speedup | Notes |
 |-------|--------|-------------------|---------|-------|
 | Baseline | ✅ Complete | 8m 38s (518s) | - | After history bug fix |
-| Phase 1 | 🔄 In Progress | - | - | - |
-| Phase 2 | ⏳ Pending | - | - | - |
-| Phase 3 | ⏳ Pending | - | - | - |
+| Phase 1 | ✅ Complete | - | - | Parallel files, concurrent API, skip historical |
+| Phase 2 | ✅ Complete | 7m 24s (444s) | 14.3% | Incremental cross-link, index, parallel batches |
+| Phase 3 | ⏳ Not Started | - | - | LLM caching, smart diffs (deferred) |
 
 ---
 
@@ -160,3 +160,71 @@ time node generate-self-wiki.js 10
 - Run full test suite after each change
 - Document any edge cases or limitations
 - Update this file with actual results
+
+---
+
+## Test Results (2025-11-24)
+
+### Phase 1 + Phase 2 Combined Results
+
+**Test Configuration:**
+- 10 commits processed
+- Fresh wiki generation (clean slate)
+- All Phase 1 and Phase 2 optimizations enabled
+
+**Performance:**
+- **Baseline:** 8m 38s (518 seconds)
+- **Optimized:** 7m 24s (444 seconds)
+- **Improvement:** 74 seconds saved (14.3% faster)
+- **Projected 100 commits:** ~49 minutes (down from 58 minutes)
+
+**Processing Statistics:**
+- Commits processed: 10
+- Files processed: 7 (skipped: 17)
+- Meta-documents: 6
+- Pages created: 18
+- Pages updated: 0
+- Meta-analysis runs: 2
+- Total cost: $0.00
+
+**Optimizations Verified Working:**
+1. ✅ **Parallel file processing** - Multiple files processed concurrently within commits
+2. ✅ **Concurrent API requests** - Rate-limited parallel API calls (5 concurrent)
+3. ✅ **Skip historical cross-linking** - Only ran on commits 5 and 10 (last 10 commits)
+4. ✅ **Incremental cross-linking** - "Adding cross-page links to 19 modified pages"
+5. ✅ **Incremental index generation** - "Regenerating index for 19 modified pages"
+6. ✅ **Parallel cross-linking batches** - Pages processed in batches of 10
+
+**Commits Made:**
+- `56ffdcb` - Phase 1.1: Parallel file processing within commits
+- `3f7975e` - Phase 1.2: Concurrent API requests with rate limiting
+- `b62fec8` - Phase 1.3: Skip historical cross-linking on old commits
+- `7d38abc` - Phase 2.5: Incremental cross-linking
+- `ebc40d6` - Phase 2.6: Incremental index generation
+- `f216872` - Phase 2.7: Parallel cross-linking batches
+
+### Analysis
+
+**What worked well:**
+- Incremental approaches (cross-linking, index) eliminated redundant work
+- Parallel processing within commits improved throughput
+- Historical optimizations reduced unnecessary operations on old commits
+- All tests passed, no regressions
+
+**Bottlenecks remaining:**
+- LLM API calls still sequential within agents
+- Full page scans still needed for cross-link discovery
+- No caching of LLM responses for similar prompts
+- Architecture/guide generation still processes all pages
+
+**Phase 3 Considerations:**
+- LLM response caching could provide 50-80% speedup on repeated patterns
+- Smart diff-based processing could reduce redundant analysis
+- Both are higher complexity/risk - deferred for now
+- Current 14.3% improvement is meaningful but short of 50-60% Phase 1+2 target
+
+**Recommendations:**
+1. Continue monitoring performance on larger commit counts
+2. Consider Phase 3 optimizations if further speedup needed
+3. Current optimizations provide good balance of risk/reward
+4. Focus on maintaining code quality and test coverage
