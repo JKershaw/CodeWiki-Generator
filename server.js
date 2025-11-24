@@ -90,13 +90,6 @@ app.delete('/api/projects/:project', (req, res) => dashboardController.deletePro
 app.get('/api/projects/:project/settings', (req, res) => dashboardController.getProjectSettings(req, res));
 app.put('/api/projects/:project/settings', (req, res) => dashboardController.updateProjectSettings(req, res));
 
-// Comments routes
-app.get('/api/comments/:project/:page', (req, res) => dashboardController.getPageComments(req, res));
-app.post('/api/comments/:project/:page', (req, res) => dashboardController.addComment(req, res));
-app.put('/api/comments/:project/:commentId', (req, res) => dashboardController.updateComment(req, res));
-app.delete('/api/comments/:project/:commentId', (req, res) => dashboardController.deleteComment(req, res));
-app.post('/api/comments/:project/:commentId/resolve', (req, res) => dashboardController.resolveComment(req, res));
-
 // Git history routes
 app.get(/^\/api\/history\/([^\/]+)\/(.+)\/statistics$/, (req, res) => {
   req.params.project = req.params[0];
