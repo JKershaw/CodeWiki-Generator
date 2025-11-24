@@ -120,7 +120,7 @@ describe('CodeAnalysisAgent', () => {
 
       const options = mockClaudeClient.sendMessageJSON.mock.calls[0][1];
       // Model is now set by config, not hardcoded by agent
-      expect(options.maxTokens).toBe(2000);
+      expect(options.maxTokens).toBe(4000);
     });
 
     it('should handle API errors gracefully', async () => {
