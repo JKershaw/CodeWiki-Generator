@@ -1,0 +1,222 @@
+---
+title: Implementation Guide
+category: meta
+sourceFile: ImplementationGuide.md
+created: 2025-11-24
+updated: 2025-11-24
+related: [meta/overview.md, meta/philosophy.md]
+---
+
+# Implementation Guide for AI Coding Agent
+
+## [Overview](../meta/overview.md)
+
+This guide directs AI agents through building the CodeWiki Generator using test-driven development. The system generates wikis from git history and validates itself by documenting its own codebase during development.
+
+**Core Practice**: After implementing each feature, run the wiki generator on the codebase, then consult the generated wiki before proceeding. If you cannot understand your own architecture from the wiki, improve the documentation system first.
+
+## Development [Philosophy](../meta/philosophy.md)
+
+### Test-First Always
+Write failing tests before implementation. No exceptions. This ensures every feature is validated from conception.
+
+### Wiki-Driven Development
+1. Build feature
+2. Run wiki generator on codebase
+3. Read generated documentation
+4. Fix documentation generation if unclear
+5. Proceed to next feature
+
+This creates a feedback loop where poor documentation reveals flaws in the system itself.
+
+### Incremental Commits
+Commit after each passing test or completed feature. The human monitors progress through the wiki. Target minimum 20 commits for this project—ideally 37+ for continuous visibility.
+
+### Self-Validation
+The system documents itself. Documentation quality serves as a proxy for system design quality. If you cannot explain it in the wiki, the architecture needs improvement.
+
+## Project Structure
+
+### Directory Organization
+- `lib/` - Core implementation modules
+- `views/` - Template files
+- `views/partials/` - Reusable template components
+- `public/` - Static assets
+- `wiki/` - Generated wiki output
+- `dev-wiki/` - Development documentation
+- `tests/` - Test suite
+
+### Key Dependencies
+- **express@5.1.0** - Web server
+- **ejs@3.1.10** - Templating
+- **@anthropic-ai/sdk@0.70.0** - Claude API access
+- **octokit@5.0.5** - GitHub API access
+- **ws@8.18.0** - WebSocket support
+- **dotenv@16.4.5** - Environment configuration
+
+## Development Phases
+
+### Phase 1: Core Infrastructure (Steps 1-7)
+Establish foundation components with complete test coverage:
+
+- **Step 1**: Repository setup with `.gitignore`, `package.json`, directory structure
+- **Step 2**: Development wiki initialization with architecture documentation
+- **Step 3**: WikiManager read operations (file parsing, searching, listing)
+- **Step 4**: WikiManager write operations (creating, updating, metadata management)
+- **Step 5**: State management (persistence, validation, incremental updates)
+- **Step 6**: GitHub integration via Octokit (commits, diffs, file content)
+- **Step 7**: First self-documentation run with manual wiki generation
+
+**Timeline**: 6-8 hours
+
+### Phase 2: AI Agent System (Steps 8-13)
+Implement Claude integration and agent orchestration:
+
+- **Step 8**: Anthropic SDK wrapper with retry logic and token tracking
+- **Step 9**: Agent prompt templates for code analysis, documentation, and meta-analysis
+- **Step 10**: Agent spawning system for parallel sub-agent tasks
+- **Step 11**: Result aggregation and synthesis from multiple agents
+- **Step 12**: Response validation and error handling
+- **Step 13**: First self-generated wiki from actual Claude processing
+
+**Timeline**: 6-8 hours
+
+### Phase 3: Processing Engine (Steps 14-16)
+Build the core wiki generation workflow:
+
+- **Step 14**: Commit analysis workflow (fetch, analyze, extract insights)
+- **Step 15**: Processing orchestration (queue management, progress tracking)
+- **Step 16**: Caching layer for efficiency and cost control
+
+**Timeline**: 4-6 hours
+
+### Phase 4: Web Interface (Steps 17-22)
+Create user-facing dashboard and controls:
+
+- **Step 17**: Express server setup with routing
+- **Step 18**: Dashboard view showing processing status and generated wiki
+- **Step 19**: Manual stepping mode UI (process one commit at a time)
+- **Step 20**: Batch processing controls
+- **Step 21**: Real-time updates via WebSocket
+- **Step 22**: Cost and usage tracking display
+
+**Timeline**: 6-8 hours
+
+### Phase 5: Integration & Polish (Steps 23-30)
+Refine and complete core functionality:
+
+- **Steps 23-28**: Request queuing, meta-analysis, wiki navigation, final integration
+- **Steps 29-30**: Second and third self-documentation runs with prompt tuning
+
+**Timeline**: 8-10 hours
+
+### Phase 6: MCP Server (Steps 31-33)
+Enable Claude Code integration via Model Context Protocol:
+
+- **Step 31**: MCP server implementation for wiki queries
+- **Step 32**: Request queue integration
+- **Step 33**: Claude Code integration validation
+
+**Timeline**: 4-6 hours
+
+### Final Steps (Steps 34-37)
+Prepare for production:
+
+- **Step 34**: Performance optimization and profiling
+- **Step 35**: Security hardening review
+- **Step 36**: Bug fixes and UI polish
+- **Step 37**: Release preparation and v1.0.0 tagging
+
+**Timeline**: 4-6 hours
+
+**Total Expected Duration**: 38-52 hours
+
+## Key Practices
+
+### Before Each Step
+1. Read relevant wiki pages for components you'll interact with
+2. Review test files for related components
+3. Check the state of existing tests
+
+### During Implementation
+1. **Red**: Write failing tests
+2. **Green**: Implement minimum code to pass
+3. **Refactor**: Improve code quality
+4. **Commit**: When all tests pass
+
+### After Completing Each Step
+1. Run full test suite
+2. Commit with descriptive message
+3. Update wiki if architecture changed
+4. Document any technical debt or future improvements
+
+### Every 5 Steps
+1. Run wiki generator on codebase
+2. Read generated documentation
+3. Validate accuracy and usefulness
+4. Tune prompts if documentation is poor
+5. Commit updated wiki
+
+## Sub-Agent Usage
+
+**When to Spawn Sub-Agents**:
+- Research tasks (library evaluation, API exploration)
+- Isolated implementations (utility functions, test fixtures)
+- Documentation writing for complex concepts
+- Design tasks (UI mockups, data schemas)
+
+**Main Agent Responsibilities**:
+- Architectural decisions
+- Integration of sub-agent work
+- Test orchestration
+- Progress tracking and validation
+
+## Success Criteria
+
+### Functional Requirements
+- [ ] Can process git repository and generate wiki
+- [ ] Wiki is accurate and useful
+- [ ] Manual stepping mode works
+- [ ] Batch processing works
+- [ ] Meta-analysis identifies themes
+- [ ] Dashboard provides visibility
+- [ ] WebSocket updates work
+- [ ] Cost tracking enforced
+- [ ] Error recovery works
+- [ ] MCP server integrates with Claude Code
+
+### Quality Requirements
+- [ ] 80%+ test coverage
+- [ ] All tests passing
+- [ ] Generated wiki for this project is comprehensive
+- [ ] README allows new user to get started
+- [ ] Manual mode works without API keys
+- [ ] No security vulnerabilities
+
+### Self-Validation Requirements
+- [ ] Generated wiki was consulted during development
+- [ ] Generated wiki accurately describes the system
+- [ ] Documentation quality improved through iterations
+- [ ] System can be explained from wiki alone
+
+## Critical Decision Points
+
+**After Step 7**: Human reviews initial hand-written wiki to validate documentation standards
+
+**After Step 26**: Human reviews first self-generated wiki to assess quality before continuing
+
+**After Step 29**: Human validates final self-generated wiki for production readiness
+
+**After Step 33**: Human confirms Claude Code integration provides real development value
+
+## Continuous Development Workflow
+
+Each commit represents a concrete milestone. The progression from manual documentation (Step 7) to self-generated documentation (Step 13) to fully-integrated self-improving documentation (Steps 26, 29) creates a validation pipeline.
+
+The human monitoring progress can assess system quality by reading the generated wiki. This transforms documentation from a post-hoc burden into an integral part of quality assurance.
+
+---
+
+**Version**: 2.0 - AI Coding Agent Implementation Guide  
+**Status**: Ready for AI-Driven Development  
+**Expected Outcome**: Production-ready CodeWiki Generator with comprehensive self-documentation

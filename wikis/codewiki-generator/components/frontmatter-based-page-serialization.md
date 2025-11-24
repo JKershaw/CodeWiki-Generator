@@ -11,61 +11,50 @@ updated: 2025-11-24
 
 ## Purpose and Overview
 
-This component provides the serialization logic that converts wiki page metadata and content into markdown files with YAML-style frontmatter headers. It enables structured storage of wiki pages by consistently formatting metadata at the top of each file, making pages both human-readable and machine-parseable.
+Frontmatter-based Page Serialization implements bidirectional conversion between metadata objects and markdown frontmatter format for wiki pages. The `_serializePage` method complements the existing `_parseFrontmatter` functionality, enabling structured metadata storage while maintaining markdown readability and human-editability.
 
 ## Key Functionality
 
-The frontmatter serialization system handles the conversion between internal page objects and stored markdown files through the following operations:
+This component handles the serialization of wiki page objects into markdown format with YAML frontmatter:
 
-- **`_serializePage(metadata, content)`** - Core serialization method that combines a metadata object and content string into a single markdown string with frontmatter header format
-- **`createPage(path, content, metadata)`** - Creates new wiki pages with automatic timestamp generation (`createdAt`) and serializes them using frontmatter format
-- **`updatePage(path, content, metadata)`** - Updates existing pages while preserving creation timestamps and automatically updating the `modifiedAt` timestamp
-- **`updateMetadata(path, metadata)`** - Updates only page metadata while keeping content intact, useful for metadata-only changes
-- **`deletePage(path)`** - Removes wiki pages from the filesystem with graceful error handling for missing files
+- **Metadata Serialization**: Converts page metadata objects into YAML frontmatter blocks enclosed by `---` delimiters
+- **Content Preservation**: Maintains the original markdown content while updating metadata headers
+- **Structured Format**: Produces standardized markdown files that can be parsed by other markdown processors
+- **Bidirectional Conversion**: Works alongside `_parseFrontmatter` to enable round-trip serialization without data loss
 
-All metadata is stored in ISO date format at the top of markdown files, creating a consistent structure that pairs with the existing `_parseFrontmatter()` read functionality.
+The serialization process structures pages with frontmatter containing metadata (title, tags, timestamps) followed by the markdown content body.
 
 ## Relationships
 
-This component operates as part of a symmetric read-write system:
+This component is tightly integrated with other WikiManager components:
 
-- **Complements `_parseFrontmatter()`** - While parsing reads frontmatter from files, serialization writes it back in the same format
-- **Builds on `getPage()`** - Write operations retrieve existing pages to validate changes and preserve timestamps
-- **Uses shared `wikiPath`** - All serialized pages are stored in the base directory established during WikiManager initialization
-- **Maintains metadata consistency** - Timestamps follow the same ISO format used throughout the codebase
+- **Wiki Page Write Operations**: Used by create, update, and delete operations to persist pages to disk
+- **Automatic Metadata Lifecycle Management**: Serializes automatically managed timestamps and metadata
+- **Safe File Operation Pattern**: Works within the defensive file operation framework for robust persistence
+- **Frontmatter Parser**: Provides the inverse operation to `_parseFrontmatter` for complete page lifecycle management
 
 ## Usage Example
 
 ```javascript
 const WikiManager = require('./lib/wiki-manager');
-const wikiManager = new WikiManager('./wiki');
+const path = require('path');
 
-// Create a new page with automatic timestamp
-await wikiManager.createPage('my-page.md', 'This is my content', {
-  title: 'My Page',
-  tags: ['tutorial']
-});
+// Initialize WikiManager with wiki directory
+const testDir = path.join(__dirname, '../fixtures/test-wiki');
+const wikiManager = new WikiManager(testDir);
 
-// Update page content and merge metadata
-await wikiManager.updatePage('my-page.md', 'Updated content', {
-  tags: ['tutorial', 'updated']
-});
+// Read a page with frontmatter parsing
+const page = await wikiManager.getPage('test-page.md');
 
-// Update only metadata, preserving content
-await wikiManager.updateMetadata('my-page.md', {
-  status: 'published'
-});
-
-// Delete a page
-await wikiManager.deletePage('my-page.md');
+// The serialization happens internally during write operations
+// The parsed page object contains metadata and content
+expect(page.metadata.title).toBe('Test Page');
+expect(page.content).toBeDefined();
 ```
 
 ## Testing
 
-This component is covered by 17 test cases across 5 test suites in `tests/unit/wiki-manager.test.js`, including specific tests for:
-
-- Page creation with metadata and automatic timestamp generation
-- Page updates with metadata merging and timestamp updates
-- Metadata-only updates
-- Page deletion with error handling
-- Round-trip serialization and parsing consistency
+**Test Coverage**: `tests/unit/wiki-manager.test.js`
+- 17 test cases across 5 test suites
+- Comprehensive testing of WikiManager functionality including getPage, getAllPages, searchPages, and getRelatedPages operations
+- Tests verify proper frontmatter parsing and page structure handling
