@@ -2,16 +2,16 @@
 title: Global metadata tracking system
 category: component
 sourceFile: lib/wiki-manager.js
-related: []
+related: [_history/components/global-metadata-tracking-system/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Global Metadata Tracking System
+# [Global Metadata Tracking System](../_history/components/global-metadata-tracking-system/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The global metadata tracking system provides a centralized mechanism for managing wiki-wide statistics and per-page metadata through a `_metadata.json` file. This system enables the WikiManager to maintain aggregated insights about documentation structure, categories, and processing history beyond what individual page frontmatter can capture, supporting informed documentation management and analysis.
+The [global metadata tracking system](../_history/components/global-metadata-tracking-system/2025-11-24T14-38-56.md) provides a centralized mechanism for managing wiki-wide statistics and per-page metadata through a `_metadata.json` file. This system enables the WikiManager to maintain aggregated insights about documentation structure, categories, and processing history beyond what individual page frontmatter can capture, supporting informed documentation management and analysis.
 
 ## Key Functionality
 
@@ -25,11 +25,11 @@ The global metadata system operates through four core functions:
 
 - **getPageGlobalMetadata(pagePath)** - Retrieves metadata for a specific page from the global metadata store, enabling lookup of per-page information.
 
-The system implements **category-based statistics aggregation**, automatically categorizing pages as concepts, components, or guides while maintaining real-time statistics about wiki composition. This enables tracking of documentation health and organization patterns across the entire wiki.
+The system implements **[category-based statistics aggregation](../concepts/category-based-statistics-aggregation.md)**, automatically categorizing pages as concepts, components, or guides while maintaining real-time statistics about wiki composition. This enables tracking of documentation health and organization patterns across the entire wiki.
 
 ## Relationships
 
-The global metadata tracking system extends WikiManager's core capabilities by:
+The [global metadata tracking system](../_history/components/global-metadata-tracking-system/2025-11-24T14-38-56.md) extends WikiManager's core capabilities by:
 
 - Enabling wiki-wide reporting and analysis features beyond individual page operations
 - Integrating seamlessly with the existing page processing workflow to maintain metadata accuracy

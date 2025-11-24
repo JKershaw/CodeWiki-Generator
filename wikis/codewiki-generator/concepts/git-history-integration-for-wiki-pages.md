@@ -2,16 +2,16 @@
 title: Git history integration for wiki pages
 category: concept
 sourceFile: public/git-history.js
-related: []
+related: [_history/concepts/git-history-integration-for-wiki-pages/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Git History Integration for Wiki Pages
+# [Git History Integration for Wiki Pages](../_history/concepts/git-history-integration-for-wiki-pages/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The Git History Integration provides version control visibility within the wiki interface, enabling users to track page changes and understand content evolution over time. This client-side component creates an interactive timeline visualization of git commits associated with wiki pages, complete with author information, timestamps, and commit details.
+The [Git History Integration](../concepts/git-history-integration.md) provides version control visibility within the wiki interface, enabling users to track page changes and understand content evolution over time. This client-side component creates an interactive timeline visualization of git commits associated with wiki pages, complete with author information, timestamps, and commit details.
 
 ## Key Functionality
 

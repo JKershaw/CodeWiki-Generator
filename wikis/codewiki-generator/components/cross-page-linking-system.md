@@ -2,16 +2,16 @@
 title: Cross-page linking system
 category: component
 sourceFile: lib/agents/documentation-writer-agent.js
-related: []
+related: [_history/concepts/cross-page-linking-system/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Cross-page Linking System
+# [Cross-page Linking System](../_history/concepts/cross-page-linking-system/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The cross-page linking system automatically discovers mentions of other wiki pages within documentation content and converts them into markdown hyperlinks. This system enhances documentation interconnectedness by creating intelligent internal links while preserving existing markdown formatting and preventing self-referential links.
+The [cross-page linking system](../_history/concepts/cross-page-linking-system/2025-11-24T14-38-57.md) automatically discovers mentions of other wiki pages within documentation content and converts them into markdown hyperlinks. This system enhances documentation interconnectedness by creating intelligent internal links while preserving existing markdown formatting and preventing self-referential links.
 
 ## Key Functionality
 

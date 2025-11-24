@@ -2,21 +2,21 @@
 title: Web Dashboard Control Interface
 category: component
 sourceFile: lib/dashboard-controller.js
-related: []
+related: [_history/components/web-dashboard-control-interface/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Web Dashboard Control Interface
+# [Web Dashboard Control Interface](../_history/components/web-dashboard-control-interface/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The Web Dashboard Control Interface provides HTTP endpoints for interactive control and monitoring of wiki generation from repository analysis. It serves as the primary user-facing layer, enabling developers to start processing, pause/resume analysis, monitor progress, and access generated documentation through a web UI without managing long-running tasks directly.
+The [Web Dashboard Control Interface](../_history/components/web-dashboard-control-interface/2025-11-24T14-38-56.md) provides HTTP endpoints for interactive control and monitoring of wiki generation from repository analysis. It serves as the primary user-facing layer, enabling developers to start processing, pause/resume analysis, monitor progress, and access generated documentation through a web UI without managing long-running tasks directly.
 
 ## Key Functionality
 
 ### Dashboard Rendering and Status Monitoring
-The controller renders an interactive dashboard view displaying current processing state and exposes a JSON endpoint (`getStatus`) for real-time status polling. This allows the UI to stay synchronized with backend processing progress without forcing page refreshes.
+The controller renders an interactive dashboard view displaying current processing state and exposes a JSON endpoint (`getStatus`) for [real-time status polling](../components/real-time-status-polling.md). This allows the UI to stay synchronized with backend processing progress without forcing page refreshes.
 
 ### Processing Control Operations
 The controller implements fine-grained control over repository processing:

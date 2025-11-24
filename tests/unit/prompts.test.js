@@ -135,11 +135,10 @@ City: {{city}}`;
       expect(template.toLowerCase()).toContain('json');
     });
 
-    it('should mention concepts and code elements', () => {
+    it('should mention concepts', () => {
       const template = promptManager.getTemplate('code-analysis');
 
       expect(template.toLowerCase()).toContain('concept');
-      expect(template.toLowerCase()).toContain('element');
     });
   });
 

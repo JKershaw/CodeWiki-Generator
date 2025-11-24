@@ -2,24 +2,24 @@
 title: MCP Server Integration Pattern
 category: concept
 sourceFile: mcp-server.js
-related: []
+related: [_history/concepts/mcp-server-integration-pattern/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# MCP Server Integration Pattern
+# [MCP Server Integration Pattern](../_history/concepts/mcp-server-integration-pattern/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The MCP Server Integration Pattern establishes a JSON-RPC over stdio protocol that enables Claude Code to seamlessly query generated documentation context. This server acts as a bridge between AI development tools and the project's wiki documentation system, providing intelligent context gathering for enhanced code development workflows.
+The [MCP Server Integration Pattern](../_history/concepts/mcp-server-integration-pattern/2025-11-24T14-38-57.md) establishes a JSON-RPC over stdio protocol that enables Claude Code to seamlessly query generated documentation context. This server acts as a bridge between AI development tools and the project's wiki documentation system, providing intelligent context gathering for enhanced code development workflows.
 
 ## Key Functionality
 
 The MCP Server implements several core capabilities:
 
 - **JSON-RPC 2.0 Protocol**: Handles communication over stdio using standard JSON-RPC messaging format for Claude Code integration
-- **Context-aware Documentation Querying**: Searches the wiki using WikiResearcher with task-type optimization and relevance scoring to provide the most relevant documentation for AI context
-- **Documentation Request Tracking**: Captures and queues requests for missing documentation with priority scoring and metrics collection
+- **[Context-aware Documentation Querying](../concepts/context-aware-documentation-querying.md)**: Searches the wiki using WikiResearcher with [task-type optimization](../concepts/task-type-optimization.md) and relevance scoring to provide the most relevant documentation for AI context
+- **[Documentation Request Tracking](../components/documentation-request-tracking.md)**: Captures and queues requests for missing documentation with priority scoring and metrics collection
 - **Structured Response Formatting**: Transforms wiki search results into optimized formats for Claude Code consumption
 
 The server routes incoming requests through `handleRequest()` to specialized handlers like `queryWiki()` for searches and `requestDocumentation()` for tracking missing content. All responses are formatted through `formatWikiResponse()` to ensure consistent structure for AI tool integration.

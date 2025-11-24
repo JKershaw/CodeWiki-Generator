@@ -2,16 +2,16 @@
 title: Local git history extraction for documentation
 category: component
 sourceFile: generate-self-wiki.js
-related: []
+related: [_history/components/local-git-history-extraction-for-documentation/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Local Git History Extraction for Documentation
+# [Local Git History Extraction for Documentation](../_history/components/local-git-history-extraction-for-documentation/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-This component enables automatic wiki documentation generation by extracting commit history and file changes directly from the local git repository, eliminating the need for GitHub API calls. It implements a self-documenting repository pattern where code changes automatically flow into updated documentation as part of the development workflow.
+This component enables automatic wiki documentation generation by extracting commit history and file changes directly from the local git repository, eliminating the need for GitHub API calls. It implements a [self-documenting repository pattern](../concepts/self-documenting-repository-pattern.md) where code changes automatically flow into updated documentation as part of the development workflow.
 
 ## Key Functionality
 

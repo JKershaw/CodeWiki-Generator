@@ -2,12 +2,12 @@
 title: Full-page materialization for batch processing
 category: component
 sourceFile: lib/processor.js
-related: []
+related: [_history/components/full-page-materialization-for-batch-processing/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Full-Page Materialization for Batch Processing
+# [Full-Page Materialization for Batch Processing](../_history/components/full-page-materialization-for-batch-processing/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
@@ -67,4 +67,4 @@ The component is covered by **26 test cases** across **6 test suites** in `tests
 
 - **Test Categories**: Processor initialization, processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository
 - **Mock Coverage**: WikiManager, StateManager, and agent mocks validate the materialization and coordination patterns
-- **Validation Tests**: Include checks for content validation in batch operations to ensure pages without content are skipped safely
+- **Validation Tests**: Include checks for [content validation in batch operations](../components/content-validation-in-batch-operations.md) to ensure pages without content are skipped safely

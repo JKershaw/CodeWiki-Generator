@@ -2,16 +2,16 @@
 title: Repository-scale batch processing with state management
 category: concept
 sourceFile: lib/processor.js
-related: []
+related: [_history/concepts/repository-scale-batch-processing-with-state-management/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Repository-scale Batch Processing with State Management
+# [Repository-scale Batch Processing with State Management](../_history/concepts/repository-scale-batch-processing-with-state-management/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The Processor component enables automated documentation generation across entire GitHub repositories, processing commits sequentially while maintaining persistent state for resumable execution. It introduces cost-aware API consumption limits and periodic meta-analysis to prevent runaway expenses and derive insights from accumulated documentation during long-running batch operations.
+The Processor component enables automated documentation generation across entire GitHub repositories, processing commits sequentially while maintaining persistent state for resumable execution. It introduces [cost-aware API consumption](../concepts/cost-aware-api-consumption.md) limits and periodic meta-analysis to prevent runaway expenses and derive insights from accumulated documentation during long-running batch operations.
 
 ## Key Functionality
 

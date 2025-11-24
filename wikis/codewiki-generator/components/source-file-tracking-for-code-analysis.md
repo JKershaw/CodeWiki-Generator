@@ -2,16 +2,16 @@
 title: Source file tracking for code analysis
 category: component
 sourceFile: lib/agents/code-analysis-agent.js
-related: []
+related: [_history/components/source-file-tracking-for-code-analysis/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Source file tracking for code analysis
+# [Source file tracking for code analysis](../_history/components/source-file-tracking-for-code-analysis/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The source file tracking component enhances code analysis responses by adding file path information to analysis results, improving traceability and debugging capabilities. This component implements backward-compatible response normalization to handle legacy formats while transitioning to a new structured format that includes source file context.
+The source file tracking component enhances code analysis responses by adding file path information to analysis results, improving traceability and debugging capabilities. This component implements [backward-compatible response normalization](../concepts/backward-compatible-response-normalization.md) to handle legacy formats while transitioning to a new structured format that includes source file context.
 
 ## Key Functionality
 

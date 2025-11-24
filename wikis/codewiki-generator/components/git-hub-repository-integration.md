@@ -2,12 +2,12 @@
 title: GitHub repository integration
 category: component
 sourceFile: lib/processor.js
-related: []
+related: [_history/components/git-hub-repository-integration/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# GitHub Repository Integration
+# [GitHub Repository Integration](../_history/components/git-hub-repository-integration/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
@@ -80,4 +80,4 @@ The implementation includes comprehensive test coverage with **26 test cases** a
 - **isSignificantFile suite**: File filtering heuristics
 - **getRelevantContext suite**: Context retrieval for analysis
 - **determinePagePath suite**: Wiki page path resolution
-- **processRepository suite**: Repository-scale batch processing with state management, cost tracking, and meta-analysis integration
+- **processRepository suite**: [Repository-scale batch processing with state management](../concepts/repository-scale-batch-processing-with-state-management.md), cost tracking, and meta-analysis integration

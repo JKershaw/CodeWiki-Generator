@@ -2,16 +2,16 @@
 title: Document mapping configuration
 category: component
 sourceFile: ingest-meta-docs.js
-related: []
+related: [_history/components/document-mapping-configuration/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Document Mapping Configuration
+# [Document Mapping Configuration](../_history/components/document-mapping-configuration/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The document mapping configuration system provides a declarative way to define how source documents are transformed and ingested into the wiki structure. It maps individual source files to their target wiki categories, document types, and file paths, enabling automated bulk processing of existing documentation into structured wiki content.
+The [document mapping configuration](../_history/components/document-mapping-configuration/2025-11-24T14-38-56.md) system provides a declarative way to define how source documents are transformed and ingested into the wiki structure. It maps individual source files to their target wiki categories, document types, and file paths, enabling automated bulk processing of existing documentation into structured wiki content.
 
 ## Key Functionality
 
@@ -32,7 +32,7 @@ The CLI interface (`main` function) enables selective processing by document nam
 
 ## Relationships
 
-This component serves as the configuration layer for the meta-documentation ingestion system:
+This component serves as the configuration layer for the [meta-documentation ingestion system](../concepts/meta-documentation-ingestion-system.md):
 
 - **Depends on** `MetaDocumentIngestionAgent` for AI-powered document processing and frontmatter generation
 - **Uses** `WikiManager` for file system operations and wiki page management

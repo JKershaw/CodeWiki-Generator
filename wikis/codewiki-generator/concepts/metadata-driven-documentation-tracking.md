@@ -2,22 +2,22 @@
 title: Metadata-driven documentation tracking
 category: concept
 sourceFile: lib/processor.js
-related: []
+related: [_history/concepts/metadata-driven-documentation-tracking/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Metadata-driven Documentation Tracking
+# [Metadata-driven Documentation Tracking](../_history/concepts/metadata-driven-documentation-tracking/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The metadata-driven documentation tracking system maintains centralized metadata for all wiki pages, enabling future link tracking, categorization queries, and documentation discoverability. This shifts the codebase from isolated page management to interconnected documentation state, laying the foundation for graph-based analysis of page relationships and dependencies.
+The [metadata-driven documentation tracking](../_history/concepts/metadata-driven-documentation-tracking/2025-11-24T14-38-57.md) system maintains centralized metadata for all wiki pages, enabling future link tracking, categorization queries, and documentation discoverability. This shifts the codebase from isolated page management to interconnected documentation state, laying the foundation for graph-based analysis of page relationships and dependencies.
 
 ## Key Functionality
 
 ### Metadata Synchronization
 
-The system implements **dual-path metadata synchronization** to ensure consistent metadata across the page lifecycle:
+The system implements **[dual-path metadata synchronization](../components/dual-path-metadata-synchronization.md)** to ensure consistent metadata across the page lifecycle:
 
 - **Page Creation**: Captures the creation timestamp alongside core metadata (title, category)
 - **Page Updates**: Refreshes metadata while preserving the original creation timestamp

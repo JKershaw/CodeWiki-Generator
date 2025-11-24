@@ -2,16 +2,16 @@
 title: Agent-based guide generation workflow
 category: concept
 sourceFile: lib/processor.js
-related: []
+related: [_history/concepts/agent-based-guide-generation-workflow/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Agent-based Guide Generation Workflow
+# [Agent-based Guide Generation Workflow](../_history/concepts/agent-based-guide-generation-workflow/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The agent-based guide generation workflow orchestrates the creation of operational guides from wiki content and repository analysis. It integrates a specialized `GuideGenerationAgent` into the multi-agent documentation pipeline to automatically generate structured guides based on components, concepts, and repository context before the wiki index is finalized.
+The [agent-based guide generation workflow](../_history/concepts/agent-based-guide-generation-workflow/2025-11-24T14-38-57.md) orchestrates the creation of operational guides from wiki content and repository analysis. It integrates a specialized `GuideGenerationAgent` into the [multi-agent documentation pipeline](../concepts/multi-agent-documentation-pipeline.md) to automatically generate structured guides based on components, concepts, and repository context before the wiki index is finalized.
 
 ## Key Functionality
 

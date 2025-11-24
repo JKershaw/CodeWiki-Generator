@@ -2,16 +2,16 @@
 title: Cost-controlled wiki generation
 category: component
 sourceFile: generate-self-wiki.js
-related: []
+related: [_history/components/cost-controlled-wiki-generation/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Cost-controlled Wiki Generation
+# [Cost-controlled Wiki Generation](../_history/components/cost-controlled-wiki-generation/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The `generate-self-wiki.js` script enables repositories to automatically generate their own wiki documentation from local git history, eliminating the need for GitHub API calls and associated costs. This implements a self-documenting repository pattern where documentation stays synchronized with code changes through regular script execution, while maintaining strict cost controls to prevent API expense overruns.
+The `generate-self-wiki.js` script enables repositories to automatically generate their own wiki documentation from local git history, eliminating the need for GitHub API calls and associated costs. This implements a [self-documenting repository pattern](../concepts/self-documenting-repository-pattern.md) where documentation stays synchronized with code changes through regular script execution, while maintaining strict cost controls to prevent API expense overruns.
 
 ## Key Functionality
 

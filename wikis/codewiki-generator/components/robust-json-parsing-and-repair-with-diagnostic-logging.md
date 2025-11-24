@@ -2,12 +2,12 @@
 title: Robust JSON parsing and repair with diagnostic logging
 category: component
 sourceFile: lib/agents/guide-generation-agent.js
-related: []
+related: [_history/components/robust-json-parsing-and-repair-with-diagnostic-logging/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Robust JSON Parsing and Repair with Diagnostic Logging
+# [Robust JSON Parsing and Repair with Diagnostic Logging](../_history/components/robust-json-parsing-and-repair-with-diagnostic-logging/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
@@ -26,7 +26,7 @@ The `_cleanJSON` method is enhanced to:
 - Re-parse the repaired JSON to verify the repair was successful
 - Throw contextual errors with diagnostic information if repair fails, preventing silent failures
 
-### Defensive Filtering of Malformed Data
+### [Defensive Filtering of Malformed Data](../components/defensive-filtering-of-malformed-data.md)
 Rather than rejecting entire API responses when individual guides are invalid:
 - Validates each guide in the response array
 - Filters out only the malformed items while preserving valid ones

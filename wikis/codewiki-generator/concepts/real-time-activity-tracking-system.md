@@ -2,16 +2,16 @@
 title: Real-time activity tracking system
 category: concept
 sourceFile: lib/dashboard-controller.js
-related: []
+related: [_history/concepts/real-time-activity-tracking-system/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Real-time Activity Tracking System
+# [Real-time Activity Tracking System](../_history/concepts/real-time-activity-tracking-system/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The real-time activity tracking system provides live monitoring and collaborative features for wiki operations through a centralized dashboard controller. It implements Server-Sent Events for real-time activity streaming and coordinates multiple specialized services to deliver comprehensive wiki management capabilities.
+The [real-time activity tracking system](../_history/concepts/real-time-activity-tracking-system/2025-11-24T14-38-57.md) provides live monitoring and collaborative features for wiki operations through a centralized dashboard controller. It implements Server-Sent Events for real-time activity streaming and coordinates multiple specialized services to deliver comprehensive wiki management capabilities.
 
 ## Key Functionality
 
@@ -28,7 +28,7 @@ The real-time activity tracking system provides live monitoring and collaborativ
 **Analytics and Search**
 - Comprehensive wiki analytics dashboard (`getWikiAnalytics`)
 - Full-text search with relevance scoring (`searchWiki`)
-- Git history integration for version tracking (`getPageHistory`)
+- [Git history integration](../concepts/git-history-integration.md) for version tracking (`getPageHistory`)
 
 **Content Management**
 - Table of contents generation with hierarchical organization (`getTableOfContents`)
@@ -37,7 +37,7 @@ The real-time activity tracking system provides live monitoring and collaborativ
 
 ## Relationships
 
-The system extends the existing WikiManager functionality while maintaining backward compatibility with dashboard endpoints. It coordinates ten specialized services (WikiContextService, WikiSearchService, ActivityEventEmitter, PlanningManager, SuggestionEngine, WikiAnalytics, ProjectManager, CommentsManager, GitHistoryService) through a central controller architecture. The ActivityEventEmitter serves as the backbone for real-time monitoring, while other services provide domain-specific functionality accessed through RESTful API patterns.
+The system extends the existing WikiManager functionality while maintaining backward compatibility with dashboard endpoints. It coordinates ten specialized services ([WikiContextService](../components/wiki-context-service.md), WikiSearchService, ActivityEventEmitter, PlanningManager, SuggestionEngine, WikiAnalytics, ProjectManager, CommentsManager, GitHistoryService) through a central controller architecture. The ActivityEventEmitter serves as the backbone for real-time monitoring, while other services provide domain-specific functionality accessed through RESTful API patterns.
 
 ## Usage Example
 

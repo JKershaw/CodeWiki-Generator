@@ -2,16 +2,16 @@
 title: Progressive JSON repair strategy
 category: component
 sourceFile: lib/agents/meta-document-ingestion-agent.js
-related: []
+related: [_history/components/progressive-json-repair-strategy/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Progressive JSON repair strategy
+# [Progressive JSON repair strategy](../_history/components/progressive-json-repair-strategy/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The Progressive JSON repair strategy implements robust parsing of LLM responses with multiple fallback mechanisms for handling malformed JSON, code blocks, and response wrapper text. This component ensures reliable data extraction from Claude API responses even when the JSON is partially corrupted or wrapped in markdown formatting.
+The [Progressive JSON repair strategy](../_history/components/progressive-json-repair-strategy/2025-11-24T14-38-56.md) implements robust parsing of LLM responses with multiple fallback mechanisms for handling malformed JSON, code blocks, and response wrapper text. This component ensures reliable data extraction from Claude API responses even when the JSON is partially corrupted or wrapped in markdown formatting.
 
 ## Key Functionality
 
@@ -28,7 +28,7 @@ This multi-layered approach handles common failure modes in LLM-generated JSON r
 - Incomplete or truncated responses
 - Special character encoding issues
 
-The strategy integrates with the intelligent content truncation system to ensure that even when source documents are truncated to fit token limits, the resulting JSON parsing remains robust.
+The strategy integrates with the [intelligent content truncation](../components/intelligent-content-truncation.md) system to ensure that even when source documents are truncated to fit token limits, the resulting JSON parsing remains robust.
 
 ## Relationships
 
@@ -36,8 +36,8 @@ This component operates within the MetaDocumentIngestionAgent and connects to:
 
 - **ClaudeClient** - Processes responses from Claude API calls that may contain malformed JSON
 - **PromptManager** - Works with template-generated prompts that expect JSON responses
-- **Meta-document ingestion system** - Provides reliable data extraction for wiki page generation
-- **Intelligent content truncation** - Ensures parsing works even with truncated source content
+- **[Meta-document ingestion system](../concepts/meta-document-ingestion-system.md)** - Provides reliable data extraction for wiki page generation
+- **[Intelligent content truncation](../components/intelligent-content-truncation.md)** - Ensures parsing works even with truncated source content
 
 ## Usage Example
 

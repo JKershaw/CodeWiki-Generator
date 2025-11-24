@@ -2,12 +2,12 @@
 title: Resilient API Request Handling
 category: concept
 sourceFile: lib/github.js
-related: []
+related: [components/resilient-api-request-handling.md, components/url-parsing-and-normalization.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Resilient API Request Handling
+# [Resilient API Request Handling](../components/resilient-api-request-handling.md)
 
 ## Purpose and Overview
 
@@ -19,7 +19,7 @@ This module provides a resilient GitHub API client that wraps the Octokit librar
 
 - **Exponential Backoff Retries**: Automatically retries failed API requests with increasing delays, handling rate limits (429) and transient network errors (500-series)
 - **Repository Data Access**: Retrieves repository metadata, commit history, and file contents through normalized methods
-- **URL Parsing and Normalization**: Converts multiple GitHub URL formats (HTTPS and SSH) into standardized owner/repository components
+- **[URL Parsing and Normalization](../components/url-parsing-and-normalization.md)**: Converts multiple GitHub URL formats (HTTPS and SSH) into standardized owner/repository components
 - **Lazy Initialization**: Defers Octokit client creation until first use, reducing startup overhead
 - **Test Mode Isolation**: Automatically disables real API calls during testing, enabling safe mocking scenarios
 

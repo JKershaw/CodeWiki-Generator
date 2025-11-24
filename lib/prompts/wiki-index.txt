@@ -15,9 +15,15 @@ Requirements:
    - Brief description (1 line) based on the title
 4. Add a "Getting Started" or "Navigation" section
 5. Keep it concise and scannable
-6. Use ONLY markdown formatting - NO HTML tags
-7. Use # for headings, - for lists, [text](url) for links
-8. NEVER use <h1>, <p>, <li>, <a>, or any other HTML tags
+
+CRITICAL - Output Format:
+- Use ONLY markdown formatting - NO HTML tags whatsoever
+- Use # for headings (not <h1>, <h2>, etc.)
+- Use - for lists (not <ul>, <li>, etc.)
+- Use [text](url) for links (not <a href="">)
+- Use **bold** (not <strong>, <b>)
+- Use *italic* (not <em>, <i>)
+- NEVER use <p>, <div>, <span>, or any other HTML tags
 
 Structure:
 - Title and project overview (2-3 sentences)

@@ -2,20 +2,20 @@
 title: Project lifecycle management
 category: component
 sourceFile: server.js
-related: []
+related: [_history/components/project-lifecycle-management/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Project Lifecycle Management
+# [Project Lifecycle Management](../_history/components/project-lifecycle-management/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The project lifecycle management component provides comprehensive CRUD operations for wiki projects, handling complete project workflows including creation, import, deletion, and configuration management. It serves as the central orchestrator for project operations within the comprehensive wiki dashboard system, managing project metadata, validation, and settings persistence throughout the entire project lifecycle.
+The [project lifecycle management](../_history/components/project-lifecycle-management/2025-11-24T14-38-56.md) component provides comprehensive CRUD operations for wiki projects, handling complete project workflows including creation, import, deletion, and configuration management. It serves as the central orchestrator for project operations within the [comprehensive wiki dashboard system](../concepts/comprehensive-wiki-dashboard-system.md), managing project metadata, validation, and settings persistence throughout the entire project lifecycle.
 
 ## Key Functionality
 
-The project lifecycle management system offers several core capabilities:
+The [project lifecycle management](../_history/components/project-lifecycle-management/2025-11-24T14-38-56.md) system offers several core capabilities:
 
 - **Project Creation**: Creates new wiki projects with initial configuration and metadata setup through the `createProject` function
 - **Project Import**: Imports existing projects from external sources with validation and structure preservation  
@@ -24,7 +24,7 @@ The project lifecycle management system offers several core capabilities:
 - **Metadata Handling**: Processes project metadata and configuration data for structured storage and retrieval
 - **Integration Coordination**: Works seamlessly with specialized services like WikiManager, ProjectManager, and analytics systems
 
-The component operates as part of the multi-service dashboard architecture, providing RESTful API endpoints for all project lifecycle operations while maintaining activity tracking and real-time monitoring capabilities.
+The component operates as part of the [multi-service dashboard architecture](../concepts/multi-service-dashboard-architecture.md), providing RESTful API endpoints for all project lifecycle operations while maintaining activity tracking and real-time monitoring capabilities.
 
 ## Relationships
 
@@ -56,4 +56,4 @@ const activity = await getActivityFeed();
 
 ## Testing
 
-**Test Coverage**: tests/integration/server.test.js covers the underlying server infrastructure with 11 test cases across 6 test suites, including Express Server, Health Check, Static File Serving, View Engine, Error Handling, and Middleware Configuration. Specific project lifecycle management functionality requires additional test coverage for creation, import, deletion, and settings management operations.
+**Test Coverage**: tests/integration/server.test.js covers the underlying server infrastructure with 11 test cases across 6 test suites, including Express Server, Health Check, Static File Serving, View Engine, Error Handling, and Middleware Configuration. Specific [project lifecycle management](../_history/components/project-lifecycle-management/2025-11-24T14-38-56.md) functionality requires additional test coverage for creation, import, deletion, and settings management operations.

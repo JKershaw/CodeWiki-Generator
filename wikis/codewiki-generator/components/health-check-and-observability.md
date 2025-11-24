@@ -2,16 +2,16 @@
 title: Health Check and Observability
 category: component
 sourceFile: server.js
-related: []
+related: [_history/components/health-check-and-observability/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Health Check and Observability
+# [Health Check and Observability](../_history/components/health-check-and-observability/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The Health Check and Observability component provides a `/health` endpoint that enables external monitoring systems and container orchestration platforms to verify service availability and retrieve operational metadata. This endpoint is essential for production deployments, load balancers, and Kubernetes-style health probes that need to confirm the server is running and responsive.
+The [Health Check and Observability](../_history/components/health-check-and-observability/2025-11-24T14-38-56.md) component provides a `/health` endpoint that enables external monitoring systems and container orchestration platforms to verify service availability and retrieve operational metadata. This endpoint is essential for production deployments, load balancers, and Kubernetes-style health probes that need to confirm the server is running and responsive.
 
 ## Key Functionality
 
@@ -24,7 +24,7 @@ The health check endpoint implements observability through a simple GET request 
 This component works alongside the Express middleware pipeline to:
 
 1. **Respond to monitoring requests** - Returns structured JSON responses that orchestration tools can parse
-2. **Enable graceful degradation** - Combined with the graceful shutdown pattern, allows clean service transitions during deployments
+2. **Enable graceful degradation** - Combined with the [graceful shutdown pattern](../concepts/graceful-shutdown-pattern.md), allows clean service transitions during deployments
 3. **Provide deployment metadata** - Version information helps track which build is currently running
 
 The health check is placed early in the middleware chain to ensure it responds even if other parts of the application encounter issues, maximizing reliability for orchestration systems.

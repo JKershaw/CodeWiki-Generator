@@ -2,12 +2,12 @@
 title: Real-time status polling for long-running processes
 category: component
 sourceFile: public/app.js
-related: []
+related: [_history/components/real-time-status-polling/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Real-time Status Polling for Long-running Processes
+# [Real-time Status Polling](../_history/components/real-time-status-polling/2025-11-24T14-38-56.md) for Long-running Processes
 
 ## Purpose and Overview
 

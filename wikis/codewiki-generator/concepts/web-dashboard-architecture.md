@@ -2,22 +2,22 @@
 title: Web Dashboard Architecture
 category: concept
 sourceFile: server.js
-related: []
+related: [_history/concepts/web-dashboard-architecture/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Web Dashboard Architecture
+# [Web Dashboard Architecture](../_history/concepts/web-dashboard-architecture/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The web dashboard architecture provides an HTTP-based control interface for repository processing with real-time status tracking and integrated wiki documentation. It serves as the primary web interface for managing code analysis workflows through a unified controller-based pattern that separates presentation logic from core server operations.
+The [web dashboard architecture](../_history/concepts/web-dashboard-architecture/2025-11-24T14-38-57.md) provides an HTTP-based control interface for repository processing with real-time status tracking and integrated wiki documentation. It serves as the primary web interface for managing code analysis workflows through a unified controller-based pattern that separates presentation logic from core server operations.
 
 ## Key Functionality
 
 The dashboard implements a layered architecture with dedicated presentation logic through the following components:
 
-**Processing Control API** - Exposes REST endpoints for managing repository processing operations:
+**[Processing Control API](../components/processing-control-api.md)** - Exposes REST endpoints for managing repository processing operations:
 - `POST /process/start` - Initiates processing on a repository
 - `POST /process/pause` - Pauses ongoing processing
 - `POST /process/step` - Executes a single processing step

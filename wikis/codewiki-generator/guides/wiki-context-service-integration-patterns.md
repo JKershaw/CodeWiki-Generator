@@ -2,16 +2,16 @@
 title: WikiContextService integration patterns
 category: guide
 sourceFile: examples/wiki-context-service-example.js
-related: []
+related: [components/wiki-context-service.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# WikiContextService Integration Patterns
+# [WikiContextService](../components/wiki-context-service.md) Integration Patterns
 
 ## Purpose and Overview
 
-This example demonstrates integration patterns for the WikiContextService, which enables programmatic research of wiki content to extract structured development context. It shows how to integrate wiki-driven development into both CLI tools and web applications for automated guidance and documentation generation.
+This example demonstrates integration patterns for the [WikiContextService](../components/wiki-context-service.md), which enables programmatic research of wiki content to extract structured development context. It shows how to integrate wiki-driven development into both CLI tools and web applications for automated guidance and documentation generation.
 
 ## Key Functionality
 
@@ -24,7 +24,7 @@ The example provides two integration approaches:
 
 ## Relationships
 
-- Depends on WikiContextService from `../lib/wiki-context-service` for core wiki research functionality
+- Depends on [WikiContextService](../components/wiki-context-service.md) from `../lib/wiki-context-service` for core wiki research functionality
 - Demonstrates integration with Express.js framework for web service patterns
 - Shows structured output consumption for automated development workflows
 - Connects wiki content management with programmatic development guidance systems
@@ -36,7 +36,7 @@ const WikiContextService = require('../lib/wiki-context-service');
 
 // CLI integration pattern
 async function main() {
-  const service = new WikiContextService();
+  const service = new [WikiContextService](../components/wiki-context-service.md)();
   const query = process.argv[2] || 'authentication system';
   
   const result = await service.research(query);
@@ -49,7 +49,7 @@ async function main() {
 function webAppExample() {
   const express = require('express');
   const app = express();
-  const service = new WikiContextService();
+  const service = new [WikiContextService](../components/wiki-context-service.md)();
   
   app.get('/api/research/:query', async (req, res) => {
     const result = await service.research(req.params.query);

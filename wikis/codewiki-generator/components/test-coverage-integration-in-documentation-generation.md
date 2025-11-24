@@ -2,12 +2,12 @@
 title: Test Coverage Integration in Documentation Generation
 category: component
 sourceFile: lib/processor.js
-related: []
+related: [_history/components/test-coverage-integration-in-documentation-generation/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Test Coverage Integration in Documentation Generation
+# [Test Coverage Integration in Documentation Generation](../_history/components/test-coverage-integration-in-documentation-generation/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
@@ -22,7 +22,7 @@ The `TestCoverageAnalyzer` class analyzes and generates test coverage summaries 
 - **Metadata Aggregation**: Integrates coverage data with code examples and other contextual information into a unified metadata object
 - **Consistent Architecture**: Follows the same enrichment pattern as code example extraction, enabling extensible metadata sourcing
 
-The analyzer operates as part of the Processor's multi-faceted content enrichment pipeline, working alongside other agents (MetaAnalysisAgent, WikiIndexAgent, GuideGenerationAgent) to augment documentation with contextual data sources. Coverage information flows into the `GuideGenerationAgent`, which incorporates it into the final generated documentation.
+The analyzer operates as part of the Processor's [multi-faceted content enrichment pipeline](../concepts/multi-faceted-content-enrichment-pipeline.md), working alongside other agents (MetaAnalysisAgent, WikiIndexAgent, GuideGenerationAgent) to augment documentation with contextual data sources. Coverage information flows into the `GuideGenerationAgent`, which incorporates it into the final generated documentation.
 
 ## Relationships
 

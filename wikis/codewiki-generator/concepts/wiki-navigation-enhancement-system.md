@@ -2,16 +2,16 @@
 title: Wiki navigation enhancement system
 category: concept
 sourceFile: add-breadcrumbs-and-tags.js
-related: []
+related: [_history/concepts/wiki-navigation-enhancement-system/2025-11-24T14-38-57.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Wiki Navigation Enhancement System
+# [Wiki Navigation Enhancement System](../_history/concepts/wiki-navigation-enhancement-system/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The wiki navigation enhancement system automatically improves the discoverability and navigation of wiki content by adding breadcrumbs and intelligent tags to markdown files. It processes existing wiki structures and enriches them with hierarchical navigation paths and category-based tagging without requiring manual intervention.
+The [wiki navigation enhancement system](../_history/concepts/wiki-navigation-enhancement-system/2025-11-24T14-38-57.md) automatically improves the discoverability and navigation of wiki content by adding breadcrumbs and intelligent tags to markdown files. It processes existing wiki structures and enriches them with hierarchical navigation paths and category-based tagging without requiring manual intervention.
 
 ## Key Functionality
 
@@ -19,7 +19,7 @@ The system operates through several coordinated components:
 
 - **Automated Discovery**: Recursively scans wiki directories to find all markdown files using `getAllMarkdownFiles()`
 - **Breadcrumb Generation**: Creates hierarchical navigation paths based on file system structure through `generateBreadcrumb()`
-- **Intelligent Tagging**: Uses the category-based tag suggestion engine with predefined `TAG_SUGGESTIONS` mappings to automatically assign relevant tags
+- **Intelligent Tagging**: Uses the [category-based tag suggestion engine](../components/category-based-tag-suggestion-engine.md) with predefined `TAG_SUGGESTIONS` mappings to automatically assign relevant tags
 - **Frontmatter Enhancement**: Enriches existing YAML frontmatter with navigation metadata and tags via `enhanceFrontmatter()`
 
 The tag suggestion engine analyzes content categories and applies appropriate tags from predefined mappings, making wiki pages more discoverable through consistent categorization.

@@ -2,16 +2,16 @@
 title: Dynamic Wiki Page Serving
 category: component
 sourceFile: server.js
-related: []
+related: [_history/components/dynamic-wiki-page-serving/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Dynamic Wiki Page Serving
+# [Dynamic Wiki Page Serving](../_history/components/dynamic-wiki-page-serving/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The Dynamic Wiki Page Serving component provides a middleware-based routing system that intercepts requests to nested wiki paths and serves documentation pages through the web interface. This enables users to access in-application documentation without leaving the dashboard, integrating knowledge resources directly into the application's user experience.
+The [Dynamic Wiki Page Serving](../_history/components/dynamic-wiki-page-serving/2025-11-24T14-38-56.md) component provides a middleware-based routing system that intercepts requests to nested wiki paths and serves documentation pages through the web interface. This enables users to access in-application documentation without leaving the dashboard, integrating knowledge resources directly into the application's user experience.
 
 ## Key Functionality
 
@@ -34,12 +34,12 @@ This approach keeps documentation accessible within the application while mainta
 
 ## Relationships
 
-The Dynamic Wiki Page Serving component integrates with the larger dashboard ecosystem:
+The [Dynamic Wiki Page Serving](../_history/components/dynamic-wiki-page-serving/2025-11-24T14-38-56.md) component integrates with the larger dashboard ecosystem:
 
 - **Part of DashboardController**: The `renderWikiPage()` method belongs to the central `DashboardController` class that manages all dashboard-related operations
 - **Middleware Pattern**: Uses Express middleware to intercept and handle wiki requests before other route handlers
 - **Dashboard Integration**: Works alongside `renderDashboard()` and other controller methods to provide a complete user interface
-- **Documentation Delivery**: Complements the Interactive Process Control API by providing contextual help and procedural guidance
+- **Documentation Delivery**: Complements the [Interactive Process Control API](../components/interactive-process-control-api.md) by providing contextual help and procedural guidance
 
 ## Usage Example
 

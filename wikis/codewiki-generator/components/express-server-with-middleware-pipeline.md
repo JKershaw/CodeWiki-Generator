@@ -2,12 +2,12 @@
 title: Express Server with Middleware Pipeline
 category: component
 sourceFile: server.js
-related: []
+related: [_history/components/express-server-with-middleware-pipeline/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Express Server with Middleware Pipeline
+# [Express Server with Middleware Pipeline](../_history/components/express-server-with-middleware-pipeline/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
@@ -28,11 +28,11 @@ The server implements a layered middleware architecture:
 3. **Request Processing**: Routes requests through the configured application handlers
 4. **Error Handling**: Global error middleware with environment-aware response details
 
-### Health Check and Observability
+### [Health Check and Observability](../components/health-check-and-observability.md)
 - **`/health` Endpoint**: GET endpoint returning server status, timestamp, and version metadata
 - **Monitoring Support**: Enables external systems to verify service availability and readiness
 
-### Graceful Shutdown Pattern
+### [Graceful Shutdown Pattern](../concepts/graceful-shutdown-pattern.md)
 - **SIGTERM Handler**: Listens for termination signals to cleanly close server connections before process exit
 - **Resource Safety**: Prevents resource leaks and ensures safe deployment transitions during scaling or updates
 

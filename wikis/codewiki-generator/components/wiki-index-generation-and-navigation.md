@@ -2,16 +2,16 @@
 title: Wiki Index Generation and Navigation
 category: component
 sourceFile: lib/processor.js
-related: []
+related: [_history/components/wiki-index-generation-and-navigation/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Wiki Index Generation and Navigation
+# [Wiki Index Generation and Navigation](../_history/components/wiki-index-generation-and-navigation/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The Wiki Index Generation system automatically creates navigational index pages (`index.md`) from processed documentation, organizing wiki pages by metadata-driven categorization. This component enables readers to discover and navigate related documentation through a structured, auto-generated table of contents. It represents Phase 2 of the multi-agent documentation pipeline, adding cross-cutting organizational concerns beyond individual page generation.
+The Wiki Index Generation system automatically creates navigational index pages (`index.md`) from processed documentation, organizing wiki pages by metadata-driven categorization. This component enables readers to discover and navigate related documentation through a structured, auto-generated table of contents. It represents Phase 2 of the [multi-agent documentation pipeline](../concepts/multi-agent-documentation-pipeline.md), adding cross-cutting organizational concerns beyond individual page generation.
 
 ## Key Functionality
 

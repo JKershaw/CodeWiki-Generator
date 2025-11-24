@@ -2,16 +2,16 @@
 title: Content-based TOC generation
 category: component
 sourceFile: add-table-of-contents.js
-related: []
+related: [_history/components/content-based-toc-generation/2025-11-24T14-38-56.md]
 created: 2025-11-24
 updated: 2025-11-24
 ---
 
-# Content-based TOC Generation
+# [Content-based TOC Generation](../_history/components/content-based-toc-generation/2025-11-24T14-38-56.md)
 
 ## Purpose and Overview
 
-The Content-based TOC generation component automatically analyzes markdown files in the wiki and intelligently adds table of contents sections where they would improve navigation. It processes documents based on content complexity heuristics, ensuring TOCs are only added when they provide genuine value to readers.
+The [Content-based TOC generation](../_history/components/content-based-toc-generation/2025-11-24T14-38-56.md) component automatically analyzes markdown files in the wiki and intelligently adds table of contents sections where they would improve navigation. It processes documents based on content complexity heuristics, ensuring TOCs are only added when they provide genuine value to readers.
 
 ## Key Functionality
 
@@ -27,7 +27,7 @@ The component uses two primary thresholds to determine when a TOC adds value: a 
 
 ## Relationships
 
-This component integrates with the broader wiki enhancement pipeline and follows established patterns used by other documentation tools in the system. It processes files from the same wiki structure and uses consistent frontmatter parsing patterns found in other markdown processing components. The tool fits into the automated documentation enhancement system architecture, which can be extended with additional content improvement scripts.
+This component integrates with the broader wiki enhancement pipeline and follows established patterns used by other documentation tools in the system. It processes files from the same wiki structure and uses consistent frontmatter parsing patterns found in other markdown processing components. The tool fits into the [automated documentation enhancement system](../concepts/automated-documentation-enhancement-system.md) architecture, which can be extended with additional content improvement scripts.
 
 ## Usage Example
 

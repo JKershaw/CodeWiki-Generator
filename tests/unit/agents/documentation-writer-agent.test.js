@@ -43,13 +43,20 @@ This is a test component.
       mockClaudeClient.sendMessage.mockResolvedValue('# Documentation');
 
       const conceptName = 'TestConcept';
-      const codeAnalysis = { concepts: ['A', 'B'] };
+      const codeAnalysis = {
+        concepts: [
+          { name: 'A', category: 'component', reason: 'Test reason A', sourceFile: 'test.js' },
+          { name: 'B', category: 'concept', reason: 'Test reason B', sourceFile: 'test.js' }
+        ]
+      };
 
       await agent.writeDocumentation(conceptName, codeAnalysis);
 
       const promptCall = mockClaudeClient.sendMessage.mock.calls[0][0];
       expect(promptCall).toContain('TestConcept');
-      expect(promptCall).toContain('"concepts"');
+      expect(promptCall).toContain('Identified concepts');
+      expect(promptCall).toContain('**A**');
+      expect(promptCall).toContain('**B**');
     });
 
     it('should handle existing content for updates', async () => {
@@ -74,21 +81,22 @@ This is a test component.
       expect(promptCall).toBeDefined();
     });
 
-    it('should stringify code analysis object', async () => {
+    it('should format code analysis as markdown', async () => {
       mockClaudeClient.sendMessage.mockResolvedValue('# Docs');
 
       const analysis = {
-        concepts: ['Auth'],
-        codeElements: [{ name: 'Service', type: 'class' }],
-        relationships: ['uses Database']
+        concepts: [
+          { name: 'AuthService', category: 'component', reason: 'Handles authentication', sourceFile: 'lib/auth.js' }
+        ]
       };
 
       await agent.writeDocumentation('Test', analysis);
 
       const promptCall = mockClaudeClient.sendMessage.mock.calls[0][0];
-      // Should include the analysis data
-      expect(promptCall).toContain('Auth');
-      expect(promptCall).toContain('Service');
+      // Should include formatted markdown analysis
+      expect(promptCall).toContain('Identified concepts');
+      expect(promptCall).toContain('**AuthService**');
+      expect(promptCall).toContain('Handles authentication');
     });
 
     it('should use appropriate model and token limits', async () => {
