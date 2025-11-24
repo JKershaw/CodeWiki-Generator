@@ -15,11 +15,12 @@ function getLocalCommits(limit = null) {
   const commitCount = limit || totalCommits;
 
   console.log(`\n📊 Repository has ${totalCommits} total commits`);
-  console.log(`📥 Fetching ${commitCount === totalCommits ? 'all' : 'last ' + commitCount} commits from local git...\n`);
+  console.log(`📥 Fetching ${commitCount === totalCommits ? 'all' : 'first ' + commitCount} commits from local git...\n`);
 
+  // Get commits in chronological order (oldest first)
   const logOutput = execSync(
-    `git log -${commitCount} --pretty=format:"%H|%s"`,
-    { encoding: 'utf-8' }
+    `git log --reverse --pretty=format:"%H|%s" | head -${commitCount}`,
+    { encoding: 'utf-8', shell: '/bin/bash' }
   ).trim();
 
   const commits = [];
@@ -94,12 +95,20 @@ function getLocalCommits(limit = null) {
 
 async function main() {
   console.log('=== CodeWiki Generator - Self Documentation ===\n');
-  console.log('Generating wiki from full git history...\n');
+
+  // Parse command line argument for commit limit
+  const commitLimit = process.argv[2] ? parseInt(process.argv[2]) : null;
+
+  if (commitLimit) {
+    console.log(`Generating wiki from last ${commitLimit} commit(s)...\n`);
+  } else {
+    console.log('Generating wiki from full git history...\n');
+  }
 
   const processor = new Processor('./wikis/codewiki-generator');
 
-  // Get all commits (no limit - process full history)
-  const commits = getLocalCommits();
+  // Get commits (with optional limit)
+  const commits = getLocalCommits(commitLimit);
 
   // Mock GitHub client to use local commits
   processor.githubClient = {
