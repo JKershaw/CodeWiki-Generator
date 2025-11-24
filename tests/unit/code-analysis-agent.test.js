@@ -8,9 +8,8 @@ describe('CodeAnalysisAgent', () => {
   });
 
   describe('_validateResponse', () => {
-    it('should preserve filePath from response', () => {
+    it('should normalize concepts with sourceFile', () => {
       const mockResponse = {
-        filePath: 'lib/dashboard-controller.js',
         concepts: [
           {
             name: 'DashboardController',
@@ -19,38 +18,33 @@ describe('CodeAnalysisAgent', () => {
             reason: 'Main controller for dashboard',
             sourceFile: 'lib/dashboard-controller.js'
           }
-        ],
-        codeElements: [],
-        relationships: []
+        ]
       };
 
       const result = agent._validateResponse(mockResponse);
 
-      expect(result).toHaveProperty('filePath', 'lib/dashboard-controller.js');
       expect(result.concepts[0]).toHaveProperty('sourceFile', 'lib/dashboard-controller.js');
     });
 
-    it('should add filePath to concepts that are missing sourceFile', () => {
+    it('should add sourceFile to concepts that are missing it', () => {
       const mockResponse = {
-        filePath: 'lib/test-coverage-analyzer.js',
         concepts: [
           {
             name: 'TestCoverageAnalyzer',
             category: 'component',
             abstraction: 'low',
-            reason: 'Analyzes test coverage'
-            // sourceFile missing
+            reason: 'Analyzes test coverage',
+            sourceFile: 'lib/test-coverage-analyzer.js'
           }
         ]
       };
 
       const result = agent._validateResponse(mockResponse);
 
-      expect(result.filePath).toBe('lib/test-coverage-analyzer.js');
       expect(result.concepts[0].sourceFile).toBe('lib/test-coverage-analyzer.js');
     });
 
-    it('should use "Not specified" when filePath is missing', () => {
+    it('should use "Not specified" when sourceFile is missing', () => {
       const mockResponse = {
         concepts: [
           {
@@ -64,37 +58,31 @@ describe('CodeAnalysisAgent', () => {
 
       const result = agent._validateResponse(mockResponse);
 
-      expect(result.filePath).toBe('Not specified');
       expect(result.concepts[0].sourceFile).toBe('Not specified');
     });
 
     it('should handle legacy string format concepts', () => {
       const mockResponse = {
-        filePath: 'lib/processor.js',
         concepts: ['Processor', 'WikiManager']
       };
 
       const result = agent._validateResponse(mockResponse);
 
-      expect(result.filePath).toBe('lib/processor.js');
       expect(result.concepts).toHaveLength(2);
       expect(result.concepts[0]).toMatchObject({
         name: 'Processor',
         category: 'component',
-        abstraction: 'low',
-        sourceFile: 'lib/processor.js'
+        abstraction: 'low'
       });
       expect(result.concepts[1]).toMatchObject({
         name: 'WikiManager',
         category: 'component',
-        abstraction: 'low',
-        sourceFile: 'lib/processor.js'
+        abstraction: 'low'
       });
     });
 
-    it('should preserve all standard fields', () => {
+    it('should return only concepts field', () => {
       const mockResponse = {
-        filePath: 'lib/example.js',
         concepts: [
           {
             name: 'Example',
@@ -103,20 +91,12 @@ describe('CodeAnalysisAgent', () => {
             reason: 'Example component',
             sourceFile: 'lib/example.js'
           }
-        ],
-        codeElements: [
-          { name: 'exampleFunction', type: 'function', purpose: 'Does something' }
-        ],
-        relationships: ['related-concept'],
-        suggestedGuides: [
-          { title: 'Example Guide', reason: 'Helps understand examples' }
         ]
       };
 
       const result = agent._validateResponse(mockResponse);
 
       expect(result).toMatchObject({
-        filePath: 'lib/example.js',
         concepts: [
           {
             name: 'Example',
@@ -125,15 +105,10 @@ describe('CodeAnalysisAgent', () => {
             reason: 'Example component',
             sourceFile: 'lib/example.js'
           }
-        ],
-        codeElements: [
-          { name: 'exampleFunction', type: 'function', purpose: 'Does something' }
-        ],
-        relationships: ['related-concept'],
-        suggestedGuides: [
-          { title: 'Example Guide', reason: 'Helps understand examples' }
         ]
       });
+      // Ensure no extra fields
+      expect(Object.keys(result)).toEqual(['concepts']);
     });
   });
 
