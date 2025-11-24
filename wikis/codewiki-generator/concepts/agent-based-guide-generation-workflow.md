@@ -1,0 +1,74 @@
+---
+title: Agent-based guide generation workflow
+category: concept
+sourceFile: lib/processor.js
+related: [_history/concepts/agent-based-guide-generation-workflow/2025-11-24T14-38-57.md]
+created: 2025-11-24
+updated: 2025-11-24
+---
+
+# [Agent-based Guide Generation Workflow](../_history/concepts/agent-based-guide-generation-workflow/2025-11-24T14-38-57.md)
+
+## Purpose and Overview
+
+The [agent-based guide generation workflow](../_history/concepts/agent-based-guide-generation-workflow/2025-11-24T14-38-57.md) orchestrates the creation of operational guides from wiki content and repository analysis. It integrates a specialized `GuideGenerationAgent` into the [multi-agent documentation pipeline](../concepts/multi-agent-documentation-pipeline.md) to automatically generate structured guides based on components, concepts, and repository context before the wiki index is finalized.
+
+## Key Functionality
+
+### Main Components
+
+**GuideGenerationAgent**
+- Analyzes wiki pages categorized as components and concepts
+- Generates operational guides with repository context
+- Produces actionable documentation from code analysis results
+
+**generateWikiGuides()**
+- Orchestrates the complete guide generation workflow
+- Collects and categorizes wiki pages by metadata
+- Invokes repository introspection for contextual information
+- Delegates guide generation to the specialized agent
+- Persists generated guides back to the wiki
+
+**Repository Introspection**
+- `detectRepositoryInfo()` - Scans the codebase to identify technology stack, frameworks, and configuration patterns
+- `scanDir()` - Recursively traverses repository structure while excluding hidden directories and `node_modules`, collecting file metadata for analysis
+
+### Workflow Pattern
+
+1. Retrieves all wiki pages via `WikiManager.getAllPages()`
+2. Filters pages by category metadata (components, concepts)
+3. Analyzes repository structure to detect technology context
+4. Passes categorized content and repository info to GuideGenerationAgent
+5. Gracefully handles generation failures with warning logs
+6. Executes before `generateWikiIndex()` in the processing pipeline, establishing guides as prerequisite documentation
+
+### Graceful Degradation
+
+Guide generation failures are caught and logged as warnings without interrupting the overall documentation pipeline, ensuring the system continues with wiki index generation and maintains robustness.
+
+## Relationships
+
+- **Agent Integration**: Follows the established multi-agent pattern used by `CodeAnalysisAgent`, `DocumentationWriterAgent`, `MetaAnalysisAgent`, and `WikiIndexAgent`
+- **Pipeline Sequencing**: Executes before wiki index generation, treating generated guides as foundational documentation
+- **Wiki Manager Dependency**: Leverages `WikiManager.getAllPages()` and page update methods to access and persist categorized content
+- **Repository Context**: Complements existing code analysis functionality to provide richer documentation context through file structure analysis
+
+## Usage Example
+
+```javascript
+const processor = new Processor(wikiManager, stateManager, agents);
+
+// Guide generation is invoked during the processing pipeline
+// It automatically runs before wiki index generation
+await processor.generateWikiGuides();
+
+// Generated guides are persisted to the wiki and become part of the documentation
+// The workflow accesses categorized pages internally:
+const pages = wikiManager.getAllPages();
+const components = pages.filter(p => p.metadata.category === 'component');
+const concepts = pages.filter(p => p.metadata.category === 'concept');
+```
+
+## Testing
+
+The implementation is covered by the Processor test suite with 26 test cases across 6 test suites, including tests for guide generation integration within the broader documentation processing pipeline. Tests verify proper orchestration of the guide generation workflow, correct categorization of wiki pages, repository introspection accuracy, and error handling behavior in the multi-agent system.

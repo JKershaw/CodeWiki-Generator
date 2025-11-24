@@ -1,0 +1,68 @@
+---
+title: Real-time activity tracking system
+category: concept
+sourceFile: lib/dashboard-controller.js
+related: [_history/concepts/real-time-activity-tracking-system/2025-11-24T14-38-57.md]
+created: 2025-11-24
+updated: 2025-11-24
+---
+
+# [Real-time Activity Tracking System](../_history/concepts/real-time-activity-tracking-system/2025-11-24T14-38-57.md)
+
+## Purpose and Overview
+
+The [real-time activity tracking system](../_history/concepts/real-time-activity-tracking-system/2025-11-24T14-38-57.md) provides live monitoring and collaborative features for wiki operations through a centralized dashboard controller. It implements Server-Sent Events for real-time activity streaming and coordinates multiple specialized services to deliver comprehensive wiki management capabilities.
+
+## Key Functionality
+
+**Real-time Activity Monitoring**
+- Implements Server-Sent Events endpoint (`getActivityFeed`) for live activity streaming
+- Provides keepalive mechanisms and automatic cleanup for persistent connections
+- Tracks and broadcasts wiki operations as they occur
+
+**Collaborative Features**
+- Comments system with author tracking and content management (`addComment`)
+- Planning task management with CRUD operations (`createPlanningTask`)
+- Intelligent content suggestions based on wiki analysis (`generateSuggestions`)
+
+**Analytics and Search**
+- Comprehensive wiki analytics dashboard (`getWikiAnalytics`)
+- Full-text search with relevance scoring (`searchWiki`)
+- [Git history integration](../concepts/git-history-integration.md) for version tracking (`getPageHistory`)
+
+**Content Management**
+- Table of contents generation with hierarchical organization (`getTableOfContents`)
+- AI-powered research functionality for content analysis (`researchContext`)
+- YAML frontmatter parsing with metadata extraction (`_parseFrontmatter`)
+
+## Relationships
+
+The system extends the existing WikiManager functionality while maintaining backward compatibility with dashboard endpoints. It coordinates ten specialized services ([WikiContextService](../components/wiki-context-service.md), WikiSearchService, ActivityEventEmitter, PlanningManager, SuggestionEngine, WikiAnalytics, ProjectManager, CommentsManager, GitHistoryService) through a central controller architecture. The ActivityEventEmitter serves as the backbone for real-time monitoring, while other services provide domain-specific functionality accessed through RESTful API patterns.
+
+## Usage Example
+
+```javascript
+const DashboardController = require('./lib/dashboard-controller');
+
+// Initialize dashboard controller
+const dashboard = new DashboardController(wikiManager);
+
+// Set up real-time activity monitoring
+app.get('/api/activity-feed', (req, res) => {
+  dashboard.getActivityFeed(req, res);
+});
+
+// Search wiki content
+const searchResults = await dashboard.searchWiki({ query: 'documentation' });
+
+// Add collaborative comment
+await dashboard.addComment({
+  pageId: 'getting-started',
+  content: 'This section needs more examples',
+  author: 'developer'
+});
+```
+
+## Testing
+
+No automated tests found for this component.

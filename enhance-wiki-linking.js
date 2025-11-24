@@ -176,17 +176,25 @@ function isInsideHtmlTag(content, position) {
  * Create a relative markdown link
  */
 function createMarkdownLink(mention, currentPath) {
-  // Calculate relative path
+  // Calculate proper relative path from current file to target
   const currentDir = path.dirname(currentPath);
-  const targetPath = mention.targetPath;
+  const targetDir = path.dirname(mention.targetPath);
+  const targetFile = path.basename(mention.targetPath);
 
   let relativePath;
-  if (currentDir === '.') {
-    relativePath = targetPath;
-  } else {
-    const levels = currentDir.split('/').length;
-    const prefix = '../'.repeat(levels);
-    relativePath = prefix + targetPath;
+
+  // If both files are in the same directory, just use the filename
+  if (currentDir === targetDir) {
+    relativePath = targetFile;
+  }
+  // If current is root and target is in subdirectory
+  else if (currentDir === '.') {
+    relativePath = mention.targetPath;
+  }
+  // Otherwise, calculate relative path properly
+  else {
+    // Use Node's path.relative to calculate the correct relative path
+    relativePath = path.relative(currentDir, mention.targetPath);
   }
 
   // Preserve bold formatting

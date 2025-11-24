@@ -227,4 +227,143 @@ describe('WikiManager - Write Operations', () => {
       expect(page.content.trim()).toBe('<p>Content 3</p>');
     });
   });
+
+  describe('archivePageVersion', () => {
+    it('should archive existing page before update', async () => {
+      // Create initial page
+      await wikiManager.createPage('test.md', 'Original content', { title: 'Test' });
+
+      // Update with commit info - should archive old version
+      await wikiManager.updatePage('test.md', 'Updated content', {}, {
+        sha: 'abc1234',
+        timestamp: '2025-11-24T10:30:00Z'
+      });
+
+      // Check archive was created
+      const archiveDir = path.join(testDir, '_history/test');
+      const files = await fs.readdir(archiveDir);
+      expect(files.length).toBe(1);
+      expect(files[0]).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}-abc1234\.md$/);
+
+      // Check archive contains original content
+      const archiveContent = await fs.readFile(path.join(archiveDir, files[0]), 'utf-8');
+      expect(archiveContent).toContain('Original content');
+    });
+
+    it('should create nested archive directories for nested pages', async () => {
+      // Create a nested page
+      await wikiManager.createPage('concepts/architecture.md', 'Architecture v1', { title: 'Architecture' });
+
+      // Update it
+      await wikiManager.updatePage('concepts/architecture.md', 'Architecture v2', {}, {
+        sha: 'def5678',
+        timestamp: '2025-11-24T11:00:00Z'
+      });
+
+      // Check archive structure
+      const archiveDir = path.join(testDir, '_history/concepts/architecture');
+      const files = await fs.readdir(archiveDir);
+      expect(files.length).toBe(1);
+      expect(files[0]).toMatch(/def5678\.md$/);
+    });
+
+    it('should not create archive when creating new page', async () => {
+      // Create a new page (no previous version to archive)
+      await wikiManager.createPage('new-page.md', 'First version', { title: 'New' });
+
+      // Archive directory should not exist
+      const archiveDir = path.join(testDir, '_history/new-page');
+      try {
+        await fs.access(archiveDir);
+        fail('Archive directory should not exist for new pages');
+      } catch (error) {
+        expect(error.code).toBe('ENOENT');
+      }
+    });
+
+    it('should not create archive when page does not exist yet (updatePage creates it)', async () => {
+      // Update a non-existent page (updatePage will create it)
+      await wikiManager.updatePage('brand-new.md', 'Content', { title: 'New' });
+
+      // Archive directory should not exist
+      const archiveDir = path.join(testDir, '_history/brand-new');
+      try {
+        await fs.access(archiveDir);
+        fail('Archive directory should not exist when no previous version exists');
+      } catch (error) {
+        expect(error.code).toBe('ENOENT');
+      }
+    });
+
+    it('should create multiple archives when page is updated multiple times', async () => {
+      // Create initial page
+      await wikiManager.createPage('multi.md', 'Version 1', { title: 'Multi' });
+
+      // Update multiple times
+      await wikiManager.updatePage('multi.md', 'Version 2', {}, {
+        sha: 'commit1',
+        timestamp: '2025-11-24T10:00:00Z'
+      });
+
+      await wikiManager.updatePage('multi.md', 'Version 3', {}, {
+        sha: 'commit2',
+        timestamp: '2025-11-24T11:00:00Z'
+      });
+
+      await wikiManager.updatePage('multi.md', 'Version 4', {}, {
+        sha: 'commit3',
+        timestamp: '2025-11-24T12:00:00Z'
+      });
+
+      // Check all archives exist
+      const archiveDir = path.join(testDir, '_history/multi');
+      const files = await fs.readdir(archiveDir);
+      expect(files.length).toBe(3);
+
+      // Verify they're sorted chronologically by filename
+      const sortedFiles = files.sort();
+      expect(sortedFiles[0]).toContain('commit1');
+      expect(sortedFiles[1]).toContain('commit2');
+      expect(sortedFiles[2]).toContain('commit3');
+    });
+
+    it('should work without commit info (backward compatibility)', async () => {
+      // Create initial page
+      await wikiManager.createPage('no-commit.md', 'Original', { title: 'No Commit' });
+
+      // Update without commit info
+      await wikiManager.updatePage('no-commit.md', 'Updated');
+
+      // Archive should still be created with timestamp-only filename
+      const archiveDir = path.join(testDir, '_history/no-commit');
+      const files = await fs.readdir(archiveDir);
+      expect(files.length).toBe(1);
+      expect(files[0]).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}\.md$/);
+    });
+
+    it('should preserve frontmatter in archived version', async () => {
+      // Create page with metadata
+      await wikiManager.createPage('meta.md', 'Content', {
+        title: 'Meta Test',
+        created: '2025-11-20',
+        category: 'concept'
+      });
+
+      // Update it
+      await wikiManager.updatePage('meta.md', 'New content', {}, {
+        sha: 'xyz9999',
+        timestamp: '2025-11-24T13:00:00Z'
+      });
+
+      // Read archive and check frontmatter is preserved
+      const archiveDir = path.join(testDir, '_history/meta');
+      const files = await fs.readdir(archiveDir);
+      const archiveContent = await fs.readFile(path.join(archiveDir, files[0]), 'utf-8');
+
+      expect(archiveContent).toContain('---');
+      expect(archiveContent).toContain('title: Meta Test');
+      expect(archiveContent).toContain('created: 2025-11-20');
+      expect(archiveContent).toContain('category: concept');
+    });
+  });
 });

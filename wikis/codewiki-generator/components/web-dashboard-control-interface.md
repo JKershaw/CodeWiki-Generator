@@ -1,74 +1,82 @@
 ---
-title: Web dashboard control interface
+title: Web Dashboard Control Interface
 category: component
-layer: code
-tags: [implementation, code, dashboard, ui]
-related: [components/dashboard-controller.md]
-updated: 2025-11-23
-created: 2025-11-23
 sourceFile: lib/dashboard-controller.js
+related: [_history/components/web-dashboard-control-interface/2025-11-24T14-38-56.md]
+created: 2025-11-24
+updated: 2025-11-24
 ---
-[Home](../index.md) > [Components](../components) > Web Dashboard Control Interface
 
-## Table of Contents
+# [Web Dashboard Control Interface](../_history/components/web-dashboard-control-interface/2025-11-24T14-38-56.md)
 
-- [See Also](#see-also)
+## Purpose and Overview
 
-<h1>Web Dashboard Control Interface</h1>
-<h2>Purpose and Overview</h2>
-<p>The <code>[DashboardController](../components/dashboard-controller.md)</code> provides a web-based interface and HTTP API for controlling the wiki generation process. It allows users to start, pause, and monitor repository processing through a browser interface, with granular controls for step-by-step processing and batch operations.</p>
-<h2>Key Functionality</h2>
-<p>The dashboard controller offers comprehensive control over the wiki generation pipeline:</p>
-<ul>
-<li><strong>Web Interface</strong>: Renders a dashboard view showing current processing state and controls</li>
-<li><strong>Processing Control</strong>: Start, pause, and monitor repository processing with real-time status updates</li>
-<li><strong>Granular Processing</strong>: Execute single commit processing steps for debugging and cost management</li>
-<li><strong>Batch Operations</strong>: Process specified numbers of commits in controlled batches</li>
-<li><strong>Wiki Serving</strong>: Serves generated wiki pages through the web interface</li>
-<li><strong>Input Validation</strong>: Validates GitHub repository URLs before processing</li>
-</ul>
-<p>The controller provides both HTML views for human users and JSON API endpoints for programmatic access. It maintains processing state and integrates background execution with user controls.</p>
-<h2>Relationships</h2>
-<p>The <code>[DashboardController](../components/dashboard-controller.md)</code> serves as the orchestration layer that connects:</p>
-<ul>
-<li><strong>Processor</strong>: Controls the core repository processing engine</li>
-<li><strong>StateManager</strong>: Manages and persists processing state across operations</li>
-<li><strong>WikiManager</strong>: Handles wiki page generation and serving</li>
-<li><strong>Web Layer</strong>: Provides HTTP endpoints and renders user interface views</li>
-</ul>
-<p>It acts as the primary integration point between the user interface and the underlying processing components, translating user actions into system operations.</p>
-<h2>Usage Example</h2>
-<pre><code class="language-javascript">const [DashboardController](../components/dashboard-controller.md) = require(&#39;./lib/dashboard-controller&#39;);
+The [Web Dashboard Control Interface](../_history/components/web-dashboard-control-interface/2025-11-24T14-38-56.md) provides HTTP endpoints for interactive control and monitoring of wiki generation from repository analysis. It serves as the primary user-facing layer, enabling developers to start processing, pause/resume analysis, monitor progress, and access generated documentation through a web UI without managing long-running tasks directly.
 
-// Initialize controller with required dependencies
-const controller = new [DashboardController](../components/dashboard-controller.md)({
-  processor: processorInstance,
-  stateManager: stateManagerInstance,
-  wikiManager: wikiManagerInstance
+## Key Functionality
+
+### Dashboard Rendering and Status Monitoring
+The controller renders an interactive dashboard view displaying current processing state and exposes a JSON endpoint (`getStatus`) for [real-time status polling](../components/real-time-status-polling.md). This allows the UI to stay synchronized with backend processing progress without forcing page refreshes.
+
+### Processing Control Operations
+The controller implements fine-grained control over repository processing:
+- **Start Processing**: Initiates background repository analysis with URL validation and duplicate prevention
+- **Pause Processing**: Halts active processing by updating persisted state, allowing later resumption
+- **Step Processing**: Advances one commit incrementally for granular control
+- **Batch Processing**: Processes multiple commits in a single operation for efficiency
+
+### Background Task Decoupling
+Long-running repository analysis occurs in background promises, decoupled from HTTP request/response cycles. This pattern prevents request timeouts while maintaining user feedback through state persistence and status polling.
+
+### Wiki Page Access and Routing
+The controller maps URL paths to generated wiki markdown files through the `renderWikiPage` function. This provides a unified access layer to the documentation produced by the processing pipeline, converting URL paths to file system locations.
+
+### Input Validation
+URL validation via `isValidGitHubUrl` ensures only properly formatted GitHub repository URLs enter the processing pipeline, preventing invalid requests from consuming resources.
+
+## Relationships
+
+- **Processor**: Delegates repository analysis and commit processing operations
+- **StateManager**: Persists processing progress and pause/resume state across HTTP requests
+- **WikiManager**: Retrieves generated wiki pages for serving to end users
+- **HTTP Adapter**: Acts as the bridge between web requests and the core processing pipeline
+
+## Usage Example
+
+```javascript
+const DashboardController = require('./lib/dashboard-controller');
+const controller = new DashboardController(processor, stateManager, wikiManager);
+
+// Render dashboard view
+app.get('/dashboard', (req, res) => {
+  const html = controller.renderDashboard();
+  res.send(html);
 });
 
-// Get current processing status
-const status = await controller.getStatus();
+// Get current status as JSON
+app.get('/api/status', (req, res) => {
+  const status = controller.getStatus();
+  res.json(status);
+});
 
 // Start processing a repository
-await controller.startProcessing(&#39;https://github.com/owner/repo&#39;);
+app.post('/api/start', (req, res) => {
+  controller.startProcessing(req.body.repositoryUrl);
+  res.json({ status: 'processing started' });
+});
 
-// Process single step for debugging
-await controller.processStep();
+// Render a wiki page
+app.get('/wiki/:page', (req, res) => {
+  const html = controller.renderWikiPage(req.params.page);
+  res.send(html);
+});
+```
 
-// Process batch of commits
-await controller.processBatch(5);
-</code></pre>
-<h2>Testing</h2>
-<p>No automated tests found for this component.</p>
+## Testing
 
-## See Also
-
-**Project Context:**
-- [Core Philosophy & Vision](../meta/philosophy.md)
-- [Technical Specification](../meta/specification.md)
-- [Project History and Achievement Analysis](../history/progress-report.md)
-
-**Related Topics:**
-- [DashboardController](../components/dashboard-controller.md)
-- [Dashboard Control Interface](../components/dashboard-control-interface.md)
+No automated tests are currently available for this component. Test coverage is recommended for:
+- URL validation logic for GitHub repositories
+- State persistence across pause/resume cycles
+- Background promise error containment
+- Wiki page routing and file path conversion
+- HTTP endpoint behavior and response formats

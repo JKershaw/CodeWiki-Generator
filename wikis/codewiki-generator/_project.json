@@ -1,0 +1,11 @@
+{
+  "name": "codewiki-generator",
+  "description": "",
+  "repository": "",
+  "createdAt": "2025-11-24T12:40:02.386Z",
+  "updatedAt": "2025-11-24T12:40:02.386Z",
+  "settings": {
+    "theme": "default",
+    "maxPageSize": 5000
+  }
+}

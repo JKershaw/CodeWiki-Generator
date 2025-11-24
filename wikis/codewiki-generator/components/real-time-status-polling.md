@@ -1,0 +1,70 @@
+---
+title: Real-time Status Polling
+category: component
+sourceFile: public/app.js
+related: [_history/components/real-time-status-polling/2025-11-24T14-38-56.md]
+created: 2025-11-24
+updated: 2025-11-24
+---
+
+# [Real-time Status Polling](../_history/components/real-time-status-polling/2025-11-24T14-38-56.md)
+
+## Purpose and Overview
+
+[Real-time Status Polling](../_history/components/real-time-status-polling/2025-11-24T14-38-56.md) implements an automatic refresh mechanism that monitors the processing status of repository operations at regular intervals. By polling the `/api/status` endpoint every 5 seconds, the component enables responsive UI feedback without requiring WebSocket complexity, automatically reloading the page when the processing status changes.
+
+## Key Functionality
+
+The [Real-time Status Polling](../_history/components/real-time-status-polling/2025-11-24T14-38-56.md) component provides:
+
+- **Automatic Status Monitoring**: Establishes a polling interval that queries the backend status endpoint every 5 seconds
+- **Change Detection**: Compares current status against previous state to identify when processing completes or transitions occur
+- **Page Reload Trigger**: Automatically refreshes the page when status changes from `'processing'` to another state, ensuring users see updated results
+- **Non-blocking Operation**: Runs in the background without disrupting other dashboard interactions like form submission or step controls
+
+The polling mechanism operates independently from user actions, allowing the dashboard to provide real-time feedback while users interact with process control buttons. When a status change is detected, the page reloads to reflect the latest processing state and results.
+
+## Relationships
+
+[Real-time Status Polling](../_history/components/real-time-status-polling/2025-11-24T14-38-56.md) integrates with the following components and systems:
+
+- **Backend API**: Communicates with the `/api/status` endpoint to retrieve current processing state
+- **Dashboard UI**: Coordinates with the `status-badge` HTML element to display status information
+- **Process Management System**: Depends on the server-side process management to provide accurate status transitions
+- **[Form-based Process Control Interface](../components/form-based-process-control-interface.md)**: Works alongside step, pause, and form submission handlers to provide complete user feedback throughout the workflow
+
+The polling strategy complements the form-based controls—while users manually initiate steps or pause operations, the polling component independently monitors for external state changes or completion events.
+
+## Usage Example
+
+The [Real-time Status Polling](../_history/components/real-time-status-polling/2025-11-24T14-38-56.md) component initializes automatically when the DOM loads and operates without explicit method calls:
+
+```javascript
+// Polling runs automatically in the background after DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Auto-refresh interval is established here
+  // Polls /api/status every 5 seconds
+  setInterval(async () => {
+    const response = await fetch('/api/status');
+    const data = await response.json();
+    
+    // Detects when status changes from 'processing'
+    if (data.status !== 'processing') {
+      location.reload(); // Reloads page to show updated results
+    }
+  }, 5000);
+});
+```
+
+To monitor status changes in your own code, fetch the `/api/status` endpoint and check the returned status field. The polling mechanism handles page reloads automatically, but you can implement custom handlers by modifying the status change detection logic.
+
+## Testing
+
+No automated tests are currently available for this component. To verify polling functionality:
+
+1. Start a processing operation via the form
+2. Observe the status endpoint being called every 5 seconds in browser network logs
+3. Confirm the page reloads when processing completes
+4. Verify no unnecessary reloads occur during active processing
+
+Consider adding integration tests that mock the `/api/status` endpoint and verify page reload behavior at status state transitions.

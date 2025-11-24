@@ -17,20 +17,17 @@ describe('GuideGenerationAgent', () => {
 
   describe('generateGuides', () => {
     it('should generate guides from wiki data', async () => {
-      const mockGuidesJson = JSON.stringify({
-        guides: [
-          {
-            title: 'Getting Started',
-            content: '# Getting Started\n\nInstall dependencies...'
-          },
-          {
-            title: 'Testing Approach',
-            content: '# Testing Approach\n\nRun tests with jest...'
-          }
-        ]
-      });
+      const mockGuidesMarkdown = `---GUIDE: Getting Started---
+# Getting Started
 
-      mockClaudeClient.sendMessage.mockResolvedValue(mockGuidesJson);
+Install dependencies...
+
+---GUIDE: Testing Approach---
+# Testing Approach
+
+Run tests with jest...`;
+
+      mockClaudeClient.sendMessage.mockResolvedValue(mockGuidesMarkdown);
 
       const wikiData = {
         repositoryName: 'My Repository',
@@ -91,16 +88,12 @@ describe('GuideGenerationAgent', () => {
     });
 
     it('should validate guide structure', async () => {
-      const mockGuidesJson = JSON.stringify({
-        guides: [
-          {
-            title: 'Getting Started',
-            content: '# Getting Started\n\nContent here'
-          }
-        ]
-      });
+      const mockGuidesMarkdown = `---GUIDE: Getting Started---
+# Getting Started
 
-      mockClaudeClient.sendMessage.mockResolvedValue(mockGuidesJson);
+Content here`;
+
+      mockClaudeClient.sendMessage.mockResolvedValue(mockGuidesMarkdown);
 
       const wikiData = {
         repositoryName: 'Test',
@@ -118,8 +111,8 @@ describe('GuideGenerationAgent', () => {
     });
 
     it('should use correct model and token limits', async () => {
-      const mockGuidesJson = JSON.stringify({ guides: [] });
-      mockClaudeClient.sendMessage.mockResolvedValue(mockGuidesJson);
+      const mockGuidesMarkdown = ''; // Empty response
+      mockClaudeClient.sendMessage.mockResolvedValue(mockGuidesMarkdown);
 
       const wikiData = {
         repositoryName: 'Test',
@@ -133,15 +126,14 @@ describe('GuideGenerationAgent', () => {
       expect(mockClaudeClient.sendMessage).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({
-          model: 'claude-sonnet-4-20250514',
-          maxTokens: 4000
+          maxTokens: 8000
         })
       );
     });
 
     it('should handle empty components and concepts', async () => {
-      const mockGuidesJson = JSON.stringify({ guides: [] });
-      mockClaudeClient.sendMessage.mockResolvedValue(mockGuidesJson);
+      const mockGuidesMarkdown = ''; // Empty response
+      mockClaudeClient.sendMessage.mockResolvedValue(mockGuidesMarkdown);
 
       const wikiData = {
         repositoryName: 'Empty',

@@ -1,92 +1,65 @@
 ---
 title: Web Dashboard Architecture
 category: concept
-layer: code
-tags: [architecture, design-pattern, dashboard, ui]
-related: [components/dashboard-controller.md, components/wiki-integration.md]
-updated: 2025-11-23
-created: 2025-11-23
 sourceFile: server.js
+related: [_history/concepts/web-dashboard-architecture/2025-11-24T14-38-57.md]
+created: 2025-11-24
+updated: 2025-11-24
 ---
-[Home](../index.md) > [Concepts](../concepts) > Web Dashboard Architecture
 
-## Table of Contents
+# [Web Dashboard Architecture](../_history/concepts/web-dashboard-architecture/2025-11-24T14-38-57.md)
 
-- [See Also](#see-also)
+## Purpose and Overview
 
-<h1>Web Dashboard Architecture</h1>
-<h2>Purpose and Overview</h2>
-<p>The Web Dashboard Architecture transforms the application from a CLI-only system into a web-accessible interface, providing centralized monitoring and control capabilities through a browser. This [architecture](../concepts/architecture.md) implements a comprehensive dashboard that integrates system status reporting, processing control, and documentation viewing into a single web interface.</p>
-<h2>Key Functionality</h2>
-<p>The dashboard provides several core capabilities:</p>
-<ul>
-<li><strong>System Monitoring</strong>: Real-time status reporting through API endpoints that display current system state and health metrics</li>
-<li><strong>Processing Control</strong>: Web-based controls for starting, pausing, stepping through, and batch processing operations that were previously only available via CLI</li>
-<li><strong><a href="../components/wiki-integration.md">[Wiki Integration](../components/wiki-integration.md)</a></strong>: Seamless viewing of documentation and wiki content through nested URL patterns like <code>/wiki/concepts/[architecture](../concepts/architecture.md)</code></li>
-<li><strong>Dashboard Interface</strong>: A centralized web UI that consolidates all system operations and information into an accessible format</li>
-</ul>
-<p>The <code>[DashboardController](../components/dashboard-controller.md)</code> class serves as the primary orchestrator, handling HTTP routes and business logic for all dashboard operations. The [architecture](../concepts/architecture.md) supports both interactive dashboard rendering and API endpoints for programmatic access.</p>
-<h2>Relationships</h2>
-<p>The Web Dashboard Architecture integrates with several existing system components:</p>
-<ul>
-<li><strong>Health Check System</strong>: Builds upon existing health monitoring endpoints to provide web-accessible status information</li>
-<li><strong>CLI Processing Engine</strong>: Exposes existing CLI functionality through web endpoints, maintaining the same underlying processing logic</li>
-<li><strong>Documentation System</strong>: Connects the wiki and documentation viewing capabilities directly within the dashboard interface</li>
-<li><strong>Express Server Infrastructure</strong>: Utilizes the established server framework with additional middleware for dashboard-specific routing and static file serving</li>
-</ul>
+The [web dashboard architecture](../_history/concepts/web-dashboard-architecture/2025-11-24T14-38-57.md) provides an HTTP-based control interface for repository processing with real-time status tracking and integrated wiki documentation. It serves as the primary web interface for managing code analysis workflows through a unified controller-based pattern that separates presentation logic from core server operations.
 
-```mermaid
-graph TB
-    Browser[Web Browser] --> Express[Express Server]
-    Express --> DC[DashboardController]
+## Key Functionality
 
-    DC --> Status[Status Endpoints]
-    DC --> Control[Control Endpoints]
-    DC --> Wiki[Wiki Viewer]
+The dashboard implements a layered architecture with dedicated presentation logic through the following components:
 
-    Status --> Health[Health Check System]
-    Control --> CLI[CLI Processing Engine]
-    Wiki --> Docs[Documentation System]
+**[Processing Control API](../components/processing-control-api.md)** - Exposes REST endpoints for managing repository processing operations:
+- `POST /process/start` - Initiates processing on a repository
+- `POST /process/pause` - Pauses ongoing processing
+- `POST /process/step` - Executes a single processing step
+- `POST /process/batch` - Runs batch processing operations
+- `GET /api/status` - Returns current processing state as JSON
 
-    Health --> State[System State]
-    CLI --> Processor[Processor]
-    Docs --> Pages[Wiki Pages]
+These endpoints validate GitHub repository URLs, enforce cost limits, and provide immediate feedback for UI-driven and programmatic interactions.
 
-    style Browser fill:#e1f5ff
-    style DC fill:#fff3cd
-    style State fill:#d4edda
-    style Processor fill:#d4edda
-    style Pages fill:#d4edda
+**Dashboard Rendering** - The `GET /` route renders the main dashboard HTML interface through the DashboardController, providing a centralized presentation layer.
+
+**Wiki Content Routing** - Implements dynamic routing through `app.use('/wiki')` middleware that maps URL paths to wiki markdown files with automatic file extension handling. This enables seamless navigation of generated documentation through web-friendly URLs.
+
+The DashboardController maintains processing state persistence and coordinates background processing operations while supporting multiple strategies including continuous processing, single-step execution, and configurable batch processing.
+
+## Relationships
+
+The DashboardController serves as the central orchestration point between the web interface and core processing engine:
+
+- **Processor** - Delegates actual repository analysis and commit processing
+- **StateManager** - Maintains persistent processing state across sessions
+- **WikiManager** - Handles wiki content generation and file management
+
+The controller abstracts presentation logic from Express route handlers, enabling clean separation of concerns and simplified route management. All dashboard routes depend on DashboardController initialization.
+
+## Usage Example
+
+```javascript
+const DashboardController = require('./lib/dashboard-controller');
+
+// Initialize controller with dependencies
+const controller = new DashboardController(processor, stateManager, wikiManager);
+
+// Start processing a repository
+await controller.startProcessing('https://github.com/owner/repo');
+
+// Check current status
+const status = await controller.getStatus();
+
+// Process single step for fine-grained control
+await controller.processStep();
 ```
 
-<h2>Usage Example</h2>
-<pre><code class="language-javascript">const express = require(&#39;express&#39;);
-const [DashboardController](../components/dashboard-controller.md) = require(&#39;./server&#39;);
+## Testing
 
-// Initialize dashboard with Express app
-const app = express();
-const dashboard = new [DashboardController](../components/dashboard-controller.md)(app);
-
-// Access dashboard endpoints
-app.get(&#39;/&#39;, dashboard.renderDashboard);
-app.get(&#39;/api/status&#39;, dashboard.getStatus);
-app.post(&#39;/api/start&#39;, dashboard.startProcessing);
-</code></pre>
-<h2>Testing</h2>
-<p><strong>Test Coverage</strong>: Comprehensive integration testing in <code>tests/integration/server.test.js</code></p>
-<ul>
-<li><strong>11 test cases</strong> across <strong>6 test suites</strong></li>
-<li><strong>Test Categories</strong>: Express Server [configuration](../guides/configuration.md), Health Check endpoints, Static File Serving, View Engine setup, Error Handling, and Middleware [Configuration](../guides/configuration.md)</li>
-<li>Tests ensure proper server initialization, route handling, and integration between dashboard components and existing system infrastructure</li>
-</ul>
-
-## See Also
-
-**Project Context:**
-- [Core Philosophy & Vision](../meta/philosophy.md)
-- [Technical Specification](../meta/specification.md)
-- [Project History and Achievement Analysis](../history/progress-report.md)
-
-**Related Topics:**
-- [DashboardController](../components/dashboard-controller.md)
-- [Wiki Integration](../components/wiki-integration.md)
+Test coverage for server functionality is available in `tests/integration/server.test.js` with 11 test cases across 6 suites covering Express Server, Health Check, Static File Serving, View Engine, Error Handling, and Middleware Configuration. Additional test coverage is recommended specifically for the DashboardController's processing control endpoints and wiki routing logic.

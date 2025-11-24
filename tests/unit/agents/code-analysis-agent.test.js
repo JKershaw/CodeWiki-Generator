@@ -19,15 +19,7 @@ describe('CodeAnalysisAgent', () => {
   describe('analyzeCode', () => {
     it('should analyze code changes and return structured data', async () => {
       const mockAnalysis = {
-        concepts: ['Authentication', 'Session Management'],
-        codeElements: [
-          {
-            name: 'AuthService',
-            type: 'class',
-            purpose: 'Handles user authentication flow'
-          }
-        ],
-        relationships: ['uses SessionManager', 'called by UserController']
+        concepts: ['Authentication', 'Session Management']
       };
 
       mockClaudeClient.sendMessageJSON.mockResolvedValue(mockAnalysis);
@@ -43,16 +35,11 @@ describe('CodeAnalysisAgent', () => {
       expect(result.concepts[0].name).toBe('Authentication');
       expect(result.concepts[0].category).toBe('component'); // Default for legacy format
       expect(result.concepts[1].name).toBe('Session Management');
-      expect(result.codeElements[0].name).toBe('AuthService');
-      expect(result.relationships).toEqual(['uses SessionManager', 'called by UserController']);
-      expect(result.suggestedGuides).toEqual([]);
     });
 
     it('should pass file path, diff, and commit message to prompt', async () => {
       mockClaudeClient.sendMessageJSON.mockResolvedValue({
-        concepts: [],
-        codeElements: [],
-        relationships: []
+        concepts: []
       });
 
       await agent.analyzeCode('src/test.js', '+ code', 'Test commit', []);
@@ -65,9 +52,7 @@ describe('CodeAnalysisAgent', () => {
 
     it('should format related pages into prompt', async () => {
       mockClaudeClient.sendMessageJSON.mockResolvedValue({
-        concepts: [],
-        codeElements: [],
-        relationships: []
+        concepts: []
       });
 
       const relatedPages = ['Page 1', 'Page 2', 'Page 3'];
@@ -119,8 +104,8 @@ describe('CodeAnalysisAgent', () => {
       await agent.analyzeCode('src/test.js', '+ code', 'Commit', []);
 
       const options = mockClaudeClient.sendMessageJSON.mock.calls[0][1];
-      expect(options.model).toBe('claude-sonnet-4-20250514');
-      expect(options.maxTokens).toBe(2000);
+      // Model is now set by config, not hardcoded by agent
+      expect(options.maxTokens).toBe(4000);
     });
 
     it('should handle API errors gracefully', async () => {

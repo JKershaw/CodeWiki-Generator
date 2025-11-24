@@ -2,48 +2,46 @@
 title: Bidirectional wiki linking system
 category: concept
 sourceFile: enhance-wiki-linking.js
-related: []
-created: 2025-11-23
-updated: 2025-11-23
+related: [_history/concepts/bidirectional-wiki-linking-system/2025-11-24T14-38-57.md]
+created: 2025-11-24
+updated: 2025-11-24
 ---
 
-# Bidirectional Wiki Linking System
+# [Bidirectional Wiki Linking System](../_history/concepts/bidirectional-wiki-linking-system/2025-11-24T14-38-57.md)
 
 ## Purpose and Overview
 
-The bidirectional wiki linking system automatically creates cross-references between wiki pages by analyzing content and identifying mentions of other pages. This Wikipedia-style linking system enables intelligent discovery of related content across different wiki layers (meta, code, and history) without requiring manual link management.
+The [bidirectional wiki linking system](../_history/concepts/bidirectional-wiki-linking-system/2025-11-24T14-38-57.md) transforms isolated markdown files into a connected knowledge graph by automatically inserting cross-references between related pages. It implements Wikipedia-style automatic linking, creating a web of connections that helps users discover related content across the wiki.
 
 ## Key Functionality
 
-The system processes all wiki pages to add automatic cross-links based on content analysis:
+This system processes all wiki pages to identify mentions of other page titles within content and converts them into proper markdown links. The core functionality includes:
 
-- **Intelligent Link Discovery**: Integrates with the LinkDiscoveryAgent to automatically find potential page mentions within content
-- **Duplicate Prevention**: Uses `isAlreadyLinked()` to prevent creating links in text that's already part of existing markdown links
-- **Relative Path Resolution**: Generates proper relative markdown links with `createMarkdownLink()` while preserving text formatting like bold
-- **Frontmatter Processing**: Works with frontmatter-structured markdown files from the existing wiki system
+- **Intelligent mention detection**: Uses the `LinkDiscoveryAgent` class to find references to other page titles within markdown content
+- **[Context-aware link insertion](../components/context-aware-link-insertion.md)**: Prevents duplicate links by checking if text is already part of existing markdown links through `isAlreadyLinked()`
+- **Format preservation**: Maintains original text formatting (like bold text) when creating new cross-references via `createMarkdownLink()`
+- **Relative path handling**: Generates proper relative markdown links that work within the wiki structure
 
-The main `enhanceBidirectionalLinks()` function orchestrates the entire process, analyzing each page's content and injecting appropriate cross-links where relevant mentions are detected.
+The system operates as a post-processing enhancement, running after the initial wiki generation to add these automatic cross-references.
 
 ## Relationships
 
-- **Depends on WikiManager**: Uses WikiManager for page management and content access
-- **Integrates with LinkDiscoveryAgent**: Leverages the agent for intelligent mention detection capabilities
-- **Extends Wiki System**: Builds upon the existing wiki infrastructure to add automated cross-referencing
-- **Processes Markdown Files**: Works with the standard frontmatter-structured markdown files used throughout the wiki
+- **Depends on WikiManager**: Accesses page content, metadata, and structure information
+- **Uses LinkDiscoveryAgent**: Leverages specialized logic for finding potential cross-reference opportunities
+- **Integrates with frontmatter structure**: Works within the existing wiki architecture that uses frontmatter for page metadata
+- **Complements wiki generation**: Functions as an enhancement layer that adds value to the base wiki system
 
 ## Usage Example
 
 ```javascript
 const { enhanceBidirectionalLinks } = require('./enhance-wiki-linking');
-const WikiManager = require('./wiki-manager');
 
-// Initialize wiki manager and run enhancement
-const wikiManager = new WikiManager();
-await enhanceBidirectionalLinks(wikiManager);
+// Process all wiki pages to add automatic cross-links
+enhanceBidirectionalLinks(wikiManager);
 ```
 
-The enhancement process analyzes all pages in the wiki and automatically inserts markdown links where page mentions are detected, creating a fully cross-referenced knowledge base.
+The main `enhanceBidirectionalLinks()` function serves as the orchestrator, taking a wiki manager instance and processing all pages to add bidirectional links. The function handles the entire workflow of discovery, validation, and link insertion across the wiki content.
 
 ## Testing
 
-No automated tests are currently available for this component. Testing should focus on verifying link discovery accuracy, preventing duplicate links, and ensuring proper relative path generation across different wiki directory structures.
+No automated tests are currently available for this component.

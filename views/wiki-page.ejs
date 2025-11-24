@@ -7,36 +7,155 @@
   <link rel="stylesheet" href="/public/style.css">
 </head>
 <body>
-  <div class="container wiki-page">
-    <header>
-      <h1><%= title %></h1>
-      <nav class="breadcrumb">
-        <a href="/">Dashboard</a> /
-        <a href="/wiki/<%= project %>/index">Wiki</a> /
-        <span><%= title %></span>
-      </nav>
+  <div class="wiki-layout">
+    <!-- Header with Search -->
+    <header class="wiki-header">
+      <div class="wiki-header-content">
+        <div class="wiki-title-row">
+          <h1 class="wiki-title"><%= title %></h1>
+          <div class="wiki-actions">
+            <button id="history-toggle-btn" class="btn btn-secondary">History</button>
+            <a href="/wiki/<%= project %>/<%= page.path.replace('.md', '') %>/edit" class="btn btn-secondary btn-edit">Edit</a>
+          </div>
+        </div>
+
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+          <a href="/">Dashboard</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/wiki/<%= project %>/index">Wiki</a>
+          <span class="breadcrumb-separator">/</span>
+          <% if (page.metadata && page.metadata.category) { %>
+            <a href="/wiki/<%= project %>/<%= page.metadata.category %>"><%= page.metadata.category %></a>
+            <span class="breadcrumb-separator">/</span>
+          <% } %>
+          <span class="breadcrumb-current"><%= title %></span>
+        </nav>
+
+        <!-- Search Bar -->
+        <div class="wiki-search-container">
+          <form id="wiki-search-form" class="wiki-search-form">
+            <input
+              type="text"
+              id="wiki-search-input"
+              placeholder="Search wiki pages..."
+              class="wiki-search-input"
+            />
+            <button type="submit" class="wiki-search-btn">Search</button>
+          </form>
+          <div id="search-results" class="search-results" style="display: none;"></div>
+        </div>
+
+        <!-- Metadata -->
+        <% if (page.metadata) { %>
+        <div class="wiki-metadata">
+          <% if (page.metadata.category) { %>
+            <span class="metadata-item">
+              <strong>Category:</strong>
+              <span class="category-badge"><%= page.metadata.category %></span>
+            </span>
+          <% } %>
+          <% if (page.metadata.created) { %>
+            <span class="metadata-item">
+              <strong>Created:</strong> <%= page.metadata.created %>
+            </span>
+          <% } %>
+          <% if (page.metadata.updated) { %>
+            <span class="metadata-item">
+              <strong>Updated:</strong> <%= page.metadata.updated %>
+            </span>
+          <% } %>
+        </div>
+        <% } %>
+
+        <!-- Tags -->
+        <% if (page.metadata && page.metadata.tags && page.metadata.tags.length > 0) { %>
+        <div class="wiki-tags">
+          <%
+          const tags = Array.isArray(page.metadata.tags) ? page.metadata.tags : [page.metadata.tags];
+          tags.forEach(tag => {
+          %>
+            <span class="tag-pill" data-tag="<%= tag %>"><%= tag %></span>
+          <% }); %>
+        </div>
+        <% } %>
+      </div>
     </header>
 
-    <main>
-      <article class="wiki-content">
-        <%- page.content %>
-      </article>
+    <!-- Main Content Area with Sidebar -->
+    <div class="wiki-content-wrapper">
+      <!-- Sidebar -->
+      <aside class="wiki-sidebar">
+        <!-- Table of Contents -->
+        <div class="sidebar-section toc-section">
+          <h3 class="sidebar-title">On This Page</h3>
+          <nav id="table-of-contents" class="toc-nav">
+            <div class="toc-loading">Loading...</div>
+          </nav>
+        </div>
 
-      <% if (page.metadata && page.metadata.related && page.metadata.related.length > 0) { %>
-      <aside class="related-pages">
-        <h3>Related Pages</h3>
-        <ul>
-          <% page.metadata.related.forEach(relatedPath => { %>
-            <li><a href="/wiki/<%= project %>/<%= relatedPath.replace('.md', '') %>"><%= relatedPath %></a></li>
-          <% }); %>
-        </ul>
+        <!-- Related Pages -->
+        <div class="sidebar-section related-section">
+          <h3 class="sidebar-title">Related Pages</h3>
+          <div id="related-pages" class="related-pages-list">
+            <div class="related-loading">Loading...</div>
+          </div>
+        </div>
       </aside>
-      <% } %>
-    </main>
 
-    <footer>
+      <!-- Main Article Content -->
+      <main class="wiki-main">
+        <article class="wiki-content">
+          <%- page.content %>
+        </article>
+
+        <!-- History Panel (Hidden by default) -->
+        <section id="history-panel" class="history-panel" style="display: none;">
+          <div class="history-header">
+            <h2 class="history-title">Page History</h2>
+            <button id="history-close-btn" class="btn btn-sm">Close</button>
+          </div>
+
+          <div id="history-content" class="history-content">
+            <div class="history-loading">Loading history...</div>
+          </div>
+
+          <!-- History Timeline -->
+          <div id="history-timeline" class="history-timeline" style="display: none;">
+            <!-- Timeline items will be inserted here by JavaScript -->
+          </div>
+
+          <!-- No Git Repository Message -->
+          <div id="no-git-message" class="no-git-message" style="display: none;">
+            <p>No git repository found for this project.</p>
+            <p>Git history is not available.</p>
+          </div>
+        </section>
+
+        <!-- Back to Top Button -->
+        <button id="back-to-top" class="back-to-top" style="display: none;">
+          ↑ Top
+        </button>
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="wiki-footer">
       <a href="/">← Back to Dashboard</a>
+      <span class="footer-separator">|</span>
+      <a href="/wiki/<%= project %>/index">← Back to Wiki Index</a>
     </footer>
   </div>
+
+  <!-- Pass data to JavaScript -->
+  <script>
+    window.wikiData = {
+      project: '<%= project %>',
+      pagePath: '<%= page.path %>',
+      title: '<%= title %>'
+    };
+  </script>
+  <script src="/public/wiki-browser.js"></script>
+  <script src="/public/git-history.js"></script>
 </body>
 </html>

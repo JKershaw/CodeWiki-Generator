@@ -1,0 +1,66 @@
+---
+title: Cross-page link discovery and extraction
+category: component
+sourceFile: lib/agents/link-discovery-agent.js
+related: [_history/components/cross-page-link-discovery-and-extraction/2025-11-24T14-38-56.md]
+created: 2025-11-24
+updated: 2025-11-24
+---
+
+# [Cross-Page Link Discovery and Extraction](../_history/components/cross-page-link-discovery-and-extraction/2025-11-24T14-38-56.md)
+
+## Purpose and Overview
+
+The `LinkDiscoveryAgent` automatically detects and extracts hyperlink opportunities between wiki pages by analyzing page content for mentions of other page titles. It enables dynamic relationship mapping and automated wiki interconnectedness without manual curation, while preventing false positives through [markup-aware pattern matching](../components/markup-aware-pattern-matching.md) and mention prioritization.
+
+## Key Functionality
+
+### Mention Detection
+The agent scans page content using regex-based pattern matching to locate mentions of wiki page titles. It returns a prioritized list of potential link targets with position metadata, distinguishing between different mention types (bold text vs plain text) to identify which references are most intentional.
+
+### Markup-Aware Matching
+To prevent broken markup and duplicate links, the agent analyzes surrounding context before creating link suggestions. It avoids matching text already inside bold formatting, existing hyperlinks, or code blocks, ensuring extraction accuracy and preventing false positives.
+
+### Related Pages Identification
+The agent identifies related pages by analyzing mention frequency across content. It returns up to 5 pages sorted by mention count, making it suitable for populating frontmatter relationship fields and automatically discovering page connections.
+
+### Mention Prioritization and Deduplication
+When multiple overlapping mentions are detected, the system prioritizes higher-confidence matches (such as bold mentions over plain text mentions) and removes duplicates while preserving the most intentional references.
+
+## Relationships
+
+- **Integrates with page collection systems** — Works with `allPages` arrays provided by page discovery mechanisms
+- **Populates frontmatter metadata** — Supplies data for 'related' fields and page relationship information
+- **Markdown-aware processing** — Operates on markdown-formatted content, requiring understanding of markup syntax
+- **Wiki interconnectedness enabler** — Provides automated linking capabilities for wiki systems
+
+## Usage Example
+
+```javascript
+const LinkDiscoveryAgent = require('./lib/agents/link-discovery-agent');
+
+// Initialize the agent with all pages in your wiki
+const agent = new LinkDiscoveryAgent({ allPages: pages });
+
+// Find mentions of other pages within a page's content
+const mentions = agent.findMentions(pageContent);
+
+// Identify related pages based on mention frequency
+const relatedPages = agent.findRelatedPages(pageContent);
+```
+
+## Configuration Notes
+
+The agent uses hardcoded thresholds for link discovery:
+- **Minimum title length**: 4 characters (prevents matching very short page titles)
+- **Maximum related pages**: 5 (limits frontmatter relationship fields)
+
+These values may require adjustment depending on your wiki's size and naming conventions.
+
+## Testing
+
+No automated tests are currently available for this component. When implementing or extending the agent, test coverage should validate:
+- Markup context detection (ensuring links inside bold/code are not created)
+- Mention deduplication (priority of bold over plain text mentions)
+- Edge cases with special regex characters in page titles
+- Related pages sorting by frequency

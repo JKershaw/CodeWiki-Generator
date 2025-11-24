@@ -13,7 +13,6 @@ Task: Identify new concepts, classes, functions, and patterns in this code chang
 
 Return JSON only with the following structure:
 {
-  "filePath": "{{filePath}}",
   "concepts": [
     {
       "name": "concept name",
@@ -21,20 +20,6 @@ Return JSON only with the following structure:
       "abstraction": "high|medium|low",
       "reason": "why this concept is important",
       "sourceFile": "{{filePath}}"
-    }
-  ],
-  "codeElements": [
-    {
-      "name": "element name",
-      "type": "class|function|module|constant|interface",
-      "purpose": "brief description of what it does"
-    }
-  ],
-  "relationships": ["array of relationships to other concepts or components"],
-  "suggestedGuides": [
-    {
-      "title": "guide title",
-      "reason": "why this guide would be helpful"
     }
   ]
 }

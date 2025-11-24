@@ -12,6 +12,10 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:e2e": "playwright test",
+    "test:e2e:desktop": "playwright test --project=desktop",
+    "test:e2e:mobile": "playwright test --project=mobile",
+    "test:e2e:tablet": "playwright test --project=tablet",
+    "test:e2e:screenshots": "playwright test tests/e2e/ui-screenshots.spec.js",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:debug": "playwright test --debug",
     "mcp-server": "node mcp-server.js"
@@ -33,6 +37,7 @@
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "marked": "^17.0.1",
+    "simple-git": "^3.30.0",
     "ws": "^8.18.0"
   },
   "devDependencies": {

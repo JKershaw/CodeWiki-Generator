@@ -1,0 +1,68 @@
+---
+title: Wiki-driven development pattern
+category: concept
+sourceFile: examples/wiki-context-service-example.js
+related: []
+created: 2025-11-24
+updated: 2025-11-24
+---
+
+# Wiki-driven Development Pattern
+
+## Purpose and Overview
+
+The Wiki-driven development pattern demonstrates how to use wiki content as a source of truth for automated development guidance and context retrieval. This example shows how to integrate WikiContextService into both CLI tools and web applications for programmatic wiki research.
+
+## Key Functionality
+
+This pattern provides two integration approaches:
+
+- **CLI Integration**: Demonstrates comprehensive result display with structured output including summaries, pages, components, concepts, and development guidance
+- **Web Application Integration**: Shows Express.js API endpoint patterns for wiki research services
+- **Context Extraction**: Retrieves and structures wiki content into actionable development context
+- **Cost Monitoring**: Tracks API usage and provides cost monitoring capabilities
+
+The WikiContextService researches wiki content and extracts structured information that can guide development decisions and provide contextual understanding of codebases.
+
+## Relationships
+
+- Depends on `WikiContextService` from the core library (`../lib/wiki-context-service`)
+- Integrates with Express.js framework for web application endpoints  
+- Outputs structured data format compatible with development tooling
+- Connects wiki documentation directly to development workflows
+
+## Usage Example
+
+### CLI Usage Pattern
+```javascript
+const { WikiContextService } = require('../lib/wiki-context-service');
+
+async function main() {
+  const wikiService = new WikiContextService();
+  const result = await wikiService.research('development topic');
+  
+  console.log('Summary:', result.summary);
+  console.log('Components:', result.components);
+  console.log('Guidance:', result.guidance);
+}
+```
+
+### Web Application Integration
+```javascript
+const express = require('express');
+const { WikiContextService } = require('../lib/wiki-context-service');
+
+async function webAppExample() {
+  const app = express();
+  const wikiService = new WikiContextService();
+  
+  app.get('/research/:topic', async (req, res) => {
+    const context = await wikiService.research(req.params.topic);
+    res.json(context);
+  });
+}
+```
+
+## Testing
+
+No automated tests found for this example component. Testing would be valuable for validating integration patterns and service responses.

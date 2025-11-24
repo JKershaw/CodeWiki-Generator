@@ -51,12 +51,33 @@ module.exports = defineConfig({
     }
   },
 
-  // Test projects for different browsers
+  // Test projects for different devices
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'desktop',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1280, height: 720 }
+      },
     },
+    {
+      name: 'mobile',
+      use: {
+        ...devices['iPhone 13'],
+        viewport: { width: 390, height: 844 },
+        isMobile: true,
+        hasTouch: true
+      },
+    },
+    {
+      name: 'tablet',
+      use: {
+        ...devices['iPad Pro'],
+        viewport: { width: 1024, height: 1366 },
+        isMobile: true,
+        hasTouch: true
+      },
+    }
   ],
 
   // Web server configuration
