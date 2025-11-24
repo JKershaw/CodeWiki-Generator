@@ -133,7 +133,7 @@ describe('GuideGenerationAgent', () => {
       expect(mockClaudeClient.sendMessage).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({
-          maxTokens: 4000
+          maxTokens: 8000
         })
       );
     });
