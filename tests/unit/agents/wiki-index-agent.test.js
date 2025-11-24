@@ -159,5 +159,106 @@ Content`;
       expect(result).toBeTruthy();
       expect(mockClaudeClient.sendMessage).toHaveBeenCalled();
     });
+
+    it('should fix HTML links with embedded markdown syntax in href', async () => {
+      const htmlWithBadLinks = `
+<h1>Test Wiki</h1>
+<ul>
+<li><a href="guides/[getting-started](guides/getting-started.md).md">Getting Started</a></li>
+<li><a href="concepts/[architecture](concepts/architecture.md).md">Architecture</a></li>
+</ul>`;
+
+      mockClaudeClient.sendMessage.mockResolvedValue(htmlWithBadLinks);
+
+      const wikiData = {
+        repositoryName: 'Test',
+        pages: []
+      };
+
+      const result = await agent.generateIndex(wikiData);
+
+      // Should have clean markdown links without embedded markdown in href
+      expect(result).toContain('[Getting Started](guides/getting-started.md)');
+      expect(result).toContain('[Architecture](concepts/architecture.md)');
+
+      // Should NOT contain the malformed HTML or double .md extensions
+      expect(result).not.toContain('[getting-started](guides/getting-started.md).md');
+      expect(result).not.toContain('[architecture](concepts/architecture.md).md');
+      expect(result).not.toContain('<a href=');
+    });
+
+    it('should fix HTML links with embedded markdown syntax in text', async () => {
+      const htmlWithBadLinks = `
+<h1>Test Wiki</h1>
+<ul>
+<li><a href="guides/configuration.md">[Configuration](guides/configuration.md) Guide</a></li>
+<li><a href="meta/specification.md">[Technical Specification](meta/specification.md)</a></li>
+</ul>`;
+
+      mockClaudeClient.sendMessage.mockResolvedValue(htmlWithBadLinks);
+
+      const wikiData = {
+        repositoryName: 'Test',
+        pages: []
+      };
+
+      const result = await agent.generateIndex(wikiData);
+
+      // Should extract clean text from markdown syntax in link text
+      expect(result).toContain('[Configuration Guide](guides/configuration.md)');
+      expect(result).toContain('[Technical Specification](meta/specification.md)');
+
+      // Should NOT contain the markdown syntax in the text
+      expect(result).not.toContain('[Configuration](guides/configuration.md) Guide');
+      expect(result).not.toContain('<a href=');
+    });
+
+    it('should fix HTML links with embedded markdown in both href and text', async () => {
+      const htmlWithBadLinks = `
+<h1>Test Wiki</h1>
+<ul>
+<li><a href="concepts/[architecture](concepts/architecture.md).md">[Architecture](concepts/architecture.md) Overview</a></li>
+</ul>`;
+
+      mockClaudeClient.sendMessage.mockResolvedValue(htmlWithBadLinks);
+
+      const wikiData = {
+        repositoryName: 'Test',
+        pages: []
+      };
+
+      const result = await agent.generateIndex(wikiData);
+
+      // Should clean both href and text
+      expect(result).toContain('[Architecture Overview](concepts/architecture.md)');
+
+      // Should NOT contain any malformed syntax
+      expect(result).not.toContain('[architecture](concepts/architecture.md).md');
+      expect(result).not.toContain('.md.md');
+      expect(result).not.toContain('<a href=');
+    });
+
+    it('should preserve normal HTML links without issues', async () => {
+      const normalHtml = `
+<h1>Test Wiki</h1>
+<ul>
+<li><a href="guides/getting-started.md">Getting Started</a></li>
+<li><a href="concepts/architecture.md">Architecture Overview</a></li>
+</ul>`;
+
+      mockClaudeClient.sendMessage.mockResolvedValue(normalHtml);
+
+      const wikiData = {
+        repositoryName: 'Test',
+        pages: []
+      };
+
+      const result = await agent.generateIndex(wikiData);
+
+      // Should convert to clean markdown
+      expect(result).toContain('[Getting Started](guides/getting-started.md)');
+      expect(result).toContain('[Architecture Overview](concepts/architecture.md)');
+      expect(result).not.toContain('<a href=');
+    });
   });
 });
