@@ -119,7 +119,7 @@ describe('CodeAnalysisAgent', () => {
       await agent.analyzeCode('src/test.js', '+ code', 'Commit', []);
 
       const options = mockClaudeClient.sendMessageJSON.mock.calls[0][1];
-      expect(options.model).toBe('claude-sonnet-4-20250514');
+      // Model is now set by config, not hardcoded by agent
       expect(options.maxTokens).toBe(2000);
     });
 
