@@ -11,38 +11,40 @@ updated: 2025-11-24
 
 ## Purpose and Overview
 
-The markdown link normalization component implements defensive parsing to handle malformed HTML-to-markdown conversion where links may already contain markdown syntax. It prevents double-encoding and broken link structures that can occur during wiki document processing.
+The markdown link normalization component provides robust HTML-to-Markdown link conversion with defensive parsing capabilities. It handles edge cases where HTML anchor tags contain nested markdown syntax, preventing double-encoding and malformed link structures during wiki document processing.
 
 ## Key Functionality
 
-This component provides three main normalization functions:
+This component implements several normalization strategies to clean up problematic link conversions:
 
-- **HTML link regex with markdown extraction**: Uses pattern matching to extract URLs from markdown syntax that may be embedded within HTML href attributes
-- **Double extension cleanup**: Removes duplicate `.md.md` extensions that commonly occur during iterative link processing
-- **Text content markdown cleanup**: Strips markdown link syntax from link text content to prevent nested markdown structures like `[text [link](url) more text](outer-url)`
+- **HTML link regex handling**: Extracts and sanitizes href URLs from HTML anchor tags, with special handling for markdown syntax embedded within href attributes
+- **Double extension cleanup**: Removes duplicate `.md.md` extensions that occur during iterative link processing workflows
+- **Nested markdown prevention**: Strips existing markdown link syntax from link text content to prevent invalid nested structures like `[text [link](url) more text](outer-url)`
+- **Malformed href attribute processing**: Handles cases where HTML-to-markdown converters encounter links that have already been partially processed or contain mixed formatting
 
-The normalization process handles edge cases where HTML-to-markdown converters encounter links that have already been partially processed or contain mixed formatting.
+The normalization uses pattern matching to identify and extract clean URLs from complex markup scenarios, ensuring consistent markdown output regardless of input quality.
 
 ## Relationships
 
-This component integrates with:
+This component integrates as part of the WikiIndexAgent's content processing pipeline:
 
-- **WikiIndexAgent HTML-to-markdown conversion pipeline**: Serves as a preprocessing step to clean malformed links before final markdown generation
-- **Wiki document link processing**: Ensures consistent link formatting across wiki pages during indexing operations
+- **WikiIndexAgent HTML-to-Markdown conversion**: Serves as a preprocessing step within the larger document transformation workflow
+- **Wiki content indexing**: Ensures link consistency across wiki pages during index generation and content processing operations
 
 ## Usage Example
 
 ```javascript
-// Pattern for extracting URLs from markdown syntax in HTML attributes
+// HTML link pattern matching for markdown extraction
 const htmlLinkRegex = /<a\s+href="([^"]*\[.*?\]\(([^)]+)\)[^"]*)"[^>]*>/g;
 
-// Clean up double extensions
-const cleanedUrl = url.replace(/\.md\.md$/, '.md');
-
-// Remove markdown syntax from link text content
-const cleanText = linkText.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+// Process HTML content with embedded markdown links
+const processedContent = htmlContent.replace(htmlLinkRegex, (match, href, extractedUrl) => {
+  // Clean double extensions and normalize URL
+  const cleanUrl = extractedUrl.replace(/\.md\.md$/, '.md');
+  return `[${linkText}](${cleanUrl})`;
+});
 ```
 
 ## Testing
 
-No automated tests are currently available for this component. Manual testing should verify proper handling of malformed HTML links containing markdown syntax and prevention of double-encoding scenarios.
+No automated tests are currently available for this component. Testing should focus on verifying proper handling of malformed HTML links containing markdown syntax and prevention of double-encoding scenarios during wiki content processing.
