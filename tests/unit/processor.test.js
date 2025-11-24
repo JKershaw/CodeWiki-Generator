@@ -268,9 +268,11 @@ describe('Processor', () => {
       mockWikiManager.getRelatedPages.mockReturnValue([]);
       mockCodeAnalysisAgent.analyzeCode.mockRejectedValue(new Error('API Error'));
 
-      await expect(
-        processor.processCommit(commit, state)
-      ).rejects.toThrow('API Error');
+      // With parallel processing, errors are caught and files are marked as skipped
+      const summary = await processor.processCommit(commit, state);
+
+      expect(summary.filesSkipped).toBe(1);
+      expect(summary.filesProcessed).toBe(0);
     });
 
     it('should return processing summary', async () => {
