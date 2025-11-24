@@ -15,10 +15,24 @@ if (!fs.existsSync(screenshotsDir)) {
   fs.mkdirSync(screenshotsDir, { recursive: true });
 }
 
+/**
+ * Helper function to get screenshot path organized by device type
+ * @param {Object} testInfo - Playwright test info object
+ * @param {string} filename - Screenshot filename
+ * @returns {string} Full path for screenshot
+ */
+function getScreenshotPath(testInfo, filename) {
+  const deviceDir = path.join(screenshotsDir, testInfo.project.name);
+  if (!fs.existsSync(deviceDir)) {
+    fs.mkdirSync(deviceDir, { recursive: true });
+  }
+  return path.join(deviceDir, filename);
+}
+
 test.describe('Comprehensive UI Screenshots', () => {
 
-  test('01 - Dashboard Overview', async ({ page }) => {
-    console.log('Capturing Dashboard overview...');
+  test('01 - Dashboard Overview', async ({ page }, testInfo) => {
+    console.log(`Capturing Dashboard overview [${testInfo.project.name}]...`);
 
     // Use domcontentloaded instead of networkidle because SSE keeps connection open
     await page.goto('/', { waitUntil: 'domcontentloaded' });
@@ -28,7 +42,7 @@ test.describe('Comprehensive UI Screenshots', () => {
 
     // Full page screenshot
     await page.screenshot({
-      path: path.join(screenshotsDir, '01-dashboard-full.png'),
+      path: getScreenshotPath(testInfo, '01-dashboard-full.png'),
       fullPage: true
     });
 
@@ -36,7 +50,7 @@ test.describe('Comprehensive UI Screenshots', () => {
     const header = page.locator('header, .header, h1').first();
     if (await header.isVisible()) {
       await header.screenshot({
-        path: path.join(screenshotsDir, '01-dashboard-header.png')
+        path: getScreenshotPath(testInfo, '01-dashboard-header.png')
       });
     }
 
@@ -44,7 +58,7 @@ test.describe('Comprehensive UI Screenshots', () => {
     const statusSection = page.locator('text=Processing Status').locator('..').first();
     if (await statusSection.isVisible()) {
       await statusSection.screenshot({
-        path: path.join(screenshotsDir, '01-dashboard-status.png')
+        path: getScreenshotPath(testInfo, '01-dashboard-status.png')
       });
     }
 
@@ -52,20 +66,20 @@ test.describe('Comprehensive UI Screenshots', () => {
     const controls = page.locator('text=Controls').locator('..').first();
     if (await controls.isVisible()) {
       await controls.screenshot({
-        path: path.join(screenshotsDir, '01-dashboard-controls.png')
+        path: getScreenshotPath(testInfo, '01-dashboard-controls.png')
       });
     }
   });
 
-  test('02 - Wiki Index Page (codewiki-generator)', async ({ page }) => {
-    console.log('Capturing main wiki index page...');
+  test('02 - Wiki Index Page (codewiki-generator)', async ({ page }, testInfo) => {
+    console.log(`Capturing main wiki index page [${testInfo.project.name}]...`);
 
     await page.goto('/wiki/codewiki-generator/index');
     await page.waitForLoadState('networkidle');
 
     // Full page screenshot
     await page.screenshot({
-      path: path.join(screenshotsDir, '02-wiki-index-full.png'),
+      path: getScreenshotPath(testInfo, '02-wiki-index-full.png'),
       fullPage: true
     });
 
@@ -73,7 +87,7 @@ test.describe('Comprehensive UI Screenshots', () => {
     const breadcrumb = page.locator('nav.breadcrumb, .breadcrumb');
     if (await breadcrumb.isVisible()) {
       await breadcrumb.screenshot({
-        path: path.join(screenshotsDir, '02-wiki-breadcrumb.png')
+        path: getScreenshotPath(testInfo, '02-wiki-breadcrumb.png')
       });
     }
 
@@ -82,7 +96,7 @@ test.describe('Comprehensive UI Screenshots', () => {
       const toc = await page.locator('.toc, #toc').first().or(page.getByText('Table of Contents').locator('..')).first();
       if (await toc.isVisible()) {
         await toc.screenshot({
-          path: path.join(screenshotsDir, '02-wiki-toc.png')
+          path: getScreenshotPath(testInfo, '02-wiki-toc.png')
         });
       }
     } catch (e) {
@@ -90,15 +104,15 @@ test.describe('Comprehensive UI Screenshots', () => {
     }
   });
 
-  test('03 - Wiki Concept Pages', async ({ page }) => {
-    console.log('Capturing concept pages...');
+  test('03 - Wiki Concept Pages', async ({ page }, testInfo) => {
+    console.log(`Capturing concept pages [${testInfo.project.name}]...`);
 
     // Try to navigate to architecture concept page
     await page.goto('/wiki/codewiki-generator/concepts/architecture');
     await page.waitForLoadState('networkidle');
 
     await page.screenshot({
-      path: path.join(screenshotsDir, '03-wiki-concept-architecture.png'),
+      path: getScreenshotPath(testInfo, '03-wiki-concept-architecture.png'),
       fullPage: true
     });
 
@@ -108,7 +122,7 @@ test.describe('Comprehensive UI Screenshots', () => {
       await page.waitForLoadState('networkidle');
 
       await page.screenshot({
-        path: path.join(screenshotsDir, '03-wiki-concept-agents.png'),
+        path: getScreenshotPath(testInfo, '03-wiki-concept-agents.png'),
         fullPage: true
       });
     } catch (e) {
@@ -116,15 +130,15 @@ test.describe('Comprehensive UI Screenshots', () => {
     }
   });
 
-  test('04 - Wiki Component Pages', async ({ page }) => {
-    console.log('Capturing component pages...');
+  test('04 - Wiki Component Pages', async ({ page }, testInfo) => {
+    console.log(`Capturing component pages [${testInfo.project.name}]...`);
 
     try {
       await page.goto('/wiki/codewiki-generator/components/processor');
       await page.waitForLoadState('networkidle');
 
       await page.screenshot({
-        path: path.join(screenshotsDir, '04-wiki-component-processor.png'),
+        path: getScreenshotPath(testInfo, '04-wiki-component-processor.png'),
         fullPage: true
       });
 
@@ -133,7 +147,7 @@ test.describe('Comprehensive UI Screenshots', () => {
       const count = await codeBlocks.count();
       if (count > 0) {
         await codeBlocks.first().screenshot({
-          path: path.join(screenshotsDir, '04-wiki-code-block.png')
+          path: getScreenshotPath(testInfo, '04-wiki-code-block.png')
         });
       }
     } catch (e) {
@@ -141,15 +155,15 @@ test.describe('Comprehensive UI Screenshots', () => {
     }
   });
 
-  test('05 - Wiki Guide Pages', async ({ page }) => {
-    console.log('Capturing guide pages...');
+  test('05 - Wiki Guide Pages', async ({ page }, testInfo) => {
+    console.log(`Capturing guide pages [${testInfo.project.name}]...`);
 
     try {
       await page.goto('/wiki/codewiki-generator/guides/getting-started');
       await page.waitForLoadState('networkidle');
 
       await page.screenshot({
-        path: path.join(screenshotsDir, '05-wiki-guide-getting-started.png'),
+        path: getScreenshotPath(testInfo, '05-wiki-guide-getting-started.png'),
         fullPage: true
       });
     } catch (e) {
@@ -161,7 +175,7 @@ test.describe('Comprehensive UI Screenshots', () => {
       await page.waitForLoadState('networkidle');
 
       await page.screenshot({
-        path: path.join(screenshotsDir, '05-wiki-guide-development.png'),
+        path: getScreenshotPath(testInfo, '05-wiki-guide-development.png'),
         fullPage: true
       });
     } catch (e) {
@@ -169,15 +183,15 @@ test.describe('Comprehensive UI Screenshots', () => {
     }
   });
 
-  test('06 - Planning View', async ({ page }) => {
-    console.log('Capturing planning view...');
+  test('06 - Planning View', async ({ page }, testInfo) => {
+    console.log(`Capturing planning view [${testInfo.project.name}]...`);
 
     await page.goto('/planning', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(1000);
 
     // Full page screenshot
     await page.screenshot({
-      path: path.join(screenshotsDir, '06-planning-full.png'),
+      path: getScreenshotPath(testInfo, '06-planning-full.png'),
       fullPage: true
     });
 
@@ -185,7 +199,7 @@ test.describe('Comprehensive UI Screenshots', () => {
     const projectSelector = page.locator('#project, select');
     if (await projectSelector.first().isVisible()) {
       await projectSelector.first().screenshot({
-        path: path.join(screenshotsDir, '06-planning-selector.png')
+        path: getScreenshotPath(testInfo, '06-planning-selector.png')
       });
     }
 
@@ -194,7 +208,7 @@ test.describe('Comprehensive UI Screenshots', () => {
       const tasksSection = await page.locator('.tasks, #tasks').first().or(page.getByText('Tasks').locator('..')).first();
       if (await tasksSection.isVisible()) {
         await tasksSection.screenshot({
-          path: path.join(screenshotsDir, '06-planning-tasks.png')
+          path: getScreenshotPath(testInfo, '06-planning-tasks.png')
         });
       }
     } catch (e) {
@@ -202,15 +216,15 @@ test.describe('Comprehensive UI Screenshots', () => {
     }
   });
 
-  test('07 - Analytics View', async ({ page }) => {
-    console.log('Capturing analytics view...');
+  test('07 - Analytics View', async ({ page }, testInfo) => {
+    console.log(`Capturing analytics view [${testInfo.project.name}]...`);
 
     await page.goto('/analytics', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(2000); // Wait for analytics to load
 
     // Full page screenshot
     await page.screenshot({
-      path: path.join(screenshotsDir, '07-analytics-full.png'),
+      path: getScreenshotPath(testInfo, '07-analytics-full.png'),
       fullPage: true
     });
 
@@ -218,7 +232,7 @@ test.describe('Comprehensive UI Screenshots', () => {
     await page.waitForTimeout(2000);
 
     await page.screenshot({
-      path: path.join(screenshotsDir, '07-analytics-loaded.png'),
+      path: getScreenshotPath(testInfo, '07-analytics-loaded.png'),
       fullPage: true
     });
 
@@ -228,7 +242,7 @@ test.describe('Comprehensive UI Screenshots', () => {
       const chartCount = await charts.count();
       if (chartCount > 0) {
         await charts.first().screenshot({
-          path: path.join(screenshotsDir, '07-analytics-chart.png')
+          path: getScreenshotPath(testInfo, '07-analytics-chart.png')
         });
       }
     } catch (e) {
@@ -236,15 +250,15 @@ test.describe('Comprehensive UI Screenshots', () => {
     }
   });
 
-  test('08 - Projects View', async ({ page }) => {
-    console.log('Capturing projects view...');
+  test('08 - Projects View', async ({ page }, testInfo) => {
+    console.log(`Capturing projects view [${testInfo.project.name}]...`);
 
     await page.goto('/projects', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(1000);
 
     // Full page screenshot
     await page.screenshot({
-      path: path.join(screenshotsDir, '08-projects-full.png'),
+      path: getScreenshotPath(testInfo, '08-projects-full.png'),
       fullPage: true
     });
 
@@ -253,13 +267,13 @@ test.describe('Comprehensive UI Screenshots', () => {
     const cardCount = await projectCards.count();
     if (cardCount > 0) {
       await projectCards.first().screenshot({
-        path: path.join(screenshotsDir, '08-projects-card.png')
+        path: getScreenshotPath(testInfo, '08-projects-card.png')
       });
     }
   });
 
-  test('09 - Wiki Page Links and Navigation', async ({ page }) => {
-    console.log('Testing wiki navigation and links...');
+  test('09 - Wiki Page Links and Navigation', async ({ page }, testInfo) => {
+    console.log(`Testing wiki navigation and links [${testInfo.project.name}]...`);
 
     await page.goto('/wiki/codewiki-generator/index');
     await page.waitForLoadState('networkidle');
@@ -278,7 +292,7 @@ test.describe('Comprehensive UI Screenshots', () => {
         const filename = text.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 30);
 
         await section.screenshot({
-          path: path.join(screenshotsDir, `09-wiki-section-${i}-${filename}.png`)
+          path: getScreenshotPath(testInfo, `09-wiki-section-${i}-${filename}.png`)
         });
       }
     }
@@ -288,7 +302,7 @@ test.describe('Comprehensive UI Screenshots', () => {
       const relatedPages = await page.locator('.related-pages').first().or(page.getByText('Related Pages').locator('..')).first();
       if (await relatedPages.isVisible()) {
         await relatedPages.screenshot({
-          path: path.join(screenshotsDir, '09-wiki-related-pages.png')
+          path: getScreenshotPath(testInfo, '09-wiki-related-pages.png')
         });
       }
     } catch (e) {
@@ -296,48 +310,11 @@ test.describe('Comprehensive UI Screenshots', () => {
     }
   });
 
-  test('10 - Mobile Responsive Views', async ({ page }) => {
-    console.log('Capturing mobile responsive views...');
+  test('11 - UI Element States', async ({ page }, testInfo) => {
+    // Hover states don't work on touch devices - skip for mobile and tablet
+    test.skip(testInfo.project.name !== 'desktop', 'Hover states not applicable on touch devices');
 
-    // Set mobile viewport
-    await page.setViewportSize({ width: 375, height: 667 }); // iPhone SE size
-
-    // Dashboard mobile - use domcontentloaded due to SSE
-    await page.goto('/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(1500);
-    await page.screenshot({
-      path: path.join(screenshotsDir, '10-mobile-dashboard.png'),
-      fullPage: true
-    });
-
-    // Wiki index mobile
-    await page.goto('/wiki/codewiki-generator/index', { waitUntil: 'networkidle' });
-    await page.screenshot({
-      path: path.join(screenshotsDir, '10-mobile-wiki-index.png'),
-      fullPage: true
-    });
-
-    // Planning mobile - use domcontentloaded
-    await page.goto('/planning', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(1500);
-    await page.screenshot({
-      path: path.join(screenshotsDir, '10-mobile-planning.png'),
-      fullPage: true
-    });
-
-    // Tablet size
-    await page.setViewportSize({ width: 768, height: 1024 }); // iPad size
-
-    await page.goto('/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(1500);
-    await page.screenshot({
-      path: path.join(screenshotsDir, '10-tablet-dashboard.png'),
-      fullPage: true
-    });
-  });
-
-  test('11 - UI Element States', async ({ page }) => {
-    console.log('Capturing UI element states...');
+    console.log(`Capturing UI element states [${testInfo.project.name}]...`);
 
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(1000);
@@ -347,7 +324,7 @@ test.describe('Comprehensive UI Screenshots', () => {
     if (await startButton.isVisible()) {
       await startButton.hover();
       await page.screenshot({
-        path: path.join(screenshotsDir, '11-button-hover-state.png')
+        path: getScreenshotPath(testInfo, '11-button-hover-state.png')
       });
     }
 
@@ -356,7 +333,7 @@ test.describe('Comprehensive UI Screenshots', () => {
     if (await projectSelect.isVisible()) {
       await projectSelect.focus();
       await page.screenshot({
-        path: path.join(screenshotsDir, '11-select-focus-state.png')
+        path: getScreenshotPath(testInfo, '11-select-focus-state.png')
       });
     }
 
@@ -365,20 +342,20 @@ test.describe('Comprehensive UI Screenshots', () => {
       await projectSelect.click();
       await page.waitForTimeout(500);
       await page.screenshot({
-        path: path.join(screenshotsDir, '11-select-open-state.png')
+        path: getScreenshotPath(testInfo, '11-select-open-state.png')
       });
     }
   });
 
-  test('12 - Error and Edge Cases', async ({ page }) => {
-    console.log('Capturing error states...');
+  test('12 - Error and Edge Cases', async ({ page }, testInfo) => {
+    console.log(`Capturing error states [${testInfo.project.name}]...`);
 
     // Try to access non-existent wiki page
     const response = await page.goto('/wiki/codewiki-generator/nonexistent-page');
 
     if (response.status() === 404) {
       await page.screenshot({
-        path: path.join(screenshotsDir, '12-error-404-page.png'),
+        path: getScreenshotPath(testInfo, '12-error-404-page.png'),
         fullPage: true
       });
     }
@@ -387,13 +364,13 @@ test.describe('Comprehensive UI Screenshots', () => {
     await page.goto('/api/invalid-endpoint');
     await page.waitForLoadState('networkidle');
     await page.screenshot({
-      path: path.join(screenshotsDir, '12-error-api-404.png'),
+      path: getScreenshotPath(testInfo, '12-error-api-404.png'),
       fullPage: true
     });
   });
 
-  test('13 - Console Errors Check', async ({ page }) => {
-    console.log('Checking for console errors across pages...');
+  test('13 - Console Errors Check', async ({ page }, testInfo) => {
+    console.log(`Checking for console errors across pages [${testInfo.project.name}]...`);
 
     const errors = [];
     const warnings = [];
@@ -470,7 +447,7 @@ test.describe('Comprehensive UI Screenshots', () => {
     };
 
     fs.writeFileSync(
-      path.join(screenshotsDir, '13-console-errors.json'),
+      getScreenshotPath(testInfo, '13-console-errors.json'),
       JSON.stringify(errorReport, null, 2)
     );
 
@@ -503,8 +480,8 @@ test.describe('Comprehensive UI Screenshots', () => {
 
 test.describe('Accessibility and Layout Issues', () => {
 
-  test('14 - Check for Layout Issues', async ({ page }) => {
-    console.log('Checking for layout issues...');
+  test('14 - Check for Layout Issues', async ({ page }, testInfo) => {
+    console.log(`Checking for layout issues [${testInfo.project.name}]...`);
 
     await page.goto('/wiki/codewiki-generator/index');
     await page.waitForLoadState('networkidle');
@@ -541,7 +518,7 @@ test.describe('Accessibility and Layout Issues', () => {
     });
 
     fs.writeFileSync(
-      path.join(screenshotsDir, '14-layout-issues.json'),
+      getScreenshotPath(testInfo, '14-layout-issues.json'),
       JSON.stringify({ timestamp: new Date().toISOString(), issues }, null, 2)
     );
 
@@ -555,19 +532,47 @@ test.describe('Accessibility and Layout Issues', () => {
     }
   });
 
-  test('15 - Screenshot Summary', async ({ page }) => {
+  test('15 - Screenshot Summary', async ({ page }, testInfo) => {
     console.log('\n========================================');
-    console.log('Screenshot Test Suite Complete!');
+    console.log(`Screenshot Test Suite Complete: ${testInfo.project.name.toUpperCase()}`);
     console.log('========================================');
-    console.log(`Screenshots saved to: ${screenshotsDir}`);
-    console.log('\nGenerated screenshots:');
 
-    const files = fs.readdirSync(screenshotsDir).filter(f => f.endsWith('.png'));
-    files.sort().forEach((file, i) => {
-      console.log(`  ${i + 1}. ${file}`);
-    });
+    const projectDir = path.join(screenshotsDir, testInfo.project.name);
 
-    console.log(`\nTotal: ${files.length} screenshots`);
+    if (fs.existsSync(projectDir)) {
+      const files = fs.readdirSync(projectDir).filter(f => f.endsWith('.png') || f.endsWith('.json'));
+      files.sort().forEach((file, i) => {
+        console.log(`  ${i + 1}. ${file}`);
+      });
+      console.log(`\nTotal: ${files.length} files for ${testInfo.project.name}`);
+    } else {
+      console.log(`No screenshots found for ${testInfo.project.name}`);
+    }
+
+    // Cross-project summary (only run once for desktop to avoid duplication)
+    if (testInfo.project.name === 'desktop') {
+      console.log('\n========================================');
+      console.log('CROSS-PROJECT SUMMARY');
+      console.log('========================================');
+
+      const allProjects = ['desktop', 'mobile', 'tablet'];
+      let grandTotal = 0;
+
+      allProjects.forEach(proj => {
+        const dir = path.join(screenshotsDir, proj);
+        if (fs.existsSync(dir)) {
+          const count = fs.readdirSync(dir).filter(f => f.endsWith('.png') || f.endsWith('.json')).length;
+          console.log(`${proj.padEnd(10)}: ${count} files`);
+          grandTotal += count;
+        } else {
+          console.log(`${proj.padEnd(10)}: 0 files (not yet run)`);
+        }
+      });
+
+      console.log(`\n🎉 Grand Total: ${grandTotal} files across all devices`);
+      console.log(`📁 Location: ${screenshotsDir}`);
+    }
+
     console.log('========================================\n');
   });
 });
