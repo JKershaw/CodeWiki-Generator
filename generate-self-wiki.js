@@ -9,19 +9,31 @@ const { execSync } = require('child_process');
 /**
  * Get commits from local git repository
  */
-function getLocalCommits(limit = 10) {
-  console.log(`Fetching last ${limit} commits from local git...`);
+function getLocalCommits(limit = null) {
+  // If no limit specified, get all commits
+  const totalCommits = parseInt(execSync('git rev-list --count HEAD', { encoding: 'utf-8' }).trim());
+  const commitCount = limit || totalCommits;
+
+  console.log(`\n📊 Repository has ${totalCommits} total commits`);
+  console.log(`📥 Fetching ${commitCount === totalCommits ? 'all' : 'last ' + commitCount} commits from local git...\n`);
 
   const logOutput = execSync(
-    `git log -${limit} --pretty=format:"%H|%s"`,
+    `git log -${commitCount} --pretty=format:"%H|%s"`,
     { encoding: 'utf-8' }
   ).trim();
 
   const commits = [];
   const lines = logOutput.split('\n');
 
-  for (const line of lines) {
+  console.log('Processing commits:');
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
     const [sha, message] = line.split('|');
+
+    // Show progress every 10 commits
+    if (i % 10 === 0 || i === lines.length - 1) {
+      console.log(`  [${i + 1}/${lines.length}] ${sha.substring(0, 7)} - ${message.substring(0, 60)}${message.length > 60 ? '...' : ''}`);
+    }
 
     // Get files changed in this commit
     let diffOutput;
@@ -76,18 +88,18 @@ function getLocalCommits(limit = 10) {
     });
   }
 
-  console.log(`Found ${commits.length} commits\n`);
+  console.log(`\n✓ Found ${commits.length} commits\n`);
   return commits;
 }
 
 async function main() {
   console.log('=== CodeWiki Generator - Self Documentation ===\n');
-  console.log('Generating wiki from recent git history...\n');
+  console.log('Generating wiki from full git history...\n');
 
   const processor = new Processor('./wikis/codewiki-generator');
 
-  // Get recent commits (limit to 10 to keep costs reasonable)
-  const commits = getLocalCommits(10);
+  // Get all commits (no limit - process full history)
+  const commits = getLocalCommits();
 
   // Mock GitHub client to use local commits
   processor.githubClient = {
@@ -95,11 +107,17 @@ async function main() {
     getCommits: async () => commits
   };
 
+  console.log('⚙️  Starting wiki generation with the following settings:');
+  console.log(`   • Commits to process: ${commits.length}`);
+  console.log(`   • Meta-analysis frequency: every 5 commits`);
+  console.log(`   • Cost limit: $10.00`);
+  console.log(`   • Output directory: ./wikis/codewiki-generator/\n`);
+
   try {
     const stats = await processor.processRepository(
       'https://github.com/JKershaw/CodeWiki-Generator',
       {
-        maxCost: 1.00,  // $1 limit
+        maxCost: 10.00,  // $10 limit (increased for full history processing)
         metaAnalysisFrequency: 5
       }
     );
