@@ -52,7 +52,8 @@ describe('ClaudeClient', () => {
         expect.objectContaining({
           model: expect.any(String),
           messages: [{ role: 'user', content: 'Test prompt' }]
-        })
+        }),
+        expect.any(Object)
       );
     });
 
@@ -69,7 +70,8 @@ describe('ClaudeClient', () => {
       expect(mockAnthropic.messages.create).toHaveBeenCalledWith(
         expect.objectContaining({
           model: 'claude-3-haiku-20240307'
-        })
+        }),
+        expect.any(Object)
       );
     });
 
@@ -86,7 +88,8 @@ describe('ClaudeClient', () => {
       expect(mockAnthropic.messages.create).toHaveBeenCalledWith(
         expect.objectContaining({
           max_tokens: 1000
-        })
+        }),
+        expect.any(Object)
       );
     });
 
@@ -288,6 +291,161 @@ describe('ClaudeClient', () => {
       expect(claudeClient.totalCost).toBe(0);
       expect(claudeClient.totalTokens).toBe(0);
       expect(claudeClient.requestCount).toBe(0);
+    });
+  });
+
+  describe('Haiku 4.5 support', () => {
+    it('should have pricing for claude-haiku-4-5-20251001', () => {
+      expect(claudeClient.pricing['claude-haiku-4-5-20251001']).toBeDefined();
+      expect(claudeClient.pricing['claude-haiku-4-5-20251001'].input).toBe(1.0);
+      expect(claudeClient.pricing['claude-haiku-4-5-20251001'].output).toBe(5.0);
+    });
+
+    it('should calculate cost correctly for Haiku 4.5', () => {
+      const cost = claudeClient.calculateCost(1000000, 1000000, 'claude-haiku-4-5-20251001');
+      // $1 per million input + $5 per million output = $6
+      expect(cost).toBe(6.0);
+    });
+  });
+
+  describe('Interleaved thinking support', () => {
+    it('should accept thinking parameter', async () => {
+      const mockResponse = {
+        content: [
+          { type: 'thinking', thinking: 'Let me think...' },
+          { type: 'text', text: 'Response' }
+        ],
+        usage: { input_tokens: 100, output_tokens: 50 },
+        stop_reason: 'end_turn'
+      };
+
+      mockAnthropic.messages.create.mockResolvedValue(mockResponse);
+
+      const response = await claudeClient.sendMessage('Test', {
+        thinking: { type: 'enabled', budget_tokens: 5000 }
+      });
+
+      expect(mockAnthropic.messages.create).toHaveBeenCalledWith(
+        expect.objectContaining({
+          thinking: { type: 'enabled', budget_tokens: 5000 }
+        }),
+        expect.any(Object)
+      );
+    });
+
+    it('should pass beta headers correctly', async () => {
+      const mockResponse = {
+        content: [{ type: 'text', text: 'Response' }],
+        usage: { input_tokens: 10, output_tokens: 10 }
+      };
+
+      mockAnthropic.messages.create.mockResolvedValue(mockResponse);
+
+      await claudeClient.sendMessage('Test', {
+        betas: ['interleaved-thinking-2025-05-14']
+      });
+
+      const callArgs = mockAnthropic.messages.create.mock.calls[0];
+      expect(callArgs[1]).toEqual({
+        headers: { 'anthropic-beta': 'interleaved-thinking-2025-05-14' }
+      });
+    });
+
+    it('should handle multiple beta headers', async () => {
+      const mockResponse = {
+        content: [{ type: 'text', text: 'Response' }],
+        usage: { input_tokens: 10, output_tokens: 10 }
+      };
+
+      mockAnthropic.messages.create.mockResolvedValue(mockResponse);
+
+      await claudeClient.sendMessage('Test', {
+        betas: ['beta-1', 'beta-2']
+      });
+
+      const callArgs = mockAnthropic.messages.create.mock.calls[0];
+      expect(callArgs[1].headers['anthropic-beta']).toBe('beta-1,beta-2');
+    });
+  });
+
+  describe('Tool support', () => {
+    it('should accept tools parameter', async () => {
+      const mockTools = [
+        {
+          name: 'test_tool',
+          description: 'A test tool',
+          input_schema: {
+            type: 'object',
+            properties: { query: { type: 'string' } }
+          }
+        }
+      ];
+
+      const mockResponse = {
+        content: [
+          { type: 'text', text: 'Let me use a tool' },
+          { type: 'tool_use', id: 'tool_1', name: 'test_tool', input: { query: 'test' } }
+        ],
+        usage: { input_tokens: 100, output_tokens: 50 },
+        stop_reason: 'tool_use'
+      };
+
+      mockAnthropic.messages.create.mockResolvedValue(mockResponse);
+
+      const response = await claudeClient.sendMessage('Test', { tools: mockTools });
+
+      expect(mockAnthropic.messages.create).toHaveBeenCalledWith(
+        expect.objectContaining({
+          tools: mockTools
+        }),
+        expect.any(Object)
+      );
+    });
+
+    it('should return full response when tools present', async () => {
+      const mockTools = [{ name: 'test_tool', description: 'Test', input_schema: {} }];
+
+      const mockResponse = {
+        content: [
+          { type: 'tool_use', id: 'tool_1', name: 'test_tool', input: {} }
+        ],
+        usage: { input_tokens: 100, output_tokens: 50 },
+        stop_reason: 'tool_use'
+      };
+
+      mockAnthropic.messages.create.mockResolvedValue(mockResponse);
+
+      const response = await claudeClient.sendMessage('Test', { tools: mockTools });
+
+      // Should return full response object, not just text
+      expect(response).toHaveProperty('content');
+      expect(response).toHaveProperty('stop_reason');
+      expect(response.stop_reason).toBe('tool_use');
+      expect(response.content[0].type).toBe('tool_use');
+    });
+
+    it('should accept messages as array for multi-turn conversations', async () => {
+      const mockResponse = {
+        content: [{ type: 'text', text: 'Response' }],
+        usage: { input_tokens: 100, output_tokens: 50 }
+      };
+
+      mockAnthropic.messages.create.mockResolvedValue(mockResponse);
+
+      const messages = [
+        { role: 'user', content: 'First message' },
+        { role: 'assistant', content: 'First response' },
+        { role: 'user', content: 'Second message' }
+      ];
+
+      await claudeClient.sendMessage(messages);
+
+      expect(mockAnthropic.messages.create).toHaveBeenCalledWith(
+        expect.objectContaining({
+          messages: messages
+        }),
+        expect.any(Object)
+      );
     });
   });
 });
