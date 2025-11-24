@@ -12,6 +12,8 @@ describe('Processor', () => {
   let mockStateManager;
   let mockCodeAnalysisAgent;
   let mockDocWriterAgent;
+  let mockTechDebtAgent;
+  let mockSecurityAgent;
 
   beforeEach(() => {
     // Create mock managers and agents
@@ -40,11 +42,27 @@ describe('Processor', () => {
       writeDocumentation: jest.fn()
     };
 
+    mockTechDebtAgent = {
+      analyze: jest.fn().mockResolvedValue({
+        items: [],
+        summary: { totalItems: 0, highPriority: 0, mediumPriority: 0, lowPriority: 0 }
+      })
+    };
+
+    mockSecurityAgent = {
+      analyze: jest.fn().mockResolvedValue({
+        findings: [],
+        summary: { totalFindings: 0, critical: 0, high: 0, medium: 0, low: 0 }
+      })
+    };
+
     processor = new Processor();
     processor.wikiManager = mockWikiManager;
     processor.stateManager = mockStateManager;
     processor.codeAnalysisAgent = mockCodeAnalysisAgent;
     processor.documentationWriterAgent = mockDocWriterAgent;
+    processor.techDebtAnalysisAgent = mockTechDebtAgent;
+    processor.securityAnalysisAgent = mockSecurityAgent;
   });
 
   describe('processCommit', () => {
