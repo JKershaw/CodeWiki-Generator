@@ -157,126 +157,56 @@
 
 ### Core Principle: Real Database, Mocked External APIs
 
-**What to use real:**
-- MongoDB operations
-- Repository functions
-- Service layer logic
-- Business rules
+**Use real:** MongoDB, all internal code
+**Mock only:** GitHub API, Anthropic API, Stripe API
 
-**What to mock:**
-- GitHub API calls
-- Anthropic API calls
-- Stripe API calls
+---
+
+## Test Types
+
+### 1. Unit Tests (Selective)
+Only write unit tests where initialization is complex:
+- Agents with intricate setup logic
+- Complex data transformations
+- Utility functions with edge cases
+
+**Don't unit test:** Simple CRUD, obvious pass-through code, trivial getters/setters.
+
+### 2. API Tests (Comprehensive)
+Test every API endpoint thoroughly:
+- All HTTP methods and status codes
+- Authentication/authorization
+- Valid and invalid inputs
+- Error responses
+
+This is the primary test layer - covers most business logic.
+
+### 3. E2E Tests (User Flows)
+Playwright browser tests covering:
+- **Every UI happy path** - Each user flow works end-to-end
+- **One of each error type** - Auth failure, validation error, server error, not found
 
 ---
 
 ## Test Database Setup
 
-### Per-Test-File Isolation
-Each test file gets a unique database:
+Each test file gets isolated database:
+- Before: Create `codewiki_test_<random>` database
+- After: Drop database
 
-1. **Before all tests in file:**
-   - Connect to MongoDB
-   - Create database with unique name (e.g., `codewiki_test_<timestamp>_<random>`)
-   - Pass connection to tests
-
-2. **After all tests in file:**
-   - Drop the database
-   - Close connection
-
-### Connection Management
-- Single MongoDB instance for all tests
-- Separate database per test file
-- Connection pooling for performance
-
-### Environment Setup
-- `MONGODB_TEST_URI` environment variable
-- Default to `mongodb://localhost:27017`
-- CI uses MongoDB service container
+Environment: `MONGODB_TEST_URI` (default: `mongodb://localhost:27017`)
 
 ---
 
 ## Mock Strategy
 
-### GitHub Mock
+### External API Mocks
+Simple fixture-based mocks for:
+- **GitHub**: Repo metadata, commits, user profile
+- **Anthropic**: Pre-written LLM responses per agent type
+- **Stripe**: Success responses, webhook payloads
 
-**Approach:** Simple fixture-based mock
-
-**Fixtures needed:**
-- Repository metadata
-- Commit list
-- Commit details with files
-- File contents
-- User profile
-
-**Mock Implementation:**
-- Replace `@octokit/rest` client methods
-- Return fixture data based on inputs
-- Simulate errors when needed
-
-### Anthropic Mock
-
-**Approach:** Pre-written response fixtures
-
-**Fixtures needed:**
-- Code analysis responses
-- Documentation generation responses
-- Index generation responses
-- Guide generation responses
-- Context research responses
-
-**Mock Implementation:**
-- Replace ClaudeClient.sendMessage
-- Match prompt patterns to fixture responses
-- Track calls for assertions
-
-### Stripe Mock
-
-**Approach:** Simple success/failure responses
-
-**Fixtures needed:**
-- Customer creation response
-- Subscription creation response
-- Webhook payloads
-
-**Mock Implementation:**
-- Replace Stripe client methods
-- Return success responses by default
-- Simulate webhook events
-
----
-
-## Test Layers
-
-### Layer 1: Pure Function Unit Tests
-- Input/output transformations
-- No database, no external calls
-- Millisecond execution time
-- Example: prompt generation, response parsing, validation
-
-### Layer 2: Repository Unit Tests
-- Test CRUD operations against real MongoDB
-- Verify indexes work correctly
-- Test query patterns
-- Example: create user, find by github ID, update plan
-
-### Layer 3: Service Integration Tests
-- Full service workflows
-- Real database + mocked external APIs
-- Test business logic end-to-end
-- Example: connect repo, sync commits, verify data state
-
-### Layer 4: API Integration Tests
-- HTTP request/response testing
-- Real database + mocked external APIs
-- Test authentication, authorization
-- Example: POST /api/repositories, verify 201 response
-
-### Layer 5: E2E Tests (Playwright)
-- Full application running
-- Real database + mocked external APIs
-- Browser interactions
-- Example: login flow, connect repo, view wiki
+Store fixtures as JSON files, load in tests.
 
 ---
 
@@ -285,146 +215,49 @@ Each test file gets a unique database:
 ```
 tests/
   fixtures/
-    github/
-      repo-metadata.json
-      commits.json
-      commit-details.json
-    anthropic/
-      code-analysis-response.json
-      documentation-response.json
-    stripe/
-      customer.json
-      subscription.json
+    github/           # GitHub API responses
+    anthropic/        # LLM responses by agent
+    stripe/           # Payment responses
   helpers/
-    db.js              # Database setup/teardown utilities
-    mocks.js           # Mock implementations
-    fixtures.js        # Fixture loading utilities
-    factories.js       # Test data factories
-  unit/
-    lib/
-      utils/           # Pure function tests
-      agents/          # Agent unit tests (mocked LLM)
-  integration/
-    repositories/      # Database repository tests
-    services/          # Service layer tests
-    api/               # API endpoint tests
+    db.js             # Database setup/teardown
+    mocks.js          # External API mocks
+  api/                # Comprehensive API tests
+    auth.test.js
+    repositories.test.js
+    jobs.test.js
+    wikis.test.js
+  unit/               # Only complex initialization
+    agents/           # Agent-specific tests
   e2e/
-    auth.spec.js       # Authentication flows
-    repos.spec.js      # Repository management
-    wiki.spec.js       # Wiki generation/viewing
+    auth.spec.js      # Login/logout flows
+    repos.spec.js     # Connect/sync repository
+    wiki.spec.js      # View wiki pages
+    errors.spec.js    # Error handling flows
 ```
 
 ---
 
-## TDD Workflow
+## Test Commands
 
-### Iteration Pattern
-1. Write failing test describing desired behavior
-2. Run test (verify it fails for right reason)
-3. Write minimal implementation to pass
-4. Run test (verify it passes)
-5. Refactor if needed
-6. Run test (verify still passes)
-7. Commit
-
-### Test-First Rules
-- No production code without a failing test
-- Test describes behavior, not implementation
-- One assertion per test (prefer, not absolute)
-- Tests are documentation
-
----
-
-## Database Testing Utilities
-
-### Factory Functions
-Create test data with sensible defaults:
-
-- `createUser(overrides)` - Creates user with defaults
-- `createRepository(userId, overrides)` - Creates repo
-- `createCommit(repoId, overrides)` - Creates commit
-- `createJob(repoId, overrides)` - Creates job
-- `createWiki(repoId, overrides)` - Creates wiki
-- `createPage(wikiId, overrides)` - Creates page
-
-### Cleanup Helpers
-- `clearCollection(name)` - Remove all documents
-- `dropDatabase()` - Drop entire test database
-- `resetSequences()` - Reset any counters
-
-### Query Helpers
-- `findUserByGithubId(id)` - Common query pattern
-- `findPendingJobs()` - Find pending jobs
-- `findWikiPages(wikiId)` - Get all pages
-
----
-
-## CI/CD Testing Configuration
-
-### GitHub Actions Setup
-- MongoDB service container
-- Environment variables for test database
-- Parallel test execution
-- Coverage reporting
-
-### Test Commands
-- `npm test` - All unit tests
-- `npm run test:integration` - Integration tests
+- `npm test` - All tests (unit + API)
 - `npm run test:e2e` - Playwright E2E tests
-- `npm run test:coverage` - With coverage report
-
-### Performance Targets
-- Unit tests: < 30 seconds total
-- Integration tests: < 2 minutes total
-- E2E tests: < 5 minutes total
+- `npm run test:api` - API tests only
 
 ---
 
-## Migration from Current Testing
+## Manual Integration Tests
 
-### Keep
-- Jest configuration
-- Playwright configuration
-- Existing agent unit tests (update mocking)
-- E2E smoke test structure
+Periodically test with real API keys to validate integrations:
+- GitHub OAuth flow (real GitHub)
+- LLM agent responses (real Anthropic)
+- Stripe webhooks (test mode)
 
-### Update
-- Test setup to handle MongoDB
-- Mock approach (inject vs patch)
-- Test organization (add integration layer)
-
-### Add
-- Database test utilities
-- Fixture loading system
-- Factory functions
-- Integration test suite
-- API endpoint tests
-
-### Remove
-- File-based state testing
-- Tests for removed frontend features
-- Tests for removed routes
+Run manually before major releases. Costs money - use sparingly.
 
 ---
 
-## Open Questions
+## CI Configuration
 
-1. **Test database location for CI?**
-   - GitHub Actions MongoDB service
-   - Or MongoDB Atlas free tier for CI
-
-2. **Fixture management strategy?**
-   - JSON files in fixtures/
-   - Or factory functions generating data
-
-3. **Test data seeding for E2E?**
-   - API calls to seed data
-   - Or direct database insertion
-
-4. **Coverage thresholds?**
-   - Aim for 80% overall
-   - Higher for critical paths (auth, billing)
-
-5. **Performance testing?**
-   - Not for MVP
-   - Add when scaling concerns arise
+- MongoDB service container in GitHub Actions
+- Run API tests first (fast feedback)
+- Run E2E tests after API tests pass

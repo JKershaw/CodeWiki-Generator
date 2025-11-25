@@ -192,33 +192,10 @@ Makes multiple LLM calls with intermediate decisions.
 
 ---
 
-## Testing Strategy for Agents
+## Agent Registry
 
-### Unit Tests (Pure Functions)
-- Test extracted utilities directly
-- No mocking needed
-- Fast execution
+Simple object map - no dynamic discovery:
 
-### Unit Tests (shouldRun)
-- Pass various context objects
-- Verify boolean returns
-- No LLM mocking needed
-
-### Unit Tests (execute with mocked LLM)
-- Mock ClaudeClient passed via deps
-- Verify prompt construction
-- Verify output transformation
-
-### Integration Tests (with real prompts)
-- Use fixture responses
-- Verify end-to-end agent behavior
-- Test error handling
-
----
-
-## Agent Registry Design
-
-### Simple Object Map (MVP)
 ```
 const agents = {
   'code-analysis': CodeAnalysisAgent,
@@ -227,55 +204,31 @@ const agents = {
 };
 ```
 
-### Registration at Startup
-- Import all agents
-- Add to registry object
-- Validate each has required interface
-
-### No Dynamic Discovery Needed
-- Fixed set of agents for MVP
-- Add new agents by manual registration
-- Plugin system can come later
+Import all agents at startup, validate interface, done.
 
 ---
 
-## Backward Compatibility Considerations
+## Testing Agents
 
-### Prompt Templates
-- Keep existing templates in `lib/prompts/`
-- May need minor adjustments for new input format
-- Test with existing fixtures
+Test agents through API tests primarily. Unit test only where agent initialization is complex.
 
-### Test Files
-- Update tests to use new interface
-- Keep fixture data
-- May need to adjust mocking approach
-
-### MCP Server
-- WikiContextAgent interface unchanged for now
-- Keep separate from standard agent flow
+For agents with complex setup:
+- Test shouldRun with various contexts
+- Test execute with mocked LLM (via injected deps)
 
 ---
 
-## Open Questions
+## Decisions
 
-1. **Should agents return structured data or markdown?**
-   - Analysis agents: structured data
-   - Writer agents: markdown string
-   - Index agents: markdown string
+| Question | Answer |
+|----------|--------|
+| Return type? | Analysis: structured data. Writers: markdown string |
+| Agent dependencies? | Processor orchestrates order, passes previous results |
+| shouldRun async? | No, keep sync |
+| Handle failures? | Return error result, processor decides retry |
 
-2. **How to handle agent dependencies on other agents' output?**
-   - Processor orchestrates order
-   - Pass previous results in input context
+---
 
-3. **Should shouldRun be async?**
-   - Prefer sync for performance
-   - If async needed, document clearly
+## Reference
 
-4. **Version strategy for agents?**
-   - Semver for breaking changes
-   - Track version in output for debugging
-
-5. **How to handle agent failures?**
-   - Return error result, don't throw
-   - Let processor decide retry/skip behavior
+The current project wiki (being merged soon) documents existing agent behavior and can be consulted during refactoring.

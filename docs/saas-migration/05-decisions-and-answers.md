@@ -142,28 +142,25 @@ Rationale:
 
 ### 7. Testing granularity: How many unit vs integration vs E2E tests?
 
-**Recommendation: Pyramid with integration emphasis**
+**Recommendation: API-first with selective unit tests**
 
-**Target distribution:**
-- Unit tests: 50% (pure functions, utilities, agent logic)
-- Integration tests: 40% (services, repositories, APIs)
-- E2E tests: 10% (critical user flows only)
+**Test types:**
+- **Unit tests**: Only where initialization is complex (not everywhere)
+- **API tests**: Comprehensive - every endpoint, all scenarios
+- **E2E tests**: Every UI happy path + one of each error type
 
 **Rationale:**
-- Unit tests fast but shallow
-- Integration tests catch real bugs
-- E2E tests expensive but high confidence
+- Unit tests only valuable for complex setup logic
+- API tests cover most business logic efficiently
+- E2E tests verify user flows work end-to-end
+- No arbitrary coverage targets - test what matters
 
-**Coverage targets:**
-- Overall: 80%
-- Critical paths (auth, billing): 90%
-- Utilities: 100%
-
-**E2E test scope (MVP):**
-- Login flow
-- Connect repository
-- View wiki page
-- MCP query (if feasible)
+**E2E scope:**
+- All happy paths (login, connect repo, view wiki, etc.)
+- One auth error flow
+- One validation error flow
+- One server error flow
+- One not-found flow
 
 ---
 
