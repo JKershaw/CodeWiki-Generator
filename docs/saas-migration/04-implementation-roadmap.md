@@ -6,7 +6,7 @@
 - **API tests are primary** - Comprehensive API coverage, selective unit tests
 - **E2E for user flows** - Every happy path + one of each error type
 - **Real database in tests** - Mock only GitHub, Anthropic, Stripe
-- **Keep it simple** - No over-abstraction, optimize when measured
+- **Clean code throughout** - Cleanup before and after, simple abstractions
 
 ---
 
@@ -42,7 +42,7 @@
 
 ---
 
-## Phase 2: Frontend Simplification
+## Phase 2: Frontend Removal & Initial Cleanup
 
 ### Remove Frontend
 - [ ] Delete views: dashboard, wiki-page, wiki-editor, analytics, planning, projects
@@ -59,11 +59,19 @@
 - [ ] E2E test: home page loads
 - [ ] E2E test: /health returns 200
 
-### Cleanup
-- [ ] Remove tests for deleted components
-- [ ] Verify remaining tests pass
+### Initial Code Cleanup
+- [ ] Remove dead code and unused imports
+- [ ] Delete orphaned test files
+- [ ] Consolidate config into single module
+- [ ] Flatten unnecessary directory nesting
+- [ ] Remove commented-out code
+- [ ] Ensure consistent file naming (kebab-case)
 
-**Deliverable:** Minimal frontend (blank page + health check)
+### Verify
+- [ ] All remaining tests pass
+- [ ] No unused exports in lib/
+
+**Deliverable:** Minimal frontend, clean starting point
 
 ---
 
@@ -247,7 +255,32 @@ Each agent exports: name, shouldRun(context), execute(input, deps)
 
 ---
 
-## Phase 10: Polish and Deploy
+## Phase 10: Final Cleanup & Polish
+
+### Code Quality Review
+- [ ] Review all new code for clarity and simplicity
+- [ ] Extract repeated patterns into shared utilities
+- [ ] Ensure consistent error handling patterns
+- [ ] Verify no circular dependencies
+- [ ] Check for proper separation of concerns
+
+### Directory Structure
+Ensure clean, logical organization:
+```
+lib/
+  adapters/       # External API wrappers (github, anthropic, stripe)
+  agents/         # LLM agents with standard interface
+  repositories/   # MongoDB data access
+  services/       # Business logic
+  utils/          # Pure utility functions
+  middleware/     # Express middleware
+```
+
+### Remove Cruft
+- [ ] Delete any remaining unused code
+- [ ] Remove TODO comments (convert to issues)
+- [ ] Clean up any debug logging
+- [ ] Verify no hardcoded values
 
 ### Error Handling
 - [ ] Consistent error response format
@@ -281,7 +314,7 @@ Each agent exports: name, shouldRun(context), execute(input, deps)
 - [ ] One server error flow
 - [ ] One not-found flow
 
-**Deliverable:** Production-ready application
+**Deliverable:** Clean, production-ready application
 
 ---
 
@@ -298,7 +331,7 @@ Each agent exports: name, shouldRun(context), execute(input, deps)
 
 - [ ] Phase 0: Preparation
 - [ ] Phase 1: Test Infrastructure
-- [ ] Phase 2: Frontend Simplification
+- [ ] Phase 2: Frontend Removal & Initial Cleanup
 - [ ] Phase 3: Data Layer
 - [ ] Phase 4: Authentication
 - [ ] Phase 5: Repository Management
@@ -306,7 +339,7 @@ Each agent exports: name, shouldRun(context), execute(input, deps)
 - [ ] Phase 7: Job System
 - [ ] Phase 8: Wiki System
 - [ ] Phase 9: MCP Integration
-- [ ] Phase 10: Polish and Deploy
+- [ ] Phase 10: Final Cleanup & Polish
 
 ---
 
