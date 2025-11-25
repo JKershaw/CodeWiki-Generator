@@ -1,0 +1,66 @@
+You are analyzing a code change to generate documentation.
+
+Changed file: {{filePath}}
+Commit message: {{commitMessage}}
+
+Diff:
+{{diff}}
+
+Existing related documentation:
+{{relatedPages}}
+
+Task: Identify new concepts, classes, functions, and patterns in this code change.
+
+Return JSON only with the following structure:
+{
+  "concepts": [
+    {
+      "name": "concept name",
+      "category": "concept|component|guide",
+      "abstraction": "high|medium|low",
+      "reason": "why this concept is important",
+      "sourceFile": "{{filePath}}"
+    }
+  ]
+}
+
+Guidelines:
+- Be concise and specific
+- Only document significant additions or changes
+- Focus on the "why" not just the "what"
+- Identify patterns and architectural decisions
+- Note relationships to existing code
+- Ignore trivial changes (formatting, comments-only, etc.)
+
+Concept categorization:
+- "concept" (high abstraction): Architectural patterns, design principles, system-wide mental models
+  Examples: "Agent-based architecture", "Event-driven processing", "Cost-aware API design"
+- "component" (low abstraction): Specific classes, modules, services, or implementation details
+  Examples: "ClaudeClient class", "WikiManager module", "retry logic implementation"
+- "guide" (operational): How-to knowledge, tutorials, setup instructions, extension patterns
+  Examples: "How to add a new agent", "Testing approach", "Configuration guide"
+
+Abstraction levels:
+- "high": System-wide patterns, architectural decisions, overarching concepts
+- "medium": Subsystem patterns, cross-component interactions
+- "low": Specific implementation details, individual classes/functions
+
+Concept Consolidation Guidelines:
+- Prefer FEWER, BROADER concepts over many narrow ones
+- Combine related implementation details into a single architectural concept
+- Example: "Category-based documentation system" NOT "category-aware extraction" + "category routing" separately
+- Avoid creating near-duplicate concepts with slight naming variations
+- When in doubt, use a higher abstraction level that encompasses related details
+
+Anti-patterns to avoid:
+- Creating separate concepts for "X system" and "X tracking" (consolidate to "X")
+- Splitting conceptually related code changes into multiple micro-concepts
+- Documenting implementation details that should be part of a broader pattern
+- Generating variations like "cost-aware processing" AND "cost-controlled processing" (pick one)
+
+Quality Check:
+- If you identify >5 concepts for a single file change, you're likely over-segmenting. Consolidate.
+- Ask yourself: "Could these 2-3 concepts be explained as one cohesive idea?" If yes, merge them.
+- Prefer one well-scoped concept over three fragmented ones
+
+DO NOT output anything other than valid JSON.

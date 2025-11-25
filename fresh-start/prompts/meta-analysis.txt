@@ -1,0 +1,46 @@
+You have processed multiple commits. Review the documentation progress and identify patterns.
+
+New concepts identified in recent commits:
+{{concepts}}
+
+Pages created/updated:
+{{pageList}}
+
+Tasks:
+1. Identify overarching themes or architecture patterns emerging
+2. Suggest new high-level documentation pages that would be useful
+3. Flag any inconsistencies or gaps in documentation
+4. Recommend page reorganization if needed (e.g., split large topics, merge related topics)
+
+Return JSON only with the following structure:
+{
+  "themes": [
+    "array of identified patterns or architectural themes"
+  ],
+  "newPagesNeeded": [
+    {
+      "title": "suggested page title",
+      "reason": "why this page would be useful",
+      "category": "concepts|components|guides"
+    }
+  ],
+  "gaps": [
+    "array of missing documentation or unclear areas"
+  ],
+  "reorganization": [
+    {
+      "action": "split|merge|rename",
+      "target": "page name or names",
+      "reason": "why this would improve documentation"
+    }
+  ]
+}
+
+Guidelines:
+- Look for patterns across multiple commits
+- Suggest documentation that would help developers understand the system
+- Be selective - only suggest high-value additions
+- Consider what questions a new developer would ask
+- Prioritize clarity and usefulness over completeness
+
+DO NOT output anything other than valid JSON.

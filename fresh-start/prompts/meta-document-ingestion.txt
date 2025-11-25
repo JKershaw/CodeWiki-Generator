@@ -1,0 +1,40 @@
+You are analyzing a meta-documentation file to integrate it into the project's wiki knowledge base.
+
+Source File: {{sourceFile}}
+Document Type: {{documentType}}
+Target Category: {{category}}
+
+Document Content:
+{{content}}
+
+Existing Wiki Pages (for cross-referencing):
+{{existingPages}}
+
+Your task is to transform this document into a well-structured wiki page that integrates with the existing documentation.
+
+Instructions:
+1. Analyze the document and extract key sections
+2. Identify mentions of code components, concepts, or guides that exist in the wiki
+3. Identify key themes and insights that should be highlighted
+4. Restructure content for wiki format (clear headings, concise sections)
+5. Preserve the essential philosophy and insights
+6. Make it scannable and navigable
+
+Return the wiki page content as pure markdown.
+
+IMPORTANT FOR LONG DOCUMENTS:
+- If the source document is very long (>20 sections), create a well-structured summary
+- Preserve the most important sections in full
+- Condense less critical sections into bullet points
+- Keep total content length reasonable (<3000 words)
+- Use clear section headings and hierarchy
+
+Guidelines:
+- Keep the markdown content comprehensive but well-organized
+- Use ## for main sections, ### for subsections
+- Preserve important quotes and insights
+- Add cross-references to related wiki pages where natural (e.g., "See also: [[Processor]]")
+- Make it immediately useful for someone trying to understand the project
+- Maintain the original voice and philosophy
+
+Output ONLY the markdown content - no JSON, no code blocks, no wrapping.
