@@ -1,0 +1,62 @@
+---
+title: Commit-driven documentation pipeline
+category: concept
+sourceFile: lib/processor.js
+related: [components/processor-class.md, meta/overview.md, concepts/file-significance-filtering.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Commit-driven Documentation Pipeline
+
+## Purpose and [Overview](../meta/overview.md)
+
+The commit-driven documentation pipeline establishes an automated system where code commits trigger comprehensive analysis and documentation generation. This architectural pattern orchestrates agent-based code analysis with wiki management to maintain up-to-date project documentation without manual intervention.
+
+## Key Functionality
+
+The pipeline operates through several coordinated processes:
+
+- **Commit Processing**: Analyzes incoming commits to identify significant changes and extract relevant code files for documentation
+- **[File Significance Filtering](../concepts/file-significance-filtering.md)**: Applies filtering logic to determine which files warrant documentation effort, reducing noise by skipping non-significant files and those without meaningful patches
+- **Contextual Analysis**: Retrieves up to 3 related wiki pages based on file path keywords to provide relevant context for more accurate code analysis
+- **Concept-centric Documentation**: Decomposes code changes into discrete concepts, each managed as independent documentation pages that can be created or updated based on analysis results
+- **Multi-agent Coordination**: Orchestrates specialized agents (code analysis, documentation writing, tech debt assessment, security review) through the central [Processor class](../components/processor-class.md)
+
+## Relationships
+
+The pipeline integrates several key components:
+
+- **WikiManager**: Handles creation, retrieval, and updates of documentation pages
+- **StateManager**: Manages processing state and tracks documentation lifecycle
+- **Analysis Agents**: Specialized components for code analysis, security assessment, and tech debt evaluation
+- **[Processor Class](../components/processor-class.md)**: Central orchestrator that coordinates all managers and agents to execute the complete documentation workflow
+
+## Usage Example
+
+```javascript
+const Processor = require('./lib/processor');
+
+// Initialize processor with required managers and agents
+const processor = new Processor({
+  wikiManager: mockWikiManager,
+  stateManager: mockStateManager,
+  codeAnalysisAgent: mockCodeAnalysisAgent,
+  docWriterAgent: mockDocWriterAgent,
+  techDebtAgent: mockTechDebtAgent,
+  securityAgent: mockSecurityAgent
+});
+
+// Process a commit to generate documentation
+await processor.processCommit(commitData);
+
+// Process entire repository for comprehensive documentation
+await processor.processRepository(repositoryPath);
+```
+
+## Testing
+
+**Test Coverage**: tests/unit/processor.test.js
+- 26 test cases across 6 test suites
+- Comprehensive testing of core methods: `processCommit`, `isSignificantFile`, `getRelevantContext`, `determinePagePath`, and `processRepository`
+- Validates the complete processor workflow including manager coordination and agent orchestration

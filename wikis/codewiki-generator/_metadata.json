@@ -1503,13 +1503,238 @@
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-25"
+    },
+    "guides/test-environment-setup-initialization.md": {
+      "title": "Test environment setup initialization",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "jest.config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/test-environment-isolation.md": {
+      "title": "Test Environment Isolation",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "tests/setup.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/mock-credential-injection.md": {
+      "title": "Mock Credential Injection",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "tests/setup.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/environment-driven-configuration-with-test-mode-separation.md": {
+      "title": "Environment-driven configuration with test mode separation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/test-friendly-configuration-defaults.md": {
+      "title": "Test-Friendly Configuration Defaults",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "tests/setup.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/configuration-validation-framework.md": {
+      "title": "Configuration validation framework",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/cost-aware-and-rate-controlled-operation-setup.md": {
+      "title": "Cost-aware and rate-controlled operation setup",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/cost-aware-api-client-wrapper.md": {
+      "title": "Cost-aware API client wrapper",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/claude.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/lazy-loaded-sdk-initialization-with-test-mode-support.md": {
+      "title": "Lazy-loaded SDK initialization with test mode support",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/claude.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/resilient-retry-logic-with-exponential-backoff.md": {
+      "title": "Resilient retry logic with exponential backoff",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/claude.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/flexible-message-processing-abstraction.md": {
+      "title": "Flexible message processing abstraction",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/claude.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/template-based-prompt-management-system.md": {
+      "title": "Template-based prompt management system",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/prompts.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/template-variable-interpolation-and-validation.md": {
+      "title": "Template variable interpolation and validation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/prompts.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/file-based-template-storage-with-caching.md": {
+      "title": "File-based template storage with caching",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/prompts.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/agent-based-code-analysis-architecture.md": {
+      "title": "Agent-based code analysis architecture",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/code-analysis-agent-class.md": {
+      "title": "CodeAnalysisAgent class",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/intelligent-file-filtering-and-diff-handling.md": {
+      "title": "Intelligent file filtering and diff handling",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/structured-code-analysis-response-format.md": {
+      "title": "Structured code analysis response format",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/agent-based-code-analysis-and-documentation.md": {
+      "title": "Agent-based code analysis and documentation",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/context-aware-documentation-generation.md": {
+      "title": "Context-aware documentation generation",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/processor-orchestration-class.md": {
+      "title": "Processor orchestration class",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/concept-to-page-mapping-system.md": {
+      "title": "Concept-to-page mapping system",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/context-aware-code-analysis.md": {
+      "title": "Context-aware code analysis",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/repository-scale-batch-processing-with-state-persistence.md": {
+      "title": "Repository-scale batch processing with state persistence",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/cost-aware-api-resource-management.md": {
+      "title": "Cost-aware API resource management",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
     }
   },
   "statistics": {
-    "totalPages": 167,
-    "concepts": 56,
-    "components": 88,
-    "guides": 23,
+    "totalPages": 192,
+    "concepts": 66,
+    "components": 99,
+    "guides": 27,
     "totalCommitsProcessed": 0,
     "orphanedPages": []
   }

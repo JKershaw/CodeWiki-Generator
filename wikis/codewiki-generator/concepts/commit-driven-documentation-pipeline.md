@@ -7,30 +7,32 @@ created: 2025-11-25
 updated: 2025-11-25
 ---
 
-# Commit-driven Documentation Pipeline
+# Processor Orchestration Class
 
-## Purpose and [Overview](../meta/overview.md)
+## Purpose and Overview
 
-The commit-driven documentation pipeline establishes an automated system where code commits trigger comprehensive analysis and documentation generation. This architectural pattern orchestrates agent-based code analysis with wiki management to maintain up-to-date project documentation without manual intervention.
+The Processor orchestration class serves as the central coordinator for the commit-driven documentation pipeline, managing the complete workflow from commit analysis to documentation generation. It delegates specialized tasks to dedicated agents (code analysis, documentation writing, tech debt assessment, security review) while orchestrating wiki management and state tracking to maintain automated, up-to-date project documentation.
 
 ## Key Functionality
 
-The pipeline operates through several coordinated processes:
+The Processor class implements several core capabilities:
 
-- **Commit Processing**: Analyzes incoming commits to identify significant changes and extract relevant code files for documentation
-- **[File Significance Filtering](../concepts/file-significance-filtering.md)**: Applies filtering logic to determine which files warrant documentation effort, reducing noise by skipping non-significant files and those without meaningful patches
-- **Contextual Analysis**: Retrieves up to 3 related wiki pages based on file path keywords to provide relevant context for more accurate code analysis
-- **Concept-centric Documentation**: Decomposes code changes into discrete concepts, each managed as independent documentation pages that can be created or updated based on analysis results
-- **Multi-agent Coordination**: Orchestrates specialized agents (code analysis, documentation writing, tech debt assessment, security review) through the central [Processor class](../components/processor-class.md)
+- **Commit Processing**: Analyzes commit data to identify significant file changes, filters out non-essential files (binary files, deletions), and extracts relevant code for documentation
+- **Context-Aware Analysis**: Retrieves related wiki pages based on file paths to provide analyzers with existing documentation context, improving analysis quality through knowledge base integration
+- **Concept-to-Page Mapping**: Converts identified code concepts into structured wiki pages using kebab-case naming conventions and category-based organization (components/ directory)
+- **Agent Coordination**: Orchestrates multiple specialized agents (CodeAnalysisAgent, DocumentationWriterAgent, TechDebtAgent, SecurityAgent) through a unified interface
+- **Repository-Wide Processing**: Supports both incremental commit-based updates and comprehensive repository analysis for complete documentation coverage
+
+Key methods include `processCommit()` for handling individual commits, `isSignificantFile()` for filtering relevant changes, `getRelevantContext()` for wiki context retrieval, and `determinePagePath()` for consistent documentation organization.
 
 ## Relationships
 
-The pipeline integrates several key components:
+The Processor integrates with several critical system components:
 
-- **WikiManager**: Handles creation, retrieval, and updates of documentation pages
-- **StateManager**: Manages processing state and tracks documentation lifecycle
-- **Analysis Agents**: Specialized components for code analysis, security assessment, and tech debt evaluation
-- **[Processor Class](../components/processor-class.md)**: Central orchestrator that coordinates all managers and agents to execute the complete documentation workflow
+- **WikiManager**: Handles all wiki operations including page creation, updates, searches, and relationship management through methods like `getPage()`, `createPage()`, and `getRelatedPages()`
+- **StateManager**: Manages processing state persistence and tracks documentation lifecycle across multiple commits using `loadState()` and state tracking capabilities
+- **Analysis Agents**: Coordinates specialized agents for different analysis aspects - CodeAnalysisAgent for code understanding, DocumentationWriterAgent for content generation, TechDebtAgent for technical debt assessment, and SecurityAgent for security reviews
+- **File System Integration**: Processes repository files and commit data to drive the documentation pipeline workflow
 
 ## Usage Example
 
@@ -59,4 +61,4 @@ await processor.processRepository(repositoryPath);
 **Test Coverage**: tests/unit/processor.test.js
 - 26 test cases across 6 test suites
 - Comprehensive testing of core methods: `processCommit`, `isSignificantFile`, `getRelevantContext`, `determinePagePath`, and `processRepository`
-- Validates the complete processor workflow including manager coordination and agent orchestration
+- Validates complete processor workflow including manager coordination, agent orchestration, and the full commit-to-documentation pipeline
