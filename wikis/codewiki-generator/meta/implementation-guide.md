@@ -7,223 +7,204 @@ updated: 2025-11-25
 related: [meta/specification.md, meta/philosophy.md, components/file-based-state-persistence-with-directory-handling.md, components/persistent-state-management-with-validation.md, concepts/state-schema-validation-pattern.md]
 ---
 
-# Implementation Guide
-
-**Document Type:** meta  
-**Status:** Ready for AI-Driven Development  
-**Version:** 2.0  
-**Last Updated:** November 22, 2025
+# Implementation Guide for AI Coding Agent
 
 ## Overview
 
-This guide provides structured instructions for building the CodeWiki Generator using test-driven development. The system generates wikis from git history and validates itself through self-documentation—you will use the system on itself as you build it.
+This guide provides a comprehensive roadmap for building the CodeWiki Generator using test-driven development. The system generates wikis from git history and validates its own architecture through self-documentation during the implementation process.
 
-**Core Principle**: After implementing each feature, run the wiki generator on this codebase, then consult the generated wiki before proceeding. If you cannot understand your own architecture from the wiki, improve the documentation system before continuing.
+**Critical Practice**: After implementing each feature, run the wiki generator on this codebase, then consult the generated wiki before proceeding. If you can't understand your own architecture from the wiki, improve the documentation system before continuing.
 
-See also: [[Architecture]], [[Testing Approach]], [[Specification]]
-
-## Development [Philosophy](../meta/philosophy.md)
+## Core Development Philosophy
 
 ### Test-First Always
-Write failing tests before implementation. No exceptions. This ensures:
-- Clear [specification](../meta/specification.md) of behavior before code exists
-- Confidence that features work as designed
-- Ability to refactor safely
+Write failing tests before implementation. No exceptions. This ensures testability and clear requirements from the start.
 
-### Wiki-Driven Development Cycle
-The development process is intentionally cyclical:
-
+### Wiki-Driven Development
 1. Build feature
 2. Run wiki generator on codebase
 3. Read generated documentation
 4. If unclear, fix documentation generation
 5. Proceed to next feature
 
-This validates that your documentation system can actually explain complex systems. Poor documentation reveals flaws in the system itself.
+This creates a feedback loop where poor documentation reveals flaws in the system design itself.
 
 ### Incremental Commits
-- Commit after completing each numbered step
-- Every test passing = one commit
-- Minimum 20 commits for this project
-- Allows human to monitor progress through wiki
+Every test passing, every feature working equals one commit. Minimum 20 commits for this project. Commit cadence allows human monitoring through git history and wiki evolution.
 
 ### Self-Validation
-The system documents itself. This creates a feedback loop: if the wiki cannot clearly explain a component, that component's design is unclear. Improve the design, not just the documentation.
+The system documents itself. Poor documentation quality indicates architectural or clarity issues that should be fixed before proceeding.
 
-## Critical Practices
+## Development Phases Overview
 
-**Commit Cadence**: Commit after each numbered step. This enables humans to track progress through the evolving wiki.
+### Phase 1: Core Infrastructure (Steps 1-7)
+Establish foundational systems: project structure, [[wiki-manager-api-consistency|wiki management]], [[persistent-state-management|state persistence]], and [[git-hub-api-client-with-resilient-retry-logic|GitHub integration]].
 
-**Sub-Agent Usage**: Spawn sub-agents for isolated tasks:
+### Phase 2: AI Agent System (Steps 8-13)
+Implement [[anthropic-sdk-wrapper-with-lazy-loading|Claude API integration]], [[agent-based-documentation-generation|prompt templates]], and core agent implementations for code analysis and documentation writing.
+
+### Phase 3: Processing Engine (Steps 14-16)
+Build the core [[processor-class|processor]] for orchestrating analysis, the [[agent-based-documentation-pipeline|documentation pipeline]], and batch processing capabilities.
+
+### Phase 4: Web Interface (Steps 17-22)
+Create Express server, REST API endpoints, real-time WebSocket updates, and the processing dashboard.
+
+### Phase 5: Integration & Polish (Steps 23-30)
+Implement cost tracking, error recovery, cross-page linking, and meta-analysis features. This phase includes the first [[multi-agent-documentation-generation-architecture|comprehensive self-generated wiki]].
+
+### Phase 6: MCP Server Integration (Steps 31-33)
+Build Model Context Protocol server for Claude Code integration and validation with actual Claude Code usage.
+
+### Final Phase: Optimization & Release (Steps 34-37)
+Performance optimization, security hardening, final polish, and release preparation.
+
+## Key Implementation Patterns
+
+### Test First, Then Implement
+For each step, write comprehensive tests covering:
+- Happy path functionality
+- Error conditions
+- Edge cases
+- Integration with other components
+
+Then implement minimum code to pass all tests.
+
+### Sub-Agent Spawning Strategy
+**When to spawn sub-agents**:
 - Research tasks (library evaluation, API exploration)
 - Isolated implementations (utility functions, test fixtures)
 - Documentation writing (complex explanations)
 - Design tasks (UI mockups, data schema design)
 
-Main agent handles:
-- Integration of sub-agent work
-- Architectural decisions
-- Test orchestration
-- Progress tracking
+**Main agent responsibility**: Integration, architectural decisions, test orchestration, and progress tracking.
 
-## Development Phases (37 Steps)
+### Continuous Self-Documentation
+Every 5 steps:
+1. Run wiki generator on codebase
+2. Read generated documentation
+3. Validate accuracy and usefulness
+4. Tune prompts if documentation is poor
+5. Commit updated wiki
 
-### Phase 1: Core Infrastructure (Steps 1-7)
+This ensures documentation quality improves throughout development and catches architectural issues early.
 
-**Step 1-2**: Project initialization and development wiki setup  
-**Step 3-6**: Implement wiki manager, state management, and GitHub integration  
-**Step 7**: First self-documentation run (critical validation point)
+## Phase 1 Detailed: Core Infrastructure
 
-**Expected Duration**: 6-8 hours
+### Step 1: Repository Setup
+Initialize project with Node.js 24.x, essential dependencies ([[anthropic-sdk-wrapper-with-lazy-loading|@anthropic-ai/sdk]], [[git-hub-api-client-with-resilient-retry-logic|octokit]], express, ejs), dev dependencies for testing, and directory structure: lib/, views/, views/partials/, public/, wiki/, tests/.
 
-### Phase 2: AI Agent System (Steps 8-13)
+**Validation**: All directories exist, `npm install` completes successfully.
 
-**Step 8**: Anthropic SDK wrapper for Claude integration  
-**Step 9**: Agent prompt templates  
-**Step 10-13**: Agent orchestration, workflow execution, validation system
+### Step 2: Development Wiki Initialization
+Create initial wiki structure with index.md, concepts/ directory, components/ directory, getting-started.md guide, and architecture.md documenting intended architecture in dev-wiki/_metadata.json.
 
-**Expected Duration**: 6-8 hours
+**Validation**: Manually verify you can read the architecture documentation you just wrote.
 
-### Phase 3: Processing Engine (Steps 14-16)
+### Step 3-6: Core Components
+Build [[wiki-manager-api-consistency|wiki manager]] with read/write operations, [[persistent-state-management|state manager]], and [[git-hub-api-client-with-resilient-retry-logic|GitHub API wrapper]]. Each follows TDD with comprehensive test coverage.
 
-**Step 14**: File analysis pipeline  
-**Step 15**: Git history analysis  
-**Step 16**: Multi-file context aggregation
+### Step 7: First Self-Documentation Run
+Manually create wiki pages documenting built components and TDD approach. Update metadata and architecture documentation.
 
-**Expected Duration**: 4-6 hours
+**Critical Validation**: Read generated documentation—does it accurately explain what each component does? If not, improve the documentation generation system before continuing.
 
-### Phase 4: Web Interface (Steps 17-22)
+## Phase 2: AI Agent System
 
-**Step 17**: Express server setup  
-**Step 18**: Dashboard frontend  
-**Step 19**: Manual stepping interface  
-**Step 20**: Batch processing interface  
-**Step 21**: Results display  
-**Step 22**: Real-time updates via WebSocket
+Key components to implement:
+- [[anthropic-sdk-wrapper-with-lazy-loading|Anthropic SDK wrapper]] with retry logic, token counting, and cost tracking
+- [[template-management-system-with-caching|Prompt template system]] for consistent agent instructions
+- [[agent-based-documentation-generation|Documentation writer agent]] using [[agent-based-documentation-synthesis|synthesis patterns]]
+- [[code-analysis-agent|Code analysis agent]] for repository introspection
+- [[meta-analysis-agent-for-documentation-patterns|Meta-analysis agent]] for identifying patterns
 
-**Expected Duration**: 6-8 hours
+Each agent implementation builds on preceding infrastructure with comprehensive test coverage.
 
-### Phase 5: Integration & Polish (Steps 23-30)
+## Processing Engine & Pipeline
 
-**Step 23-25**: Cost tracking, error recovery, performance optimization  
-**Step 26**: Second self-generated wiki (human review point)  
-**Step 27-30**: Advanced features (meta-analysis, theme detection, wiki linking, knowledge graph)
+The [[processor-class|processor]] orchestrates the documentation generation workflow:
+1. **Acquisition**: Fetch repository data via [[git-hub-api-client-integration|GitHub client]]
+2. **Analysis**: Run agents to analyze code and generate documentation
+3. **Enrichment**: [[contextual-metadata-enrichment-pattern|Enhance with context]] and [[cross-page-linking-system|cross-page linking]]
+4. **Persistence**: Write pages with [[frontmatter-parsing-pattern|frontmatter-based serialization]]
 
-**Expected Duration**: 8-10 hours
+See [[processor-based-page-operations|processor page operations]] for integration details.
 
-### Phase 6: MCP Server Integration (Steps 31-33)
+## Integration Points
 
-**Step 31**: Model Context Protocol server implementation  
-**Step 32**: Documentation request queue  
-**Step 33**: Claude Code integration testing (human review point)
+### State & Resumability
+[[processing-state-lifecycle|State lifecycle management]] enables resumable batch processing with [[persistent-state-management-with-validation|validation]].
 
-**Expected Duration**: 4-6 hours
+### Cost Control
+[[cost-aware-api-usage-tracking|Track API costs]] to enforce budgets and prevent runaway expenses during development.
 
-### Final Steps (Steps 34-37)
+### Error Handling
+Implement [[graceful-error-handling-in-pipeline-stages|graceful degradation]] at each pipeline stage with [[structured-error-context-logging|structured logging]].
 
-**Step 34**: Performance optimization  
-**Step 35**: Security review and hardening  
-**Step 36**: Final polish and bug fixes  
-**Step 37**: Release preparation and v1.0.0 tagging
+### Web Interface
+REST API endpoints expose processor functionality, with real-time updates via WebSocket and [[processing-statistics-and-observability|observability dashboards]].
 
-**Expected Duration**: 4-6 hours
+## Critical Decision Points for Human Review
 
-**Total Expected Timeline**: 38-52 hours with 37+ commits for continuous human monitoring
+**After Step 7**: Review initial hand-written wiki to establish documentation standards.
 
-## Key Decision Points
+**After Step 26**: Review first self-generated wiki to validate quality before proceeding.
 
-**After Step 7**: Human reviews initial hand-written wiki to establish documentation standards
+**After Step 29**: Review final self-generated wiki for production readiness.
 
-**After Step 26**: Human reviews first self-generated wiki to validate quality before continuing
+**After Step 33**: Validate Claude Code integration provides real development value.
 
-**After Step 29**: Human reviews final self-generated wiki for production readiness
+## Success Criteria Checklist
 
-**After Step 33**: Human validates Claude Code integration provides real value
+**Functional Requirements**:
+- [ ] Process git repository and generate wiki
+- [ ] Wiki is accurate and immediately useful
+- [ ] Manual stepping mode works without batch processing
+- [ ] Batch processing handles repositories at scale
+- [ ] Meta-analysis identifies meaningful themes
+- [ ] Dashboard provides visibility into processing
+- [ ] Cost tracking enforced throughout
+- [ ] Error recovery prevents data loss
 
-## Before Starting Each Step
+**Quality Requirements**:
+- [ ] 80%+ test coverage
+- [ ] All tests passing
+- [ ] Generated wiki accurately describes system architecture
+- [ ] README enables new users to get started
+- [ ] No security vulnerabilities
+
+**Self-Validation Requirements**:
+- [ ] Generated wiki was useful during development
+- [ ] Documentation accurately describes system
+- [ ] Documentation quality improved through iteration
+- [ ] Architecture explainable from wiki alone
+
+## Expected Timeline
+
+- **Phase 1** (Steps 1-7): Infrastructure foundation — 6-8 hours
+- **Phase 2** (Steps 8-13): AI agent system — 6-8 hours
+- **Phase 3** (Steps 14-16): Processing engine — 4-6 hours
+- **Phase 4** (Steps 17-22): Web interface — 6-8 hours
+- **Phase 5** (Steps 23-30): Integration & polish — 8-10 hours
+- **Phase 6** (Steps 31-33): MCP server — 4-6 hours
+- **Final** (Steps 34-37): Optimization & release — 4-6 hours
+
+**Total**: 38-52 hours development time with 37+ commits for continuous progress monitoring.
+
+## Before Each Step
 
 1. Read relevant wiki pages for components you'll interact with
 2. Review test files for related components
 3. Check state of existing tests
-4. Note any technical debt or blockers
 
-## During Implementation
+## After Each Step
 
-1. Write tests first (red phase)
-2. Implement minimum code to pass (green phase)
-3. Refactor if needed (refactor phase)
-4. Commit when tests pass
-
-## After Completing Each Step
-
-1. Run full test suite—ensure all tests pass
+1. Run full test suite
 2. Commit with descriptive message
 3. Update wiki if architecture changed
 4. Note any technical debt or future improvements
-5. Verify you understand what you built by consulting the wiki
-
-## Every 5 Steps
-
-1. Run wiki generator on codebase
-2. Read generated documentation
-3. Validate it's accurate and useful
-4. Tune prompts if documentation is poor
-5. Commit updated wiki
-
-## Success Criteria
-
-### Functional Requirements
-- Can process git repository and generate wiki
-- Wiki is accurate and useful for understanding code
-- Manual stepping mode works reliably
-- Batch processing completes successfully
-- Meta-analysis identifies themes and patterns
-- Dashboard provides visibility into processing
-- WebSocket updates provide real-time feedback
-- Cost tracking enforces budget constraints
-- Error recovery allows graceful degradation
-- MCP server integrates seamlessly with Claude Code
-
-### Quality Requirements
-- 80%+ test coverage achieved
-- All tests passing consistently
-- Generated wiki for this project is comprehensive
-- README allows new user to get started in 15 minutes
-- Manual mode works without requiring API keys
-- No security vulnerabilities in final review
-
-### Self-Validation Requirements
-- You actively used the generated wiki during development
-- Generated wiki accurately describes the system architecture
-- Documentation quality improved through iterative refinement
-- Can explain complete architecture using wiki alone
-- Self-documentation identified design issues that were fixed
-
-## Architecture Components
-
-The system consists of interconnected modules:
-
-**Wiki Management**: [[Wiki Markdown Management System]], [[Wiki Page Write Operations]], [[Frontmatter Parsing Pattern]]
-
-**State Persistence**: [[[File-Based State Persistence With Directory Handling](../components/file-based-state-persistence-with-directory-handling.md)]], [[[Persistent State Management With Validation](../components/persistent-state-management-with-validation.md)]], [[[State Schema Validation Pattern](../concepts/state-schema-validation-pattern.md)]]
-
-**GitHub Integration**: [[[GitHub API Client With Resilient Retry Logic](../components/git-hub-api-client-with-resilient-retry-logic.md)]], [[[Structured Git Metadata Extraction](../components/structured-git-metadata-extraction.md)]], [[Repository URL Parsing And Normalization]]
-
-**Configuration**: [[[Singleton Configuration Module](../components/singleton-configuration-module.md)]], [[[Environment-Based Configuration With Test Mode Separation](../components/environment-based-configuration-with-test-mode-separation.md)]], [[Configuration Validation Pattern]]
-
-**Testing Infrastructure**: [[[Mock Credential Injection For Testing](../components/mock-credential-injection-for-testing.md)]], [[[Test Environment Setup And Initialization](../guides/test-environment-setup-and-initialization.md)]], [[Test Isolation Through Environment Configuration]]
-
-See also: [[[Source Code Organization Pattern](../concepts/source-code-organization-pattern.md)]], [[[Lazy-Loaded External Dependencies](../concepts/lazy-loaded-external-dependencies.md)]]
-
-## Related Documentation
-
-- [[Architecture]] - Complete system design
-- [[[Specification](../meta/specification.md)]] - Detailed requirements
-- [[Philosophy]] - Design principles and approach
-- [[Getting Started]] - Setup and first run
-- [[Testing Approach]] - TDD methodology used throughout
-- [[Extension Patterns]] - How to add new features
 
 ---
 
-**Note**: This guide is designed for AI coding agents orchestrating development. Each step includes test specifications, implementation guidance, and wiki validation checkpoints. The project itself serves as both the product and the test of its own documentation system.
+**Version**: 2.0 - AI Coding Agent Implementation Guide  
+**Status**: Ready for AI-Driven Development  
+**Expected Outcome**: Production-ready CodeWiki Generator with comprehensive self-documentation
