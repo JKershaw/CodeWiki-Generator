@@ -1,0 +1,58 @@
+---
+title: Backward-compatible concept object format
+category: component
+sourceFile: lib/processor.js
+related: [concepts/category-based-documentation-routing.md, meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Backward-compatible concept object format
+
+## Purpose and [Overview](../meta/overview.md)
+
+The backward-compatible concept object format enables the processor to accept both legacy string concept names and new object-based concept definitions with metadata properties. This dual-format handling maintains compatibility with existing code while supporting enhanced features like [category-based documentation routing](../concepts/category-based-documentation-routing.md).
+
+## Key Functionality
+
+- **Dual Format Support**: Accepts both string concepts (e.g., `"Authentication"`) and object concepts (e.g., `{name: "Authentication", category: "components"}`)
+- **Legacy Preservation**: Existing code using string-only concept names continues to work without modification
+- **Metadata Enhancement**: Object format enables additional properties like category for improved organization
+- **Transparent Processing**: Internal functions automatically handle format detection and conversion
+
+The processor detects the input format and normalizes it for internal processing, ensuring consistent behavior regardless of which format is used.
+
+## Relationships
+
+- **[Category-based documentation routing](../concepts/category-based-documentation-routing.md)**: Works together to route object-format concepts to appropriate directories (`components/`, `concepts/`, `guides/`) based on the category property
+- **lib/processor.js**: Contains the core implementation of format detection and handling logic
+- **Wiki management system**: Receives normalized concept data for page creation and updates
+- **State management**: Stores concept information in a format-agnostic way
+
+## Usage Example
+
+```javascript
+const processor = new Processor(mockWikiManager, mockStateManager, mockCodeAnalysisAgent);
+
+// Legacy string format (backward compatible)
+await processor.processConcept("Authentication");
+
+// New object format with category
+await processor.processConcept({
+  name: "Authentication", 
+  category: "components"
+});
+
+// Both formats work seamlessly
+const concepts = [
+  "Legacy Concept",
+  { name: "Modern Concept", category: "guides" }
+];
+```
+
+## Testing
+
+**Test Coverage**: tests/unit/processor.test.js
+- 26 test cases across 6 test suites
+- Comprehensive coverage including: Processor initialization, processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository
+- Tests verify both string and object format handling scenarios

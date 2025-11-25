@@ -1,0 +1,48 @@
+---
+title: Search and relationship graph for content linking
+category: concept
+sourceFile: lib/wiki-manager.js
+related: [meta/overview.md, components/wiki-file-management-with-frontmatter-parsing.md, concepts/hierarchical-content-discovery-and-retrieval.md, guides/graceful-degradation-for-missing-resources.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Search and Relationship Graph for Content Linking
+
+## Purpose and [Overview](../meta/overview.md)
+
+Provides keyword-based search functionality across wiki content and metadata with context snippets, plus a related pages system that connects pages through frontmatter metadata. This enables content discovery and cross-referencing patterns within the wiki structure.
+
+## Key Functionality
+
+The search and relationship system operates through two primary mechanisms:
+
+- **Content Search**: Performs keyword-based searches across both page content and frontmatter metadata, returning results with contextual snippets to help users identify relevant pages
+- **Related Pages**: Uses frontmatter metadata relationships to discover and suggest connected content, enabling users to navigate between related topics and build knowledge graphs
+
+The system integrates with the hierarchical content discovery to search across nested directory structures while maintaining the organizational context of found results.
+
+## Relationships
+
+This concept builds on the **[Wiki file management with frontmatter parsing](../components/wiki-file-management-with-frontmatter-parsing.md)** component to access parsed metadata and content for search operations. It works within the **[Hierarchical content discovery and retrieval](../concepts/hierarchical-content-discovery-and-retrieval.md)** system to search across the full wiki structure. The search functionality follows the **[Graceful degradation for missing resources](../guides/graceful-degradation-for-missing-resources.md)** pattern, returning empty arrays when no matches are found rather than throwing errors.
+
+## Usage Example
+
+```javascript
+const WikiManager = require('./lib/wiki-manager');
+
+const wikiManager = new WikiManager('./path/to/wiki');
+
+// Search for pages containing specific keywords
+const searchResults = await wikiManager.searchPages('keyword');
+
+// Find pages related to a specific page through metadata
+const relatedPages = await wikiManager.getRelatedPages('page-name.md');
+```
+
+## Testing
+
+**Test Coverage**: tests/unit/wiki-manager.test.js
+- 17 test cases across 5 test suites
+- Includes dedicated test suites for `searchPages` and `getRelatedPages` functionality
+- Tests cover search across content and metadata, as well as relationship discovery patterns

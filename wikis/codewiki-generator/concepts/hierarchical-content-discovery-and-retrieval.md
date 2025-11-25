@@ -1,0 +1,60 @@
+---
+title: Hierarchical content discovery and retrieval
+category: concept
+sourceFile: lib/wiki-manager.js
+related: [meta/overview.md, components/wiki-file-management-with-frontmatter-parsing.md, concepts/search-and-relationship-graph-for-content-linking.md, guides/graceful-degradation-for-missing-resources.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Hierarchical Content Discovery and Retrieval
+
+## Purpose and [Overview](../meta/overview.md)
+
+This system provides recursive traversal of directory structures to discover markdown files, maintaining relative paths for hierarchical organization across nested wiki structures. It enables flexible content navigation through multiple access patterns including single page retrieval, full catalog browsing, and search capabilities.
+
+## Key Functionality
+
+The hierarchical content discovery system works by:
+
+- **Recursive Directory Traversal**: Automatically discovers markdown files throughout nested directory structures
+- **Path Preservation**: Maintains relative paths to preserve hierarchical relationships between content
+- **Multiple Access Patterns**: Supports various retrieval methods:
+  - Single page access by path
+  - Complete content catalog generation  
+  - Keyword-based search across content and metadata
+  - Related page discovery through metadata connections
+- **Structured Data Return**: Returns organized page objects with parsed frontmatter metadata and content
+
+## Relationships
+
+This concept integrates closely with:
+
+- **[Wiki file management with frontmatter parsing](../components/wiki-file-management-with-frontmatter-parsing.md)**: Relies on the WikiManager class for core file reading and YAML parsing functionality
+- **[Search and relationship graph for content linking](../concepts/search-and-relationship-graph-for-content-linking.md)**: Powers the search indexing and related page algorithms by providing the foundational content discovery
+- **[Graceful degradation for missing resources](../guides/graceful-degradation-for-missing-resources.md)**: Implements consistent error handling patterns where missing files return null/empty arrays rather than throwing exceptions
+
+## Usage Example
+
+```javascript
+const WikiManager = require('./lib/wiki-manager');
+
+// Initialize with wiki directory
+const wikiManager = new WikiManager('./path/to/wiki');
+
+// Get single page (hierarchical path supported)
+const page = await wikiManager.getPage('subfolder/test-page.md');
+
+// Get all pages (discovers entire hierarchy)
+const allPages = await wikiManager.getAllPages();
+
+// Search across hierarchical content
+const results = await wikiManager.searchPages('keyword');
+```
+
+## Testing
+
+**Test Coverage**: `tests/unit/wiki-manager.test.js`
+- 17 test cases across 5 test suites
+- Test categories: WikiManager initialization, getPage retrieval, getAllPages catalog, searchPages functionality, and getRelatedPages linking
+- Comprehensive coverage of hierarchical discovery patterns and error handling scenarios

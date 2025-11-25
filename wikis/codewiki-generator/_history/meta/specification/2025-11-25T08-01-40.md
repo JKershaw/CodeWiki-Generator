@@ -1,0 +1,378 @@
+---
+title: Specification
+category: meta
+sourceFile: Specification.md
+created: 2025-11-24
+updated: 2025-11-24
+related: [meta/overview.md]
+---
+
+# CodeWiki Generator - Technical Specification
+
+## Problem & Solution
+
+**The Challenge**: Large codebases are difficult to understand. Documentation becomes stale, mental models diverge from reality, and onboarding requires significant effort.
+
+**The Approach**: CodeWiki Generator is an autonomous system that creates and maintains comprehensive wiki documentation by progressively analyzing git history. This produces a living knowledge base that evolves with the code.
+
+**Primary Users**: Solo developers and small teams seeking automated, high-quality documentation without manual maintenance overhead.
+
+## Success Criteria
+
+- Process a 100-commit repository in under 30 minutes
+- Generate 15-20 interconnected wiki pages
+- Documentation immediately useful for understanding the codebase
+- Cost under $5 per 100 commits (Claude API)
+- Available as MCP server to provide context to Claude Code
+
+## Technical Stack
+
+| Component | Technology | Version |
+|-----------|-----------|---------|
+| Runtime | Node.js LTS | 24.x |
+| Web Framework | Express | 5.1.0 |
+| Templating | EJS | 3.1.10 |
+| GitHub Integration | Octokit | 5.0.5 |
+| AI Processing | Anthropic SDK | 0.70.0 |
+| Wiki Storage | Local markdown files | — |
+
+## System Architecture
+
+```
+Repository → Git History Walker → AI Agents → Wiki (Markdown)
+                    ↓                               ↓
+              Dashboard UI ← WebSocket Updates ← Progress
+```
+
+The system walks through git commits chronologically, analyzes code changes using Claude, and builds/updates wiki documentation incrementally. A dashboard provides real-time visibility and manual control.
+
+## Core Components
+
+### Dashboard (Express + EJS)
+
+Human-in-the-loop control interface for repository processing.
+
+**Key Routes**:
+- `GET /` – Main dashboard and control panel
+- `GET /wiki/:page` – View individual wiki page
+- `POST /process/start` – Begin processing
+- `POST /process/step` – Process single commit
+- `GET /api/status` – Current state (JSON)
+- `WebSocket /ws` – Real-time updates
+
+### Processor
+
+Main processing loop that orchestrates the analysis workflow.
+
+**Processing Flow**:
+1. Fetch commit data via GitHub API
+2. Identify changed files
+3. For significant files:
+   - Retrieve relevant wiki context (≤3 pages)
+   - Call appropriate AI agent
+   - Update wiki pages
+4. Broadcast progress via WebSocket
+5. Every 5 commits: trigger meta-analysis
+6. Save processing state
+
+**Key Functions**:
+- `processRepository(repoUrl, startCommit)` – Main entry point
+- `processCommit(commit)` – Handle single commit
+- `runMetaAnalysis()` – Analyze themes every N commits
+- `saveState()` / `loadState()` – Persistence
+
+### AI Agents
+
+Specialized Claude API calls for different documentation tasks.
+
+**Code Analysis Agent**:
+- **Input**: File diff, commit message, related wiki pages
+- **Output**: JSON with concepts, code elements, relationships
+- **Model**: claude-sonnet-4-20250514
+- **Max Tokens**: 2000
+
+**Documentation Writer Agent**:
+- **Input**: Code analysis output, existing page content
+- **Output**: Markdown documentation
+- **Model**: claude-sonnet-4-20250514
+- **Max Tokens**: 3000
+
+**Meta-Analysis Agent** (triggered every 5 commits):
+- **Input**: Summary of concepts from last 5 commits, page titles
+- **Output**: Themes, reorganization suggestions, documentation gaps
+- **Model**: claude-sonnet-4-20250514
+- **Max Tokens**: 2000
+
+### Wiki Manager
+
+Handles all read/write operations for markdown documentation.
+
+**Directory Structure**:
+```
+wiki/
+├── concepts/         # High-level abstractions
+├── components/       # Classes, modules, services
+├── guides/          # How-to documentation
+├── index.md         # Entry point
+└── _metadata.json   # Page relationships and statistics
+```
+
+**Page Format** (frontmatter + markdown):
+```
+---
+title: Authentication System
+created: 2025-11-22
+updated: 2025-11-22
+related: [OAuth, UserService, SessionManager]
+---
+
+## [Overview](../meta/overview.md)
+[Content here]
+```
+
+**Key Functions**:
+- `getPage(title)` – Read markdown with parsed frontmatter
+- `updatePage(title, content, metadata)` – Write with history
+- `getRelatedPages(filePath)` – Find relevant context (≤3 pages)
+- `searchPages(keywords)` – Keyword search
+- `getAllPages()` – List for sidebar navigation
+
+### GitHub Integration
+
+Provides programmatic access to repository data via Octokit.
+
+**Key Operations**:
+- `getCommits(owner, repo, {since, until})` – Chronological commit list
+- `getCommit(owner, repo, sha)` – Full commit with diff
+- `getFileContent(owner, repo, path, ref)` – File at specific commit
+
+## Data Models
+
+### State File (`state.json`)
+
+```json
+{
+  "repoUrl": "https://github.com/user/repo",
+  "currentCommit": 47,
+  "totalCommits": 523,
+  "processedFiles": 234,
+  "lastMetaAnalysis": 45,
+  "status": "paused|running|stopped",
+  "costEstimate": 2.34
+}
+```
+
+### Wiki Metadata (`_metadata.json`)
+
+```json
+{
+  "pages": {
+    "Authentication": {
+      "path": "concepts/authentication.md",
+      "incomingLinks": 12,
+      "lastUpdated": "2025-11-22T10:30:00Z"
+    }
+  },
+  "requestQueue": [
+    {
+      "topic": "caching strategy",
+      "priority": "high",
+      "requestedAt": "2025-11-22T10:30:00Z"
+    }
+  ]
+}
+```
+
+## User Workflows
+
+### Phase 1: Manual Stepping (MVP)
+
+Validate documentation quality with direct control over each commit analysis.
+
+1. Enter repository URL in dashboard
+2. Click "Load Repository" to fetch commit history
+3. Click "Step" to process one commit at a time
+4. Review agent output in log panel
+5. View generated wiki pages in sidebar
+6. Edit pages directly as needed
+7. Tune prompts and verify quality before scaling
+
+**Goal**: Validate that agents produce useful documentation.
+
+### Phase 2: Supervised Automation
+
+Speed up processing while maintaining quality assurance.
+
+1. After manual validation, click "Process Next 10"
+2. System automatically processes N commits
+3. Pause at any time for review
+4. Adjust prompts if needed
+5. Continue processing
+
+**Features**: Batch processing, pause/resume, cost tracking, meta-analysis integration.
+
+### Phase 3: MCP Server Integration
+
+Integrate documentation into AI-assisted development workflows.
+
+1. Start MCP server: `npm run mcp-server`
+2. Configure Claude Code to connect
+3. Claude Code queries the wiki (e.g., "How do I run tests?")
+4. MCP server returns relevant wiki pages
+5. Claude Code uses context for task completion
+
+## Cost Control & Optimization
+
+**Budget Management**:
+- Default limit: $10/day (configurable)
+- Track running total in state file
+- Estimate cost before processing
+- Pause when approaching limit
+
+**Token Optimization**:
+- Truncate large diffs (>2000 lines) to relevant sections
+- Cache common wiki pages in memory
+- Limit related pages to 3 maximum
+- Use smaller prompts for simple files (utilities, configs)
+
+**Quality Validation**:
+- Validate JSON structure of agent outputs
+- Verify markdown is well-formed
+- Check for hallucinated file paths/concepts
+- Log warnings for suspicious content
+
+## Self-Referential Development
+
+**Critical Innovation**: This system's own wiki will be used during development.
+
+**Process**:
+1. Initialize empty wiki in `./docs/wiki`
+2. As you build features, run the processor on the codebase itself
+3. Use generated wiki to understand your own architecture
+4. If wiki is confusing, prompts need improvement
+5. Edit prompts, reprocess, verify improvement
+
+**Benefits**:
+- Immediate feedback loop on documentation quality
+- Dogfooding ensures usefulness
+- Developer sees exactly what Claude Code will see
+- AI-augmented test-driven development
+
+**Example**: When implementing the Dashboard component, query the wiki: "How is the Processor initialized?" If the answer is unclear, the documentation needs work.
+
+## Development Timeline
+
+**Phase 1: Manual Stepping (Weekend 1)**
+- Load repository via Octokit
+- Process one commit at a time
+- View agent output in real-time
+- Basic dashboard with step button
+
+**Phase 2: Supervised Automation (Weekend 2)**
+- Batch processing (N commits)
+- Pause/resume functionality
+- Cost tracking
+- Meta-analysis integration
+
+**Phase 3: MCP Server (Weekend 3)**
+- Simple MCP server implementation
+- Query wiki via Claude Code
+- Request queue for missing docs
+
+## API Key Management
+
+**Anthropic API Key**:
+- Set `ANTHROPIC_API_KEY` environment variable, OR
+- Enter via UI at startup (stored in session, not persisted)
+
+**GitHub Token**:
+- Set `GITHUB_TOKEN` environment variable (optional for public repos)
+- Enter via UI when needed
+
+**Manual Fallback**: When API keys are unavailable, the system supports:
+- Pasting commit data directly
+- Reviewing/editing agent output before processing
+- Manual documentation entry via developer
+
+## Environment Configuration
+
+```
+ANTHROPIC_API_KEY=your_key_here
+GITHUB_TOKEN=your_token_here
+PORT=3000
+WIKI_PATH=./wiki
+MAX_DAILY_COST=10
+```
+
+## File Structure
+
+```
+codewiki-generator/
+├── server.js              # Express app entry point
+├── lib/
+│   ├── github.js          # Octokit wrapper
+│   ├── claude.js          # Anthropic SDK wrapper
+│   ├── processor.js       # Main processing loop
+│   ├── agents.js          # Agent prompts & calling
+│   ├── wiki-manager.js    # Read/write wiki files
+│   └── websocket.js       # Real-time updates
+├── views/
+│   ├── dashboard.ejs
+│   ├── wiki-page.ejs
+│   └── partials/
+├── public/
+│   ├── style.css
+│   └── app.js
+├── wiki/                  # Generated documentation
+├── state.json             # Processing state
+├── .env.example
+├── package.json
+└── README.md
+```
+
+## Key Dependencies
+
+```json
+{
+  "express": "^5.1.0",
+  "@anthropic-ai/sdk": "^0.70.0",
+  "octokit": "^5.0.5",
+  "ejs": "^3.1.10",
+  "ws": "^8.18.0",
+  "dotenv": "^16.4.5"
+}
+```
+
+## Implementation Philosophy
+
+**Start Simple**: Phase 1 can be built in ~200 lines of code. Get one commit processing end-to-end first, then add features incrementally. Don't optimize prematurely.
+
+**Testing Strategy**:
+- Use small test repo (20-50 commits)
+- Process first 5 commits manually
+- Verify wiki is useful
+- Tune prompts iteratively
+- Scale to full repository
+
+## Success Metrics
+
+**Technical Performance**:
+- Processing speed: 2-3 commits/minute
+- Cost efficiency: <$0.05 per commit
+- Wiki coverage: 80% of significant code documented
+- Link density: 5+ incoming links for core concepts
+
+**Qualitative Impact**:
+- Can answer "How do I...?" questions from wiki alone
+- New developer can onboard using wiki
+- Wiki accurately reflects current code state
+- Developer uses wiki while coding (via MCP integration)
+
+## Non-Goals (v1)
+
+Real-time processing, multi-repository support, team collaboration features, custom agent creation UI, diagram generation, full-text code search, authentication/permissions, production deployment.
+
+---
+
+**Status**: Ready for Implementation  
+**Last Updated**: November 22, 2025

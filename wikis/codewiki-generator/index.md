@@ -1,66 +1,85 @@
 # CodeWiki-Generator
 
-A comprehensive wiki generator that automatically creates and maintains documentation from source code. This system provides structured content management, metadata lifecycle handling, and robust state persistence for development teams.
+A sophisticated agent-based documentation generation system that automatically creates comprehensive wikis from codebases. This system leverages AI agents to analyze repository structure, extract concepts, and generate interconnected documentation with intelligent cross-linking and metadata management.
 
 ## Getting Started
 
-New to CodeWiki-Generator? Start with these essential resources:
+Begin your journey with these essential guides:
 
-- [Getting Started](guides/getting-started.md) - Complete setup and initial configuration guide
-- [Overview](meta/overview.md) - High-level project introduction and core concepts
-- [Implementation Guide](meta/implementation-guide.md) - Practical implementation instructions and best practices
+- **[Getting Started](guides/getting-started.md)** - Initial setup and basic usage
+- **[Implementation Guide](meta/implementation-guide.md)** - Detailed implementation instructions
+- **[Testing Approach](guides/testing-approach.md)** - Testing methodology and practices
 
 ## Meta Documentation
 
-Core project documentation and architectural principles:
+Core project documentation and architectural philosophy:
 
-- [Overview](meta/overview.md) - Project introduction and fundamental concepts
-- [Philosophy](meta/philosophy.md) - Design principles and architectural decisions
-- [Specification](meta/specification.md) - Technical requirements and system specifications
-- [Implementation Guide](meta/implementation-guide.md) - Step-by-step implementation instructions
+- **[Overview](meta/overview.md)** - High-level project overview and objectives
+- **[Philosophy](meta/philosophy.md)** - Design principles and architectural philosophy
+- **[Specification](meta/specification.md)** - Technical specifications and requirements
+- **[Implementation Guide](meta/implementation-guide.md)** - Detailed implementation guidance
 
 ## Concepts
 
-Foundational patterns and architectural concepts:
+Fundamental concepts and patterns that drive the system architecture:
 
-- [Architecture](concepts/architecture.md) - System architecture and component relationships
-- [Automatic Metadata Lifecycle Management](concepts/automatic-metadata-lifecycle-management.md) - Automated metadata creation and maintenance strategies
-- [Source Code Organization Pattern](concepts/source-code-organization-pattern.md) - Structured approach to organizing source code for documentation
-- [State Schema Validation Pattern](concepts/state-schema-validation-pattern.md) - Data validation and schema enforcement mechanisms
+- **[Agent-based Architecture](concepts/agent-based-architecture.md)** - Core architectural pattern using specialized agents
+- **[Agent-based documentation generation](concepts/agent-based-documentation-generation.md)** - AI-driven content creation approach
+- **[Agent-based Documentation Pipeline](concepts/agent-based-documentation-pipeline.md)** - End-to-end processing workflow
+- **[Agent-based documentation synthesis](concepts/agent-based-documentation-synthesis.md)** - Content synthesis and integration patterns
+- **[Agent-based link management](concepts/agent-based-link-management.md)** - Intelligent cross-reference management
+- **[Agent-based wiki generation architecture](concepts/agent-based-wiki-generation-architecture.md)** - Complete wiki generation system design
+- **[Agent-based wiki processing pipeline](concepts/agent-based-wiki-processing-pipeline.md)** - Processing workflow for wiki content
+- **[Automatic Documentation Navigation](concepts/automatic-documentation-navigation.md)** - Smart navigation and linking system
+- **[Automatic metadata lifecycle management](concepts/automatic-metadata-lifecycle-management.md)** - Metadata tracking and updates
+- **[Category-aware concept extraction with backward compatibility](concepts/category-aware-concept-extraction-with-backward-compatibility.md)** - Content categorization with legacy support
+- **[Category-based Documentation Organization](concepts/category-based-documentation-organization.md)** - Hierarchical content organization
+- **[Category-based documentation routing](concepts/category-based-documentation-routing.md)** - Content routing based on categories
+- **[Category-based documentation structure](concepts/category-based-documentation-structure.md)** - Structured content organization
+- **[Category-based page classification](concepts/category-based-page-classification.md)** - Automated page categorization
+- **[Category-based wiki content organization](concepts/category-based-wiki-content-organization.md)** - Wiki structure organization
+- **[Commit-driven documentation pipeline](concepts/commit-driven-documentation-pipeline.md)** - Git history-based processing
+- **[Concept-centric documentation workflow](concepts/concept-centric-documentation-workflow.md)** - Concept-driven content generation
+- **[Conditional Post-Processing](concepts/conditional-post-processing.md)** - Context-aware content processing
+- **[Content-aware mention detection](concepts/content-aware-mention-detection.md)** - Intelligent reference detection
+- **[Contextual Metadata Enrichment Pattern](concepts/contextual-metadata-enrichment-pattern.md)** - Context-sensitive metadata enhancement
+- **[Contextual wiki retrieval](concepts/contextual-wiki-retrieval.md)** - Context-aware content retrieval
+- **[Correct ordering of link discovery operations](concepts/correct-ordering-of-link-discovery-operations.md)** - Sequential link processing
+- **[Cost-aware API consumption](concepts/cost-aware-api-consumption.md)** - Budget-conscious API usage
+- **[Cost-aware API usage tracking](concepts/cost-aware-api-usage-tracking.md)** - API cost monitoring and control
+- **[Cost-Bounded Processing with Statistics Tracking](concepts/cost-bounded-processing-with-statistics-tracking.md)** - Processing with budget limits
+- **[Cost-controlled local processing with mock client injection](concepts/cost-controlled-local-processing-with-mock-client-injection.md)** - Local testing with cost controls
+- **[Coverage-driven development practice](concepts/coverage-driven-development-practice.md)** - Test coverage integration in development
+- **[Dual-phase page lifecycle with metadata updates](concepts/dual-phase-page-lifecycle-with-metadata-updates.md)** - Two-stage page processing
+- **[Enriched documentation generation with contextual data](concepts/enriched-documentation-generation-with-contextual-data.md)** - Context-enhanced content creation
+- **[Environment-driven configuration with test mode separation](concepts/environment-driven-configuration-with-test-mode-separation.md)** - Environment-aware configuration
+- **[File significance filtering](concepts/file-significance-filtering.md)** - Important file identification and processing
+- **[Frequency-based analysis scheduling](concepts/frequency-based-analysis-scheduling.md)** - Periodic analysis and updates
+- **[Graceful degradation with empty fallback](concepts/graceful-degradation-with-empty-fallback.md)** - Fault tolerance with fallbacks
+- **[Graceful failure handling in documentation generation](concepts/graceful-failure-handling-in-documentation-generation.md)** - Error recovery in processing
+- **[Hierarchical content discovery and retrieval](concepts/hierarchical-content-discovery-and-retrieval.md)** - Tree-structured content navigation
+- **[Lazy-loaded External Dependencies](concepts/lazy-loaded-external-dependencies.md)** - On-demand dependency loading
+- **[Multi-agent documentation generation architecture](concepts/multi-agent-documentation-generation-architecture.md)** - Coordinated agent system
+- **[Multi-agent linking workflow](concepts/multi-agent-linking-workflow.md)** - Agent collaboration for linking
+- **[Paginated Data Aggregation](concepts/paginated-data-aggregation.md)** - Efficient large dataset processing
+- **[Periodic meta-analysis integration](concepts/periodic-meta-analysis-integration.md)** - Scheduled analysis updates
+- **[Processing state lifecycle](concepts/processing-state-lifecycle.md)** - State management during processing
+- **[Repository introspection for context enrichment](concepts/repository-introspection-for-context-enrichment.md)** - Repository analysis for context
+- **[Repository-scale batch processing with resumable state](concepts/repository-scale-batch-processing-with-resumable-state.md)** - Large-scale processing with recovery
+- **[Resilient API Communication with Exponential Backoff](concepts/resilient-api-communication-with-exponential-backoff.md)** - Robust API interaction patterns
+- **[Resilient guide content persistence](concepts/resilient-guide-content-persistence.md)** - Reliable content storage
+- **[Resilient JSON Parsing in Agent Processing](concepts/resilient-json-parsing-in-agent-processing.md)** - Fault-tolerant data parsing
+- **[Search and relationship graph for content linking](concepts/search-and-relationship-graph-for-content-linking.md)** - Graph-based content relationships
+- **[Self-documentation through git history analysis](concepts/self-documentation-through-git-history-analysis.md)** - Git history-based documentation
+- **[Source code organization pattern](concepts/source-code-organization-pattern.md)** - Code structure and organization
+- **[State Schema Validation Pattern](concepts/state-schema-validation-pattern.md)** - State integrity validation
+- **[State Validation and Integrity](concepts/state-validation-and-integrity.md)** - State consistency management
+- **[Test Environment Isolation](concepts/test-environment-isolation.md)** - Isolated testing environments
+- **[Test-Mode Dependency Injection](concepts/test-mode-dependency-injection.md)** - Testing with dependency mocking
+- **[Two-phase Documentation Generation Pipeline](concepts/two-phase-documentation-generation-pipeline.md)** - Dual-stage content generation
 
 ## Components
 
-Reusable components and implementation patterns:
+Specific implementation components and technical modules:
 
-- [Configuration Validation Pattern](components/configuration-validation-pattern.md) - Robust configuration validation and error handling
-- [Content Search with Context Extraction](components/content-search-with-context-extraction.md) - Advanced search functionality with contextual information
-- [Environment-based Configuration with Test Mode Separation](components/environment-based-configuration-with-test-mode-separation.md) - Configuration management across different environments
-- [File-based State Persistence with Directory Handling](components/file-based-state-persistence-with-directory-handling.md) - Persistent storage with automated directory management
-- [Frontmatter-based Page Serialization](components/frontmatter-based-page-serialization.md) - Page metadata serialization using frontmatter format
-- [Frontmatter Parsing Pattern](components/frontmatter-parsing-pattern.md) - Reliable frontmatter extraction and parsing
-- [Mock Credential Injection for Testing](components/mock-credential-injection-for-testing.md) - Test environment credential management
-- [Persistent State Management with Validation](components/persistent-state-management-with-validation.md) - State persistence with built-in validation
-- [Singleton Configuration Module](components/singleton-configuration-module.md) - Global configuration management pattern
-- [Wiki Markdown Management System](components/wiki-markdown-management-system.md) - Complete markdown content management solution
-- [Wiki Page Write Operations](components/wiki-page-write-operations.md) - Safe and reliable page writing operations
-
-## Guides
-
-Practical guides and implementation tutorials:
-
-- [Getting Started](guides/getting-started.md) - Complete setup and configuration walkthrough
-- [Extension Patterns](guides/extension-patterns.md) - Creating custom extensions and plugins
-- [Testing Approach](guides/testing-approach.md) - Comprehensive testing strategies and methodologies
-- [Graceful Error Handling for File Operations](guides/graceful-error-handling-for-file-operations.md) - Robust error handling in file system operations
-- [Recursive Directory Traversal for Content Discovery](guides/recursive-directory-traversal-for-content-discovery.md) - Efficient content discovery across directory structures
-- [Safe File Operation Pattern](guides/safe-file-operation-pattern.md) - Atomic and safe file manipulation techniques
-- [Test Environment Setup and Initialization](guides/test-environment-setup-and-initialization.md) - Setting up isolated test environments
-- [Test Infrastructure Configuration](guides/test-infrastructure-configuration.md) - Configuring test infrastructure and dependencies
-- [Test Isolation through Environment Configuration](guides/test-isolation-through-environment-configuration.md) - Ensuring proper test isolation and cleanup
-
-## Navigation Tips
-
-- **Start with Meta**: Review the philosophy and specification before diving into implementation
-- **Core Concepts First**: Understand the architectural patterns before exploring specific components
-- **Practical Implementation**: Use the guides section for hands-on implementation assistance
-- **Component Reference**: The components section serves as a detailed reference for specific functionality
+- **[AI-driven content generation with formatting normalization](components/ai-driven-content-generation-with-

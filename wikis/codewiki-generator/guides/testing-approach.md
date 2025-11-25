@@ -1,303 +1,255 @@
 # Testing Approach
 
-## Introduction
+## Overview
 
-This guide explains how tests are organized and written in CodeWiki-Generator. The project uses **Jest**, a modern testing framework that provides excellent coverage for Node.js applications. Understanding testing patterns here will help you write reliable tests for new features.
-
-## Test Organization
-
-Tests are located in the `tests/` directory and organized by feature:
-
-```
-tests/
-├── config.test.js           # Configuration module tests
-├── state.test.js            # State management tests
-├── wiki.test.js             # Wiki operations tests
-└── [other test files]
-```
-
-Test files follow the naming convention: `[module].test.js`
+CodeWiki-Generator uses Jest as its testing framework with comprehensive test coverage for all agents, clients, and processing logic. This guide explains testing patterns used throughout the codebase and how to write tests for new features.
 
 ## Running Tests
 
-### Basic Commands
-
-Run all tests once:
+1. **Run all tests:**
 ```bash
 npm test
 ```
 
-Run tests in watch mode (reruns on file changes during development):
+2. **Run tests in watch mode (auto-rerun on file changes):**
 ```bash
 npm test -- --watch
 ```
 
-Run a specific test file:
+3. **Run a specific test file:**
 ```bash
-npm test -- tests/config.test.js
+npm test -- src/agents/__tests__/GuideGenerationAgent.test.ts
 ```
 
-Run tests matching a pattern:
+4. **Run tests matching a pattern:**
 ```bash
-npm test -- --testNamePattern="validation"
+npm test -- --testNamePattern="should generate"
 ```
 
-### Coverage Reports
-
-Generate a coverage report to see which code is tested:
+5. **Generate and view coverage report:**
 ```bash
 npm test -- --coverage
 ```
 
-This creates a coverage report showing:
-- **Statements**: Percentage of statements executed
-- **Branches**: Percentage of conditional branches tested
-- **Functions**: Percentage of functions called
-- **Lines**: Percentage of lines executed
+Coverage is tracked across all agent classes and client integrations.
 
-Aim for at least 80% coverage on new code.
+## Test Structure
 
-## Testing Patterns Used
+Tests follow a consistent pattern organized by component:
 
-### 1. Configuration Validation Pattern Tests
-
-Tests verify that configuration is correctly validated and applied:
-
-```javascript
-describe('Configuration validation', () => {
-  it('should validate required fields', () => {
-    // Test that missing required fields throw errors
-  });
-
-  it('should apply environment-based configuration', () => {
-    // Test that different environments load correct config
-  });
-});
+```
+src/
+├── agents/
+│   └── __tests__/
+│       ├── ArchitectureOverviewAgent.test.ts
+│       ├── GuideGenerationAgent.test.ts
+│       ├── MetaAnalysisAgent.test.ts
+│       └── WikiIndexAgent.test.ts
+├── clients/
+│   └── __tests__/
+│       ├── ClaudeClient.test.ts
+│       └── GitHubClient.test.ts
+└── processors/
+    └── __tests__/
+        └── Processor.test.ts
 ```
 
-**Key aspects tested:**
-- Required fields are validated
-- Environment-based config separation (test vs. production)
-- Default values are applied correctly
+Each test file mirrors its source component and tests both success and failure paths.
 
-### 2. State Management Tests
+## Testing Patterns
 
-Tests verify persistent state operations:
+### 1. Test Environment Isolation
 
-```javascript
-describe('Persistent State Management', () => {
-  it('should persist state to file', () => {
-    // Test file-based persistence
-  });
+Tests use mock implementations to avoid external API calls:
 
-  it('should validate state schema', () => {
-    // Test State Schema Validation Pattern
-  });
+```typescript
+// Example: Mocking GitHub API client
+const mockGitHubClient = {
+  getRepositoryMetadata: jest.fn().mockResolvedValue({
+    name: 'test-repo',
+    description: 'A test repository',
+    language: 'TypeScript'
+  }),
+  getCommitHistory: jest.fn().mockResolvedValue([
+    { sha: 'abc123', message: 'Initial commit' }
+  ])
+};
 
-  it('should handle directory operations', () => {
-    // Test File-based State Persistence with Directory Handling
-  });
-});
+// Use in test
+const agent = new ArchitectureOverviewAgent(mockGitHubClient);
 ```
 
-**Key aspects tested:**
-- State persists correctly to disk
-- Schema validation prevents invalid state
-- Directory creation and cleanup works
+### 2. Cost-aware Testing
 
-### 3. Wiki Operations Tests
+All tests that use the ClaudeClient verify cost tracking:
 
-Tests verify markdown management and page operations:
-
-```javascript
-describe('Wiki Page Operations', () => {
-  it('should parse frontmatter correctly', () => {
-    // Test Frontmatter Parsing Pattern
-  });
-
-  it('should serialize pages with metadata', () => {
-    // Test Frontmatter-based Page Serialization
-  });
-
-  it('should search content with context', () => {
-    // Test Content Search with Context Extraction
-  });
-});
+```typescript
+// Tests verify API usage is tracked
+expect(mockClaudeClient.getTotalCost()).toBeLessThan(0.50);
+expect(mockClaudeClient.getTokenUsage()).toBeDefined();
 ```
 
-**Key aspects tested:**
-- YAML frontmatter parsing works correctly
-- Page serialization preserves metadata
-- Search functionality returns relevant context
+### 3. State Validation Pattern
 
-### 4. Mock Credential Injection
+Tests verify that processing state remains valid throughout operations:
 
-Tests use mocked credentials to avoid hardcoding secrets:
+```typescript
+// Test state schema validation
+const state = {
+  status: 'processing',
+  pagesGenerated: 5,
+  linksCreated: 12,
+  errors: []
+};
 
-```javascript
-describe('Authentication', () => {
-  beforeEach(() => {
-    // Mock credential injection for testing
-    process.env.TEST_CREDENTIAL = 'mock-token';
-  });
-
-  afterEach(() => {
-    delete process.env.TEST_CREDENTIAL;
-  });
-
-  it('should use injected credentials', () => {
-    // Test that mocked credentials work
-  });
-});
+expect(state.status).toMatch(/^(pending|processing|complete)$/);
+expect(typeof state.pagesGenerated).toBe('number');
 ```
 
-**Key aspects:**
-- Never hardcode real credentials in tests
-- Use environment variables for test credentials
-- Clean up after each test
+### 4. Error Handling Tests
+
+Tests verify graceful degradation and proper error handling:
+
+```typescript
+// Test resilient API communication
+mockGitHubClient.getCommitHistory.mockRejectedValueOnce(
+  new Error('API rate limited')
+);
+
+// System should retry with exponential backoff
+const result = await agent.analyze();
+expect(result.status).toBe('partial'); // Graceful degradation
+```
+
+### 5. JSON Parsing Tests
+
+Tests verify resilient JSON parsing with malformed responses:
+
+```typescript
+// Test handling of malformed LLM responses
+const malformedResponse = 'Some text {invalid json} more text';
+const parsed = parseJSON(malformedResponse);
+expect(parsed).toBeDefined(); // Should extract valid parts
+```
+
+## Key Test Files and Their Purpose
+
+| Test File | Purpose | Key Coverage |
+|-----------|---------|--------------|
+| `GuideGenerationAgent.test.ts` | Operational guide generation | Context enrichment, markdown sanitization, placeholder substitution |
+| `ArchitectureOverviewAgent.test.ts` | Architecture documentation | Repository introspection, code pattern analysis |
+| `MetaAnalysisAgent.test.ts` | Cross-page analysis | Link discovery, relationship graphs |
+| `WikiIndexAgent.test.ts` | Index generation | Category-based aggregation, metadata lifecycle |
+| `ClaudeClient.test.ts` | AI API integration | Cost tracking, token counting, response parsing |
+| `GitHubClient.test.ts` | GitHub integration | Paginated aggregation, retry logic, rate limiting |
 
 ## Writing New Tests
 
-### 1. Test File Structure
+When adding new features, follow this pattern:
 
-Create test files following this structure:
+1. **Create test file next to source:**
+```bash
+# Source at: src/agents/MyNewAgent.ts
+# Create test at: src/agents/__tests__/MyNewAgent.test.ts
+```
 
-```javascript
-describe('Feature Name', () => {
-  // Setup before each test
+2. **Use describe and it blocks:**
+```typescript
+describe('MyNewAgent', () => {
+  let agent: MyNewAgent;
+  let mockClaudeClient: jest.Mocked<ClaudeClient>;
+
   beforeEach(() => {
-    // Initialize test fixtures
+    mockClaudeClient = createMockClaudeClient();
+    agent = new MyNewAgent(mockClaudeClient);
   });
 
-  // Cleanup after each test
-  afterEach(() => {
-    // Clean up files, mocks, etc.
-  });
-
-  // Individual test cases
-  it('should do something specific', () => {
-    // Arrange: Set up test conditions
-    const input = { /* test data */ };
-
-    // Act: Execute the code
-    const result = myFunction(input);
-
-    // Assert: Verify the result
-    expect(result).toBe(expectedValue);
+  it('should generate output with cost tracking', async () => {
+    const result = await agent.process();
+    expect(result).toBeDefined();
+    expect(mockClaudeClient.getTotalCost()).toBeGreaterThan(0);
   });
 });
 ```
 
-### 2. Testing State Operations
-
-When testing Persistent State Management:
-
-```javascript
-it('should persist state to file', () => {
-  // Arrange
-  const testState = { id: 1, data: 'test' };
-
-  // Act
-  saveState(testState);
-
-  // Assert
-  const loaded = loadState();
-  expect(loaded).toEqual(testState);
+3. **Test both success and failure:**
+```typescript
+it('should handle API errors gracefully', async () => {
+  mockClaudeClient.generateContent.mockRejectedValueOnce(
+    new Error('API Error')
+  );
+  
+  const result = await agent.process();
+  expect(result.errors).toContain('API Error');
+  expect(result.status).toBe('partial');
 });
 ```
 
-### 3. Testing Configuration
-
-When testing Configuration validation:
-
-```javascript
-it('should validate required configuration', () => {
-  // Arrange
-  const invalidConfig = { /* missing required field */ };
-
-  // Act & Assert
-  expect(() => {
-    validateConfig(invalidConfig);
-  }).toThrow('Required field missing');
+4. **Verify state persistence:**
+```typescript
+it('should maintain valid processing state', async () => {
+  await agent.process();
+  const state = agent.getState();
+  expect(state).toMatchObject({
+    status: expect.any(String),
+    timestamp: expect.any(Number),
+    pageCount: expect.any(Number)
+  });
 });
 ```
 
-### 4. Testing Markdown Operations
+## Mock Helper Utilities
 
-When testing Wiki operations:
+The codebase provides mock utilities for consistent testing:
 
-```javascript
-it('should parse frontmatter from markdown', () => {
-  // Arrange
-  const markdown = `---
-title: Test Page
-date: 2024-01-01
----
-# Content`;
+```typescript
+// Import mock helpers
+import { 
+  createMockClaudeClient,
+  createMockGitHubClient,
+  createMockWikiManager
+} from '../__mocks__';
 
-  // Act
-  const { frontmatter, content } = parsePage(markdown);
-
-  // Assert
-  expect(frontmatter.title).toBe('Test Page');
-  expect(content).toContain('# Content');
-});
+// Use in tests
+const mockClient = createMockClaudeClient();
+mockClient.generateContent.mockResolvedValueOnce('Generated content');
 ```
 
-## Best Practices
+## Coverage Goals
 
-1. **One assertion focus**: Each test should verify one behavior
-2. **Descriptive names**: Use `it('should...')` to clearly state what's being tested
-3. **Setup and teardown**: Use `beforeEach()` and `afterEach()` for common setup
-4. **Avoid test interdependence**: Tests should run in any order
-5. **Mock external dependencies**: Don't make real API calls or file operations in unit tests
-6. **Test edge cases**: Empty inputs, null values, invalid data
-7. **Keep tests fast**: Mock slow operations, use in-memory alternatives
-8. **Test error paths**: Verify that errors are thrown appropriately
+- **Line Coverage**: Aim for 80%+
+- **Branch Coverage**: 75%+ (especially for error handling paths)
+- **Function Coverage**: 80%+
 
-## Running Tests Before Commit
-
-Always run tests before committing changes:
-
+Check coverage with:
 ```bash
-# Run all tests
-npm test
-
-# Check coverage
-npm test -- --coverage
-
-# If using git hooks, tests run automatically
-git commit -m "Add new feature"
+npm test -- --coverage --coverageReporters=text-summary
 ```
-
-## Continuous Integration
-
-When you push code to the repository, CI/CD automatically runs:
-```bash
-npm test
-```
-
-Ensure your code passes all tests before pushing to avoid CI failures.
 
 ## Debugging Tests
 
-Run a specific test with Node debugger:
-
+1. **Run single test in debug mode:**
 ```bash
-node --inspect-brk ./node_modules/.bin/jest --runInBand tests/config.test.js
+node --inspect-brk ./node_modules/.bin/jest --runInBand --testNamePattern="test name"
 ```
 
-Then open Chrome DevTools at `chrome://inspect` to debug.
-
-Or use VS Code's debugger with this configuration in `.vscode/launch.json`:
-
-```json
-{
-  "type": "node",
-  "request": "launch",
-  "name": "Jest Debug",
-  "program": "${workspaceFolder}/node_modules/.bin/jest",
-  "args": ["--runInBand"],
-  "console": "integratedTerminal"
-}
+2. **Add console output:**
+```typescript
+it('should work', () => {
+  console.log('Debug info:', myVariable);
+  expect(true).toBe(true);
+});
 ```
+
+3. **Use test.only to isolate one test:**
+```typescript
+it.only('should work', () => {
+  expect(true).toBe(true);
+});
+```
+
+## Next Steps
+
+- Review [Agent-based Architecture](./concepts/architecture.md) to understand components being tested
+- Check [Extension Patterns](./guides/extension-patterns.md) for adding new agents with proper test structure
+- Explore test files in `src/__tests__/` to see real examples

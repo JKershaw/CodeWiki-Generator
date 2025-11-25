@@ -1,0 +1,49 @@
+---
+title: Test environment setup configuration
+category: guide
+sourceFile: jest.config.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Test Environment Setup Configuration
+
+## Purpose and [Overview](../meta/overview.md)
+
+The test environment setup configuration provides a centralized mechanism for initializing shared test dependencies and environment settings across the entire test suite. This configuration enables consistent test mode separation and common setup patterns through Jest's lifecycle hook system.
+
+## Key Functionality
+
+- **Centralized Initialization**: Uses Jest's `setupFiles` configuration to execute shared setup code before any tests run
+- **Environment Separation**: Enables clear separation between test and production environments through centralized configuration
+- **Shared Dependencies**: Allows for common test utilities, mocks, and global configurations to be loaded once and shared across all test files
+- **Lifecycle Management**: Integrates with Jest's test lifecycle to ensure proper initialization order
+
+## Relationships
+
+- **Jest Test Runner**: Configured as part of Jest's setup process through the `setupFiles` option
+- **Test Files**: Provides shared environment and utilities accessible to all test files in the project
+- **Global Test State**: Manages application-wide test configuration and state initialization
+- **Mock Systems**: Often coordinates with mocking frameworks and test doubles setup
+
+## Usage Example
+
+```javascript
+// jest.config.js
+module.exports = {
+  setupFiles: ['<rootDir>/test/setup.js'],
+  // other Jest configuration options...
+};
+
+// test/setup.js - Referenced setup file
+process.env.NODE_ENV = 'test';
+global.testConfig = {
+  apiUrl: 'http://localhost:3001',
+  timeout: 5000
+};
+```
+
+## Testing
+
+No automated tests found for this configuration component.

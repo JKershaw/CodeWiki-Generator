@@ -1,10 +1,10 @@
 ---
-title: Frontmatter-based Page Serialization
+title: Frontmatter-based page serialization
 category: component
 sourceFile: lib/wiki-manager.js
-related: [meta/overview.md, components/wiki-page-write-operations.md, concepts/automatic-metadata-lifecycle-management.md, guides/safe-file-operation-pattern.md]
+related: [meta/overview.md]
 created: 2025-11-24
-updated: 2025-11-24
+updated: 2025-11-25
 ---
 
 # Frontmatter-based Page Serialization
@@ -43,18 +43,21 @@ const path = require('path');
 const testDir = path.join(__dirname, '../fixtures/test-wiki');
 const wikiManager = new WikiManager(testDir);
 
-// Read a page with frontmatter parsing
+// Read a page - demonstrates the parsing side of the serialization
 const page = await wikiManager.getPage('test-page.md');
 
-// The serialization happens internally during write operations
-// The parsed page object contains metadata and content
+// The page object contains parsed frontmatter and content
 expect(page.metadata.title).toBe('Test Page');
 expect(page.content).toBeDefined();
+
+// Serialization happens internally during write operations
+// creating properly formatted markdown with YAML frontmatter
 ```
 
 ## Testing
 
 **Test Coverage**: `tests/unit/wiki-manager.test.js`
+
 - 17 test cases across 5 test suites
 - Comprehensive testing of WikiManager functionality including getPage, getAllPages, searchPages, and getRelatedPages operations
-- Tests verify proper frontmatter parsing and page structure handling
+- Tests verify proper frontmatter parsing and page structure handling, ensuring the serialization component maintains data integrity

@@ -1,17 +1,17 @@
 ---
-title: Wiki Page Write Operations
+title: Wiki page write operations
 category: component
 sourceFile: lib/wiki-manager.js
-related: [meta/overview.md, components/frontmatter-based-page-serialization.md, concepts/automatic-metadata-lifecycle-management.md, guides/safe-file-operation-pattern.md]
+related: [meta/overview.md, guides/metadata-lifecycle-management.md, guides/safe-file-operation-pattern.md]
 created: 2025-11-24
-updated: 2025-11-24
+updated: 2025-11-25
 ---
 
 # Wiki Page Write Operations
 
 ## Purpose and [Overview](../meta/overview.md)
 
-Wiki Page Write Operations provides a complete CRUD interface for managing wiki pages with automatic metadata handling and frontmatter serialization. This component extends the WikiManager's read capabilities with create, update, and delete operations while maintaining consistent metadata lifecycle management across all wiki pages.
+Wiki Page Write Operations provides a complete CRUD interface for managing wiki pages with automatic metadata handling and frontmatter serialization. This component extends the WikiManager's read capabilities with create, update, and delete operations while maintaining consistent [metadata lifecycle management](../guides/metadata-lifecycle-management.md) across all wiki pages.
 
 ## Key Functionality
 
@@ -54,12 +54,10 @@ const path = require('path');
 const testDir = path.join(__dirname, 'fixtures/test-wiki');
 const wikiManager = new WikiManager(testDir);
 
-// Read existing page
+// Read existing page to demonstrate integration with write operations
 const page = await wikiManager.getPage('test-page.md');
 console.log(page.metadata.title); // 'Test Page'
-
-// Create or update page with write operations
-// (Write operation methods would be called here)
+console.log(page.content); // Page content
 ```
 
 ## Testing

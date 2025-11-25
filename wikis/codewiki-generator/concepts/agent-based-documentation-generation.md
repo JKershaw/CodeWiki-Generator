@@ -1,0 +1,50 @@
+---
+title: Agent-based documentation generation
+category: concept
+sourceFile: lib/agents/guide-generation-agent.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Guide Generation Agent
+
+## Purpose and [Overview](../meta/overview.md)
+
+The GuideGenerationAgent implements a specialized AI-powered agent that transforms wiki content into operational guides using Claude API integration. It automatically enriches guide generation with repository context by detecting project characteristics, eliminating the need for manual configuration while improving output quality.
+
+## Key Functionality
+
+The agent provides two core capabilities:
+
+- **Guide Generation**: Transforms wiki data into structured operational guides through prompt rendering and Claude API interaction, with built-in response validation for JSON output
+- **Repository Introspection**: Automatically detects repository metadata including testing frameworks, CI/CD systems, package managers, TypeScript usage, and Docker configuration to provide contextual information for guide generation
+
+The agent follows a modular architecture pattern where AI-powered transformation tasks are encapsulated within specialized agent classes, making the system extensible and maintainable.
+
+## Relationships
+
+This component is part of the broader agent-based documentation generation system located in `lib/agents/`. It integrates with:
+
+- Claude API for AI-powered content transformation
+- Repository file system for metadata detection
+- Wiki content sources for input data
+- JSON validation systems for output structure verification
+
+## Usage Example
+
+```javascript
+const GuideGenerationAgent = require('./lib/agents/guide-generation-agent');
+
+const agent = new GuideGenerationAgent();
+
+// Generate guide from wiki content
+const guide = await agent.generateGuide(wikiData);
+
+// Detect repository context for enrichment
+const repoInfo = agent.detectRepositoryInfo();
+```
+
+## Testing
+
+No automated tests found for this component.

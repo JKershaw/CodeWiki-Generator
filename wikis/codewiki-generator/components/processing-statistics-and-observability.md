@@ -1,0 +1,57 @@
+---
+title: Processing statistics and observability
+category: component
+sourceFile: test-run.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Processing Statistics and Observability
+
+## Purpose and [Overview](../meta/overview.md)
+
+The Processing statistics and observability component provides comprehensive tracking and visibility into CodeWiki Generator processing operations. It returns detailed statistics about commits, files, pages, meta-analysis runs, and API costs, enabling developers to monitor processing behavior and debug real-world test runs effectively.
+
+## Key Functionality
+
+The component tracks and reports multiple dimensions of processing activity:
+
+- **Resource Processing**: Counts of commits processed, files analyzed, and pages generated
+- **Meta-Analysis Tracking**: Number of meta-analysis operations performed during processing
+- **Cost Monitoring**: Real-time tracking of API costs incurred during processing operations
+- **Processing Visibility**: Comprehensive statistics that enable debugging and performance analysis
+- **Budget Validation**: Support for cost-aware testing scenarios with predefined spending limits
+
+The statistics are returned by the Processor after completing repository analysis, providing a complete picture of the processing session's resource usage and output generation.
+
+## Relationships
+
+This component integrates closely with:
+
+- **Processor**: The primary source of statistics data, collecting metrics throughout the processing pipeline
+- **Cost-aware testing**: Enables budget-constrained testing by providing real-time cost tracking
+- **Self-referential processing**: Supports validation testing when the CodeWiki Generator processes its own repository
+- **Repository analysis pipeline**: Provides observability into each stage of the processing workflow
+
+## Usage Example
+
+```javascript
+const Processor = require('./processor');
+
+const processor = new Processor();
+const result = await processor.processRepository(repositoryPath, options);
+
+// Access comprehensive processing statistics
+console.log('Processing Statistics:', {
+  commits: result.stats.commits,
+  files: result.stats.files, 
+  pages: result.stats.pages,
+  metaAnalysisRuns: result.stats.metaAnalysisRuns,
+  totalCost: result.stats.cost
+});
+```
+
+## Testing
+
+No automated tests found. The component is validated through the test-run.js script which performs real-world testing on the CodeWiki Generator's own repository with a $2.00 budget constraint to prevent unexpected API expenses during development.

@@ -1,0 +1,70 @@
+---
+title: Wiki Index Agent
+category: component
+sourceFile: lib/processor.js
+related: [meta/overview.md, concepts/automatic-documentation-navigation.md, concepts/conditional-post-processing.md, components/code-analysis-agent.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Wiki Index Agent
+
+## Purpose and [Overview](../meta/overview.md)
+
+The Wiki Index Agent is a component integrated into the main processor pipeline that automatically generates wiki index pages to improve navigation through generated documentation. It operates as part of the established multi-agent architecture, providing a completion step that organizes and indexes the documentation produced by other agents in the system.
+
+## Key Functionality
+
+The Wiki Index Agent performs [automatic documentation navigation](../concepts/automatic-documentation-navigation.md) generation as a Phase 2 implementation within the processor pipeline. Key capabilities include:
+
+- **Automatic Index Generation**: Creates structured wiki index pages that organize and link generated documentation
+- **Cost-Aware Processing**: Implements [conditional post-processing](../concepts/conditional-post-processing.md) that skips index generation when processing stops due to cost limits
+- **Graceful Error Handling**: Treats index generation failures as non-blocking warnings, allowing the main documentation process to complete successfully
+- **Pipeline Integration**: Operates as an optional stage that enhances but doesn't interfere with core documentation generation
+
+## Relationships
+
+The Wiki Index Agent connects to several core system components:
+
+- **Processor Pipeline**: Integrated as a post-processing stage in the main documentation workflow
+- **Wiki Manager**: Utilizes wiki management capabilities for page creation and organization
+- **Multi-Agent Architecture**: Follows established patterns alongside [Code Analysis Agent](../components/code-analysis-agent.md), Doc Writer Agent, Tech Debt Agent, and Security Agent
+- **Cost Management System**: Respects processing limits and resource constraints during execution
+
+## Usage Example
+
+```javascript
+describe('Processor', () => {
+  let processor;
+  let mockWikiManager;
+  let mockStateManager;
+  let mockCodeAnalysisAgent;
+  let mockDocWriterAgent;
+  let mockTechDebtAgent;
+  let mockSecurityAgent;
+
+  beforeEach(() => {
+    // Create mock managers and agents
+    mockWikiManager = {
+      getPage: jest.fn(),
+      createPage: jest.fn(),
+      updatePage: jest.fn(),
+      searchPages: jest.fn(),
+      getRelatedPages: jest.fn(),
+      updatePageGlobalMetadata: jest.fn()
+    };
+
+    mockStateManager = {
+      loadState: jest.fn()
+    };
+    // Additional agent initialization...
+  });
+});
+```
+
+## Testing
+
+**Test Coverage**: `tests/unit/processor.test.js`
+- 26 test cases across 6 test suites
+- Comprehensive testing of processor integration including Wiki Index Agent functionality
+- Test categories cover: Processor, processCommit, isSignificantFile, getRelevantContext, determinePagePath, processRepository

@@ -3,8 +3,8 @@ title: Overview
 category: meta
 sourceFile: README.md
 created: 2025-11-24
-updated: 2025-11-24
-related: [meta/philosophy.md]
+updated: 2025-11-25
+related: [components/architecture-overview-agent.md, meta/philosophy.md, components/cross-page-link-discovery-system.md]
 ---
 
 # CodeWiki Generator Overview
@@ -15,128 +15,144 @@ An intelligent documentation automation system that analyzes software repositori
 
 **Code tells you what. Documentation tells you why. History tells you how.**
 
-CodeWiki Generator automatically analyzes your codebase, discovers architectural patterns, and produces structured markdown documentation organized into concepts, components, and guides. The system practices **wiki-driven development**: each feature is validated by running the generator on its own codebase and reading the generated documentation. The quality of the auto-generated wiki serves as proof that the system works.
-
-## Key Capabilities
-
-- **AI-Powered Analysis**: Uses Claude Sonnet 4.5 to analyze code and generate clear, insightful documentation
-- **Specialized Agent System**: Dedicated agents for code analysis, documentation writing, architecture overview, and guide generation
-- **Cross-Page Linking**: Automatic hyperlink discovery and injection for seamless navigation
-- **Category-Based Organization**: Documents organized into concepts/, components/, and guides/
-- **Repository Fingerprinting**: Analyzes repository structure to guide documentation generation
-- **Resilient LLM Parsing**: Progressive JSON repair for handling unreliable LLM outputs
-- **Self-Documenting**: The system successfully documents its own architecture (meta-validation)
-- **Comprehensive Testing**: 220+ passing tests with comprehensive coverage
-- **MCP Server Integration**: Claude Code and other AI tools access documentation via Model Context Protocol
+CodeWiki Generator automatically analyzes your codebase, discovers architectural patterns, and produces structured markdown documentation organized into concepts, components, and guides. The system practices **wiki-driven development**: build a feature, run the generator on your own codebase, read the generated documentation, and validate the quality. The quality of the self-generated documentation validates the quality of the system itself.
 
 ## Current Status
 
-**Production-Ready Core | 87% Quality | 18 Pages Generated**
+**🎯 Production-Ready Core | 87% Quality | 18 Pages Generated**
 
-The system has successfully documented itself:
+The system has successfully documented itself with:
+- **9 concepts** (architectural patterns and design decisions)
+- **4 components** (implementation modules)
+- **4 guides** (operational documentation)
+- **1 index** (auto-generated navigation)
 
-- **9 concepts** capturing architectural patterns and design decisions
-- **4 components** documenting implementation modules
-- **4 guides** providing operational documentation
-- **1 auto-generated index** for navigation
+**Quality Metrics** (from self-documentation run):
+- Overall: 87% (Grade A)
+- Navigation: 90% (cross-page linking)
+- Completeness: 85% (all major components documented)
+- Usability: 88% (immediately actionable Getting Started guide)
 
-### Quality Metrics
+See [WIKI_COMPARISON_ASSESSMENT.md](WIKI_COMPARISON_ASSESSMENT.md) for detailed quality analysis.
 
-- **Overall**: 87% (Grade A)
-- **Navigation**: 90% (cross-page linking effectiveness)
-- **Completeness**: 85% (all major components documented)
-- **Usability**: 88% (immediately actionable Getting Started guide)
+## Key Features
 
-See WIKI_COMPARISON_ASSESSMENT.md for detailed quality analysis comparing auto-generated versus manual documentation.
+### AI-Powered Architecture Synthesis
 
-## System Architecture
-
-The system follows an **architecture synthesis agent pattern** where specialized LLM agents collaborate:
+The system uses Claude Sonnet 4.5 to analyze repositories through a multi-agent dispatch pattern:
 
 ```
 Repository → Fingerprinting → Agent Dispatch → Documentation Assembly
                                      ↓
               ┌─────────────────────┼─────────────────────┐
               │                     │                     │
-    ArchitectureOverviewAgent  CodeAnalysisAgent  GuideGenerationAgent
+    [ArchitectureOverviewAgent](../components/architecture-overview-agent.md)  CodeAnalysisAgent  GuideGenerationAgent
               │                     │                     │
               └─────────────────────┼─────────────────────┘
                                     ↓
                            JSON Response Cleaning
                                     ↓
                       Category-Based Content Organization
-                                    ↓
-                        Wiki Index with Auto-Navigation
-                                    ↓
-                           Markdown Documentation
 ```
 
-### Core Components
+### Specialized Agent System
 
-- **Processor**: Orchestrates analysis and documentation generation
-- **ArchitectureOverviewAgent**: Synthesizes high-level architectural insights
+- **[ArchitectureOverviewAgent](../components/architecture-overview-agent.md)**: Synthesizes high-level architectural insights
 - **CodeAnalysisAgent**: Analyzes code structure and patterns
 - **DocumentationWriterAgent**: Generates markdown with code examples
 - **GuideGenerationAgent**: Creates operational guides
 - **LinkDiscoveryAgent**: Discovers and injects cross-page hyperlinks
-- **WikiManager**: See [[wiki-markdown-management-system]] for file operations
 - **WikiIndexAgent**: Generates navigation structure
 
-## Quick Start
+### Cross-Page Navigation
 
-### Installation
+Automatic hyperlink discovery and injection for seamless navigation between related concepts, components, and guides. The system understands mention patterns and contextually injects references without requiring manual configuration.
+
+### Category-Based Organization
+
+All documentation is automatically organized into three categories:
+- **concepts/**: Architectural patterns, design decisions, and high-level ideas
+- **components/**: Implementation modules and technical systems
+- **guides/**: Operational documentation and how-to instructions
+
+### Resilient LLM Processing
+
+Progressive JSON repair for handling unreliable LLM outputs, defensive parsing with validation layers, and graceful degradation when data is incomplete or malformed.
+
+## How It Works
+
+### 1. Repository Analysis
+Fingerprints repository structure, identifies file significance, and gathers contextual metadata about the project.
+
+### 2. Agent Dispatch
+Routes analysis to specialized LLM agents based on repository characteristics. Each agent generates documentation for its domain in parallel.
+
+### 3. Content Generation
+Each agent produces structured JSON responses containing categorized documentation entries with titles, body content, and relationship hints.
+
+### 4. Quality Assurance
+Progressive JSON repair validates and normalizes responses. Content is checked for completeness and consistency.
+
+### 5. Assembly
+Organizes content into category-based structure with proper frontmatter metadata including relationships, tags, and source tracking.
+
+### 6. Cross-Page Linking
+LinkDiscoveryAgent performs a second pass to analyze full page content and inject contextual hyperlinks between related pages.
+
+### 7. Index Generation
+WikiIndexAgent creates navigable table of contents organized by category with relationship hierarchy.
+
+## Installation and Quick Start
+
+### Basic Setup
 
 ```bash
+# Clone the repository
 git clone <repository-url>
 cd CodeWiki-Generator
+
+# Install dependencies
 npm install
+
+# Run tests to verify installation
 npm test
 ```
 
 ### Generate Wiki for Your Project
 
 ```bash
-# Run the wiki generator
+# Generate wiki for a GitHub repository
 node generate-self-wiki.js
 
-# Or use programmatically
+# Or import and use programmatically
 const Processor = require('./lib/processor');
 const processor = new Processor('./output-wiki');
 await processor.processRepository('https://github.com/owner/repo');
 ```
 
-### Explore Generated Documentation
-
-```bash
-ls -la wiki/
-# Key pages:
-# - wiki/guides/getting-started.md - Setup and usage guide
-# - wiki/concepts/architecture.md - System design overview
-# - wiki/index.md - Navigation hub
-```
+For detailed setup instructions, see [[Getting Started Guide|guides/getting-started.md]].
 
 ## MCP Server Integration
 
-The Model Context Protocol server enables AI assistants like Claude Code to query generated wiki documentation for context while developing.
+The Model Context Protocol (MCP) server enables AI assistants like Claude Code to query generated wiki documentation for context while developing.
 
 ### Starting the Server
 
 ```bash
 npm run mcp-server
-# Or with custom path
+
+# Or with custom wiki path
 node mcp-server.js --wiki ./wikis/your-project
 ```
 
 ### Available Tools
 
-1. **query_wiki**: Search documentation with intelligent context gathering
-   - Example: "How do I implement authentication?"
+- **query_wiki**: Search the wiki for relevant documentation and gather intelligent context
+- **request_documentation**: Queue documentation requests for topics not yet covered and track priorities
 
-2. **request_documentation**: Queue documentation for topics not yet covered
-   - Tracks priorities and documentation gaps
-   - Generates metrics for missing content
+### Using with Claude Code
 
-### Claude Code Configuration
+Configure Claude Code to connect to the MCP server:
 
 ```json
 {
@@ -150,96 +166,164 @@ node mcp-server.js --wiki ./wikis/your-project
 }
 ```
 
-## How It Works
+Once configured, ask questions like:
+- "How do I run tests?"
+- "What's the architecture of the wiki generator?"
+- "Help me implement a new agent"
 
-1. **Repository Analysis**: Fingerprints repository structure and patterns
-2. **Agent Dispatch**: Routes analysis to specialized LLM agents
-3. **Content Generation**: Each agent generates documentation for its domain
-4. **Quality Assurance**: Progressive JSON repair and response validation
-5. **Assembly**: Organizes content into category-based structure
-6. **Linking**: Discovers mentions and injects cross-page hyperlinks
-7. **Index Generation**: Creates navigable table of contents
+Claude Code will automatically query the MCP server and provide context-aware answers.
 
-## Documentation Quality
+## Architecture Overview
 
-Auto-generated wiki achieves **87% quality** compared to manually-written documentation.
+The system follows an **architecture synthesis agent pattern** where specialized LLM agents collaborate to produce comprehensive documentation. See [[Agent-Based Documentation Generation|concepts/agent-based-documentation-generation.md]] for detailed architectural patterns.
 
-### Strengths
+### Core Components
 
-- Explains design rationale and trade-offs (often better than manual documentation)
-- Comprehensive cross-page navigation with automatic hyperlinking
-- Coherent narrative explaining system architecture
-- Immediately useful Getting Started guide
+- **Processor**: Orchestrates analysis and documentation generation pipeline
+- **WikiManager**: Handles markdown file operations and frontmatter management
+- **StateManager**: Persists processing state and tracks metadata lifecycle
+- **GitHubClient**: Provides repository access and commit history extraction
 
-### Current Limitations
+### Design Patterns
 
-- Code examples extracted from tests (implementation pending regeneration)
-- Test coverage statistics not yet documented
-- Some component relationships could be more detailed
+- **Multi-agent dispatch**: Specialized agents handle different documentation domains
+- **Resilient JSON parsing**: Progressive repair handles LLM output inconsistencies
+- **Category-based organization**: Documents automatically classified by type
+- **Cross-page linking**: Contextual hyperlinks without manual configuration
+- **Persistent state**: Resume processing, track progress, enable incremental updates
 
-## Prerequisites
+## Testing and Quality
 
-- **Node.js** 24.x or higher
-- **Anthropic API key** (for production use; not required for tests)
-- **Git** (for repository analysis)
+### Test Infrastructure
 
-### Environment Setup
-
-```bash
-cp .env.example .env
-# Edit .env and add: ANTHROPIC_API_KEY=your_key_here
-```
-
-Note: API keys are NOT required for running tests. All tests use mocks to avoid API costs.
-
-## Testing
+- **220+ passing tests** with comprehensive coverage
+- Unit tests for all agents and core components
+- Integration tests for complete workflows
+- All tests use mocks—no API costs incurred
 
 ```bash
-# Run full test suite (220+ tests)
+# Run full test suite
 npm test
 
-# Watch mode
+# Watch mode for development
 npm test:watch
 ```
 
-All tests use mocks — no API costs incurred. Coverage includes unit tests for all agents and core components, plus integration tests for complete workflows.
+### Documentation Quality Validation
 
-## Cost Estimation
+Our auto-generated wiki achieves **87% quality** through:
+
+**Strengths**:
+- ✅ Explains design rationale and trade-offs (better than many manual wikis)
+- ✅ Cross-page navigation with automatic hyperlinking
+- ✅ Coherent narrative explaining system architecture
+- ✅ Immediately useful Getting Started guide
+
+**Current Limitations** (being addressed):
+- ⚠️ Code examples extracted from tests
+- ⚠️ Test coverage statistics not yet documented
+- ⚠️ Some component relationships could be more detailed
+
+## Cost Efficiency
 
 - Processing ~100 commits: $3-$5 (with Claude Sonnet 4.5)
 - Average per commit: $0.03-$0.05
-- Self-documentation of this repository: ~$1-$2
+- This repository (self-documentation): ~$1-$2
 
-## Project Roadmap
+Cost tracking is built into the system—each API call is recorded and aggregated for budget-aware processing.
 
-**✅ Phase 1-3**: Core infrastructure, AI agent system, processing engine
-**✅ Phase 5**: Cross-page linking, code examples, error handling
-**✅ Phase 6**: MCP server with Claude Code integration and metrics tracking
-**⏸️ Phase 4**: Web dashboard interface (next priority)
+## Roadmap and Development Status
 
-### Immediate Next Steps
+### Completed Phases
 
-- Add code examples to component pages (+2.5 quality points)
-- Add file path references (+1 quality point)
-- Generate fresh wiki to validate improvements
+- **Phase 1**: Core infrastructure (WikiManager, StateManager, GitHub integration)
+- **Phase 2**: AI agent system (all specialized agents implemented)
+- **Phase 3**: Processing engine and repository analysis
+- **Phase 5**: Integration and cross-page linking
+- **Phase 6**: MCP server for Claude Code integration
+
+### In Progress
+
+- **Phase 4**: Web dashboard and interactive UI (planned)
+
+### Next Steps
+
+**Immediate** (< 4 hours):
+- Add code examples to component pages
+- Add file path references to documentation
+
+**Medium-Term** (4-8 hours):
 - Test coverage extraction and documentation
 - Configuration system for customization
 - Enhanced component relationship mapping
 
-## Cost of Operation
+**Long-Term** (8+ hours):
+- Web dashboard interface
+- Incremental update mode
+- Enhanced MCP server features
 
-This project demonstrates economical documentation generation:
+## Prerequisites
 
-- Low per-commit cost ($0.03-$0.05) makes continuous documentation practical
-- Batch processing repositories with 100+ commits typically costs $3-$5
-- Total cost scales linearly with repository size and complexity
+- **Node.js** 24.x or higher (tested on 22.x)
+- **Anthropic API key** (for production use; not required for tests)
+- **Git** (for repository analysis)
 
-## Development Notes
+**Note**: API keys are not required for running tests. All tests use mocks to avoid API costs.
 
-**The quality of our self-generated documentation validates the quality of the system itself.** If the auto-generated wiki for CodeWiki Generator itself is unclear or incomplete, we improve the documentation system rather than manually fixing the output.
+## Development [Philosophy](../meta/philosophy.md)
 
-This approach ensures the tool produces consistently high-quality documentation without manual intervention or cherry-picking.
+This project practices **wiki-driven development**:
 
----
+1. Build a feature
+2. Run the wiki generator on this codebase
+3. Read the generated documentation
+4. If unclear, improve the documentation system
+5. Proceed to next feature
 
-**Self-Validation**: This system has successfully documented its own architecture. The auto-generated wiki in `wiki/` serves as proof of concept and ongoing validation that the system works as described.
+The self-documenting nature of the system creates a feedback loop where quality improvements to the documentation system are immediately validated by the system's own documentation.
+
+## Key Insights
+
+### Self-Validation Through Dogfooding
+
+The system successfully documents its own architecture at 87% quality. The auto-generated wiki in `wiki/` serves as proof that the system works as described. This dogfooding approach validates system quality in a production-realistic scenario.
+
+### Documentation as Architecture Insight
+
+By analyzing code and synthesizing documentation across multiple specialized agents, the system discovers architectural patterns that may not be immediately obvious. The documentation becomes a tool for understanding and improving the architecture itself.
+
+### Resilience Through Progressive Repair
+
+Rather than failing on malformed LLM output, the system progressively repairs and validates responses. This defensive approach handles the reality of LLM unreliability without requiring perfect outputs.
+
+### Contextual Knowledge Through Linking
+
+Cross-page linking is discovered automatically by analyzing full page content and recognizing mention patterns. This creates an emergent knowledge graph without requiring manual relationship definition.
+
+## Examples
+
+Real examples of system output are available in the `wiki/` directory:
+
+- [[Architecture Concepts|concepts/architecture.md]]
+- [[Getting Started Guide|guides/getting-started.md]]
+- [[[ArchitectureOverviewAgent](../components/architecture-overview-agent.md) Component|components/architecture-overview-agent.md]]
+- [[Navigation Index|index.md]]
+
+## Contributing and Integration
+
+The project is in active development with clear areas for contribution:
+
+- Phase 4 web dashboard implementation
+- Test coverage extraction and reporting
+- Additional specialized agents
+- Documentation quality improvements
+
+For detailed extension patterns, see [[Extension Patterns Guide|guides/extension-patterns.md]].
+
+## See Also
+
+- [[Agent-Based Documentation Generation|concepts/agent-based-documentation-generation.md]]
+- [[Category-Based Documentation Organization|concepts/category-based-documentation-organization.md]]
+- [[Processor Architecture|components/processor-class.md]]
+- [[[Cross-Page Link Discovery System](../components/cross-page-link-discovery-system.md)|components/cross-page-link-discovery-system.md]]
+- [[Getting Started|guides/getting-started.md]]

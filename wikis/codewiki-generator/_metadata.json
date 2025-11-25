@@ -8,7 +8,7 @@
       "sourceFile": "jest.config.js",
       "incomingLinks": [],
       "outgoingLinks": [],
-      "updated": "2025-11-24"
+      "updated": "2025-11-25"
     },
     "components/wiki-markdown-management-system.md": {
       "title": "Wiki Markdown Management System",
@@ -65,31 +65,31 @@
       "updated": "2025-11-24"
     },
     "components/wiki-page-write-operations.md": {
-      "title": "Wiki Page Write Operations",
+      "title": "Wiki page write operations",
       "created": "2025-11-24",
       "category": "component",
       "sourceFile": "lib/wiki-manager.js",
       "incomingLinks": [],
       "outgoingLinks": [],
-      "updated": "2025-11-24"
+      "updated": "2025-11-25"
     },
     "components/frontmatter-based-page-serialization.md": {
-      "title": "Frontmatter-based Page Serialization",
+      "title": "Frontmatter-based page serialization",
       "created": "2025-11-24",
       "category": "component",
       "sourceFile": "lib/wiki-manager.js",
       "incomingLinks": [],
       "outgoingLinks": [],
-      "updated": "2025-11-24"
+      "updated": "2025-11-25"
     },
     "concepts/automatic-metadata-lifecycle-management.md": {
-      "title": "Automatic Metadata Lifecycle Management",
+      "title": "Automatic metadata lifecycle management",
       "created": "2025-11-24",
       "category": "concept",
       "sourceFile": "lib/wiki-manager.js",
       "incomingLinks": [],
       "outgoingLinks": [],
-      "updated": "2025-11-24"
+      "updated": "2025-11-25"
     },
     "guides/safe-file-operation-pattern.md": {
       "title": "Safe File Operation Pattern",
@@ -180,13 +180,1246 @@
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-24"
+    },
+    "components/git-hub-api-client-with-resilient-retry-logic.md": {
+      "title": "GitHub API Client with Resilient Retry Logic",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/github.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/lazy-loaded-external-dependencies.md": {
+      "title": "Lazy-loaded External Dependencies",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/github.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/repository-url-parsing-and-normalization.md": {
+      "title": "Repository URL Parsing and Normalization",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/github.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/paginated-api-response-aggregation.md": {
+      "title": "Paginated API Response Aggregation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/github.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/structured-git-metadata-extraction.md": {
+      "title": "Structured Git Metadata Extraction",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/github.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/wiki-file-management-with-frontmatter-parsing.md": {
+      "title": "Wiki file management with frontmatter parsing",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/coverage-driven-development-practice.md": {
+      "title": "Coverage-driven development practice",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "jest.config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/hierarchical-content-discovery-and-retrieval.md": {
+      "title": "Hierarchical content discovery and retrieval",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/search-and-relationship-graph-for-content-linking.md": {
+      "title": "Search and relationship graph for content linking",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/graceful-degradation-for-missing-resources.md": {
+      "title": "Graceful degradation for missing resources",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/persistent-state-management.md": {
+      "title": "Persistent State Management",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/state-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/state-validation-and-integrity.md": {
+      "title": "State Validation and Integrity",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/state-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/graceful-file-system-handling.md": {
+      "title": "Graceful File System Handling",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/state-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/test-environment-setup-configuration.md": {
+      "title": "Test environment setup configuration",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "jest.config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/test-environment-isolation.md": {
+      "title": "Test Environment Isolation",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "tests/setup.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/environment-driven-configuration-with-test-mode-separation.md": {
+      "title": "Environment-driven configuration with test mode separation",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/configuration-validation-and-safety-checks.md": {
+      "title": "Configuration validation and safety checks",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/test-configuration-setup.md": {
+      "title": "Test Configuration Setup",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "tests/setup.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/singleton-configuration-instance.md": {
+      "title": "Singleton configuration instance",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/git-hub-api-client-abstraction.md": {
+      "title": "GitHub API Client Abstraction",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/github.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/resilient-api-communication-with-exponential-backoff.md": {
+      "title": "Resilient API Communication with Exponential Backoff",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/github.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/test-mode-dependency-injection.md": {
+      "title": "Test-Mode Dependency Injection",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/github.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/paginated-data-aggregation.md": {
+      "title": "Paginated Data Aggregation",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/github.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/anthropic-sdk-wrapper-with-lazy-loading.md": {
+      "title": "Anthropic SDK wrapper with lazy loading",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/claude.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/cost-aware-api-usage-tracking.md": {
+      "title": "Cost-aware API usage tracking",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/claude.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/intelligent-retry-strategy-with-exponential-backoff.md": {
+      "title": "Intelligent retry strategy with exponential backoff",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/claude.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/flexible-message-formatting-with-json-extraction.md": {
+      "title": "Flexible message formatting with JSON extraction",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/claude.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/test-mode-aware-sdk-initialization.md": {
+      "title": "Test-mode aware SDK initialization",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/claude.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/template-management-system-with-caching.md": {
+      "title": "Template management system with caching",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/prompts.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/variable-placeholder-substitution-pattern.md": {
+      "title": "Variable placeholder substitution pattern",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/prompts.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/code-analysis-agent.md": {
+      "title": "Code Analysis Agent",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/intelligent-file-filtering-for-analysis.md": {
+      "title": "Intelligent File Filtering for Analysis",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/diff-truncation-strategy.md": {
+      "title": "Diff Truncation Strategy",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/agent-based-architecture.md": {
+      "title": "Agent-based Architecture",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/documentation-writer-agent.md": {
+      "title": "Documentation Writer Agent",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/markdown-response-sanitization.md": {
+      "title": "Markdown Response Sanitization",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/agent-based-documentation-pipeline.md": {
+      "title": "Agent-based Documentation Pipeline",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/meta-analysis-agent-for-documentation-patterns.md": {
+      "title": "Meta-analysis agent for documentation patterns",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/meta-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/frequency-based-analysis-scheduling.md": {
+      "title": "Frequency-based analysis scheduling",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/meta-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/response-validation-and-normalization.md": {
+      "title": "Response validation and normalization",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/agents/meta-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/commit-driven-documentation-pipeline.md": {
+      "title": "Commit-driven documentation pipeline",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/processor-class.md": {
+      "title": "Processor class",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/concept-centric-documentation-workflow.md": {
+      "title": "Concept-centric documentation workflow",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/file-significance-filtering.md": {
+      "title": "File significance filtering",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/contextual-wiki-retrieval.md": {
+      "title": "Contextual wiki retrieval",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/repository-scale-batch-processing-with-resumable-state.md": {
+      "title": "Repository-scale batch processing with resumable state",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/cost-aware-api-consumption.md": {
+      "title": "Cost-aware API consumption",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/periodic-meta-analysis-integration.md": {
+      "title": "Periodic meta-analysis integration",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/git-hub-client-integration.md": {
+      "title": "GitHubClient integration",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/claude-client-cost-tracking.md": {
+      "title": "ClaudeClient cost tracking",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/meta-analysis-agent-integration.md": {
+      "title": "MetaAnalysisAgent integration",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/wiki-api-parameter-normalization.md": {
+      "title": "Wiki API parameter normalization",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/local-git-based-testing.md": {
+      "title": "Local Git-based Testing",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "test-run-local.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/cost-aware-testing-with-budget-constraints.md": {
+      "title": "Cost-aware testing with budget constraints",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "test-run.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/self-referential-repository-processing.md": {
+      "title": "Self-referential repository processing",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "test-run.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/git-history-extraction-and-parsing.md": {
+      "title": "Git History Extraction and Parsing",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "test-run-local.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/page-path-extension-handling.md": {
+      "title": "Page path extension handling",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/git-hub-client-mocking.md": {
+      "title": "GitHub Client Mocking",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "test-run-local.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/processing-statistics-and-observability.md": {
+      "title": "Processing statistics and observability",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "test-run.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/processing-state-lifecycle.md": {
+      "title": "Processing state lifecycle",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/cost-bounded-processing-with-statistics-tracking.md": {
+      "title": "Cost-Bounded Processing with Statistics Tracking",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "test-run-local.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/self-documentation-through-git-history-analysis.md": {
+      "title": "Self-documentation through git history analysis",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "generate-self-wiki.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/local-git-commit-extraction-and-patch-generation.md": {
+      "title": "Local git commit extraction and patch generation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "generate-self-wiki.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/cost-controlled-local-processing-with-mock-client-injection.md": {
+      "title": "Cost-controlled local processing with mock client injection",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "generate-self-wiki.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/processing-statistics-and-execution-reporting.md": {
+      "title": "Processing statistics and execution reporting",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "generate-self-wiki.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/category-based-documentation-routing.md": {
+      "title": "Category-based documentation routing",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/category-aware-concept-extraction-with-backward-compatibility.md": {
+      "title": "Category-aware concept extraction with backward compatibility",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/backward-compatible-concept-object-format.md": {
+      "title": "Backward-compatible concept object format",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/defensive-data-normalization-in-response-validation.md": {
+      "title": "Defensive data normalization in response validation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/suggested-guides-integration-in-analysis-output.md": {
+      "title": "Suggested guides integration in analysis output",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/global-metadata-tracking-for-wiki-pages.md": {
+      "title": "Global metadata tracking for wiki pages",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/global-metadata-tracking-system.md": {
+      "title": "Global metadata tracking system",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/dual-phase-page-lifecycle-with-metadata-updates.md": {
+      "title": "Dual-phase page lifecycle with metadata updates",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/category-based-page-classification.md": {
+      "title": "Category-based page classification",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/metadata-lifecycle-management.md": {
+      "title": "Metadata lifecycle management",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/wiki-index-agent.md": {
+      "title": "Wiki Index Agent",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/agent-based-wiki-generation-architecture.md": {
+      "title": "Agent-based wiki generation architecture",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/wiki-index-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/automatic-documentation-navigation.md": {
+      "title": "Automatic Documentation Navigation",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/category-based-documentation-structure.md": {
+      "title": "Category-based documentation structure",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/wiki-index-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/wiki-index-agent-class.md": {
+      "title": "WikiIndexAgent class",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/wiki-index-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/conditional-post-processing.md": {
+      "title": "Conditional Post-Processing",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/ai-driven-content-generation-with-formatting-normalization.md": {
+      "title": "AI-driven content generation with formatting normalization",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/wiki-index-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/graceful-error-handling-in-pipeline-stages.md": {
+      "title": "Graceful Error Handling in Pipeline Stages",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/agent-based-documentation-generation.md": {
+      "title": "Agent-based documentation generation",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/multi-agent-documentation-generation-architecture.md": {
+      "title": "Multi-agent documentation generation architecture",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/repository-introspection-for-context-enrichment.md": {
+      "title": "Repository introspection for context enrichment",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/guide-generation-agent-for-operational-documentation-synthesis.md": {
+      "title": "GuideGenerationAgent for operational documentation synthesis",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/guide-generation-agent-class.md": {
+      "title": "GuideGenerationAgent class",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/category-based-wiki-content-organization.md": {
+      "title": "Category-based wiki content organization",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/repository-metadata-detection.md": {
+      "title": "Repository metadata detection",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/repository-structure-analysis-for-guide-generation.md": {
+      "title": "Repository structure analysis for guide generation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/graceful-failure-handling-in-documentation-generation.md": {
+      "title": "Graceful failure handling in documentation generation",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/llm-response-cleaning-and-normalization.md": {
+      "title": "LLM Response Cleaning and Normalization",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/resilient-json-parsing-in-agent-processing.md": {
+      "title": "Resilient JSON Parsing in Agent Processing",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/agent-based-documentation-synthesis.md": {
+      "title": "Agent-based documentation synthesis",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/architecture-overview-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/category-based-documentation-organization.md": {
+      "title": "Category-based Documentation Organization",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/architecture-overview-agent-class.md": {
+      "title": "ArchitectureOverviewAgent class",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/architecture-overview-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/architecture-overview-agent.md": {
+      "title": "ArchitectureOverviewAgent",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/multi-category-wiki-aggregation-pattern.md": {
+      "title": "Multi-category wiki aggregation pattern",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/architecture-overview-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/two-phase-documentation-generation-pipeline.md": {
+      "title": "Two-phase Documentation Generation Pipeline",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/markdown-output-sanitization.md": {
+      "title": "Markdown output sanitization",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/architecture-overview-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/graceful-degradation-in-documentation-generation.md": {
+      "title": "Graceful Degradation in Documentation Generation",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/resilient-json-parsing-with-malformed-response-recovery.md": {
+      "title": "Resilient JSON parsing with malformed response recovery",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/defensive-file-system-operations-with-directory-creation.md": {
+      "title": "Defensive file system operations with directory creation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/graceful-degradation-with-empty-fallback.md": {
+      "title": "Graceful degradation with empty fallback",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/resilient-guide-content-persistence.md": {
+      "title": "Resilient guide content persistence",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/defensive-json-parsing-with-validation-layers.md": {
+      "title": "Defensive JSON parsing with validation layers",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/structured-error-context-logging.md": {
+      "title": "Structured error context logging",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/json-repair-validation-verification.md": {
+      "title": "JSON repair validation verification",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/cross-page-link-discovery-system.md": {
+      "title": "Cross-page link discovery system",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/link-discovery-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/cross-page-linking-system.md": {
+      "title": "Cross-page linking system",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/content-aware-mention-detection.md": {
+      "title": "Content-aware mention detection",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/link-discovery-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/multi-agent-linking-workflow.md": {
+      "title": "Multi-agent linking workflow",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/agent-based-link-management.md": {
+      "title": "Agent-based link management",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/link-discovery-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/conditional-page-updates-with-metadata-enrichment.md": {
+      "title": "Conditional page updates with metadata enrichment",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/full-page-content-loading-for-cross-linking-analysis.md": {
+      "title": "Full-page content loading for cross-linking analysis",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "debug-related.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/standalone-cross-linking-utility.md": {
+      "title": "Standalone cross-linking utility",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "add-cross-links.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/cross-link-discovery-and-validation-workflow.md": {
+      "title": "Cross-link discovery and validation workflow",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "debug-cross-links.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/full-page-content-loading-for-link-discovery.md": {
+      "title": "Full-page content loading for link discovery",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/link-discovery-agent-testing-and-validation.md": {
+      "title": "Link discovery agent testing and validation",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "debug-related.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/processor-based-page-operations.md": {
+      "title": "Processor-based page operations",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "add-cross-links.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/agent-based-wiki-processing-pipeline.md": {
+      "title": "Agent-based wiki processing pipeline",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "debug-cross-links.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/correct-ordering-of-link-discovery-operations.md": {
+      "title": "Correct ordering of link discovery operations",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/error-handling-and-process-exit-patterns.md": {
+      "title": "Error handling and process exit patterns",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "add-cross-links.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/full-page-content-loading-for-link-analysis.md": {
+      "title": "Full-page content loading for link analysis",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "debug-cross-links.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/content-validation-in-batch-page-processing.md": {
+      "title": "Content validation in batch page processing",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/wiki-manager-api-consistency.md": {
+      "title": "WikiManager API consistency",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/context-enriched-documentation-generation.md": {
+      "title": "Context-enriched documentation generation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/source-file-tracking-in-documentation-metadata.md": {
+      "title": "Source file tracking in documentation metadata",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/automated-code-example-extraction-from-test-files.md": {
+      "title": "Automated code example extraction from test files",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/enriched-documentation-generation-with-contextual-data.md": {
+      "title": "Enriched documentation generation with contextual data",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/test-coverage-integration-in-documentation-generation.md": {
+      "title": "Test coverage integration in documentation generation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/test-coverage-analysis.md": {
+      "title": "Test Coverage Analysis",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/test-coverage-analyzer.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/test-coverage-integration-in-documentation-pipeline.md": {
+      "title": "Test Coverage Integration in Documentation Pipeline",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/contextual-metadata-enrichment-pattern.md": {
+      "title": "Contextual Metadata Enrichment Pattern",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/flexible-test-file-discovery.md": {
+      "title": "Flexible Test File Discovery",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/test-coverage-analyzer.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/test-statistics-extraction.md": {
+      "title": "Test Statistics Extraction",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/test-coverage-analyzer.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
     }
   },
   "statistics": {
-    "totalPages": 20,
-    "concepts": 3,
-    "components": 11,
-    "guides": 6,
+    "totalPages": 157,
+    "concepts": 54,
+    "components": 81,
+    "guides": 22,
     "totalCommitsProcessed": 0,
     "orphanedPages": []
   }

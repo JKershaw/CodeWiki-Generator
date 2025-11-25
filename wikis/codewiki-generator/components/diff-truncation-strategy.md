@@ -1,0 +1,51 @@
+---
+title: Diff Truncation Strategy
+category: component
+sourceFile: lib/agents/code-analysis-agent.js
+related: [components/code-analysis-agent.md, meta/overview.md, concepts/agent-based-architecture.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Diff Truncation Strategy
+
+## Purpose and [Overview](../meta/overview.md)
+
+The Diff Truncation Strategy is a component within the [Code Analysis Agent](../components/code-analysis-agent.md) that handles large git diffs by intelligently truncating content while preserving critical context. It maintains the beginning and end portions of diffs while removing middle sections, ensuring the analysis stays within API token limits without losing important change information.
+
+## Key Functionality
+
+- **Smart Truncation**: Preserves the start and end of large diffs while truncating middle sections to stay within token constraints
+- **Context Preservation**: Maintains enough context from both ends of the diff to enable meaningful code analysis
+- **Token Management**: Automatically calculates and enforces token limits to prevent API request failures
+- **Integration with Analysis**: Works seamlessly with the [Code Analysis Agent](../components/code-analysis-agent.md)'s diff processing pipeline
+
+The strategy activates when diffs exceed predetermined size thresholds, applying truncation rules that prioritize the most contextually relevant portions of code changes for Claude API analysis.
+
+## Relationships
+
+- **[Code Analysis Agent](../components/code-analysis-agent.md)**: Core component that implements this truncation strategy as part of its diff processing workflow
+- **Claude API Integration**: Ensures truncated diffs remain within API token limits for successful analysis requests
+- **Intelligent File Filtering**: Works in conjunction with file filtering to optimize which diffs need truncation
+- **[Agent-based Architecture](../concepts/agent-based-architecture.md)**: Follows the established pattern of composable, specialized processing components
+
+## Usage Example
+
+The Diff Truncation Strategy is used internally by the [Code Analysis Agent](../components/code-analysis-agent.md) during diff processing:
+
+```javascript
+const CodeAnalysisAgent = require('./lib/agents/code-analysis-agent');
+
+const agent = new CodeAnalysisAgent();
+// Truncation strategy is automatically applied during analysis
+// when processing large diffs that exceed token limits
+const analysis = await agent.analyzeChanges(largeDiffContent);
+```
+
+## Testing
+
+**Test Coverage**: tests/unit/code-analysis-agent.test.js
+- 10 test cases across 3 test suites
+- Validates truncation logic within CodeAnalysisAgent test suite
+- Ensures proper handling of edge cases and token limit scenarios
+- Tests integration with file filtering and response validation

@@ -1,0 +1,58 @@
+---
+title: Cost-controlled local processing with mock client injection
+category: concept
+sourceFile: generate-self-wiki.js
+related: [meta/overview.md, concepts/self-documentation-through-git-history-analysis.md, components/local-git-commit-extraction-and-patch-generation.md, components/processing-statistics-and-execution-reporting.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Cost-controlled local processing with mock client injection
+
+## Purpose and [Overview](../meta/overview.md)
+
+This concept demonstrates a pattern for reducing API costs by substituting real external clients with local implementations while maintaining the same processing interface. It enables free self-documentation generation by injecting mock clients that process data locally instead of making expensive external API calls.
+
+## Key Functionality
+
+The cost-controlled processing pattern works by:
+
+- **Client Substitution**: Replaces expensive external API clients with local mock implementations that provide the same interface
+- **Processing Continuity**: Maintains identical data processing workflows without disrupting the existing codebase structure
+- **Cost Elimination**: Eliminates external API costs while preserving full functionality for development and documentation tasks
+- **Interface Compatibility**: Ensures mock clients implement the same methods and return compatible data structures as real clients
+
+The pattern allows systems to perform complete processing cycles using local resources, making it particularly valuable for automated documentation generation where external API costs would be prohibitive.
+
+## Relationships
+
+This concept integrates closely with other components in the self-documentation system:
+
+- **[Self-documentation through git history analysis](../concepts/self-documentation-through-git-history-analysis.md)**: Provides the cost-effective foundation that makes automated self-documentation financially viable
+- **[Local git commit extraction and patch generation](../components/local-git-commit-extraction-and-patch-generation.md)**: Works with the extracted git data through injected mock clients instead of external services
+- **[Processing statistics and execution reporting](../components/processing-statistics-and-execution-reporting.md)**: Benefits from cost tracking that shows $0 expenses when mock clients are used
+
+The mock client injection serves as the bridge between local data sources and processing pipelines that were originally designed for external services.
+
+## Usage Example
+
+```javascript
+// Mock client injection pattern
+const generateWiki = require('./generate-self-wiki.js');
+
+// Configure with mock client instead of real API client
+const mockClient = {
+  processCommit: (commitData) => ({ processed: true, cost: 0 }),
+  generateDocs: (patches) => ({ documentation: 'generated locally' })
+};
+
+// Inject mock client to avoid API costs
+const result = generateWiki({
+  client: mockClient,
+  useLocal: true
+});
+```
+
+## Testing
+
+No automated tests found for this component. Testing would ideally verify that mock clients produce equivalent outputs to real clients while maintaining zero cost execution.

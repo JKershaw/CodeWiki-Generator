@@ -1,0 +1,78 @@
+---
+title: Conditional page updates with metadata enrichment
+category: guide
+sourceFile: lib/processor.js
+related: [meta/overview.md, components/cross-page-linking-system.md, concepts/multi-agent-linking-workflow.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Conditional Page Updates with Metadata Enrichment
+
+## Purpose and [Overview](../meta/overview.md)
+
+This pattern enables efficient wiki page updates by only modifying pages when actual changes occur, while simultaneously enriching page frontmatter with computed metadata such as related pages. It demonstrates how to merge dynamic content transformations with static metadata updates in a single write operation within the documentation generation pipeline.
+
+## Key Functionality
+
+The conditional update pattern works through these key mechanisms:
+
+- **Change Detection**: Compares current page content with existing content to determine if updates are necessary
+- **Metadata Enrichment**: Computes and injects related pages, cross-references, and other metadata into page frontmatter during the update process
+- **Atomic Updates**: Combines content changes and metadata updates in a single write operation to maintain consistency
+- **Multi-pass Processing**: Operates as part of a post-generation phase after initial page creation, allowing for cross-page relationship analysis
+
+The pattern leverages both DocumentationWriterAgent for inline content modifications and LinkDiscoveryAgent for semantic page relationship discovery, coordinating their outputs into unified page updates.
+
+## Relationships
+
+This pattern integrates with several core components:
+
+- **WikiManager**: Provides the underlying page update mechanisms (`updatePage`, `updatePageGlobalMetadata`)
+- **[Cross-page linking system](../components/cross-page-linking-system.md)**: Utilizes the linking infrastructure to establish and maintain page relationships
+- **[Multi-agent linking workflow](../concepts/multi-agent-linking-workflow.md)**: Coordinates multiple agents to gather both content and metadata updates
+- **StateManager**: Tracks page states to enable efficient change detection
+- **DocumentationWriterAgent & LinkDiscoveryAgent**: Supply the content transformations and relationship data for enrichment
+
+## Usage Example
+
+```javascript
+describe('Processor', () => {
+  let processor;
+  let mockWikiManager;
+  let mockStateManager;
+
+  beforeEach(() => {
+    // Create mock managers and agents
+    mockWikiManager = {
+      getPage: jest.fn(),
+      updatePage: jest.fn(),
+      updatePageGlobalMetadata: jest.fn(),
+      getRelatedPages: jest.fn()
+    };
+
+    mockStateManager = {
+      loadState: jest.fn()
+    };
+
+    processor = new Processor({
+      wikiManager: mockWikiManager,
+      stateManager: mockStateManager
+    });
+  });
+
+  // Test conditional updates with metadata enrichment
+  it('should update pages only when changes occur', async () => {
+    await processor.processCommit(commitData);
+    expect(mockWikiManager.updatePage).toHaveBeenCalled();
+    expect(mockWikiManager.updatePageGlobalMetadata).toHaveBeenCalled();
+  });
+});
+```
+
+## Testing
+
+**Test Coverage**: tests/unit/processor.test.js
+- 26 test cases across 6 test suites
+- Test categories include: Processor, processCommit, isSignificantFile, getRelevantContext, determinePagePath, processRepository
+- Comprehensive coverage of conditional update logic and metadata enrichment workflows

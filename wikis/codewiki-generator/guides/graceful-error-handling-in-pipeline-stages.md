@@ -1,0 +1,79 @@
+---
+title: Graceful Error Handling in Pipeline Stages
+category: guide
+sourceFile: lib/processor.js
+related: [meta/overview.md, components/wiki-index-agent.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Graceful Error Handling in Pipeline Stages
+
+## Purpose and [Overview](../meta/overview.md)
+
+Graceful Error Handling in Pipeline Stages is a pattern implemented in the processor that ensures optional pipeline stages (like wiki index generation) fail gracefully without blocking the entire documentation process. This approach allows the system to complete successfully even when non-critical operations encounter errors, logging warnings instead of throwing exceptions.
+
+## Key Functionality
+
+The pattern works by wrapping optional pipeline operations in try-catch blocks and treating failures as non-fatal events. When an optional stage like wiki index generation fails, the error is logged as a warning and processing continues normally. This is particularly important for post-processing steps that enhance the documentation but aren't essential for core functionality.
+
+Key characteristics:
+- **Warning-level logging**: Errors in optional stages are logged as warnings rather than errors
+- **Process continuation**: Pipeline continues executing even when optional stages fail
+- **Cost-aware execution**: Optional stages can be conditionally skipped when cost limits are reached
+- **Non-blocking failures**: Critical path remains unaffected by optional stage failures
+
+## Relationships
+
+This pattern connects to several processor components:
+
+- **[Wiki Index Agent](../components/wiki-index-agent.md)**: Primary beneficiary of graceful error handling as an optional post-processing stage
+- **State Manager**: Works with cost-aware conditional processing to determine when to skip optional stages
+- **Logging System**: Receives warning-level messages instead of fatal errors
+- **Multi-agent Architecture**: Ensures that agent failures don't cascade through the entire pipeline
+
+## Usage Example
+
+```javascript
+describe('Processor', () => {
+  let processor;
+  let mockWikiManager;
+  let mockStateManager;
+  let mockCodeAnalysisAgent;
+  let mockDocWriterAgent;
+  let mockTechDebtAgent;
+  let mockSecurityAgent;
+
+  beforeEach(() => {
+    // Create mock managers and agents
+    mockWikiManager = {
+      getPage: jest.fn(),
+      createPage: jest.fn(),
+      updatePage: jest.fn(),
+      searchPages: jest.fn(),
+      getRelatedPages: jest.fn(),
+      updatePageGlobalMetadata: jest.fn()
+    };
+
+    mockStateManager = {
+      loadState: jest.fn()
+    };
+    
+    // Initialize processor with mocked dependencies
+    processor = new Processor({
+      wikiManager: mockWikiManager,
+      stateManager: mockStateManager,
+      codeAnalysisAgent: mockCodeAnalysisAgent,
+      docWriterAgent: mockDocWriterAgent,
+      techDebtAgent: mockTechDebtAgent,
+      securityAgent: mockSecurityAgent
+    });
+  });
+```
+
+## Testing
+
+**Test Coverage**: tests/unit/processor.test.js
+- 26 test cases across 6 test suites
+- Test categories include: Processor, processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository
+- Tests verify that optional pipeline stages handle failures gracefully without affecting overall process success

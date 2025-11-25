@@ -1,0 +1,58 @@
+---
+title: Meta-analysis agent for documentation patterns
+category: component
+sourceFile: lib/agents/meta-analysis-agent.js
+related: [meta/overview.md, concepts/frequency-based-analysis-scheduling.md, guides/response-validation-and-normalization.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Meta-analysis Agent for Documentation Patterns
+
+## Purpose and [Overview](../meta/overview.md)
+
+The meta-analysis agent identifies patterns across multiple commits and suggests documentation improvements, enabling systematic quality assessment of generated documentation. It provides a specialized layer for analyzing documentation trends and recommending enhancements at a higher level than individual commit analysis.
+
+## Key Functionality
+
+**Pattern Analysis Across Commits**
+- Analyzes documentation patterns spanning multiple commits to identify trends and inconsistencies
+- Generates suggestions for systematic documentation improvements based on historical data
+- Provides quality assessment metrics for generated documentation over time
+
+**[Frequency-based Analysis Scheduling](../concepts/frequency-based-analysis-scheduling.md)**
+- Runs expensive analysis operations at configurable intervals (every N commits) rather than continuously
+- Balances comprehensive analysis with resource efficiency by avoiding redundant processing
+- Allows tuning of analysis frequency based on project needs and computational constraints
+
+**[Response Validation and Normalization](../guides/response-validation-and-normalization.md)**
+- Implements defensive programming practices for Claude API responses
+- Ensures API responses have expected structure with proper array fields
+- Provides safe fallbacks to empty arrays when response data is malformed or missing
+
+## Relationships
+
+This component operates as a higher-level analysis layer that:
+- Consumes data from multiple commit analysis cycles to identify broader patterns
+- Integrates with the Claude API for generating meta-level insights about documentation quality
+- Works alongside other agents in the documentation generation pipeline to provide systematic feedback
+- Feeds recommendations back into the documentation improvement process
+
+## Usage Example
+
+```javascript
+const MetaAnalysisAgent = require('./lib/agents/meta-analysis-agent');
+
+// Initialize with configuration for analysis frequency
+const agent = new MetaAnalysisAgent({
+  analysisInterval: 5, // Run analysis every 5 commits
+  apiConfig: { /* Claude API settings */ }
+});
+
+// Process commits and generate meta-analysis
+const patterns = await agent.analyzeDocumentationPatterns(commitHistory);
+```
+
+## Testing
+
+No automated tests found for this component.

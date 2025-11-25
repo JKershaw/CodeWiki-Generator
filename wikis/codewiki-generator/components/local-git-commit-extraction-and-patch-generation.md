@@ -1,0 +1,50 @@
+---
+title: Local git commit extraction and patch generation
+category: component
+sourceFile: generate-self-wiki.js
+related: [meta/overview.md, components/processing-statistics-and-execution-reporting.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Local git commit extraction and patch generation
+
+## Purpose and [Overview](../meta/overview.md)
+
+This component implements the core functionality for extracting commit metadata and generating unified diffs from local git history. It serves as the foundational data source for automated wiki documentation generation by parsing repository changes without requiring external API calls.
+
+## Key Functionality
+
+The component provides several key capabilities:
+
+- **Git History Parsing**: Extracts commit metadata including hashes, messages, authors, and timestamps from the local repository
+- **Patch Generation**: Creates unified diffs for each changed file in commits, capturing the actual code changes
+- **File Change Tracking**: Identifies which files were modified, added, or deleted in each commit
+- **Data Structuring**: Organizes extracted information into a structured format suitable for documentation processing
+
+The extraction process operates entirely on the local git repository, using git commands to retrieve historical data and generate patches that can be analyzed for documentation purposes.
+
+## Relationships
+
+This component serves as the foundation for the self-documentation system:
+
+- **Feeds into**: Wiki generation processes that transform git data into documentation pages
+- **Supports**: Cost-controlled local processing by eliminating the need for external API calls
+- **Enables**: Self-documentation through git history analysis by providing structured access to repository changes
+- **Integrates with**: [Processing statistics and execution reporting](../components/processing-statistics-and-execution-reporting.md) for tracking extraction results
+
+## Usage Example
+
+```javascript
+// Located in generate-self-wiki.js
+// Extracts git commits and generates patches for documentation
+const commitData = extractGitHistory();
+const patches = generatePatches(commitData);
+const processedFiles = processCommitChanges(patches);
+```
+
+Note: This component is part of the `generate-self-wiki.js` file and operates as an integrated part of the self-documentation system rather than a standalone module.
+
+## Testing
+
+No automated tests found for this component.

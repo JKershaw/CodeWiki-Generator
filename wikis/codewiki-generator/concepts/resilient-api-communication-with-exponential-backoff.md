@@ -1,0 +1,69 @@
+---
+title: Resilient API Communication with Exponential Backoff
+category: concept
+sourceFile: lib/github.js
+related: [meta/overview.md, concepts/paginated-data-aggregation.md, concepts/test-mode-dependency-injection.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Resilient API Communication with Exponential Backoff
+
+## Purpose and [Overview](../meta/overview.md)
+
+The resilient API communication pattern implements robust retry logic with exponential backoff to handle transient failures when making API calls to external services like GitHub. This pattern ensures reliable integration by automatically recovering from temporary issues like rate limits or network errors while avoiding unnecessary retries on permanent failures like authentication errors.
+
+## Key Functionality
+
+The retry mechanism works by:
+
+- **Exponential Backoff**: Progressively increases delay between retry attempts to avoid overwhelming the API
+- **Selective Retry Logic**: Distinguishes between transient failures (network timeouts, rate limits) and permanent failures (authentication, authorization errors)
+- **Configurable Parameters**: Allows customization of retry attempts, initial delay, and backoff multiplier
+- **Graceful Degradation**: Provides meaningful error messages when all retry attempts are exhausted
+
+The pattern typically wraps API calls in try-catch blocks and implements a delay mechanism that doubles the wait time with each failed attempt, helping to reduce load on the target API during outages or high-traffic periods.
+
+## Relationships
+
+This concept is implemented within the **GitHubClient** component (`lib/github.js`) and supports:
+
+- **Repository operations**: Fetching repository information, commits, and file content
+- **[Paginated Data Aggregation](../concepts/paginated-data-aggregation.md)**: Working with the pagination pattern to reliably fetch large datasets
+- **[Test-Mode Dependency Injection](../concepts/test-mode-dependency-injection.md)**: Compatible with testing frameworks through conditional loading
+
+The retry logic acts as a middleware layer between the application and the GitHub API, making all repository operations more resilient to network issues and API limitations.
+
+## Usage Example
+
+```javascript
+describe('GitHubClient', () => {
+  let githubClient;
+  let mockOctokit;
+
+  beforeEach(() => {
+    // Create mock Octokit instance
+    mockOctokit = {
+      rest: {
+        repos: {
+          get: jest.fn(),
+          listCommits: jest.fn(),
+          getCommit: jest.fn(),
+          getContent: jest.fn()
+        }
+      }
+    };
+
+    // In test mode, GitHubClient should use mocks
+    githubClient = new GitHubClient();
+    // Inject mock for testing
+    githubClient.octokit = mockOctokit;
+  });
+```
+
+## Testing
+
+**Test Coverage**: `tests/unit/github.test.js`
+- 18 test cases across 7 test suites
+- Comprehensive coverage including error handling and retry scenarios
+- Test categories: GitHubClient, parseRepoUrl, getRepoInfo, getCommits, getCommit, getFileContent, error handling and retries

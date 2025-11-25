@@ -1,0 +1,57 @@
+---
+title: Dual-phase page lifecycle with metadata updates
+category: concept
+sourceFile: lib/processor.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Dual-phase page lifecycle with metadata updates
+
+## Purpose and [Overview](../meta/overview.md)
+
+The dual-phase page lifecycle establishes a consistent pattern where page creation or update operations are automatically followed by metadata synchronization. This ensures that the global metadata index remains in sync with page content, enabling cross-referencing capabilities and maintaining data consistency across the wiki system.
+
+## Key Functionality
+
+The dual-phase lifecycle operates through two distinct phases:
+
+1. **Page Operation Phase**: Standard page creation or update operations are performed through the WikiManager
+2. **Metadata Synchronization Phase**: Immediately following the page operation, `updatePageGlobalMetadata()` is called to synchronize the global metadata index
+
+This pattern ensures that:
+- Page metadata (title, category, links) is consistently tracked in the global registry
+- Cross-references between pages remain accurate
+- The metadata index supports future link analysis and page discovery features
+- Data consistency is maintained between page content and the metadata system
+
+## Relationships
+
+- **WikiManager**: Provides the core page operations (`createPage`, `updatePage`) and metadata synchronization (`updatePageGlobalMetadata`)
+- **Processor**: Implements the dual-phase pattern when processing repository changes and documentation updates
+- **Global Metadata System**: Receives updates through the synchronization phase to maintain the centralized page registry
+
+## Usage Example
+
+```javascript
+// During page processing, the dual-phase pattern ensures metadata consistency
+const processor = new Processor({
+  wikiManager: mockWikiManager,
+  stateManager: mockStateManager,
+  // ... other dependencies
+});
+
+// Phase 1: Page operation (creation or update)
+await mockWikiManager.createPage(pageData);
+
+// Phase 2: Metadata synchronization (automatically triggered)
+await mockWikiManager.updatePageGlobalMetadata(pageId, metadata);
+```
+
+## Testing
+
+**Test Coverage**: `tests/unit/processor.test.js`
+- 26 test cases across 6 test suites
+- Comprehensive testing of the Processor component including page lifecycle operations
+- Test categories cover: Processor initialization, commit processing, file significance checking, context retrieval, page path determination, and repository processing

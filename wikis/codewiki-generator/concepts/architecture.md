@@ -1,97 +1,108 @@
 ---
-related: [concepts/state-schema-validation-pattern.md, components/environment-based-configuration-with-test-mode-separation.md, components/singleton-configuration-module.md, components/content-search-with-context-extraction.md, components/frontmatter-based-page-serialization.md]
-updated: 2025-11-24
+related: [concepts/multi-agent-documentation-generation-architecture.md, concepts/category-based-documentation-organization.md, components/intelligent-file-filtering-for-analysis.md, components/documentation-writer-agent.md, components/cross-page-linking-system.md]
+updated: 2025-11-25
 ---
 
 # CodeWiki-Generator Architecture
 
 ## System [Overview](../meta/overview.md)
 
-CodeWiki-Generator is an automated documentation system that transforms source code repositories into searchable wiki-style documentation. It scans codebases, extracts metadata and context, and generates structured markdown pages with frontmatter for easy navigation and discovery. The system maintains persistent state to track changes over time and provides a foundation for building comprehensive, always-up-to-date technical documentation from living code.
+CodeWiki-Generator is an intelligent documentation automation system that transforms software repositories into comprehensive, navigable wikis through AI-powered analysis. The system leverages multiple specialized agents to analyze code, extract patterns, generate documentation, and create cross-linked content that maintains itself as repositories evolve. By combining repository introspection, commit history analysis, and contextual AI generation, it produces living documentation that captures both implementation details and architectural insights without manual intervention.
 
 ## Core Architecture
 
-The system follows a **pipeline-based architecture** with clear separation of concerns across configuration, discovery, processing, and persistence layers. It implements the **[State Schema Validation Pattern](../concepts/state-schema-validation-pattern.md)** to ensure data integrity throughout the pipeline and uses **[Automatic Metadata Lifecycle Management](../concepts/automatic-metadata-lifecycle-management.md)** to keep documentation synchronized with code changes. The architecture emphasizes **environment-based separation** to enable safe testing and development workflows alongside production documentation generation.
+The system implements a **[Multi-agent documentation generation architecture](../concepts/multi-agent-documentation-generation-architecture.md)** where specialized AI agents collaborate in a coordinated pipeline. Each agent has a distinct responsibility—code analysis, content generation, linking, or meta-analysis—and operates with **[Agent-based Documentation Pipeline](../concepts/agent-based-documentation-pipeline.md)** coordination. The architecture follows **[Cost-aware API consumption](../concepts/cost-aware-api-consumption.md)** principles to manage LLM usage efficiently while maintaining quality through **[Resilient API Communication with Exponential Backoff](../concepts/resilient-api-communication-with-exponential-backoff.md)** patterns.
+
+The system is built around **[Repository-scale batch processing with resumable state](../concepts/repository-scale-batch-processing-with-resumable-state.md)**, allowing it to handle large codebases incrementally while maintaining processing continuity across runs. **[Category-based Documentation Organization](../concepts/category-based-documentation-organization.md)** ensures content is properly structured and discoverable, while **[Contextual Metadata Enrichment Pattern](../concepts/contextual-metadata-enrichment-pattern.md)** maintains rich relationships between generated content.
 
 ## Major Components
 
-### Configuration Management Layer
-The **[Singleton configuration module](../components/singleton-configuration-module.md)** serves as the central nervous system, implementing **[Environment-based configuration with test mode separation](../components/environment-based-configuration-with-test-mode-separation.md)**. It provides runtime settings, handles **[Mock credential injection for testing](../components/mock-credential-injection-for-testing.md)**, and ensures consistent behavior across different execution contexts. This component gates all system behavior through validated configuration schemas.
+### ArchitectureOverviewAgent
+Serves as the primary system coordinator, analyzing repository structure and generating high-level architectural documentation. This agent performs **[Repository structure analysis for guide generation](../components/repository-structure-analysis-for-guide-generation.md)** and implements **[Hierarchical content discovery and retrieval](../concepts/hierarchical-content-discovery-and-retrieval.md)** to understand codebase organization patterns.
 
-### Content Discovery Engine  
-The **[Recursive Directory Traversal for Content Discovery](../guides/recursive-directory-traversal-for-content-discovery.md)** component implements intelligent source code scanning using the **[Source code organization pattern](../concepts/source-code-organization-pattern.md)**. It identifies documentation targets, respects ignore patterns, and builds the initial content inventory that feeds downstream processing stages.
+### [Code Analysis Agent](../components/code-analysis-agent.md)
+Handles deep repository inspection through **[Source code organization pattern](../concepts/source-code-organization-pattern.md)** analysis and **[Intelligent File Filtering for Analysis](../components/intelligent-file-filtering-for-analysis.md)**. It extracts meaningful code patterns, identifies key components, and feeds structured insights to other agents for content generation.
 
-### Processing Pipeline
-The **[Wiki Markdown Management System](../components/wiki-markdown-management-system.md)** orchestrates content transformation, working closely with **[Content Search with Context Extraction](../components/content-search-with-context-extraction.md)** to generate meaningful documentation. The **[Frontmatter Parsing Pattern](../components/frontmatter-parsing-pattern.md)** and **[Frontmatter-based Page Serialization](../components/frontmatter-based-page-serialization.md)** handle structured metadata extraction and injection, ensuring generated pages contain rich navigational context.
+### [Documentation Writer Agent](../components/documentation-writer-agent.md)
+Transforms analytical insights into human-readable documentation using **[AI-driven content generation with formatting normalization](../components/ai-driven-content-generation-with-formatting-normalization.md)**. Implements **[LLM Response Cleaning and Normalization](../components/llm-response-cleaning-and-normalization.md)** to ensure consistent output quality and **[Markdown Response Sanitization](../components/markdown-response-sanitization.md)** for safe content generation.
 
-### State Management Layer
-**[Persistent State Management with Validation](../components/persistent-state-management-with-validation.md)** and **[File-based State Persistence with Directory Handling](../components/file-based-state-persistence-with-directory-handling.md)** work together to track system state across runs. This enables incremental processing, change detection, and recovery from interrupted operations while maintaining data consistency through validation schemas.
+### WikiIndexAgent / [Wiki Index Agent](../components/wiki-index-agent.md)
+Manages the overall wiki structure through **[Wiki Markdown Management System](../components/wiki-markdown-management-system.md)** and **[Category-based wiki content organization](../concepts/category-based-wiki-content-organization.md)**. Coordinates **[Multi-category wiki aggregation pattern](../components/multi-category-wiki-aggregation-pattern.md)** to maintain navigable content hierarchies.
 
-### Output Generation
-**[Wiki Page Write Operations](../components/wiki-page-write-operations.md)** handles the final materialization of processed content into the target documentation format. It coordinates with persistence layers to ensure atomic writes and maintains the relationship between source changes and generated documentation.
+### [Cross-page linking system](../components/cross-page-linking-system.md)
+Implements **[Multi-agent linking workflow](../concepts/multi-agent-linking-workflow.md)** and **[Search and relationship graph for content linking](../concepts/search-and-relationship-graph-for-content-linking.md)** to create intelligent connections between documentation pages. Uses **[Content-aware mention detection](../concepts/content-aware-mention-detection.md)** and **[Cross-page link discovery system](../components/cross-page-link-discovery-system.md)** to build semantic relationships.
 
-### Operational Safety
-**[Graceful Error Handling for File Operations](../guides/graceful-error-handling-for-file-operations.md)** and **[Safe File Operation Pattern](../guides/safe-file-operation-pattern.md)** provide cross-cutting reliability concerns, ensuring the system can handle filesystem errors, permission issues, and edge cases without corrupting existing documentation or system state.
+### MetaAnalysisAgent
+Provides system-wide insights through **[Meta-analysis agent for documentation patterns](../components/meta-analysis-agent-for-documentation-patterns.md)** and **[Periodic meta-analysis integration](../concepts/periodic-meta-analysis-integration.md)**. Identifies documentation gaps, suggests improvements, and maintains quality metrics across the generated wiki.
+
+### ClaudeClient / Anthropic SDK wrapper
+Manages all AI interactions with **[Cost-Bounded Processing with Statistics Tracking](../concepts/cost-bounded-processing-with-statistics-tracking.md)** and **[Lazy-loaded External Dependencies](../concepts/lazy-loaded-external-dependencies.md)**. Provides **[Cost-aware API usage tracking](../concepts/cost-aware-api-usage-tracking.md)** to prevent runaway costs while maintaining service reliability.
 
 ## Data Flow
 
-The system processes information through a four-stage pipeline:
+The system processes repositories through a **[Two-phase Documentation Generation Pipeline](../concepts/two-phase-documentation-generation-pipeline.md)**:
 
 ```
-Source Code → Discovery → Processing → Output
-     ↓            ↓          ↓         ↓
-Configuration → Content → Metadata → Wiki Pages
-     ↓         Inventory    Extract.     ↓
-State Mgmt ← ← ← ← ← ← ← ← ← ← ← ← ← ← State Update
+Repository Input
+      ↓
+  Code Analysis Agent → Repository Structure Analysis
+      ↓
+  Content Generation Phase:
+    ├─ [ArchitectureOverviewAgent](../components/architecture-overview-agent.md) → High-level docs
+    ├─ [Documentation Writer Agent](../components/documentation-writer-agent.md) → Detailed content  
+    └─ GuideGenerationAgent → Operational guides
+      ↓
+  Wiki Assembly Phase:
+    ├─ WikiIndexAgent → Structure organization
+    ├─ [Cross-page linking system](../components/cross-page-linking-system.md) → Relationship building
+    └─ MetaAnalysisAgent → Quality assessment
+      ↓
+  Wiki Output + State Persistence
 ```
 
-1. **Initialization**: Configuration validation loads settings and initializes state management
-2. **Discovery Phase**: Directory traversal identifies source files and builds content inventory
-3. **Processing Phase**: Content extraction, metadata generation, and frontmatter creation
-4. **Output Phase**: Wiki page generation with state persistence for tracking changes
+**[Commit-driven documentation pipeline](../concepts/commit-driven-documentation-pipeline.md)** ensures updates flow through the same stages when repositories change. **[Persistent State Management with Validation](../components/persistent-state-management-with-validation.md)** allows resuming interrupted processing, while **[Processing statistics and execution reporting](../components/processing-statistics-and-execution-reporting.md)** provide visibility into system operation.
 
-State flows bidirectionally - the system reads previous state to enable incremental processing and writes updated state after successful operations. Error handling operates as a cross-cutting concern, with fallback and recovery mechanisms at each stage.
+The **[Contextual wiki retrieval](../concepts/contextual-wiki-retrieval.md)** system enables agents to access previously generated content for cross-referencing and link discovery, creating a feedback loop that improves content quality over iterations.
 
 ## Key Design Decisions
 
-### File-Based State vs Database
-**Choice**: Implemented **[File-based State Persistence with Directory Handling](../components/file-based-state-persistence-with-directory-handling.md)** rather than database storage  
-**Rationale**: Simplifies deployment, reduces external dependencies, and keeps state co-located with generated documentation  
-**Trade-offs**: Gained simplicity and portability; limited concurrent access and complex querying capabilities
+### [Agent-Based Architecture](../concepts/agent-based-architecture.md) Over Monolithic Processing
+**Choice**: Separate specialized agents rather than single large processor  
+**Rationale**: Each documentation concern (analysis, generation, linking, organization) requires different expertise and can be optimized independently. Agents can be developed, tested, and scaled separately.  
+**Trade-offs**: Added coordination complexity and state management overhead, but gained modularity, testability, and the ability to swap agent implementations.
 
-### Environment Separation Strategy  
-**Choice**: **[Environment-based configuration with test mode separation](../components/environment-based-configuration-with-test-mode-separation.md)** with mock injection  
-**Rationale**: Enables safe testing without affecting production systems or requiring complex test infrastructure  
-**Trade-offs**: Added configuration complexity; gained reliable test isolation and simplified CI/CD integration
+### Cost-Aware Processing with Budget Controls
+**Choice**: Implement comprehensive API cost tracking and limits  
+**Rationale**: LLM APIs represent the primary operational cost and can scale unpredictably with repository size. **[Cost-Bounded Processing with Statistics Tracking](../concepts/cost-bounded-processing-with-statistics-tracking.md)** prevents runaway expenses.  
+**Trade-offs**: Additional complexity in request management and potential processing limitations, but gained predictable operational costs and system sustainability.
 
-### Frontmatter-Centric Metadata
-**Choice**: **[Frontmatter-based Page Serialization](../components/frontmatter-based-page-serialization.md)** as the primary metadata transport mechanism  
-**Rationale**: Leverages existing markdown ecosystem tools and provides human-readable metadata  
-**Trade-offs**: Gained compatibility with static site generators; limited to YAML-serializable data structures
+### Resumable State Architecture
+**Choice**: **[Persistent State Management with Validation](../components/persistent-state-management-with-validation.md)** for all processing stages  
+**Rationale**: Large repositories may require hours of processing, and network/API failures are inevitable. Resumable processing prevents losing work and enables incremental updates.  
+**Trade-offs**: Increased storage requirements and state management complexity, but gained reliability and efficiency for large-scale processing.
 
-### Singleton Configuration Pattern
-**Choice**: **[Singleton configuration module](../components/singleton-configuration-module.md)** for system-wide settings access  
-**Rationale**: Ensures consistency across components and simplifies dependency management  
-**Trade-offs**: Gained simplicity and consistency; reduced testability and increased coupling
+### Category-Based Organization Over Flat Structure  
+**Choice**: **[Category-based Documentation Organization](../concepts/category-based-documentation-organization.md)** with hierarchical navigation  
+**Rationale**: Generated wikis need to be navigable and maintainable as they grow. Categories provide logical groupings that scale with repository complexity.  
+**Trade-offs**: More complex wiki management logic, but significantly improved user experience and content discoverability.
 
-### Validation-First Processing
-**Choice**: **[State Schema Validation Pattern](../concepts/state-schema-validation-pattern.md)** enforced at persistence boundaries  
-**Rationale**: Prevents data corruption and provides clear error messages for configuration issues  
-**Trade-offs**: Added processing overhead; gained data integrity and better debugging experience
+### [Test Environment Isolation](../concepts/test-environment-isolation.md)
+**Choice**: **[Test-Mode Dependency Injection](../concepts/test-mode-dependency-injection.md)** and **Environment-driven configuration**  
+**Rationale**: Documentation generation involves external API calls and file system operations that need isolation during testing. Mock injection enables comprehensive testing without costs.  
+**Trade-offs**: Additional configuration complexity, but gained reliable test coverage and development workflow efficiency.
 
 ## Extension Points
 
-### Custom Content Extractors
-Extend the **[Content Search with Context Extraction](../components/content-search-with-context-extraction.md)** component to handle new file types or extract domain-specific metadata. The system provides hooks for registering custom parsers that integrate with the existing metadata lifecycle.
+The system provides several well-defined extension points for customization:
 
-### Output Format Plugins
-The **[Wiki Page Write Operations](../components/wiki-page-write-operations.md)** component can be extended to support additional output formats beyond markdown. Custom serializers can leverage the existing frontmatter infrastructure while generating different target formats.
+**Agent Extension**: New agents can be added to the **[Multi-agent documentation generation architecture](../concepts/multi-agent-documentation-generation-architecture.md)** by implementing the standard agent interface and registering with the coordinator. Custom agents can handle specialized content types or analysis patterns.
 
-### State Schema Extensions
-Add custom fields to the **[State Schema Validation Pattern](../concepts/state-schema-validation-pattern.md)** to track additional metadata or processing state. Extensions must provide migration paths and maintain backward compatibility with existing state files.
+**Template Customization**: The **[Template management system with caching](../components/template-management-system-with-caching.md)** allows custom documentation templates and formatting rules. Templates can be repository-specific or globally applied based on content categories.
 
-### Configuration Providers
-The **[Environment-based configuration with test mode separation](../components/environment-based-configuration-with-test-mode-separation.md)** can be extended with new configuration sources (cloud services, databases, etc.) while maintaining the existing test isolation guarantees.
+**Processing Pipeline Hooks**: **[Conditional Post-Processing](../concepts/conditional-post-processing.md)** and **[Processor-based page operations](../components/processor-based-page-operations.md)** enable custom processing steps at any pipeline stage. Extensions can add validation, transformation, or enrichment operations.
 
-### Error Handling Strategies
-Extend **[Graceful Error Handling for File Operations](../guides/graceful-error-handling-for-file-operations.md)** with custom recovery strategies, notification systems, or integration with external monitoring tools. The existing error handling framework provides standardized interfaces for plugging in custom behaviors.
+**Configuration Extensions**: The **[Singleton configuration module](../components/singleton-configuration-module.md)** supports custom settings and **Environment-based configuration** for deployment-specific behavior. New configuration sections integrate automatically with the validation system.
+
+**Content Discovery**: **[Intelligent File Filtering for Analysis](../components/intelligent-file-filtering-for-analysis.md)** can be extended with custom rules for specific repository types or content patterns. New filters integrate with the existing **[Repository introspection for context enrichment](../concepts/repository-introspection-for-context-enrichment.md)** system.
+
+**State Management**: The **[State Schema Validation Pattern](../concepts/state-schema-validation-pattern.md)** allows extensions to add custom state tracking and **[Processing state lifecycle](../concepts/processing-state-lifecycle.md)** management for specialized processing requirements.

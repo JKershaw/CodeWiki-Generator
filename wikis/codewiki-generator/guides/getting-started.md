@@ -1,150 +1,155 @@
 # Getting Started
 
-## Introduction
+## Overview
 
-Welcome to CodeWiki-Generator! This guide will help you set up the repository, understand its structure, and run tests. Whether you're contributing new features or exploring the codebase, this is your starting point.
+CodeWiki-Generator is an agent-based documentation generation system that automatically creates and maintains wiki documentation from your codebase. This guide will walk you through installation, setup, and running your first documentation generation.
 
 ## Prerequisites
 
-Before you begin, ensure you have:
-- **Node.js**: Version 14.0 or higher
-- **npm**: Version 6.0 or higher (comes with Node.js)
-- **Git**: For cloning and version control
-- A code editor (VS Code, WebStorm, etc.)
-
-Verify your installation:
-```bash
-node --version
-npm --version
-```
+- Node.js 16 or higher
+- npm 7 or higher
+- Git (for repository operations)
+- A GitHub personal access token (for GitHub API operations)
 
 ## Installation
 
-1. Clone the repository:
+1. **Clone the repository:**
 ```bash
-git clone https://github.com/your-org/CodeWiki-Generator.git
+git clone <repository-url>
 cd CodeWiki-Generator
 ```
 
-2. Install dependencies:
+2. **Install dependencies:**
 ```bash
 npm install
 ```
 
-This installs all packages listed in `package.json`, including Jest for testing.
+3. **Set up environment variables:**
 
-## Project Structure
-
-Key directories and files in this repository:
-
-```
-CodeWiki-Generator/
-├── package.json              # Project metadata and npm scripts
-├── jest.config.js            # Jest testing configuration
-├── src/                       # Source code
-│   ├── config/               # Configuration modules
-│   ├── state/                # State management
-│   ├── wiki/                 # Wiki operations
-│   └── utils/                # Utility functions
-├── tests/                    # Test files (Jest)
-├── docs/                     # Documentation
-│   └── concepts/             # Conceptual guides
-└── README.md                 # Repository overview
+Create a `.env` file in the project root:
+```bash
+cp .env.example .env
 ```
 
-## Understanding Key Components
+Edit `.env` and add your GitHub credentials:
+```
+GITHUB_TOKEN=your_github_personal_access_token
+GITHUB_REPO_OWNER=your_username
+GITHUB_REPO_NAME=your_repository
+```
 
-The codebase implements several important patterns:
+## Running the Application
 
-- **Configuration Validation Pattern**: Centralized config management with validation
-- **Persistent State Management**: File-based state with directory handling
-- **Frontmatter-based Serialization**: Markdown pages with YAML frontmatter
-- **Environment-based Configuration**: Separate test and production modes
-- **Wiki Markdown Management**: Core system for managing wiki content
+1. **Generate documentation for a repository:**
+```bash
+npm start
+```
 
-See the existing wiki structure for detailed concept explanations.
+This command will:
+- Analyze your repository structure
+- Extract code patterns and documentation
+- Generate wiki pages with frontmatter metadata
+- Build cross-page links automatically
+- Create an index of all generated content
+
+2. **Expected output:**
+
+After running, you should see:
+- Generated wiki files in the `wiki/` directory
+- An `index.md` file listing all generated pages
+- Console output showing:
+  - Number of files analyzed
+  - Pages generated
+  - Links created
+  - API calls made (with cost tracking)
+  - Processing statistics
 
 ## Running Tests
 
-Jest is configured for this project. Tests are essential to verify your changes work correctly.
-
-Run all tests:
+1. **Run all tests:**
 ```bash
 npm test
 ```
 
-Run tests in watch mode (reruns on file changes):
+2. **Run tests in watch mode (for development):**
 ```bash
 npm test -- --watch
 ```
 
-Run tests with coverage report:
+3. **Run specific test file:**
+```bash
+npm test -- src/agents/__tests__/GuideGenerationAgent.test.ts
+```
+
+4. **Generate coverage report:**
 ```bash
 npm test -- --coverage
 ```
 
-Run a specific test file:
-```bash
-npm test -- path/to/test.js
+Tests use Jest and include:
+- Unit tests for all agents (ArchitectureOverviewAgent, GuideGenerationAgent, etc.)
+- Integration tests for the documentation pipeline
+- Mock GitHub API client for test environment isolation
+- Cost tracking verification tests
+
+## Project Structure
+
+```
+CodeWiki-Generator/
+├── src/
+│   ├── agents/              # Multi-agent architecture
+│   │   ├── ArchitectureOverviewAgent.ts
+│   │   ├── CodeAnalysisAgent.ts
+│   │   ├── GuideGenerationAgent.ts
+│   │   ├── MetaAnalysisAgent.ts
+│   │   └── WikiIndexAgent.ts
+│   ├── clients/             # External API integrations
+│   │   ├── ClaudeClient.ts
+│   │   └── GitHubClient.ts
+│   ├── config/              # Configuration management
+│   │   └── Config.ts
+│   ├── processors/          # Page processing logic
+│   │   └── Processor.ts
+│   └── index.ts             # Entry point
+├── wiki/                    # Generated documentation output
+├── package.json
+└── tsconfig.json
 ```
 
-### Expected Test Output
+## Key Concepts
 
-When tests run successfully, you'll see:
-```
-PASS  tests/wiki.test.js
-PASS  tests/state.test.js
-PASS  tests/config.test.js
-
-Test Suites: 3 passed, 3 total
-Tests:       45 passed, 45 total
-```
-
-## Development Workflow
-
-1. **Create a new branch** for your work:
-```bash
-git checkout -b feature/your-feature-name
-```
-
-2. **Make your changes** to the source code in the `src/` directory
-
-3. **Write or update tests** for your changes in the `tests/` directory
-
-4. **Run tests** to verify everything works:
-```bash
-npm test
-```
-
-5. **Check test coverage** to ensure adequate testing:
-```bash
-npm test -- --coverage
-```
+- **Agent-based Architecture**: Multiple specialized agents handle different aspects of documentation generation
+- **Category-based Organization**: Wiki pages are organized by category for better navigation
+- **Commit-driven Pipeline**: Documentation updates are tracked with git commit history
+- **Cost-aware Processing**: API usage is tracked to monitor Claude API costs
 
 ## Next Steps
 
-Now that you have the project running, explore these guides:
+1. **Review generated documentation:**
+   - Check the `wiki/` directory for generated pages
+   - Open `wiki/index.md` to see the full documentation index
 
-- **Testing Approach** - Learn the testing patterns and conventions used in this codebase
-- **Extension Patterns** - Understand how to add new features following established patterns
-- **Configuration** - Detailed guide on configuring the system for different environments
+2. **Configure for your needs:**
+   - See the [Configuration Guide](./guides/configuration.md) for advanced setup options
+   - Customize category mappings and page templates
 
-For conceptual understanding, review:
-- `Automatic Metadata Lifecycle Management` - How metadata is managed
-- `Source Code Organization Pattern` - How the codebase is structured
-- `State Schema Validation Pattern` - How state validation works
+3. **Understand the architecture:**
+   - Read [Agent-based Architecture](./concepts/architecture.md) to learn how the system works
+   - Review [Extension Patterns](./guides/extension-patterns.md) to add custom agents
+
+4. **Learn testing practices:**
+   - See the [Testing Approach Guide](./guides/testing-approach.md) for testing patterns
 
 ## Troubleshooting
 
-**Tests won't run:**
-- Ensure all dependencies are installed: `npm install`
-- Clear Jest cache: `npm test -- --clearCache`
-- Check Node.js version: `node --version` (should be 14+)
+**Issue: "GITHUB_TOKEN not found"**
+- Solution: Ensure your `.env` file has `GITHUB_TOKEN` set with a valid GitHub personal access token
 
-**Port already in use:**
-- If the application runs on a specific port, check what's using it
-- Change the port in configuration if needed
+**Issue: "Module not found" errors**
+- Solution: Run `npm install` again, then verify with `npm test`
 
-**Module not found errors:**
-- Run `npm install` again to ensure all packages are installed
-- Delete `node_modules/` and reinstall: `rm -rf node_modules && npm install`
+**Issue: Tests fail with API errors**
+- Solution: Tests use mocked APIs - ensure you're using `npm test` not running files directly
+
+**Issue: Out of memory during large repository analysis**
+- Solution: The system includes cost-aware batching - check your `.env` for batch size settings

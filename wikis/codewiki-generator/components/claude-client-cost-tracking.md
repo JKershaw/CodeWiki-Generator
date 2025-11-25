@@ -1,0 +1,54 @@
+---
+title: ClaudeClient cost tracking
+category: component
+sourceFile: lib/processor.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# ClaudeClient Cost Tracking
+
+## Purpose and [Overview](../meta/overview.md)
+
+The ClaudeClient cost tracking component monitors cumulative API costs across processing sessions within the repository processor. It enables enforcement of configurable cost limits during bulk processing operations, automatically pausing processing when budget thresholds are reached to prevent unexpected API expenses.
+
+## Key Functionality
+
+- **Cost Accumulation**: Tracks API usage costs across multiple processing sessions with persistent state
+- **Budget Enforcement**: Compares current costs against configurable limits and halts processing when thresholds are exceeded
+- **Session Continuity**: Maintains cost tracking state between processor restarts and resumable processing operations
+- **Integration Point**: Provides cost data to the processor for decision-making during repository-scale batch processing
+
+The component works as a dependency of the main processor, being consulted before and after API calls to ensure cost limits are respected throughout the processing lifecycle.
+
+## Relationships
+
+- **Primary Integration**: Used by `lib/processor.js` as a core dependency for cost-aware processing
+- **Parallel Components**: Works alongside GitHubClient and MetaAnalysisAgent integrations within the processor
+- **State Management**: Coordinates with the processor's resumable state system to persist cost data
+- **Processing Control**: Influences the processor's batch processing flow through cost limit enforcement
+
+## Usage Example
+
+```javascript
+const processor = {
+  claudeClient: mockClaudeClient,
+  stateManager: mockStateManager,
+  wikiManager: mockWikiManager,
+  codeAnalysisAgent: mockCodeAnalysisAgent,
+  docWriterAgent: mockDocWriterAgent,
+  techDebtAgent: mockTechDebtAgent,
+  securityAgent: mockSecurityAgent
+};
+
+// Cost tracking is integrated into processor operations
+// and monitors API usage during batch processing
+```
+
+## Testing
+
+**Test Coverage**: tests/unit/processor.test.js
+- 26 test cases across 6 test suites
+- Coverage includes processor integration, commit processing, and repository-scale operations
+- Tests verify cost tracking integration within the broader processor workflow

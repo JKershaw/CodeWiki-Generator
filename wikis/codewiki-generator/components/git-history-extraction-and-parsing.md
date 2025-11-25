@@ -1,0 +1,55 @@
+---
+title: Git History Extraction and Parsing
+category: component
+sourceFile: test-run-local.js
+related: [meta/overview.md, components/git-hub-client-mocking.md, guides/local-git-based-testing.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Git History Extraction and Parsing
+
+## Purpose and [Overview](../meta/overview.md)
+
+The Git History Extraction and Parsing component provides functionality to extract commit history, file changes, and diffs from a local Git repository using Node.js child processes. It serves as the foundation for local testing and development of the processor without requiring external API dependencies.
+
+## Key Functionality
+
+This component implements several core capabilities:
+
+- **Commit History Extraction**: Uses `execSync` to retrieve Git commit data from the local repository
+- **File Change Detection**: Identifies modified, added, and deleted files between commits
+- **Diff Generation**: Extracts detailed diff information for code changes
+- **Error Handling**: Manages edge cases including initial commits, deleted files, and Git command failures
+- **Data Parsing**: Converts raw Git output into structured data formats compatible with the processor
+
+The implementation leverages Node.js `child_process.execSync` to execute Git commands and parse the results into usable data structures.
+
+## Relationships
+
+This component integrates with several other system components:
+
+- **[GitHub Client Mocking](../components/git-hub-client-mocking.md)**: Works in conjunction with mock GitHub clients to replace external API calls with local Git data
+- **[Local Git-based Testing](../guides/local-git-based-testing.md)**: Serves as the data source for the local testing pattern, enabling safe iteration on the codebase itself
+- **Cost-Bounded Processing**: Provides input data to processors that track statistics and enforce cost constraints (maxCost parameter)
+- **Main Processor**: Supplies the same data structure format that would normally come from GitHub API calls
+
+## Usage Example
+
+```javascript
+// Implementation details would typically involve execSync calls
+const { execSync } = require('child_process');
+
+// Extract commit history from local repository
+const commitData = execSync('git log --format=...', { encoding: 'utf8' });
+
+// Get file changes and diffs
+const diffData = execSync('git diff HEAD~1 HEAD', { encoding: 'utf8' });
+
+// Parse and structure the data for processor consumption
+const structuredData = parseGitOutput(commitData, diffData);
+```
+
+## Testing
+
+No automated test coverage is currently available for this component. The component primarily serves as a testing utility itself, enabling local development and debugging without external API dependencies.

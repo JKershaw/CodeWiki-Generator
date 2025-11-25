@@ -1,0 +1,72 @@
+---
+title: Multi-agent linking workflow
+category: concept
+sourceFile: lib/processor.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Multi-agent Linking Workflow
+
+## Purpose and [Overview](../meta/overview.md)
+
+The multi-agent linking workflow coordinates two specialized agents to establish connections between wiki pages after their initial generation. This post-processing system injects hyperlinks within page content while simultaneously discovering and documenting semantic relationships between pages.
+
+## Key Functionality
+
+The workflow operates as a multi-pass documentation generation pattern with distinct phases:
+
+- **Link Injection**: Uses DocumentationWriterAgent to identify and inject hyperlinks between wiki pages within existing content
+- **Relationship Discovery**: Leverages LinkDiscoveryAgent to analyze semantic connections and identify related pages
+- **Metadata Enrichment**: Updates page frontmatter with discovered relationships and connection metadata
+- **Conditional Updates**: Only writes changes to pages when modifications occur, optimizing performance
+
+The system establishes a unified linking pipeline that transforms static documentation into an interconnected knowledge graph through agent composition.
+
+## Relationships
+
+This workflow integrates with several core components:
+
+- **WikiManager**: Retrieves existing pages, searches content, and persists updates with enriched metadata
+- **StateManager**: Tracks processing state and manages workflow persistence
+- **DocumentationWriterAgent**: Handles inline link injection within page content
+- **LinkDiscoveryAgent**: Analyzes page relationships and semantic connections
+- **Processor**: Orchestrates the overall workflow as part of the broader documentation generation pipeline
+
+## Usage Example
+
+```javascript
+describe('Processor', () => {
+  let processor;
+  let mockWikiManager;
+  let mockStateManager;
+  let mockDocWriterAgent;
+
+  beforeEach(() => {
+    mockWikiManager = {
+      getPage: jest.fn(),
+      updatePage: jest.fn(),
+      searchPages: jest.fn(),
+      getRelatedPages: jest.fn(),
+      updatePageGlobalMetadata: jest.fn()
+    };
+
+    mockStateManager = {
+      loadState: jest.fn()
+    };
+    
+    processor = new Processor({
+      wikiManager: mockWikiManager,
+      stateManager: mockStateManager,
+      docWriterAgent: mockDocWriterAgent
+    });
+  });
+```
+
+## Testing
+
+**Test Coverage**: tests/unit/processor.test.js
+- 26 test cases across 6 test suites
+- Test categories include Processor initialization, processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository
+- Comprehensive mocking of WikiManager, StateManager, and agent dependencies

@@ -1,0 +1,60 @@
+---
+title: Cost-aware API usage tracking
+category: concept
+sourceFile: lib/claude.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Cost-aware API usage tracking
+
+## Purpose and [Overview](../meta/overview.md)
+
+The cost-aware API usage tracking system provides comprehensive monitoring and calculation of API costs based on token usage and model-specific pricing. This enables budget awareness and cost summaries across requests, allowing applications to track spending and optimize API usage patterns.
+
+## Key Functionality
+
+- **Token-based cost calculation**: Tracks input and output tokens for each API request and calculates costs using model-specific pricing
+- **Cumulative cost tracking**: Maintains running totals of API usage costs across multiple requests within a session
+- **Model-aware pricing**: Supports different pricing structures for various Claude models (Haiku, Sonnet, Opus)
+- **Cost summaries**: Provides detailed breakdowns of token usage and associated costs
+- **Cost reset capability**: Allows clearing accumulated cost data for new tracking sessions
+
+The system automatically captures token usage from API responses and multiplies by the appropriate rates to provide real-time cost visibility.
+
+## Relationships
+
+This concept is implemented within the ClaudeClient component in `lib/claude.js`, working alongside:
+- **Anthropic SDK wrapper**: Integrates cost tracking with API message processing
+- **Intelligent retry strategy**: Ensures cost tracking accuracy even when requests are retried
+- **Message formatting components**: Tracks costs for both text and JSON response formats
+
+## Usage Example
+
+```javascript
+const ClaudeClient = require('./lib/claude');
+
+// Initialize client
+const claudeClient = new ClaudeClient();
+
+// Send message and track costs automatically
+const response = await claudeClient.sendMessage('Hello, Claude!');
+
+// Get current cost summary
+const costSummary = claudeClient.getCostSummary();
+console.log(`Total cost: $${costSummary.totalCost}`);
+console.log(`Input tokens: ${costSummary.inputTokens}`);
+console.log(`Output tokens: ${costSummary.outputTokens}`);
+
+// Reset cost tracking for new session
+claudeClient.resetCost();
+```
+
+## Testing
+
+**Test Coverage**: `tests/unit/claude.test.js`
+- 29 test cases across 11 test suites
+- Comprehensive testing of cost calculation, token estimation, and cost summary functionality
+- Tests cover various Claude models (Haiku 4.5) and response formats
+- Validates cost tracking accuracy and reset capabilities
