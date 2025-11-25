@@ -2322,13 +2322,175 @@
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-25"
+    },
+    "components/express-server-architecture-for-dashboard.md": {
+      "title": "Express Server Architecture for Dashboard",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/request/response-middleware-pipeline.md": {
+      "title": "Request/Response Middleware Pipeline",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/health-check-endpoint-pattern.md": {
+      "title": "Health Check Endpoint Pattern",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/graceful-shutdown-with-signal-handling.md": {
+      "title": "Graceful Shutdown with Signal Handling",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/environment-aware-error-handling.md": {
+      "title": "Environment-Aware Error Handling",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/web-dashboard-control-layer.md": {
+      "title": "Web Dashboard Control Layer",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/dashboard-controller.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/web-dashboard-controller-architecture.md": {
+      "title": "Web Dashboard Controller Architecture",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/interactive-dashboard-client.md": {
+      "title": "Interactive Dashboard Client",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "public/app.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/process-control-interface.md": {
+      "title": "Process Control Interface",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "public/app.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/dashboard-centric-web-interface.md": {
+      "title": "Dashboard-Centric Web Interface",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/interactive-processing-control-pattern.md": {
+      "title": "Interactive Processing Control Pattern",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/dashboard-controller.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/real-time-status-polling.md": {
+      "title": "Real-time Status Polling",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "public/app.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/request-validation-and-error-handling.md": {
+      "title": "Request Validation and Error Handling",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/dashboard-controller.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/process-control-api.md": {
+      "title": "Process Control API",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/async-form-submission-pattern.md": {
+      "title": "Async Form Submission Pattern",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "public/app.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/background-processing-with-state-persistence.md": {
+      "title": "Background Processing with State Persistence",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/dashboard-controller.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/nested-wiki-documentation-routing.md": {
+      "title": "Nested Wiki Documentation Routing",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/wiki-page-rendering-pipeline.md": {
+      "title": "Wiki Page Rendering Pipeline",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/dashboard-controller.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
     }
   },
   "statistics": {
-    "totalPages": 258,
-    "concepts": 89,
-    "components": 134,
-    "guides": 35,
+    "totalPages": 276,
+    "concepts": 93,
+    "components": 145,
+    "guides": 38,
     "totalCommitsProcessed": 0,
     "orphanedPages": []
   }
