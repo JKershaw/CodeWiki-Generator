@@ -2484,13 +2484,346 @@
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-25"
+    },
+    "components/documentation-fallback-messaging-strategy.md": {
+      "title": "Documentation fallback messaging strategy",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/source-file-tracking-in-concept-validation.md": {
+      "title": "Source file tracking in concept validation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/backward-compatible-response-normalization.md": {
+      "title": "Backward-compatible response normalization",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/multi-project-infrastructure.md": {
+      "title": "Multi-Project Infrastructure",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/multi-project-wiki-organization.md": {
+      "title": "Multi-Project Wiki Organization",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "generate-self-wiki.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/multi-project-wiki-architecture.md": {
+      "title": "Multi-Project Wiki Architecture",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/dashboard-controller.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/project-listing-api-endpoint.md": {
+      "title": "Project Listing API Endpoint",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "server.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/project-scoped-resource-management.md": {
+      "title": "Project-scoped Resource Management",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/dashboard-controller.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/dynamic-project-discovery.md": {
+      "title": "Dynamic Project Discovery",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/dashboard-controller.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/project-aware-request-routing.md": {
+      "title": "Project-aware Request Routing",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/dashboard-controller.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/e2e-testing-infrastructure.md": {
+      "title": "E2E Testing Infrastructure",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "playwright.config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/dynamic-wiki-link-routing.md": {
+      "title": "Dynamic Wiki Link Routing",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "public/app.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/client-side-project-persistence.md": {
+      "title": "Client-side Project Persistence",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "public/app.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/ci/cd-aware-test-configuration.md": {
+      "title": "CI/CD-aware Test Configuration",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "playwright.config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/test-observability-and-debugging.md": {
+      "title": "Test Observability and Debugging",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "playwright.config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/project-selector-integration.md": {
+      "title": "Project Selector Integration",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "public/app.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/sandboxed-environment-test-execution-strategy.md": {
+      "title": "Sandboxed Environment Test Execution Strategy",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "playwright.config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/markdown-to-html-rendering-pipeline.md": {
+      "title": "Markdown-to-HTML rendering pipeline",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/browser-launch-configuration-for-restricted-environments.md": {
+      "title": "Browser Launch Configuration for Restricted Environments",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "playwright.config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/content-transformation-contract.md": {
+      "title": "Content transformation contract",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/flakiness-mitigation-in-sandboxed-tests.md": {
+      "title": "Flakiness Mitigation in Sandboxed Tests",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "playwright.config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/direct-file-i/o-with-frontmatter-parsing.md": {
+      "title": "Direct file I/O with frontmatter parsing",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/es-module-to-common-js-interoperability-via-jest-mocking.md": {
+      "title": "ES Module to CommonJS Interoperability via Jest Mocking",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "tests/setup.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/separation-of-concerns:-metadata-vs-content-handling.md": {
+      "title": "Separation of concerns: metadata vs content handling",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/markdown-parsing-mock-strategy.md": {
+      "title": "Markdown Parsing Mock Strategy",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "tests/setup.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/explicit-error-handling-with-file-system-error-codes.md": {
+      "title": "Explicit error handling with file system error codes",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/multi-strategy-json-repair-with-progressive-fallbacks.md": {
+      "title": "Multi-strategy JSON repair with progressive fallbacks",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/truncation-based-recovery-for-incomplete-streaming-responses.md": {
+      "title": "Truncation-based recovery for incomplete streaming responses",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/context-aware-json-syntax-repair.md": {
+      "title": "Context-aware JSON syntax repair",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/robust-error-recovery-logging-and-diagnostics.md": {
+      "title": "Robust error recovery logging and diagnostics",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/multi-layer-context-research-system.md": {
+      "title": "Multi-layer Context Research System",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "test-context.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/multi-layer-wiki-expansion-with-context-research.md": {
+      "title": "Multi-layer wiki expansion with context research",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/wiki-researcher.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/multi-layer-wiki-verification-framework.md": {
+      "title": "Multi-layer wiki verification framework",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "verify-wiki-expansion.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/meta-document-ingestion-and-wiki-transformation.md": {
+      "title": "Meta-document ingestion and wiki transformation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/meta-document-ingestion-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/wiki-researcher-module.md": {
+      "title": "WikiResearcher Module",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "test-context.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/task-type-optimized-context-prioritization.md": {
+      "title": "Task-type-optimized context prioritization",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/wiki-researcher.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/context-research-system-integration.md": {
+      "title": "Context research system integration",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "verify-wiki-expansion.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
     }
   },
   "statistics": {
-    "totalPages": 276,
-    "concepts": 93,
-    "components": 145,
-    "guides": 38,
+    "totalPages": 313,
+    "concepts": 104,
+    "components": 166,
+    "guides": 43,
     "totalCommitsProcessed": 0,
     "orphanedPages": []
   }
