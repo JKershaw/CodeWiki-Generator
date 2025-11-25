@@ -1,0 +1,11 @@
+{
+  "concepts": [
+    {
+      "name": "User Authentication System",
+      "category": "component",
+      "abstraction": "medium",
+      "reason": "Handles user login and session management",
+      "sourceFile": "src/auth.js"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+You are writing documentation for a codebase wiki.
+
+Concept/Component: {{conceptName}}
+
+File Location: {{filePath}}
+
+Code Analysis:
+{{codeAnalysis}}
+
+Code Examples from Tests:
+{{codeExamples}}
+
+Test Coverage:
+{{testCoverage}}
+
+Existing documentation (if any):
+{{existingContent}}
+
+Task: Write clear, concise documentation in markdown format.
+
+Required Sections:
+1. **Purpose and Overview** (2-3 sentences explaining what this is and why it exists)
+2. **Key Functionality** (what it does, how it works)
+3. **Relationships** (how it connects to other components)
+4. **Usage Example** (REQUIRED - show how to use this component)
+5. **Testing** (if test coverage information is available, include it at the end)
+
+Guidelines for Usage Examples:
+- If code examples from tests are provided above, USE THEM as the primary source
+- If no test examples are provided, you may create a simple example BUT:
+  * DO NOT invent method names, parameters, or APIs that aren't in the code analysis
+  * Only show patterns that are clearly evident in the code analysis
+  * Use generic variable names and keep it minimal
+  * If you cannot create an accurate example from the code analysis alone, state "No usage examples available - see source code for implementation details"
+- Show imports, initialization, and basic usage patterns
+- Keep examples concise but complete (3-10 lines)
+- Use JavaScript/TypeScript code blocks with proper syntax highlighting
+
+Example Format:
+```javascript
+const Component = require('./path/to/component');
+const instance = new Component(options);
+const result = instance.method(args);
+```
+
+General Guidelines:
+- Write in present tense
+- Be specific and accurate - avoid vague descriptions
+- Keep it under 500 words unless complexity requires more
+- Use markdown formatting (headers, lists, code blocks)
+- Don't repeat information that's already clear from the code
+- Focus on understanding, not exhaustive cataloging
+- If updating existing documentation, preserve structure and merge new insights
+
+Output only markdown - no preamble, no JSON, just the documentation content.

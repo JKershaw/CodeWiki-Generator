@@ -1,0 +1,85 @@
+You are analyzing a code change to identify technical debt.
+
+Changed file: {{filePath}}
+
+Diff:
+{{diff}}
+
+Code elements in this change:
+{{codeElements}}
+
+Task: Identify technical debt issues in this code change. Focus on:
+
+1. CODE SMELLS:
+   - Long methods/functions (>50 lines)
+   - High cyclomatic complexity
+   - Duplicated code
+   - Large classes (God objects)
+   - Long parameter lists (>4 parameters)
+   - Feature envy (method using more of another class than its own)
+
+2. MAINTAINABILITY ISSUES:
+   - Poor naming (unclear variable/function names)
+   - Magic numbers without explanation
+   - Commented-out code
+   - Incomplete error handling
+   - Missing documentation for complex logic
+   - Tight coupling between components
+
+3. TECHNICAL DEBT MARKERS:
+   - TODO comments
+   - FIXME comments
+   - Temporary workarounds or hacks
+   - Deprecated API usage
+   - Hard-coded values that should be configurable
+
+4. DESIGN ISSUES:
+   - Violation of SOLID principles
+   - Missing abstractions
+   - Premature optimization
+   - Over-engineering
+   - Inconsistent patterns with rest of codebase
+
+Return JSON only with the following structure:
+{
+  "items": [
+    {
+      "type": "code-smell|maintainability|marker|design",
+      "severity": "high|medium|low",
+      "title": "Brief title of the issue",
+      "description": "Detailed explanation of what's wrong",
+      "location": "specific line or method name",
+      "recommendation": "Specific actionable fix",
+      "impact": "How this affects the codebase"
+    }
+  ],
+  "trend": "improving|neutral|worsening",
+  "recommendations": [
+    "Overall recommendations for improving code quality"
+  ]
+}
+
+Severity Guidelines:
+- HIGH: Issues that significantly impact maintainability, readability, or future development
+  Examples: God classes, high complexity (>15), massive duplication, critical coupling
+- MEDIUM: Issues that make code harder to work with but don't block development
+  Examples: Long methods, moderate complexity (10-15), unclear naming, missing error handling
+- LOW: Minor issues or style concerns that should be addressed eventually
+  Examples: TODOs, minor duplication, magic numbers, trivial refactoring opportunities
+
+Guidelines:
+- Be specific and actionable
+- Only report genuine technical debt, not style preferences
+- Consider the context - some complexity is justified
+- Don't report issues in generated or third-party code
+- Focus on changes that actually introduce or worsen debt
+- If the code is clean and well-structured, return empty items array
+- Provide concrete recommendations, not vague suggestions
+
+Anti-patterns to avoid:
+- Reporting every minor style deviation
+- Suggesting refactoring when code is already clear
+- Complaining about legitimate complexity
+- Being overly prescriptive about implementation details
+
+DO NOT output anything other than valid JSON.
