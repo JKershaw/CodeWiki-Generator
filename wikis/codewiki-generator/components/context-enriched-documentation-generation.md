@@ -9,28 +9,28 @@ updated: 2025-11-25
 
 # Context-enriched Documentation Generation
 
-## Purpose and [Overview](../meta/overview.md)
+## Purpose and Overview
 
-The Context-enriched Documentation Generation component extends the [documentation writer agent](../components/documentation-writer-agent.md) to accept and utilize contextual metadata such as file paths and code examples when generating documentation. This enables the production of more grounded and practical documentation by shifting from simple analysis-based generation to context-aware generation that leverages real codebase information.
+The Context-enriched Documentation Generation component extends the documentation writer agent to accept and utilize contextual metadata such as file paths and code examples when generating documentation. This enables the production of more grounded and practical documentation by shifting from simple analysis-based generation to context-aware generation that leverages real codebase information.
 
 ## Key Functionality
 
 This component enhances the documentation generation process by:
 
-- **Contextual Metadata Integration**: Accepts file paths, code examples, and other contextual information alongside the primary content to be documented
+- **Contextual Metadata Integration**: Accepts optional file paths and code examples alongside the primary content to be documented
 - **Enhanced Content Generation**: Utilizes the provided context to generate more accurate and relevant documentation that reflects actual codebase patterns
-- **Practical Documentation Output**: Produces documentation that is grounded in real implementation details rather than abstract analysis
-- **Flexible Context Handling**: Adapts documentation style and content based on the type and richness of contextual information provided
+- **Graceful Fallback Handling**: Implements sensible defaults ('Not specified', 'None available') when contextual information is unavailable
+- **Backwards Compatibility**: Maintains compatibility with existing callers while enabling enhanced documentation features through optional parameters
 
-The agent processes both the target content and its contextual metadata to create comprehensive documentation that better serves developers by including practical examples and implementation-specific details.
+The agent processes both the target content and its contextual metadata through the `writeDocumentation` method to create comprehensive documentation that better serves developers by including practical examples and implementation-specific details.
 
 ## Relationships
 
 The Context-enriched Documentation Generation component:
 
-- **Extends**: The base [documentation writer agent](../components/documentation-writer-agent.md) functionality in `lib/agents/documentation-writer-agent.js`
-- **Consumes**: Contextual metadata including file paths, code examples, and codebase structure information
-- **Integrates with**: Code analysis systems that provide the contextual information required for enhanced generation
+- **Extends**: The base documentation writer agent functionality in `lib/agents/documentation-writer-agent.js`
+- **Consumes**: Contextual metadata including file paths and code examples from code analysis systems
+- **Demonstrates**: The flexible parameter handling pattern for extending functionality without breaking existing integrations
 - **Outputs to**: Documentation systems and wikis that benefit from context-aware, practical documentation
 
 ## Usage Example
@@ -39,13 +39,15 @@ The Context-enriched Documentation Generation component:
 const DocumentationWriterAgent = require('./lib/agents/documentation-writer-agent');
 
 const agent = new DocumentationWriterAgent();
-const contextualData = {
-  filePath: 'lib/utils/helper-functions.js',
-  codeExamples: ['function processData(input) { return input.map(transform); }'],
-  metadata: { componentType: 'utility', dependencies: ['lodash'] }
-};
 
-const documentation = agent.generateDocumentation(content, contextualData);
+// Enhanced documentation with context
+const documentation = agent.writeDocumentation(content, {
+  filePath: 'lib/components/user-manager.js',
+  codeExamples: ['user.authenticate()', 'user.getProfile()']
+});
+
+// Still works without context (backwards compatible)
+const basicDocumentation = agent.writeDocumentation(content);
 ```
 
 ## Testing

@@ -11,28 +11,29 @@ updated: 2025-11-25
 
 ## Purpose and Overview
 
-The cross-page linking system is a post-generation component that automatically injects hyperlinks between wiki pages and enriches page metadata with related page information. It establishes a multi-pass documentation generation pattern where content enhancement occurs after initial page creation, creating interconnected documentation networks.
+The cross-page linking system is a post-generation component that automatically injects hyperlinks between wiki pages and enriches page metadata with related page information. It implements a multi-phase documentation generation pipeline where content enhancement occurs after initial page creation, enabling intelligent cross-referencing across the entire wiki structure.
 
 ## Key Functionality
 
-The system operates through a coordinated multi-agent workflow that processes generated documentation in two phases:
+The system operates through a coordinated workflow that processes generated documentation in distinct phases:
 
-- **Link Injection**: Uses DocumentationWriterAgent to analyze page content and inject relevant hyperlinks to related pages within the wiki
-- **Relationship Discovery**: Leverages LinkDiscoveryAgent to identify semantic relationships between pages and build metadata about page connections
-- **Conditional Updates**: Implements efficient page updating that only writes changes when content modifications occur, while simultaneously enriching frontmatter with computed metadata
-- **Metadata Enrichment**: Updates page frontmatter with related pages information and global metadata tracking
+- **Multi-phase Processing**: Implements sequential processing where initial content generation (architecture overview, guides, index) completes before relationship discovery and linking begins
+- **Intelligent Link Discovery**: Uses LinkDiscoveryAgent to analyze page content and identify semantic connections between related pages throughout the wiki
+- **Cross-link Injection**: Automatically injects hyperlinks into page content using the addCrossLinks method, creating navigable connections between related documentation
+- **Metadata Enrichment**: Updates page frontmatter with related pages information and global metadata tracking for enhanced discoverability
+- **Efficient Updates**: Only writes page changes when content modifications occur, optimizing performance during incremental processing
 
-The processor coordinates these agents in a unified pipeline, ensuring that documentation pages are both internally linked and properly cross-referenced through metadata.
+This separation of concerns allows the system to make intelligent decisions about page relationships after all content exists, resulting in more accurate and comprehensive linking.
 
 ## Relationships
 
-The cross-page linking system integrates with several core components:
+The cross-page linking system integrates with several core components in the documentation pipeline:
 
-- **WikiManager**: Retrieves existing pages, searches for related content, and handles page updates with new links and metadata
-- **DocumentationWriterAgent**: Performs the actual link injection into page content
-- **LinkDiscoveryAgent**: Discovers semantic relationships between pages for metadata enrichment  
-- **StateManager**: Tracks processing state to enable efficient incremental linking updates
-- **Repository Processing Pipeline**: Operates as a post-processing step after initial page generation
+- **Processor**: Acts as the orchestration layer that coordinates the multi-phase generation pipeline
+- **LinkDiscoveryAgent**: Performs the semantic analysis to identify related pages and establish cross-references
+- **WikiManager**: Provides page retrieval, search capabilities, and handles updates with new links and metadata
+- **DocumentationWriterAgent**: Works in conjunction with link discovery to inject hyperlinks into page content
+- **StateManager**: Enables efficient incremental processing by tracking what has been linked previously
 
 ## Usage Example
 
@@ -41,11 +42,11 @@ const Processor = require('./lib/processor');
 
 // Initialize processor with required dependencies
 const processor = new Processor({
-  wikiManager: wikiManager,
-  stateManager: stateManager,
-  codeAnalysisAgent: codeAnalysisAgent,
-  docWriterAgent: docWriterAgent,
-  linkDiscoveryAgent: linkDiscoveryAgent
+  wikiManager: mockWikiManager,
+  stateManager: mockStateManager,
+  codeAnalysisAgent: mockCodeAnalysisAgent,
+  docWriterAgent: mockDocWriterAgent,
+  linkDiscoveryAgent: mockLinkDiscoveryAgent
 });
 
 // Process repository to generate and cross-link documentation
@@ -57,4 +58,4 @@ await processor.processRepository(repositoryPath);
 **Test Coverage**: tests/unit/processor.test.js
 - 26 test cases across 6 test suites
 - Test categories include: Processor, processCommit, isSignificantFile, getRelevantContext, determinePagePath, processRepository
-- Comprehensive mocking of WikiManager, StateManager, and agent dependencies for isolated testing
+- Comprehensive mocking of WikiManager, StateManager, and all agent dependencies for isolated unit testing

@@ -2090,20 +2090,245 @@
       "updated": "2025-11-25"
     },
     "components/link-discovery-agent-integration.md": {
-      "title": "LinkDiscoveryAgent integration",
+      "title": "Link discovery agent integration",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/cross-page-hyperlinking-system.md": {
+      "title": "Cross-page hyperlinking system",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/pattern-based-mention-detection-with-priority-ranking.md": {
+      "title": "Pattern-based mention detection with priority ranking",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/link-discovery-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/multi-phase-documentation-generation-pipeline.md": {
+      "title": "Multi-phase documentation generation pipeline",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/markdown-aware-text-analysis.md": {
+      "title": "Markdown-aware text analysis",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/link-discovery-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/markdown-format-preservation-in-linking.md": {
+      "title": "Markdown format preservation in linking",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/intelligent-link-discovery-agent.md": {
+      "title": "Intelligent link discovery agent",
       "created": "2025-11-25",
       "category": "component",
       "sourceFile": "lib/processor.js",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-25"
+    },
+    "guides/cross-link-discovery-and-validation-debugging.md": {
+      "title": "Cross-link discovery and validation debugging",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "debug-cross-links.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/full-page-content-loading-for-cross-linking.md": {
+      "title": "Full-page content loading for cross-linking",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "debug-related.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/cross-page-link-injection-system.md": {
+      "title": "Cross-page link injection system",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "add-cross-links.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/full-content-page-loading-for-cross-linking.md": {
+      "title": "Full-content page loading for cross-linking",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/link-discovery-debugging-workflow.md": {
+      "title": "Link discovery debugging workflow",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "debug-related.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/processor-based-batch-operations.md": {
+      "title": "Processor-based batch operations",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "add-cross-links.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/correct-processing-order-in-link-discovery-workflow.md": {
+      "title": "Correct processing order in link discovery workflow",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/page-content-validation-in-batch-processing.md": {
+      "title": "Page content validation in batch processing",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/wiki-manager-api-method-consolidation.md": {
+      "title": "WikiManager API method consolidation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/source-aware-documentation-enrichment.md": {
+      "title": "Source-aware documentation enrichment",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/flexible-parameter-handling-with-sensible-defaults.md": {
+      "title": "Flexible parameter handling with sensible defaults",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/code-example-extraction-from-test-files.md": {
+      "title": "Code example extraction from test files",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/metadata-propagation-through-documentation-pipeline.md": {
+      "title": "Metadata propagation through documentation pipeline",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/test-coverage-integration.md": {
+      "title": "Test Coverage Integration",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/test-coverage-analysis-pattern.md": {
+      "title": "Test Coverage Analysis Pattern",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/test-coverage-analyzer.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/enriched-documentation-context.md": {
+      "title": "Enriched Documentation Context",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/test-file-discovery-by-convention.md": {
+      "title": "Test File Discovery by Convention",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/test-coverage-analyzer.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/test-metadata-extraction.md": {
+      "title": "Test Metadata Extraction",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/test-coverage-analyzer.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/graceful-degradation-for-missing-test-coverage.md": {
+      "title": "Graceful Degradation for Missing Test Coverage",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/test-coverage-analyzer.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
     }
   },
   "statistics": {
-    "totalPages": 233,
-    "concepts": 80,
-    "components": 122,
-    "guides": 31,
+    "totalPages": 258,
+    "concepts": 89,
+    "components": 134,
+    "guides": 35,
     "totalCommitsProcessed": 0,
     "orphanedPages": []
   }

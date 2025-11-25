@@ -1,65 +1,51 @@
 ---
-title: LinkDiscoveryAgent integration
+title: Link discovery agent integration
 category: component
-sourceFile: lib/processor.js
+sourceFile: lib/agents/documentation-writer-agent.js
 related: []
 created: 2025-11-25
 updated: 2025-11-25
 ---
 
-# LinkDiscoveryAgent Integration
+# Link Discovery Agent Integration
 
 ## Purpose and Overview
 
-The LinkDiscoveryAgent integration extends the processor's multi-stage document generation pipeline with intelligent cross-page linking capabilities. This component enables the system to discover and create relationships between wiki pages after the initial documentation generation phase, improving navigation and discoverability across the codebase documentation.
+The link discovery agent integration enables intelligent cross-page hyperlinking within the documentation writer agent by delegating mention detection to a specialized LinkDiscoveryAgent. This separation of concerns allows the writer agent to focus on creating formatted links while the discovery agent handles the complex task of identifying related content across wiki pages.
 
 ## Key Functionality
 
-The integration implements a **cross-page linking system** that operates in two distinct phases:
+The integration implements a **cross-page hyperlinking system** that converts text mentions into markdown links while preserving existing formatting:
 
-1. **Core Generation Phase**: Standard document processing using existing agents (CodeAnalysisAgent, DocWriterAgent, TechDebtAgent, SecurityAgent)
-2. **Post-Generation Linking Phase**: LinkDiscoveryAgent analyzes generated content to identify related pages and creates inline hyperlinks and frontmatter metadata
+- **Intelligent Link Creation**: Discovers mentions of other wiki pages within content and converts them to properly formatted markdown links
+- **Format Preservation**: Maintains markdown formatting such as bold text when converting mentions to links, ensuring visual consistency
+- **Duplicate Prevention**: Avoids creating self-references and duplicate links to maintain clean, readable documentation
+- **Agent Separation**: Delegates mention detection logic to LinkDiscoveryAgent while handling the link formatting and insertion within the documentation writer
 
-The **multi-stage document generation pipeline** ensures that link discovery occurs after all pages exist, allowing the agent to:
-- Analyze relationships between completed documentation pages
-- Generate contextual cross-references based on content similarity
-- Update existing pages with discovered links without disrupting the primary generation process
-- Maintain separation of concerns between content creation and relationship discovery
+The system follows **markdown format preservation patterns** that ensure converted links maintain the original text styling, such as preserving bold formatting when transforming `**ComponentName**` mentions into `[**ComponentName**](./component-name)` links.
 
 ## Relationships
 
-The LinkDiscoveryAgent integrates with several core components:
+The link discovery integration connects several components within the documentation generation pipeline:
 
-- **WikiManager**: Uses `searchPages`, `getRelatedPages`, and `updatePageGlobalMetadata` methods to query existing pages and update them with discovered links
-- **StateManager**: Leverages state management for tracking processed relationships and avoiding duplicate link creation
-- **Processor**: Extends the main processing pipeline as an additional agent type alongside existing analysis agents
-- **Existing Agents**: Operates independently from CodeAnalysisAgent, DocWriterAgent, TechDebtAgent, and SecurityAgent while building upon their generated content
+- **LinkDiscoveryAgent**: Performs the actual mention detection and provides discovered links to the documentation writer
+- **Documentation Writer Agent**: Consumes discovered mentions and handles the markdown link creation and formatting
+- **Wiki Pages**: Serves as both the source for mention discovery and the target for link generation
+- **Cross-page Hyperlinking System**: Acts as the broader framework that coordinates link creation across the entire wiki structure
 
 ## Usage Example
 
 ```javascript
-const Processor = require('./lib/processor');
+// Within documentation-writer-agent.js
+const linkDiscoveryAgent = new LinkDiscoveryAgent(options);
 
-// Initialize processor with LinkDiscoveryAgent included in agent configuration
-const processor = new Processor({
-  wikiManager: mockWikiManager,
-  stateManager: mockStateManager,
-  agents: {
-    codeAnalysis: mockCodeAnalysisAgent,
-    docWriter: mockDocWriterAgent,
-    techDebt: mockTechDebtAgent,
-    security: mockSecurityAgent,
-    linkDiscovery: mockLinkDiscoveryAgent
-  }
-});
+// Delegate mention detection to specialized agent
+const discoveredMentions = await linkDiscoveryAgent.findMentions(content);
 
-// Process repository - LinkDiscoveryAgent runs in post-generation phase
-await processor.processRepository(repositoryPath);
+// Process mentions and create formatted links while preserving markdown
+const linkedContent = this.createLinksFromMentions(content, discoveredMentions);
 ```
 
 ## Testing
 
-**Test Coverage**: tests/unit/processor.test.js
-- 26 test cases across 6 test suites
-- Test categories include: Processor initialization, processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository
-- Comprehensive mocking of WikiManager methods (`getPage`, `createPage`, `updatePage`, `searchPages`, `getRelatedPages`, `updatePageGlobalMetadata`) validates integration points
+**Test Coverage**: No automated tests found for this specific integration. Testing would need to cover mention detection delegation, link formatting with preserved markdown styling, and prevention of duplicate/self-referential links.
