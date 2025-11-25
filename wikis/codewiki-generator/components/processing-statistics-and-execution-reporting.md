@@ -1,0 +1,42 @@
+---
+title: Processing statistics and execution reporting
+category: component
+sourceFile: generate-self-wiki.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Processing Statistics and Execution Reporting
+
+## Purpose and [Overview](../meta/overview.md)
+
+This component provides structured output summarizing documentation generation results for the self-wiki system. It tracks and reports key metrics including commits processed, files handled, pages created, and cost tracking to provide operational transparency during automated wiki generation.
+
+## Key Functionality
+
+The processing statistics and execution reporting component:
+
+- **Tracks Processing Metrics**: Monitors the number of git commits processed, files analyzed, and wiki pages generated during execution
+- **Reports Cost Information**: Provides cost tracking capabilities to monitor expenses associated with documentation generation, particularly useful when switching between local and external API processing
+- **Provides Execution Summary**: Generates comprehensive reports that give users visibility into the scope and results of wiki generation operations
+- **Enables Operational Monitoring**: Offers structured data output that can be used for debugging, optimization, and process improvement
+
+The component integrates with the git history analysis workflow to capture metrics at each stage of processing and presents them in a standardized format.
+
+## Relationships
+
+This component connects to several other parts of the self-documentation system:
+
+- **Local git commit extraction**: Receives data about the number of commits and files processed from the git history analysis
+- **Cost-controlled local processing**: Works with the mock client injection pattern to track cost savings when using local processing instead of external APIs  
+- **Self-documentation system**: Serves as the reporting layer that provides feedback to users about the overall wiki generation process
+- **Wiki generation workflow**: Acts as the final output stage that summarizes the entire documentation creation pipeline
+
+## Usage Example
+
+No usage examples available - see source code for implementation details
+
+## Testing
+
+No automated tests found for this component.

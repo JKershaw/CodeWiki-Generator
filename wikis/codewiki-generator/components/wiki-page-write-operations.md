@@ -1,51 +1,49 @@
 ---
-title: Wiki Page Write Operations
+title: Wiki page write operations
 category: component
 sourceFile: lib/wiki-manager.js
-related: []
+related: [meta/overview.md, guides/metadata-lifecycle-management.md, guides/safe-file-operation-pattern.md]
 created: 2025-11-24
-updated: 2025-11-24
+updated: 2025-11-25
 ---
 
 # Wiki Page Write Operations
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
-Wiki Page Write Operations provide complete CRUD capabilities for creating, updating, and deleting wiki pages stored as markdown files with YAML frontmatter. This component automates metadata lifecycle management, including timestamp generation and serialization, ensuring consistent and structured page storage across the wiki system.
+Wiki Page Write Operations provides a complete CRUD interface for managing wiki pages with automatic metadata handling and frontmatter serialization. This component extends the WikiManager's read capabilities with create, update, and delete operations while maintaining consistent [metadata lifecycle management](../guides/metadata-lifecycle-management.md) across all wiki pages.
 
 ## Key Functionality
 
-### Write Operations
+**CRUD Write Operations**
+- Creates new wiki pages with automatic metadata initialization
+- Updates existing pages while preserving metadata consistency
+- Deletes pages with safe file operation handling
+- Complements existing read operations (getPage, getAllPages, searchPages)
 
-The component implements four primary write functions:
+**[Frontmatter-based Page Serialization](../components/frontmatter-based-page-serialization.md)**
+- Implements bidirectional conversion between metadata objects and markdown frontmatter
+- Uses `_serializePage` method that mirrors existing `_parseFrontmatter` functionality
+- Maintains markdown readability while enabling structured metadata storage
 
-- **createPage()** - Creates a new wiki page with content and metadata. Prevents accidental overwrites and automatically generates a `created` timestamp in ISO format.
+**[Automatic Metadata Lifecycle Management](../concepts/automatic-metadata-lifecycle-management.md)**
+- Automatically manages temporal metadata (created/updated timestamps)
+- Ensures audit trail consistency across all write operations
+- Eliminates need for explicit caller metadata management
 
-- **updatePage()** - Updates both content and metadata of an existing page. Merges new metadata with existing metadata while automatically updating the `modified` timestamp.
-
-- **updateMetadata()** - Updates only a page's metadata while preserving its existing content. Useful for updating metadata fields without touching the content body.
-
-- **deletePage()** - Deletes a wiki page from the filesystem, gracefully handling cases where the file doesn't exist.
-
-### Serialization
-
-- **_serializePage()** - Converts a metadata object and content string into markdown format with YAML frontmatter. This internal method ensures symmetric processing with the existing `_parseFrontmatter()` parser.
-
-### Metadata Management
-
-All write operations automatically manage timestamps:
-- `created` is set only on page creation
-- `modified` is updated on every page modification
-- Timestamps follow ISO 8601 date format consistent with existing page metadata structure
+**[Safe File Operation Pattern](../guides/safe-file-operation-pattern.md)**
+- Performs existence checks before file creation
+- Handles missing files gracefully during deletion
+- Creates directories recursively as needed
+- Provides defensive programming model for wiki persistence
 
 ## Relationships
 
-Write operations build upon existing read functionality from the WikiManager component:
+**Extends WikiManager Core**: Builds upon existing WikiManager read operations (getPage, getAllPages, searchPages, getRelatedPages) to provide complete persistence layer functionality.
 
-- Leverages `getPage()` for metadata retrieval and validation before updates
-- Uses `_parseFrontmatter()` for symmetric markdown processing (parse/serialize pair)
-- Follows the same metadata schema and ISO date format conventions
-- All operations use the `wikiPath` base directory established during WikiManager initialization
+**Integrates with Frontmatter System**: Works with the existing `_parseFrontmatter` method by providing complementary `_serializePage` functionality for bidirectional metadata conversion.
+
+**Supports Wiki Navigation**: Write operations maintain metadata consistency required by related pages functionality and search indexing.
 
 ## Usage Example
 
@@ -53,29 +51,19 @@ Write operations build upon existing read functionality from the WikiManager com
 const WikiManager = require('./lib/wiki-manager');
 const path = require('path');
 
-const wikiManager = new WikiManager(path.join(__dirname, 'my-wiki'));
+const testDir = path.join(__dirname, 'fixtures/test-wiki');
+const wikiManager = new WikiManager(testDir);
 
-// Create a new page
-await wikiManager.createPage('new-page.md', {
-  title: 'My New Page',
-  tags: ['documentation']
-}, 'This is the page content.');
-
-// Update both content and metadata
-await wikiManager.updatePage('new-page.md', {
-  title: 'Updated Title',
-  tags: ['documentation', 'updated']
-}, 'Updated page content.');
-
-// Update only metadata
-await wikiManager.updateMetadata('new-page.md', {
-  status: 'published'
-});
-
-// Delete a page
-await wikiManager.deletePage('new-page.md');
+// Read existing page to demonstrate integration with write operations
+const page = await wikiManager.getPage('test-page.md');
+console.log(page.metadata.title); // 'Test Page'
+console.log(page.content); // Page content
 ```
 
 ## Testing
 
-Test coverage is provided by `tests/unit/wiki-manager.test.js` with 17 test cases across 5 test suites. Tests validate page creation with metadata preservation, content updates, timestamp management, and file system operations including graceful handling of edge cases.
+**Test Coverage**: tests/unit/wiki-manager.test.js
+- 17 test cases across 5 test suites
+- Covers WikiManager initialization, getPage, getAllPages, searchPages, and getRelatedPages functionality
+- Tests markdown file reading with frontmatter parsing
+- Validates metadata and content extraction

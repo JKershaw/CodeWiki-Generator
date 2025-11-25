@@ -1,0 +1,69 @@
+---
+title: State Validation and Integrity
+category: concept
+sourceFile: lib/state-manager.js
+related: [meta/overview.md, components/persistent-state-management.md, guides/graceful-file-system-handling.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# State Validation and Integrity
+
+## Purpose and [Overview](../meta/overview.md)
+
+State Validation and Integrity ensures application state consistency through comprehensive validation logic that protects against corrupted or invalid state data. This concept implements required field checks, type validation, value constraints, and business logic rules to maintain data integrity across application sessions.
+
+## Key Functionality
+
+The validation system performs multiple layers of verification:
+
+- **Required Field Validation**: Ensures all mandatory state properties are present
+- **Type Validation**: Confirms data types match expected schemas
+- **Value Constraints**: Validates numeric ranges and acceptable values
+- **Business Logic Rules**: Enforces domain-specific constraints (e.g., currentCommit cannot exceed totalCommits)
+- **Corruption Detection**: Identifies and handles malformed or inconsistent state data
+
+The validation process occurs during state loading and updating operations, providing immediate feedback when integrity violations are detected. Failed validation triggers appropriate error handling while maintaining system stability.
+
+## Relationships
+
+State Validation and Integrity works closely with:
+
+- **[Persistent State Management](../components/persistent-state-management.md)**: Validates state data during load and save operations in the StateManager class
+- **[Graceful File System Handling](../guides/graceful-file-system-handling.md)**: Distinguishes between file system errors and validation failures for proper error classification
+- **Application State Tracking**: Ensures reliable state persistence for processing progress and system configuration
+
+## Usage Example
+
+```javascript
+const StateManager = require('./lib/state-manager');
+
+// Initialize with state file path
+const stateManager = new StateManager('./app-state.json');
+
+// Load state - validation occurs automatically
+const state = await stateManager.loadState();
+
+// Update state with validation
+await stateManager.updateState({
+  currentCommit: 5,
+  totalCommits: 10
+});
+
+// Validation error handling
+try {
+  await stateManager.updateState({
+    currentCommit: 15,  // Invalid: exceeds totalCommits
+    totalCommits: 10
+  });
+} catch (error) {
+  console.error('State validation failed:', error.message);
+}
+```
+
+## Testing
+
+Comprehensive test coverage in `tests/unit/state-manager.test.js`:
+- **16 test cases** across 7 test suites
+- **Test categories**: StateManager initialization, loadState, saveState, updateState, getState, resetState, and state validation
+- **Coverage includes**: Default state handling, validation error scenarios, file system edge cases, and business rule enforcement

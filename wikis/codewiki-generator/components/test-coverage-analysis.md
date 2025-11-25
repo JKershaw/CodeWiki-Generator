@@ -1,0 +1,71 @@
+---
+title: Test Coverage Analysis
+category: component
+sourceFile: lib/test-coverage-analyzer.js
+related: [meta/overview.md, components/test-statistics-extraction.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Test Coverage Analysis
+
+## Purpose and [Overview](../meta/overview.md)
+
+The Test Coverage Analysis component provides comprehensive functionality for discovering, analyzing, and reporting on test coverage metrics within a codebase. It automatically identifies test files across various project structures and extracts detailed statistics to support documentation generation and coverage reporting.
+
+## Key Functionality
+
+**Test File Discovery**
+- Scans multiple directory patterns (`test`, `tests`, `__tests__`) to locate test files
+- Supports various naming conventions (`.test.js`, `.spec.js`) to accommodate different project layouts
+- Provides flexible pattern-based lookup that adapts to diverse project structures
+
+**[Test Statistics Extraction](../components/test-statistics-extraction.md)**
+- Uses regex-based parsing to extract metrics from test files including:
+  - Total test count (individual test cases)
+  - Describe block count (test suites/groups)
+  - Test categories and organizational structures
+- Generates detailed coverage reports for documentation purposes
+
+**Coverage Analysis**
+- Analyzes source files to determine if corresponding tests exist
+- Returns structured coverage data including test presence, locations, and statistics
+- Supports summary generation for project-wide coverage [overview](../meta/overview.md)
+
+## Relationships
+
+The Test Coverage Analyzer integrates with the broader documentation system by:
+- Providing test metrics for wiki documentation generation
+- Supporting coverage reporting workflows
+- Interfacing with file system utilities for test discovery
+- Contributing data to project analysis and documentation tools
+
+## Usage Example
+
+```javascript
+const TestCoverageAnalyzer = require('./lib/test-coverage-analyzer.js');
+
+// Initialize analyzer with project root
+const analyzer = new TestCoverageAnalyzer('/test/project');
+
+// Analyze coverage for a specific source file
+const result = await analyzer.analyzeFile('src/component.js');
+console.log(result);
+// Output: {
+//   hasTests: true,
+//   testFile: 'tests/component.test.js',
+//   totalTests: 15,
+//   describeBlocks: 3,
+//   testCategories: ['Component', 'Creation', 'Usage']
+// }
+
+// Generate project-wide coverage summary
+const summary = analyzer.generateSummary();
+```
+
+## Testing
+
+**Test Coverage**: `tests/unit/test-coverage-analyzer.test.js`
+- **42 test cases** across **19 test suites**
+- **Test categories**: TestCoverageAnalyzer, analyzeFile, Processor, Component, method1, method2, Creation, Usage, generateSummary, _findTestFile, _extractTestStats, Method 1, Method 2
+- Comprehensive coverage of core functionality, edge cases, and error handling scenarios

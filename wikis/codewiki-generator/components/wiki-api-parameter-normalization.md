@@ -1,0 +1,67 @@
+---
+title: Wiki API parameter normalization
+category: component
+sourceFile: lib/processor.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Wiki API Parameter Normalization
+
+## Purpose and [Overview](../meta/overview.md)
+
+The Wiki API parameter normalization component in `lib/processor.js` standardizes method signatures and parameter handling across wiki operations. This refactoring improves API consistency by establishing uniform parameter ordering and makes the interface more maintainable as functionality expands.
+
+## Key Functionality
+
+**Parameter Standardization**: The `updatePage` and `createPage` methods use consistent parameter ordering with the pattern `(pagePath, content, options)` instead of varied positional parameters. This creates a predictable interface across all wiki operations.
+
+**Path Extension Handling**: The `determinePagePath` function ensures proper `.md` extension handling, maintaining consistency between generated file paths and their documented contracts.
+
+**State Management**: The processor implements explicit state lifecycle management using discrete values like 'running' and 'stopped' rather than boolean flags, creating a clearer state machine pattern for controlling long-running operations.
+
+## Relationships
+
+This component integrates with several key system components:
+- **WikiManager**: Receives normalized parameters for page operations
+- **StateManager**: Tracks processing lifecycle states
+- **Code Analysis Agents**: Provides consistent interfaces for documentation generation
+- **Security and Tech Debt Agents**: Benefits from standardized parameter patterns
+
+## Usage Example
+
+```javascript
+describe('Processor', () => {
+  let processor;
+  let mockWikiManager;
+  let mockStateManager;
+
+  beforeEach(() => {
+    mockWikiManager = {
+      getPage: jest.fn(),
+      createPage: jest.fn(),
+      updatePage: jest.fn(),
+      searchPages: jest.fn(),
+      getRelatedPages: jest.fn(),
+      updatePageGlobalMetadata: jest.fn()
+    };
+
+    mockStateManager = {
+      loadState: jest.fn()
+    };
+
+    processor = new Processor({
+      wikiManager: mockWikiManager,
+      stateManager: mockStateManager
+    });
+  });
+});
+```
+
+## Testing
+
+**Test Coverage**: `tests/unit/processor.test.js`
+- 26 test cases across 6 test suites
+- Comprehensive testing of core functionality including `processCommit`, `isSignificantFile`, `getRelevantContext`, `determinePagePath`, and `processRepository`
+- Full processor initialization and configuration testing

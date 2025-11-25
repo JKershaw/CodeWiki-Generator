@@ -2,95 +2,63 @@
 title: Commit-driven documentation pipeline
 category: concept
 sourceFile: lib/processor.js
-related: []
-created: 2025-11-24
-updated: 2025-11-24
+related: [components/processor-class.md, meta/overview.md, concepts/file-significance-filtering.md]
+created: 2025-11-25
+updated: 2025-11-25
 ---
 
-# Commit-driven Documentation Pipeline
+# Processor Orchestration Class
 
 ## Purpose and Overview
 
-The `Processor` class orchestrates an automated documentation pipeline that analyzes code commits, extracts meaningful architectural concepts, and updates a wiki with relevant documentation. It bridges version control systems and knowledge management by delegating code analysis and documentation generation to specialized agents, ensuring that documentation stays synchronized with codebase evolution.
+The Processor orchestration class serves as the central coordinator for the commit-driven documentation pipeline, managing the complete workflow from commit analysis to documentation generation. It delegates specialized tasks to dedicated agents (code analysis, documentation writing, tech debt assessment, security review) while orchestrating wiki management and state tracking to maintain automated, up-to-date project documentation.
 
 ## Key Functionality
 
-The processor follows a multi-stage workflow:
+The Processor class implements several core capabilities:
 
-**Commit Processing**
-- `processCommit()` analyzes all files in a commit and filters for significant changes
-- Only files with actual patches and architectural significance are processed
-- Extracts concepts from changed code using the CodeAnalysisAgent
+- **Commit Processing**: Analyzes commit data to identify significant file changes, filters out non-essential files (binary files, deletions), and extracts relevant code for documentation
+- **Context-Aware Analysis**: Retrieves related wiki pages based on file paths to provide analyzers with existing documentation context, improving analysis quality through knowledge base integration
+- **Concept-to-Page Mapping**: Converts identified code concepts into structured wiki pages using kebab-case naming conventions and category-based organization (components/ directory)
+- **Agent Coordination**: Orchestrates multiple specialized agents (CodeAnalysisAgent, DocumentationWriterAgent, TechDebtAgent, SecurityAgent) through a unified interface
+- **Repository-Wide Processing**: Supports both incremental commit-based updates and comprehensive repository analysis for complete documentation coverage
 
-**Concept Documentation Lifecycle**
-- `processConceptDocumentation()` handles individual concept documentation
-- Checks for existing wiki pages and decides whether to create or update
-- Preserves prior documentation context while integrating new information
-- Tracks metrics on created vs. updated pages
-
-**Contextual Integration**
-- `getRelevantContext()` extracts keywords from file paths and retrieves related wiki pages
-- Provides contextual information to agents, ensuring new documentation builds on existing knowledge
-- Enables the DocumentationWriterAgent to write comprehensive, interconnected documentation
-
-**File Significance Filtering**
-- `isSignificantFile()` delegates to the CodeAnalysisAgent to determine documentation worthiness
-- Prevents documentation effort on trivial changes (test files, minor fixes, configuration tweaks)
-- Ensures focus on architecturally relevant changes
-
-**Wiki Organization**
-- `determinePagePath()` standardizes wiki structure by converting concept names to kebab-case paths
-- All documentation lives under a `components/` hierarchy for consistent discovery and organization
+Key methods include `processCommit()` for handling individual commits, `isSignificantFile()` for filtering relevant changes, `getRelevantContext()` for wiki context retrieval, and `determinePagePath()` for consistent documentation organization.
 
 ## Relationships
 
-The Processor coordinates multiple components:
+The Processor integrates with several critical system components:
 
-- **WikiManager**: Provides page CRUD operations (create, read, update) and content discovery via `getRelatedPages()`
-- **CodeAnalysisAgent**: Evaluates file significance and extracts concepts from code changes
-- **DocumentationWriterAgent**: Generates or updates wiki page content based on analysis results
-- **StateManager**: Tracks pipeline execution state (initialized but not actively used in base implementation)
+- **WikiManager**: Handles all wiki operations including page creation, updates, searches, and relationship management through methods like `getPage()`, `createPage()`, and `getRelatedPages()`
+- **StateManager**: Manages processing state persistence and tracks documentation lifecycle across multiple commits using `loadState()` and state tracking capabilities
+- **Analysis Agents**: Coordinates specialized agents for different analysis aspects - CodeAnalysisAgent for code understanding, DocumentationWriterAgent for content generation, TechDebtAgent for technical debt assessment, and SecurityAgent for security reviews
+- **File System Integration**: Processes repository files and commit data to drive the documentation pipeline workflow
 
 ## Usage Example
 
 ```javascript
 const Processor = require('./lib/processor');
-const WikiManager = require('./lib/wiki-manager');
-const CodeAnalysisAgent = require('./lib/agents/code-analysis-agent');
-const DocumentationWriterAgent = require('./lib/agents/documentation-writer-agent');
 
-// Initialize dependencies
-const wikiManager = new WikiManager(config);
-const codeAnalysisAgent = new CodeAnalysisAgent();
-const docWriterAgent = new DocumentationWriterAgent();
-
-// Create processor with agents
+// Initialize processor with required managers and agents
 const processor = new Processor({
-  wikiManager,
-  codeAnalysisAgent,
-  docWriterAgent
+  wikiManager: mockWikiManager,
+  stateManager: mockStateManager,
+  codeAnalysisAgent: mockCodeAnalysisAgent,
+  docWriterAgent: mockDocWriterAgent,
+  techDebtAgent: mockTechDebtAgent,
+  securityAgent: mockSecurityAgent
 });
 
-// Process a commit with changed files
-const result = await processor.processCommit({
-  files: [
-    { path: 'lib/processor.js', patch: '...' },
-    { path: 'lib/wiki-manager.js', patch: '...' }
-  ]
-});
+// Process a commit to generate documentation
+await processor.processCommit(commitData);
 
-console.log(`Created: ${result.created}, Updated: ${result.updated}`);
+// Process entire repository for comprehensive documentation
+await processor.processRepository(repositoryPath);
 ```
 
 ## Testing
 
-The Processor has comprehensive test coverage with **26 test cases** across **6 test suites** in `tests/unit/processor.test.js`:
-
-- **Processor suite**: Initialization and basic functionality
-- **processCommit suite**: Commit analysis and file filtering logic
-- **isSignificantFile suite**: File significance determination
-- **getRelevantContext suite**: Wiki context retrieval
-- **determinePagePath suite**: Path mapping and naming conventions
-- **processRepository suite**: Repository-level operations
-
-Test mocks verify interactions with WikiManager, CodeAnalysisAgent, DocumentationWriterAgent, and StateManager, ensuring proper delegation and coordination patterns.
+**Test Coverage**: tests/unit/processor.test.js
+- 26 test cases across 6 test suites
+- Comprehensive testing of core methods: `processCommit`, `isSignificantFile`, `getRelevantContext`, `determinePagePath`, and `processRepository`
+- Validates complete processor workflow including manager coordination, agent orchestration, and the full commit-to-documentation pipeline

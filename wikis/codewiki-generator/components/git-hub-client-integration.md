@@ -1,0 +1,62 @@
+---
+title: GitHubClient integration
+category: component
+sourceFile: lib/processor.js
+related: [meta/overview.md, concepts/cost-aware-api-consumption.md, components/claude-client-cost-tracking.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# GitHubClient Integration
+
+## Purpose and [Overview](../meta/overview.md)
+
+The GitHubClient integration provides the processor with the ability to parse GitHub repository URLs and fetch commit history data directly from GitHub repositories. This enables the processor to perform repository-scale batch processing operations with access to complete version control history.
+
+## Key Functionality
+
+The GitHubClient integration adds the following capabilities to the processor:
+
+- **Repository URL parsing** - Extracts repository information from GitHub URLs
+- **Commit history retrieval** - Fetches complete commit logs for repository processing
+- **Git integration** - Enables the processor to work with version control data as part of its analysis workflow
+- **Batch processing support** - Provides the foundation for commit-by-commit repository analysis
+
+The integration works as a dependency that extends the processor's data sources beyond local files to include remote repository data, enabling comprehensive codebase documentation generation from GitHub repositories.
+
+## Relationships
+
+The GitHubClient integration connects to several other components:
+
+- **Processor** (`lib/processor.js`) - Primary consumer that uses GitHubClient for repository data access
+- **Repository-scale batch processing** - Provides the commit data needed for resumable state management
+- **[Cost-aware API consumption](../concepts/cost-aware-api-consumption.md)** - Works alongside [ClaudeClient cost tracking](../components/claude-client-cost-tracking.md) to manage API usage during repository processing
+- **StateManager** - Stores and resumes processing state across GitHub repository commits
+- **Analysis Agents** - Provides commit and file data to CodeAnalysisAgent, DocWriterAgent, TechDebtAgent, and SecurityAgent
+
+## Usage Example
+
+```javascript
+const Processor = require('./lib/processor');
+
+// GitHubClient is integrated as a dependency within the processor
+const processor = new Processor({
+  wikiManager: mockWikiManager,
+  stateManager: mockStateManager,
+  codeAnalysisAgent: mockCodeAnalysisAgent,
+  docWriterAgent: mockDocWriterAgent,
+  techDebtAgent: mockTechDebtAgent,
+  securityAgent: mockSecurityAgent
+  // GitHubClient integration is handled internally
+});
+
+// Process a GitHub repository
+await processor.processRepository('https://github.com/user/repo');
+```
+
+## Testing
+
+**Test Coverage**: `tests/unit/processor.test.js`
+- 26 test cases across 6 test suites
+- Tests cover Processor core functionality, processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository methods
+- GitHubClient integration is tested through processor repository processing workflows

@@ -1,0 +1,54 @@
+---
+title: Self-documentation through git history analysis
+category: concept
+sourceFile: generate-self-wiki.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Self-documentation through git history analysis
+
+## Purpose and [Overview](../meta/overview.md)
+
+This component establishes a bootstrapping pattern where the system documents itself by analyzing its own git commits and changes, enabling automated wiki generation from repository history without external API calls. It provides a cost-effective approach to maintaining documentation by leveraging local git data instead of expensive external services.
+
+## Key Functionality
+
+The system operates through several core capabilities:
+
+- **Local git commit extraction**: Parses local git history to extract commit metadata and generate unified diffs for each changed file
+- **Mock client injection**: Substitutes real external API clients with local implementations while maintaining the same processing interface
+- **Patch generation**: Creates detailed diffs showing code changes across commits to provide context for documentation
+- **Cost-controlled processing**: Eliminates API costs by performing all analysis locally using git history data
+- **Execution reporting**: Generates structured output summarizing commits processed, files handled, pages created, and cost tracking
+
+The component serves as both a data source and processing engine, transforming raw git commits into structured documentation suitable for wiki generation.
+
+## Relationships
+
+This component connects to several parts of the codebase:
+
+- **Wiki generation system**: Provides the primary data source for automated documentation creation
+- **Client abstraction layer**: Demonstrates the mock client pattern that can be applied to other external service integrations
+- **Cost tracking components**: Integrates with existing cost monitoring to show savings from local processing
+- **Git repository**: Directly interfaces with the local git history as its primary data source
+
+## Usage Example
+
+```javascript
+// Basic execution of self-documentation generation
+const generateSelfWiki = require('./generate-self-wiki');
+
+// Run the self-documentation process
+const results = generateSelfWiki();
+
+// Results contain processing statistics
+console.log(`Processed ${results.commitsProcessed} commits`);
+console.log(`Generated ${results.pagesCreated} wiki pages`);
+console.log(`Total cost: ${results.totalCost}`);
+```
+
+## Testing
+
+No automated tests found. The component currently lacks test coverage for its git history analysis and documentation generation functionality.

@@ -1,9 +1,0 @@
-# Quality / Technical Debt Tracking
-
-This directory contains auto-generated documentation about technical debt in the codebase.
-
-Pages are organized by severity and type:
-- High priority issues requiring immediate attention
-- Code smells and refactoring opportunities
-- Maintainability concerns
-- Design improvements

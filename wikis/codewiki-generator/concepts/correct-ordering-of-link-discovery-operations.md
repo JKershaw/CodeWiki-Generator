@@ -1,0 +1,74 @@
+---
+title: Correct ordering of link discovery operations
+category: concept
+sourceFile: lib/processor.js
+related: [meta/overview.md, components/full-page-content-loading-for-link-discovery.md, components/content-validation-in-batch-page-processing.md, components/wiki-manager-api-consistency.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Correct Ordering of Link Discovery Operations
+
+## Purpose and [Overview](../meta/overview.md)
+
+This concept establishes the critical architectural principle that link discovery operations must be performed on original content before any inline link modifications are applied. This ordering ensures that cross-reference detection operates on unmodified content, preventing incorrect results from processing already-modified text.
+
+## Key Functionality
+
+The correct ordering workflow operates in distinct phases:
+
+1. **Full content loading**: Loads complete page objects with titles and content (not just metadata) to enable comprehensive link discovery
+2. **Related page detection**: Analyzes original, unmodified content to identify cross-references and relationships between pages  
+3. **Content modification**: Only after link discovery is complete, applies inline links and other content transformations
+4. **Content validation**: Validates that pages contain actual content before processing to handle edge cases robustly
+
+This sequencing prevents the fundamental issue where link discovery algorithms would attempt to analyze content that has already been modified with inline links, leading to detection of artificial relationships rather than genuine content connections.
+
+## Relationships
+
+This concept is implemented within the **Processor** component (`lib/processor.js`) and directly depends on:
+
+- **[Full-page content loading for link discovery](../components/full-page-content-loading-for-link-discovery.md)**: Ensures complete page data is available before processing begins
+- **[Content validation in batch page processing](../components/content-validation-in-batch-page-processing.md)**: Provides defensive checks for incomplete page data
+- **[WikiManager API consistency](../components/wiki-manager-api-consistency.md)**: Uses appropriate `updatePage` method calls for persisting results
+
+The ordering constraint affects any downstream processing that relies on accurate link discovery results.
+
+## Usage Example
+
+```javascript
+describe('Processor', () => {
+  let processor;
+  let mockWikiManager;
+
+  beforeEach(() => {
+    mockWikiManager = {
+      getPage: jest.fn(),
+      createPage: jest.fn(),
+      updatePage: jest.fn(),
+      searchPages: jest.fn(),
+      getRelatedPages: jest.fn(),
+      updatePageGlobalMetadata: jest.fn()
+    };
+    
+    processor = new Processor(mockWikiManager, mockStateManager, {
+      codeAnalysisAgent: mockCodeAnalysisAgent,
+      docWriterAgent: mockDocWriterAgent
+    });
+  });
+  
+  // Test ensures proper ordering of operations
+  it('should process pages with correct link discovery ordering', async () => {
+    // Processing respects: load → discover → modify → update
+    await processor.processRepository(mockRepository);
+    expect(mockWikiManager.updatePage).toHaveBeenCalled();
+  });
+});
+```
+
+## Testing
+
+**Test Coverage**: `tests/unit/processor.test.js`
+- 26 test cases across 6 test suites
+- Tests cover: Processor initialization, processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository operations
+- Validates proper sequencing and API consistency in processing workflows

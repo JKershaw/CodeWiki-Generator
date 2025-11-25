@@ -2,66 +2,53 @@
 title: Agent-based documentation synthesis
 category: concept
 sourceFile: lib/agents/architecture-overview-agent.js
-related: []
-created: 2025-11-24
-updated: 2025-11-24
+related: [meta/overview.md, components/architecture-overview-agent.md]
+created: 2025-11-25
+updated: 2025-11-25
 ---
 
-# Architecture Overview Agent
+# Agent-based Documentation Synthesis
 
 ## Purpose and Overview
 
-The `ArchitectureOverviewAgent` generates comprehensive system architecture documentation by synthesizing multiple documentation categories (concepts, components, and guides) into cohesive, AI-powered summaries. It serves as a specialized agent that aggregates heterogeneous wiki data and uses Claude AI to produce unified architecture documentation suitable for project wikis and README files.
+Agent-based documentation synthesis establishes a pattern where specialized agents synthesize multiple wiki data sources into unified documentation artifacts. This enables scalable, composable documentation generation where different agents handle different documentation concerns, demonstrated through concrete implementations like the ArchitectureOverviewAgent.
 
 ## Key Functionality
 
-The agent implements a multi-stage pipeline for documentation synthesis:
+The agent-based documentation synthesis pattern provides:
 
-- **Data Aggregation**: Collects structured wiki data from three documentation categories—concepts, components, and guides—normalizing each into consistent list representations
-- **Prompt Rendering**: Uses the `PromptManager` to render the 'architecture-overview' template with formatted wiki data injected as context
-- **AI Synthesis**: Invokes Claude API to generate coherent, system-level architecture narratives that connect individual documentation elements into a unified story
-- **Output Normalization**: Post-processes Claude's markdown response to remove code block wrappers and frontmatter, ensuring clean, production-ready documentation
-
-### Internal Methods
-
-- `_formatConcepts()`, `_formatComponents()`, `_formatGuides()`: Private methods that transform raw wiki structures into prompt-injectable lists
-- `_cleanMarkdown()`: Strips markdown code block wrappers (`~~~markdown`, ` ``` `) and YAML frontmatter from AI output
-- `generateArchitectureOverview()`: Main orchestration method that chains the above operations
+- **Specialized Agent Architecture**: Individual agents focus on specific documentation types (architecture overviews, API docs, guides) while following consistent interfaces
+- **Multi-source Data Integration**: Agents consume heterogeneous wiki data types (concepts, components, guides) and synthesize them into coherent documentation
+- **LLM-Powered Content Generation**: Integration with language models through standardized prompt management for intelligent content synthesis
+- **Standardized Output Processing**: Consistent markdown normalization across agents, removing code block wrappers and frontmatter for clean documentation artifacts
+- **Template-Driven Approach**: Structured prompt engineering guides LLM responses toward specific documentation formats and styles
 
 ## Relationships
 
-| Component | Role |
-|-----------|------|
-| **ClaudeClient** | Provides AI-powered content generation via API |
-| **PromptManager** | Renders 'architecture-overview' prompt template |
-| **Wiki Data** | Consumes structured concepts, components, and guides |
-| **Agent Pattern** | Follows established patterns in `lib/agents/` |
+This pattern connects to several key architectural components:
 
-The agent is designed to work within a documentation pipeline, producing markdown output (e.g., `architecture.md`) from aggregated wiki sources.
+- **Wiki Data Sources**: Consumes structured data from concept, component, and guide repositories as synthesis inputs
+- **PromptManager**: Leverages templated prompts to guide LLM behavior for consistent documentation generation
+- **ClaudeClient**: Integrates with external LLM services through standardized API interfaces
+- **Markdown Processing Pipeline**: Outputs normalized, formatted documentation ready for wiki integration
+- **Agent Implementations**: Serves as the foundational pattern for concrete agents like ArchitectureOverviewAgent
 
 ## Usage Example
 
 ```javascript
 const ArchitectureOverviewAgent = require('./lib/agents/architecture-overview-agent');
-const claudeClient = require('./lib/clients/claude-client');
-const promptManager = require('./lib/managers/prompt-manager');
 
-const agent = new ArchitectureOverviewAgent(claudeClient, promptManager);
-
+const agent = new ArchitectureOverviewAgent();
 const wikiData = {
-  concepts: [{ name: 'MVC Pattern', description: '...' }],
-  components: [{ name: 'UserController', purpose: '...' }],
-  guides: [{ title: 'Getting Started', content: '...' }]
+  concepts: [...],
+  components: [...], 
+  guides: [...]
 };
 
-const architectureDoc = await agent.generateArchitectureOverview(wikiData);
-console.log(architectureDoc); // Clean markdown suitable for documentation
+const architectureDoc = await agent.generateOverview(wikiData);
+// Returns cleaned markdown content for architecture.md
 ```
 
 ## Testing
 
-No automated tests are currently available for this component. When adding tests, focus on:
-- Data formatting correctness across all three wiki categories
-- Markdown cleaning logic (code block and frontmatter removal)
-- Integration with ClaudeClient and PromptManager mocks
-- Handling of edge cases (empty categories, malformed wiki data)
+No automated tests found for the agent pattern implementations. Testing coverage would benefit from unit tests covering multi-category data aggregation, LLM integration workflows, and markdown output normalization across different agent types.

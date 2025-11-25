@@ -1,70 +1,55 @@
 ---
-title: Automatic Metadata Lifecycle Management
+title: Automatic metadata lifecycle management
 category: concept
 sourceFile: lib/wiki-manager.js
-related: []
+related: [meta/overview.md]
 created: 2025-11-24
-updated: 2025-11-24
+updated: 2025-11-25
 ---
 
 # Automatic Metadata Lifecycle Management
 
-## Purpose and Overview
-
-The Automatic Metadata Lifecycle Management system automatically handles the creation and updating of metadata timestamps when wiki pages are created or modified. This ensures consistent, reliable metadata across all pages without requiring manual intervention, establishing a predictable pattern where system-managed fields like `created` and `updated` timestamps are always accurate and properly formatted.
+## Purpose and [Overview](../meta/overview.md)
+Automatically manages temporal metadata (created and updated timestamps) during wiki page operations without requiring explicit caller management. This concept ensures consistency across all write operations and maintains a complete audit trail for page lifecycle tracking.
 
 ## Key Functionality
 
-The WikiManager implements complete write operations for wiki pages with built-in metadata management:
+The automatic metadata lifecycle management provides:
 
-- **Page Creation** (`createPage`): Creates new wiki pages with automatic timestamp generation, preventing accidental overwrites of existing pages
-- **Page Updates** (`updatePage`): Modifies both content and metadata while automatically updating the modified timestamp and merging new metadata with existing values
-- **Metadata-Only Updates** (`updateMetadata`): Updates page metadata while preserving the original content
-- **Page Deletion** (`deletePage`): Removes pages from the filesystem with graceful error handling for missing files
-- **Serialization** (`_serializePage`): Converts metadata objects and content into markdown format with YAML-style frontmatter headers
+- **Timestamp Management**: Automatically sets `created` timestamps for new pages and updates `updated` timestamps for modified pages during write operations
+- **Metadata Merging**: Intelligently merges existing metadata with new metadata during page updates, preserving important fields while allowing modifications
+- **Lifecycle Tracking**: Maintains complete audit trail of page creation and modification times without manual intervention from calling code
+- **Transparent Operation**: Works behind the scenes during page creation, updates, and serialization without exposing complexity to callers
+- **Consistency Enforcement**: Ensures all write operations include proper temporal metadata regardless of the calling context
 
-All operations automatically manage timestamps in ISO 8601 date format, ensuring metadata consistency across the wiki without explicit user intervention.
+The system integrates with frontmatter-based serialization to persist metadata alongside page content, ensuring temporal information survives across read/write cycles and remains accessible for future operations.
 
 ## Relationships
 
-- **Builds on read functionality**: Write operations leverage the existing `getPage()` method to retrieve current metadata for validation and merging
-- **Complements parsing**: The `_serializePage()` method provides symmetric serialization to match the existing `_parseFrontmatter()` parsing functionality
-- **Consistent metadata format**: All timestamps use ISO date format consistent with the existing page metadata structure
-- **Unified storage**: All write operations use the same `wikiPath` base directory established during WikiManager initialization
+This concept depends on and integrates with:
+
+- **[Wiki Page Write Operations](../components/wiki-page-write-operations.md)**: Provides the metadata management layer for all CRUD write operations (create, update, delete)
+- **[Frontmatter-based Page Serialization](../components/frontmatter-based-page-serialization.md)**: Ensures temporal metadata is properly serialized and persisted in markdown frontmatter format
+- **[Safe File Operation Pattern](../guides/safe-file-operation-pattern.md)**: Works within the defensive programming pattern to handle metadata even when file operations encounter edge cases
 
 ## Usage Example
 
 ```javascript
 const WikiManager = require('./lib/wiki-manager');
-const wikiManager = new WikiManager('./wiki-content');
+const wikiManager = new WikiManager('./test-wiki');
 
-// Create a new page with automatic timestamp
-await wikiManager.createPage('getting-started.md', 
-  { title: 'Getting Started' }, 
-  'Welcome to the wiki!'
-);
+// Metadata lifecycle is handled automatically during page operations
+const page = await wikiManager.getPage('test-page.md');
 
-// Update page content and metadata
-await wikiManager.updatePage('getting-started.md',
-  { title: 'Getting Started', tags: ['intro'] },
-  'Welcome to our wiki! Here are the basics...'
-);
-
-// Update only metadata while preserving content
-await wikiManager.updateMetadata('getting-started.md',
-  { tags: ['intro', 'tutorial'] }
-);
-
-// Delete a page
-await wikiManager.deletePage('getting-started.md');
+// Created and updated timestamps are automatically managed
+expect(page.metadata).toBeDefined();
+expect(page.metadata.title).toBe('Test Page');
 ```
 
 ## Testing
 
-The WikiManager write operations are covered by 17 comprehensive test cases across 5 test suites in `tests/unit/wiki-manager.test.js`. Test coverage includes validation of:
-
-- Frontmatter serialization and deserialization
-- Timestamp generation and formatting
-- Metadata merging during updates
-- Prevention of file overwrites on creation
-- Error handling for missing files during deletion and updates
+**Test Coverage**: tests/unit/wiki-manager.test.js
+- 17 test cases across 5 test suites
+- Tests verify metadata persistence through WikiManager operations
+- Coverage includes getPage, getAllPages, searchPages, and getRelatedPages functionality
+- Validates that temporal metadata survives read/write cycles and is properly maintained

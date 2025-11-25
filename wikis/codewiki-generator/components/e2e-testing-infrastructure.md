@@ -3,48 +3,53 @@ title: E2E Testing Infrastructure
 category: component
 sourceFile: playwright.config.js
 related: []
-created: 2025-11-24
-updated: 2025-11-24
+created: 2025-11-25
+updated: 2025-11-25
 ---
 
 # E2E Testing Infrastructure
 
 ## Purpose and Overview
 
-The E2E Testing Infrastructure provides comprehensive end-to-end testing capabilities using Playwright for browser automation. It establishes automated testing workflows with browser projects configuration, test artifact collection, and seamless CI/CD integration for validating application functionality across different browsers.
+The E2E Testing Infrastructure establishes a comprehensive testing framework using Playwright for end-to-end testing across the application. It provides browser support, parallel execution capabilities, and artifact collection to ensure reliable automated testing in both local development and CI/CD environments.
 
 ## Key Functionality
 
-- **Browser Automation**: Configures multiple browser projects for cross-browser testing compatibility
-- **Test Execution Management**: Defines test settings including timeouts, retries, and parallel execution parameters
-- **Artifact Collection**: Automatically captures screenshots, videos, and execution traces for debugging failed tests
-- **Development Server Integration**: Automatically starts and manages the local development server during test execution
-- **CI/CD Integration**: Provides headless execution modes and result reporting suitable for continuous integration pipelines
-
-The configuration uses `defineConfig` to establish comprehensive test execution settings and integrates a `webServer` component that automatically manages the development server lifecycle during testing.
+- **Multi-browser Support**: Configures test execution across different browsers (Chromium, Firefox, WebKit) to ensure cross-browser compatibility
+- **Environment-aware Configuration**: Adapts test behavior based on execution context:
+  - Local development: Single worker, immediate retries, server startup
+  - CI/CD pipelines: Multiple workers, retry strategies, server reuse optimization
+- **Parallel Execution**: Enables concurrent test execution to reduce overall test suite runtime
+- **Artifact Collection**: Automatically captures debugging materials including:
+  - Screenshots on test failures
+  - Video recordings of test sessions
+  - Execution traces for detailed analysis
+  - HTML reports for comprehensive test results
+- **Failure Diagnostics**: Provides comprehensive debugging capabilities through configurable trace collection and visual evidence capture
 
 ## Relationships
 
-- **Development Server**: Integrates with npm start command to automatically launch the local development server
-- **Application Endpoint**: Connects to localhost:3000 for testing the running application
-- **Test Artifacts**: Generates structured output in test-results directory for failure analysis
-- **Browser Projects**: Coordinates multiple browser configurations for comprehensive coverage testing
+- **CI/CD Pipeline Integration**: Interfaces with automated build and deployment workflows through environment detection
+- **Test Suite Components**: Serves as the foundation configuration for all E2E test files and specifications
+- **Development Workflow**: Integrates with local development servers and testing processes
+- **Reporting Systems**: Connects to HTML report generation and artifact storage systems
 
 ## Usage Example
 
 ```javascript
-// Run E2E tests using the configured setup
+// Running tests with the configured infrastructure
 npx playwright test
 
-// Run tests in headed mode for debugging
+// Running tests in headed mode for debugging
 npx playwright test --headed
 
-// Run specific test file with trace collection
-npx playwright test --trace on tests/example.spec.js
-```
+// Running specific test files
+npx playwright test tests/example.spec.js
 
-The configuration automatically handles server startup and provides comprehensive test execution with artifact collection for debugging purposes.
+// Viewing test reports
+npx playwright show-report
+```
 
 ## Testing
 
-No automated tests found for the E2E testing infrastructure configuration itself. The infrastructure serves as the foundation for testing other application components and functionality.
+No automated tests found for the configuration infrastructure itself. The configuration serves as the foundation for executing end-to-end tests across the application, with test reliability ensured through retry mechanisms and comprehensive failure diagnostics.

@@ -2,69 +2,61 @@
 title: Cost-aware API consumption
 category: concept
 sourceFile: lib/processor.js
-related: []
-created: 2025-11-24
-updated: 2025-11-24
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
 ---
 
 # Cost-aware API consumption
 
-## Purpose and Overview
+**File Location:** `lib/processor.js`
 
-The Processor module manages cost-aware, repository-scale batch processing with built-in budget constraints and state management. It enables long-running documentation generation across entire GitHub repositories while tracking API costs in real-time and preventing runaway spending through configurable budget limits.
+## Purpose and [Overview](../meta/overview.md)
+
+Cost-aware API consumption implements a system-wide pattern for tracking and limiting API costs during bulk processing operations. It provides configurable cost budgets that automatically pause processing when limits are reached, preventing unexpected expenses during large-scale repository analysis.
 
 ## Key Functionality
 
-The Processor implements several interconnected capabilities:
+The cost-aware API consumption system:
 
-**Repository-scale batch processing**: The `processRepository` function serves as the main entry point, orchestrating commit-by-commit analysis across an entire GitHub repository. It manages iteration through commit history, delegates per-commit processing to CodeAnalysisAgent and DocumentationWriterAgent, and maintains cumulative progress.
+- **Tracks cumulative costs** across processing sessions using ClaudeClient cost monitoring
+- **Enforces configurable budgets** by pausing processing when cost thresholds are exceeded
+- **Maintains cost state** persistently to track expenses across multiple processing runs
+- **Integrates with batch processing** to provide real-time cost awareness during repository-scale operations
+- **Provides cost visibility** to operators through logging and state reporting
 
-**Cost tracking and enforcement**: Built on top of Claude API integration, the processor monitors cumulative API costs throughout batch operations. The `maxCost` parameter establishes a hard budget limit, and cost summaries are retrieved via `ClaudeClient.getCostSummary()` to prevent exceeding allocated budgets. Processing pauses when cost limits are approached, enabling controlled resumption.
-
-**State persistence and resumability**: Integration with StateManager enables batch operations to survive process interruptions. State is saved incrementally during processing and reloaded on restart, allowing continuation from the last completed commit rather than restarting from the beginning.
-
-**Periodic meta-analysis**: The processor triggers MetaAnalysisAgent at configurable intervals (`metaAnalysisFrequency`) to analyze accumulated documentation concepts and derive insights from batch progress without interrupting the main processing workflow.
-
-**GitHub integration**: GitHubClient parses repository URLs and fetches commit history before batch processing begins, establishing direct integration with GitHub's data model.
+The system works by monitoring API usage costs in real-time during processing workflows. When costs approach or exceed predefined limits, processing is gracefully paused, allowing operators to review expenses and adjust budgets before continuing.
 
 ## Relationships
 
-- `processRepository` orchestrates per-commit analysis by inheriting and invoking the `processCommit` method for each commit in the repository
-- Cost monitoring is delegated to `ClaudeClient.getCostSummary()` to track cumulative API expenses
-- `StateManager` persists progress state to enable resumable execution across process restarts
-- `MetaAnalysisAgent` runs periodically during batch processing to analyze accumulated documentation concepts
-- `GitHubClient` provides repository data retrieval before batch processing initialization
+This concept integrates with several core components:
+
+- **ClaudeClient** - Provides the underlying cost tracking mechanism for API calls
+- **Repository-scale batch processing** - Uses cost awareness to manage expenses during large processing jobs
+- **StateManager** - Persists cost tracking data across processing sessions
+- **Processor** - Implements cost checks and budget enforcement during commit-by-commit processing
 
 ## Usage Example
 
 ```javascript
 const Processor = require('./lib/processor');
 
+// Initialize processor with cost-aware configuration
 const processor = new Processor({
-  wikiManager: wikiManagerInstance,
-  stateManager: stateManagerInstance,
-  claudeClient: claudeClientInstance,
-  githubClient: githubClientInstance,
-  metaAnalysisAgent: metaAnalysisAgentInstance
+  costBudget: 50.00, // Maximum cost in dollars
+  costTrackingEnabled: true
 });
 
-await processor.processRepository({
-  repositoryUrl: 'https://github.com/owner/repo',
-  maxCost: 50.00,
-  metaAnalysisFrequency: 10,
-  resumeFromState: true
+// Process repository with automatic cost monitoring
+await processor.processRepository('https://github.com/user/repo', {
+  maxCost: 25.00, // Per-session cost limit
+  pauseOnBudgetExceeded: true
 });
 ```
 
 ## Testing
 
-The component has comprehensive test coverage with **26 test cases** organized across **6 test suites** in `tests/unit/processor.test.js`. Test categories include:
-
-- Processor initialization and configuration
-- `processCommit` behavior and agent delegation
-- `isSignificantFile` filtering logic
-- `getRelevantContext` retrieval
-- `determinePagePath` routing
-- `processRepository` batch operation orchestration including cost tracking and state management
-
-All tests verify correct delegation to dependent agents, proper state handling, and accurate cost tracking throughout batch processing workflows.
+**Test Coverage:** `tests/unit/processor.test.js`
+- 26 test cases across 6 test suites
+- Tests cover Processor initialization, processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository functionality
+- Includes mock implementations for cost tracking components and state management

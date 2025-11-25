@@ -1,38 +1,38 @@
 ---
-title: Persistent State Management with Validation
+title: Persistent state management with validation
 category: component
 sourceFile: lib/state-manager.js
-related: []
+related: [meta/overview.md]
 created: 2025-11-24
-updated: 2025-11-24
+updated: 2025-11-25
 ---
 
 # Persistent State Management with Validation
 
 ## Purpose and Overview
 
-The `StateManager` component provides persistent, validated state management for the application, enabling execution progress to survive across process restarts. It enforces a strict validation schema to ensure state integrity, preventing invalid configurations from being loaded or saved to disk.
+The StateManager provides centralized persistence of application state to disk with comprehensive validation, enabling recovery and resumability of long-running processes across application restarts. It implements a robust state management pattern that ensures data integrity through strict schema validation and combines in-memory caching with lazy loading for optimal performance.
 
 ## Key Functionality
 
-`StateManager` handles the complete lifecycle of application state:
+**State Persistence**: Handles JSON serialization of application state to disk with automatic directory creation and graceful handling of missing files, providing reliable state durability across the application lifecycle.
 
-- **Loading**: Asynchronously reads state from disk, validates it against the schema, and returns default state if the file doesn't exist
-- **Saving**: Validates state before persisting to disk, automatically creating directories as needed
-- **Updating**: Merges partial state updates with existing state and saves the result, loading from disk if necessary
-- **Retrieval**: Provides in-memory access to current state without disk I/O
-- **Resetting**: Clears state back to canonical defaults and persists to disk
-- **Validation**: Enforces required fields, type constraints, value ranges, and logical consistency rules
+**Schema Validation**: Implements strict validation of state structure including required fields, type checking, value constraints, and enum validation before persistence. The `_validateState` method enforces structural and value constraints to protect against corrupted state files and invalid state transitions.
 
-The validation-first design prevents invalid state from entering the system at any point. The `_validateState()` method acts as a gatekeeper, checking all state modifications before they're stored or returned to callers.
+**In-Memory Caching**: Maintains `currentState` in memory to avoid redundant file I/O while supporting lazy loading on first access. This optimization balances performance with ensuring consistency through periodic persistence.
+
+**State Operations**: Provides methods for loading, saving, updating, retrieving, and resetting state, with all operations validated against the defined schema before persistence.
+
+**Error Handling**: Gracefully handles file system errors, missing files, and validation failures, returning default states when appropriate.
 
 ## Relationships
 
-`StateManager` integrates with:
+The StateManager acts as a foundational component for other parts of the application that require persistent state across restarts. It is particularly critical for:
 
-- **File System Operations**: Uses Node.js `fs.promises` for async I/O operations
-- **Repository Processing**: Maintains state that tracks repository analysis metadata including commits, files, processing status, cost estimates, and error logs
-- **Application State**: Serves as the single source of truth for persisted execution state across sessions
+- Long-running repository analysis operations where state corruption could cause significant data loss
+- Configuration management that requires validation
+- Application state that must survive crashes or restarts
+- Any component requiring reliable, validated data persistence with performance optimization
 
 ## Usage Example
 
@@ -40,21 +40,18 @@ The validation-first design prevents invalid state from entering the system at a
 const StateManager = require('./lib/state-manager');
 const path = require('path');
 
-// Initialize the state manager with a file path
-const stateFile = path.join(__dirname, 'app-state.json');
-const stateManager = new StateManager(stateFile);
+// Initialize state manager with file path
+const testStateFile = path.join(__dirname, '../fixtures/test-state.json');
+const stateManager = new StateManager(testStateFile);
 
-// Load existing state or get defaults
+// Load existing state or get default state for non-existent file
 const state = await stateManager.loadState();
 
-// Update specific state properties
-await stateManager.updateState({ 
-  processedCommits: 150,
-  status: 'in_progress' 
-});
+// Update state with validation
+await stateManager.updateState({ key: 'value' });
 
-// Retrieve current in-memory state
-const currentState = stateManager.getState();
+// Get current state (uses in-memory cache)
+const currentState = await stateManager.getState();
 
 // Reset to default state
 await stateManager.resetState();
@@ -62,17 +59,7 @@ await stateManager.resetState();
 
 ## Testing
 
-The `StateManager` component has comprehensive test coverage:
-
-- **Test File**: `tests/unit/state-manager.test.js`
-- **Coverage**: 16 test cases across 7 test suites
-- **Test Categories**: 
-  - StateManager initialization
-  - `loadState` behavior with missing/existing files
-  - `saveState` validation and persistence
-  - `updateState` merging and validation
-  - `getState` in-memory access
-  - `resetState` functionality
-  - State validation rules and schema enforcement
-
-Tests verify proper handling of edge cases including missing files, invalid state data, type mismatches, and filesystem operations.
+**Test Coverage**: `tests/unit/state-manager.test.js`
+- 16 test cases across 7 test suites
+- Comprehensive coverage of StateManager operations: loadState, saveState, updateState, getState, resetState, and state validation
+- Tests include file system edge cases, validation scenarios, and in-memory caching behavior

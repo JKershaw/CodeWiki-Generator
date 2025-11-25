@@ -1,0 +1,53 @@
+---
+title: Defensive JSON parsing with validation layers
+category: component
+sourceFile: lib/agents/guide-generation-agent.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Defensive JSON parsing with validation layers
+
+## Purpose and [Overview](../meta/overview.md)
+
+This component implements robust JSON parsing with multiple validation layers to handle potentially malformed responses from LLM agents. It replaces brittle single-pass parsing with defensive checks, graceful error handling, and detailed diagnostics to ensure the guide generation agent continues functioning even when receiving invalid JSON responses.
+
+## Key Functionality
+
+The defensive parsing system operates through multiple validation stages:
+
+- **Empty response validation** - Checks for null, undefined, or empty responses before attempting parsing
+- **JSON cleaning and repair** - Attempts to fix common JSON formatting issues in LLM responses
+- **Post-repair verification** - Validates that JSON cleaning succeeded before proceeding
+- **Structure validation** - Ensures parsed JSON contains expected guide array structure
+- **Per-guide filtering** - Validates individual guide objects and filters out invalid entries
+- **Graceful degradation** - Returns empty guides arrays instead of throwing errors when parsing fails
+- **Enhanced error logging** - Captures response metadata (length, content previews) for debugging without exposing full responses
+
+The system transitions from throwing parsing errors to implementing fallback behavior, allowing agents to continue operating with partial or empty results rather than crashing on malformed input.
+
+## Relationships
+
+This component is integrated within the guide generation agent (`lib/agents/guide-generation-agent.js`) and serves as the primary interface between raw LLM responses and the application's data processing pipeline. It acts as a protective layer that sanitizes and validates LLM outputs before they reach downstream components that expect well-formed guide data structures.
+
+## Usage Example
+
+```javascript
+// Within the guide generation agent
+const response = await llmClient.generateGuides(prompt);
+
+// Defensive parsing with validation layers
+const parsedGuides = parseGuideResponse(response, {
+  enableRepair: true,
+  logErrors: true,
+  fallbackToEmpty: true
+});
+
+// Returns validated guides array or empty array on failure
+console.log(`Parsed ${parsedGuides.length} valid guides`);
+```
+
+## Testing
+
+No automated tests found for this component. Testing coverage should be implemented to validate parsing behavior with various malformed JSON inputs, edge cases, and error scenarios.

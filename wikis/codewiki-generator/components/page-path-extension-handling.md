@@ -1,0 +1,60 @@
+---
+title: Page path extension handling
+category: component
+sourceFile: lib/processor.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Page Path Extension Handling
+
+## Purpose and [Overview](../meta/overview.md)
+
+The page path extension handling component manages the determination and formatting of file paths for wiki pages within the processor system. It ensures consistent `.md` extension handling and provides a standardized interface for converting page identifiers into proper file paths.
+
+## Key Functionality
+
+The `determinePagePath` function is the core component responsible for:
+
+- **Path normalization**: Converts page identifiers or paths into standardized wiki page paths
+- **Extension management**: Ensures all generated paths include the `.md` extension for markdown files
+- **Consistent return values**: Provides reliable path formatting that matches the documented contract
+
+The function has been corrected to include the `.md` extension in both the return value and documentation, ensuring consistency between actual file paths generated and their documented behavior.
+
+## Relationships
+
+This component integrates with several other system components:
+
+- **Wiki API**: Works alongside the refactored `updatePage` and `createPage` methods that use consistent parameter ordering
+- **Processor lifecycle**: Operates within the processing state lifecycle that tracks execution with explicit state values ('running', 'stopped')
+- **File system operations**: Provides standardized paths for wiki file creation and management
+- **State management**: Coordinates with the processor's state tracking system for reliable path generation
+
+## Usage Example
+
+```javascript
+const processor = new Processor({
+  wikiManager: mockWikiManager,
+  stateManager: mockStateManager,
+  codeAnalysisAgent: mockCodeAnalysisAgent,
+  docWriterAgent: mockDocWriterAgent
+});
+
+// Determine standardized page path with .md extension
+const pagePath = processor.determinePagePath('component-name');
+// Returns: 'component-name.md'
+
+// Use with wiki operations
+await processor.createPage(pagePath, content, options);
+await processor.updatePage(pagePath, updatedContent, options);
+```
+
+## Testing
+
+**Test Coverage**: `tests/unit/processor.test.js`
+- 26 test cases across 6 test suites
+- Comprehensive testing including `determinePagePath` functionality
+- Test categories cover: Processor, processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository
+- Includes mock implementations for WikiManager, StateManager, and various agent components

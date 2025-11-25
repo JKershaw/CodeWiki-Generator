@@ -1,0 +1,71 @@
+---
+title: Defensive data normalization in response validation
+category: component
+sourceFile: lib/agents/code-analysis-agent.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Defensive Data Normalization in Response Validation
+
+## Purpose and [Overview](../meta/overview.md)
+
+This component implements robust data validation and normalization within the CodeAnalysisAgent's response processing pipeline. It ensures that analysis responses conform to expected schemas by converting legacy formats, applying defaults for missing fields, and protecting downstream code from malformed data.
+
+## Key Functionality
+
+The defensive normalization system operates through multi-stage data processing:
+
+- **Legacy Format Conversion**: Automatically converts string-based concept formats to structured object formats for backward compatibility
+- **Default Value Application**: Fills in missing required fields with sensible defaults to prevent downstream errors  
+- **Schema Conformance**: Ensures all concept objects contain required properties (name, category, abstraction, reason, sourceFile)
+- **Category-Aware Processing**: Supports categorized concepts (component, guide, etc.) while maintaining compatibility with uncategorized legacy data
+- **Extended Schema Support**: Validates expanded response structure including concepts, codeElements, relationships, and suggestedGuides fields
+
+## Relationships
+
+This component connects to several parts of the codebase:
+
+- **CodeAnalysisAgent**: Core integration point where validation occurs during response processing
+- **Concept Extraction System**: Consumes normalized concept data for documentation generation
+- **Documentation Router**: Utilizes category information for semantic routing decisions
+- **Legacy Systems**: Maintains backward compatibility with existing string-based concept formats
+
+## Usage Example
+
+```javascript
+describe('CodeAnalysisAgent', () => {
+  let agent;
+
+  beforeEach(() => {
+    agent = new CodeAnalysisAgent();
+  });
+
+  describe('_validateResponse', () => {
+    it('should normalize concepts with sourceFile', () => {
+      const mockResponse = {
+        concepts: [
+          {
+            name: 'DashboardController',
+            category: 'component',
+            abstraction: 'low',
+            reason: 'Main controller for dashboard',
+            sourceFile: 'lib/dashboard-controller.js'
+          }
+        ]
+      };
+
+      const validatedResponse = agent._validateResponse(mockResponse);
+      // Response is normalized and validated for downstream processing
+    });
+  });
+});
+```
+
+## Testing
+
+**Test Coverage**: tests/unit/code-analysis-agent.test.js
+- 10 test cases across 3 test suites
+- Comprehensive validation testing in `_validateResponse` suite
+- Additional coverage in `CodeAnalysisAgent` and `isSignificantFile` test categories

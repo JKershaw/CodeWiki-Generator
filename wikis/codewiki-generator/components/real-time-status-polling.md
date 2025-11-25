@@ -2,69 +2,48 @@
 title: Real-time Status Polling
 category: component
 sourceFile: public/app.js
-related: [_history/components/real-time-status-polling/2025-11-24T14-38-56.md]
-created: 2025-11-24
-updated: 2025-11-24
+related: []
+created: 2025-11-25
+updated: 2025-11-25
 ---
 
-# [Real-time Status Polling](../_history/components/real-time-status-polling/2025-11-24T14-38-56.md)
+# Real-time Status Polling
 
 ## Purpose and Overview
 
-[Real-time Status Polling](../_history/components/real-time-status-polling/2025-11-24T14-38-56.md) implements an automatic refresh mechanism that monitors the processing status of repository operations at regular intervals. By polling the `/api/status` endpoint every 5 seconds, the component enables responsive UI feedback without requiring WebSocket complexity, automatically reloading the page when the processing status changes.
+The Real-time Status Polling component provides automatic status synchronization between the client dashboard and backend processing state. It implements a 5-second polling interval during active processing to deliver live feedback and keep users informed of operation progress.
 
 ## Key Functionality
 
-The [Real-time Status Polling](../_history/components/real-time-status-polling/2025-11-24T14-38-56.md) component provides:
+- **Automatic Polling**: Initiates status checks every 5 seconds when processing is active
+- **Backend Synchronization**: Maintains real-time connection with server-side processing state
+- **Live User Feedback**: Updates dashboard interface with current operation status
+- **Processing State Tracking**: Monitors and reflects changes in repository analysis workflow
+- **Interval Management**: Handles start/stop timing for polling cycles based on processing state
 
-- **Automatic Status Monitoring**: Establishes a polling interval that queries the backend status endpoint every 5 seconds
-- **Change Detection**: Compares current status against previous state to identify when processing completes or transitions occur
-- **Page Reload Trigger**: Automatically refreshes the page when status changes from `'processing'` to another state, ensuring users see updated results
-- **Non-blocking Operation**: Runs in the background without disrupting other dashboard interactions like form submission or step controls
-
-The polling mechanism operates independently from user actions, allowing the dashboard to provide real-time feedback while users interact with process control buttons. When a status change is detected, the page reloads to reflect the latest processing state and results.
+The polling mechanism runs continuously during active operations, querying the backend API at regular intervals to fetch the latest processing status and update the user interface accordingly.
 
 ## Relationships
 
-[Real-time Status Polling](../_history/components/real-time-status-polling/2025-11-24T14-38-56.md) integrates with the following components and systems:
-
-- **Backend API**: Communicates with the `/api/status` endpoint to retrieve current processing state
-- **Dashboard UI**: Coordinates with the `status-badge` HTML element to display status information
-- **Process Management System**: Depends on the server-side process management to provide accurate status transitions
-- **[Form-based Process Control Interface](../components/form-based-process-control-interface.md)**: Works alongside step, pause, and form submission handlers to provide complete user feedback throughout the workflow
-
-The polling strategy complements the form-based controls—while users manually initiate steps or pause operations, the polling component independently monitors for external state changes or completion events.
+- **Interactive Dashboard Client**: Integrates with the main dashboard component to provide real-time status updates
+- **Process Control Interface**: Works alongside process control operations (start, pause, step) to reflect state changes
+- **Backend API**: Communicates with server endpoints to retrieve current processing status
+- **Async Form Submission Pattern**: Utilizes the same asynchronous communication patterns for status requests
 
 ## Usage Example
 
-The [Real-time Status Polling](../_history/components/real-time-status-polling/2025-11-24T14-38-56.md) component initializes automatically when the DOM loads and operates without explicit method calls:
-
 ```javascript
-// Polling runs automatically in the background after DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-  // Auto-refresh interval is established here
-  // Polls /api/status every 5 seconds
-  setInterval(async () => {
-    const response = await fetch('/api/status');
-    const data = await response.json();
-    
-    // Detects when status changes from 'processing'
-    if (data.status !== 'processing') {
-      location.reload(); // Reloads page to show updated results
-    }
-  }, 5000);
-});
-```
+// Status polling is automatically managed by the dashboard client
+// Polling starts when processing begins and updates every 5 seconds
 
-To monitor status changes in your own code, fetch the `/api/status` endpoint and check the returned status field. The polling mechanism handles page reloads automatically, but you can implement custom handlers by modifying the status change detection logic.
+// Example of the polling pattern used internally:
+setInterval(async () => {
+  const response = await fetch('/api/status');
+  const status = await response.json();
+  updateDashboard(status);
+}, 5000);
+```
 
 ## Testing
 
-No automated tests are currently available for this component. To verify polling functionality:
-
-1. Start a processing operation via the form
-2. Observe the status endpoint being called every 5 seconds in browser network logs
-3. Confirm the page reloads when processing completes
-4. Verify no unnecessary reloads occur during active processing
-
-Consider adding integration tests that mock the `/api/status` endpoint and verify page reload behavior at status state transitions.
+No automated tests found for this component. Manual testing should verify polling behavior during processing operations and proper cleanup when operations complete.

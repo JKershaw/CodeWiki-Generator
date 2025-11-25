@@ -1,0 +1,70 @@
+---
+title: Enriched documentation generation with contextual data
+category: concept
+sourceFile: lib/processor.js
+related: [meta/overview.md, components/code-analysis-agent.md, components/documentation-writer-agent.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Enriched Documentation Generation with Contextual Data
+
+## Purpose and [Overview](../meta/overview.md)
+
+This architectural pattern enables the generation of comprehensive documentation by enriching the standard documentation process with additional contextual information such as source file paths and automatically extracted code examples. It enhances the documentation output by providing practical, real-world usage examples alongside theoretical component descriptions.
+
+## Key Functionality
+
+The enriched documentation generation operates through several key mechanisms:
+
+- **Source File Tracking**: Maintains bidirectional links between source code files and generated documentation pages through metadata tracking, enabling navigation from documentation back to source code
+- **Automated Code Example Extraction**: Discovers and extracts relevant test files using multiple naming conventions and patterns (e.g., `*.test.js`, `*.spec.js`, `test/*.js`) to provide practical usage examples
+- **Contextual Data Integration**: Passes enriched context including file paths, extracted code examples, and related metadata to documentation writer agents for more comprehensive output generation
+- **Multi-Agent Coordination**: Coordinates between code analysis agents, documentation writers, and other specialized agents while maintaining enriched context throughout the pipeline
+
+## Relationships
+
+This concept integrates with several core components:
+
+- **WikiManager**: Receives enriched page metadata including source file information for bidirectional linking
+- **[Code Analysis Agent](../components/code-analysis-agent.md)**: Provides foundational code analysis that gets enhanced with contextual data
+- **[Documentation Writer Agent](../components/documentation-writer-agent.md)**: Consumes enriched context to generate more comprehensive documentation
+- **State Manager**: Maintains enriched documentation state across processing sessions
+- **Test Discovery System**: Automatically locates and processes test files to extract usage examples
+
+## Usage Example
+
+```javascript
+describe('Processor', () => {
+  let processor;
+  let mockWikiManager;
+  let mockStateManager;
+  let mockCodeAnalysisAgent;
+  let mockDocWriterAgent;
+  let mockTechDebtAgent;
+  let mockSecurityAgent;
+
+  beforeEach(() => {
+    // Create mock managers and agents
+    mockWikiManager = {
+      getPage: jest.fn(),
+      createPage: jest.fn(),
+      updatePage: jest.fn(),
+      searchPages: jest.fn(),
+      getRelatedPages: jest.fn(),
+      updatePageGlobalMetadata: jest.fn()
+    };
+
+    mockStateManager = {
+      loadState: jest.fn()
+    };
+    // Additional agent setup...
+  });
+```
+
+## Testing
+
+**Test Coverage**: tests/unit/processor.test.js
+- 26 test cases across 6 test suites
+- Comprehensive coverage of processor functionality including commit processing, file significance evaluation, context retrieval, page path determination, and repository processing
+- Test categories cover the full enriched documentation pipeline from initial processing through final output generation

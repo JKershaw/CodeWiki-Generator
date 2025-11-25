@@ -2,64 +2,74 @@
 title: Category-based documentation routing
 category: concept
 sourceFile: lib/processor.js
-related: []
-created: 2025-11-24
-updated: 2025-11-24
+related: [meta/overview.md, components/code-analysis-agent.md, components/documentation-writer-agent.md]
+created: 2025-11-25
+updated: 2025-11-25
 ---
 
 # Category-based Documentation Routing
 
 ## Purpose and Overview
 
-The category-based documentation routing system intelligently routes documentation concepts to different wiki directories (components, concepts, guides) based on explicit category metadata. Rather than storing all concepts in a single location, this system enables a flexible, scalable documentation structure that accommodates different types of knowledge artifacts and improves discoverability through logical organization.
+Category-based documentation routing enables the processor to organize documentation into different directories (components/, concepts/, guides/) based on category properties rather than a flat structure. This architectural enhancement allows for flexible documentation organization while maintaining backward compatibility with existing string-based concept names.
 
 ## Key Functionality
 
-**Category-Driven Routing**
+The processor implements category-aware routing that:
 
-The system determines documentation location based on a concept's category field:
-- `component` → stored in the components directory
-- `concept` → stored in the concepts directory  
-- `guide` → stored in the guides directory
+- **Routes documentation by category**: Directs concept documentation to appropriate directories based on category metadata through the `determinePagePath` method
+- **Maintains backward compatibility**: Accepts both legacy string concept names and new object format with name and category properties in `processConceptDocumentation`
+- **Enables flexible organization**: Supports different documentation types (components, concepts, guides) in their respective wiki directories
+- **Preserves existing functionality**: Legacy code continues to work without modification while new code can leverage enhanced categorization
 
-**Backward Compatibility**
-
-The routing functions accept both legacy string-based concept names and new object-based formats with category metadata. This allows gradual migration of callers without breaking existing code.
-
-**Path Resolution**
-
-The `determinePagePath()` function maps concept categories to their appropriate wiki directories and generates the target page path. This centralized logic ensures consistent routing decisions across the system.
+The dual-format handling allows functions to process either simple string concept names or rich concept objects containing both name and category information, enabling gradual migration to the enhanced format without breaking existing integrations.
 
 ## Relationships
 
-- **`processConceptDocumentation()`** — Accepts concept objects with category metadata and orchestrates documentation processing
-- **`determinePagePath()`** — Called by `processConceptDocumentation()` to compute the target wiki page location based on category
-- **`wikiManager`** — Receives computed paths and persists categorized documentation via `getPage()` and `upsertPage()` operations
-- **Concept category field** — Drives all routing decisions throughout the documentation workflow
+This component integrates with several system components:
+
+- **Wiki Manager**: Receives categorized routing decisions for page creation and updates across different directory structures
+- **State Manager**: Stores and retrieves category-based organization state for persistent routing decisions
+- **Code Analysis Agent**: Provides concept categorization during code analysis to inform routing decisions
+- **Documentation Writer Agent**: Uses category information for appropriate content generation in the correct wiki sections
+- **Tech Debt Agent**: Integrates with categorized routing for technical debt documentation
+- **Security Agent**: Leverages category-based routing for security-related documentation placement
+
+The processor serves as the central routing hub, coordinating between analysis agents and the wiki management system to ensure proper document categorization.
 
 ## Usage Example
 
 ```javascript
-const processor = new Processor(mockWikiManager, mockStateManager);
+describe('Processor', () => {
+  let processor;
+  let mockWikiManager;
+  let mockStateManager;
+  let mockCodeAnalysisAgent;
+  let mockDocWriterAgent;
 
-// Process concept with category metadata (new format)
-const conceptWithCategory = {
-  name: 'API Authentication',
-  category: 'guide'
-};
+  beforeEach(() => {
+    // Create mock managers and agents
+    mockWikiManager = {
+      getPage: jest.fn(),
+      createPage: jest.fn(),
+      updatePage: jest.fn(),
+      searchPages: jest.fn(),
+      getRelatedPages: jest.fn(),
+      updatePageGlobalMetadata: jest.fn()
+    };
 
-processor.processConceptDocumentation(conceptWithCategory);
-// Routes to: guides/API Authentication
-
-// Legacy string format still supported (routes to default location)
-processor.processConceptDocumentation('Legacy Concept Name');
+    mockStateManager = {
+      loadState: jest.fn()
+    };
+    // Initialize processor with category-aware routing
+    processor = new Processor(mockWikiManager, mockStateManager, mockCodeAnalysisAgent, mockDocWriterAgent);
+  });
 ```
 
 ## Testing
 
-Test coverage for this component is comprehensive:
-
-- **26 test cases** across **6 test suites** in `tests/unit/processor.test.js`
-- Dedicated test suite: **determinePagePath** — validates category-to-directory mapping and backward compatibility
-- Integration testing with mock `wikiManager` ensures routing paths are correctly passed to persistence operations
-- Test coverage includes both object-based and string-based concept parameter formats
+**Test Coverage**: tests/unit/processor.test.js
+- 26 test cases across 6 test suites
+- Test categories include: Processor, processCommit, isSignificantFile, getRelevantContext, determinePagePath, processRepository
+- Comprehensive coverage of category-based routing functionality and backward compatibility scenarios
+- Specific testing of `determinePagePath` method ensures proper category-to-directory mapping

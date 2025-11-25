@@ -1,0 +1,47 @@
+---
+title: Singleton configuration instance
+category: component
+sourceFile: lib/config.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Singleton Configuration Instance
+
+## Purpose and [Overview](../meta/overview.md)
+
+The singleton configuration instance provides a single, shared configuration object that manages application settings across the entire codebase. This ensures consistent configuration state throughout the application while supporting environment-driven configuration with automatic test mode separation.
+
+## Key Functionality
+
+- **Centralized Configuration Management**: Maintains all application settings in one shared instance accessible from any module
+- **Environment Variable Integration**: Loads configuration values from environment variables with fallback defaults
+- **Test Mode Separation**: Automatically detects test environments and adjusts configuration behavior accordingly
+- **Configuration Validation**: Enforces constraints like port ranges, non-negative costs, and required API keys in production
+- **Runtime Safety**: Validates configuration on initialization to prevent failures from invalid settings
+
+## Relationships
+
+The singleton configuration instance serves as a foundational dependency for other application components:
+
+- **Environment-driven configuration system**: Works with the broader configuration management pattern to enable flexible deployment across different environments
+- **Configuration validation system**: Integrates with validation components to ensure configuration integrity
+- **Application modules**: Consumed by various modules throughout the codebase that need access to configuration settings
+
+## Usage Example
+
+```javascript
+const config = require('./lib/config');
+
+// Access configuration properties
+const port = config.port;
+const apiKey = config.apiKey;
+
+// Configuration is already validated and ready to use
+console.log(`Starting server on port ${config.port}`);
+```
+
+## Testing
+
+No automated tests found for this component. Testing coverage should be added to verify configuration loading, validation, and test mode behavior.

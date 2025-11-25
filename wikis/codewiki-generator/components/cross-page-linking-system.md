@@ -1,73 +1,61 @@
 ---
 title: Cross-page linking system
 category: component
-sourceFile: lib/agents/documentation-writer-agent.js
-related: [_history/concepts/cross-page-linking-system/2025-11-24T14-38-57.md]
-created: 2025-11-24
-updated: 2025-11-24
+sourceFile: lib/processor.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
 ---
 
-# [Cross-page Linking System](../_history/concepts/cross-page-linking-system/2025-11-24T14-38-57.md)
+# Cross-page linking system
 
 ## Purpose and Overview
 
-The [cross-page linking system](../_history/concepts/cross-page-linking-system/2025-11-24T14-38-57.md) automatically discovers mentions of other wiki pages within documentation content and converts them into markdown hyperlinks. This system enhances documentation interconnectedness by creating intelligent internal links while preserving existing markdown formatting and preventing self-referential links.
+The cross-page linking system is a post-generation component that automatically injects hyperlinks between wiki pages and enriches page metadata with related page information. It implements a multi-phase documentation generation pipeline where content enhancement occurs after initial page creation, enabling intelligent cross-referencing across the entire wiki structure.
 
 ## Key Functionality
 
-### Main Components
+The system operates through a coordinated workflow that processes generated documentation in distinct phases:
 
-- **addCrossLinks()** - Orchestrates the complete linking workflow. This function discovers page mentions in content using LinkDiscoveryAgent, validates each mention to prevent duplication and self-references, and replaces valid mentions with markdown link syntax.
+- **Multi-phase Processing**: Implements sequential processing where initial content generation (architecture overview, guides, index) completes before relationship discovery and linking begins
+- **Intelligent Link Discovery**: Uses LinkDiscoveryAgent to analyze page content and identify semantic connections between related pages throughout the wiki
+- **Cross-link Injection**: Automatically injects hyperlinks into page content using the addCrossLinks method, creating navigable connections between related documentation
+- **Metadata Enrichment**: Updates page frontmatter with related pages information and global metadata tracking for enhanced discoverability
+- **Efficient Updates**: Only writes page changes when content modifications occur, optimizing performance during incremental processing
 
-- **_createLink()** - Generates properly formatted markdown links while intelligently handling bold-formatted text (e.g., `**text**`), preserving the bold styling within the link.
-
-- **_isAlreadyLinked()** - Validates that a mention is not already embedded within an existing markdown link structure, preventing duplicate link wrapping and markdown corruption.
-
-- **LinkDiscoveryAgent** - A specialized agent (injected as a dependency) responsible for discovering which pages are mentioned in the content. This separation of concerns allows mention discovery logic to evolve independently.
-
-### How It Works
-
-1. LinkDiscoveryAgent analyzes content and identifies all page mentions
-2. For each discovered mention, the system checks if it's already part of an existing markdown link
-3. Self-references are filtered out (a page doesn't link to itself)
-4. Valid mentions are replaced with markdown link syntax: `[mention](../path/to/page)`
-5. Bold formatting in titles is preserved within generated links
+This separation of concerns allows the system to make intelligent decisions about page relationships after all content exists, resulting in more accurate and comprehensive linking.
 
 ## Relationships
 
-- **Depends on LinkDiscoveryAgent** - Delegates mention discovery to a specialized agent, maintaining separation of concerns
-- **Integrates with content pipeline** - Works as part of the documentation generation workflow, typically after content cleaning
-- **Markdown-aware** - Respects existing markdown syntax to prevent corruption of previously formatted links
+The cross-page linking system integrates with several core components in the documentation pipeline:
+
+- **Processor**: Acts as the orchestration layer that coordinates the multi-phase generation pipeline
+- **LinkDiscoveryAgent**: Performs the semantic analysis to identify related pages and establish cross-references
+- **WikiManager**: Provides page retrieval, search capabilities, and handles updates with new links and metadata
+- **DocumentationWriterAgent**: Works in conjunction with link discovery to inject hyperlinks into page content
+- **StateManager**: Enables efficient incremental processing by tracking what has been linked previously
 
 ## Usage Example
 
 ```javascript
-const DocumentationWriterAgent = require('./lib/agents/documentation-writer-agent');
-const LinkDiscoveryAgent = require('./lib/agents/link-discovery-agent');
+const Processor = require('./lib/processor');
 
-const writerAgent = new DocumentationWriterAgent({
-  linkDiscoveryAgent: new LinkDiscoveryAgent()
+// Initialize processor with required dependencies
+const processor = new Processor({
+  wikiManager: mockWikiManager,
+  stateManager: mockStateManager,
+  codeAnalysisAgent: mockCodeAnalysisAgent,
+  docWriterAgent: mockDocWriterAgent,
+  linkDiscoveryAgent: mockLinkDiscoveryAgent
 });
 
-const contentWithLinks = writerAgent.addCrossLinks(
-  'This page discusses the authentication system and user management.',
-  {
-    allPages: [
-      { title: 'authentication system', path: '../security/auth' },
-      { title: 'user management', path: '../users/management' }
-    ]
-  }
-);
-
-// Result: Mentions are automatically converted to markdown links
+// Process repository to generate and cross-link documentation
+await processor.processRepository(repositoryPath);
 ```
 
 ## Testing
 
-No automated tests are currently available for this component. When adding tests, verify:
-
-- Mentions are correctly converted to markdown links
-- Existing markdown links are not duplicated
-- Self-references are excluded
-- Bold formatting in titles is preserved within links
-- Multiple mentions in a single document are all processed
+**Test Coverage**: tests/unit/processor.test.js
+- 26 test cases across 6 test suites
+- Test categories include: Processor, processCommit, isSignificantFile, getRelevantContext, determinePagePath, processRepository
+- Comprehensive mocking of WikiManager, StateManager, and all agent dependencies for isolated unit testing

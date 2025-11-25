@@ -1,0 +1,52 @@
+---
+title: Agent-based documentation synthesis
+category: concept
+sourceFile: lib/agents/architecture-overview-agent.js
+related: [meta/overview.md, components/architecture-overview-agent.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Architecture [Overview](../meta/overview.md) Agent
+
+## Purpose and [Overview](../meta/overview.md)
+
+The Architecture [Overview](../meta/overview.md) Agent is a specialized agent implementation that synthesizes multi-type wiki data into coherent system-level documentation. It leverages LLM capabilities through Claude API integration to generate comprehensive architecture.md files from structured knowledge across concepts, components, and guides.
+
+## Key Functionality
+
+The `ArchitectureOverviewAgent` class orchestrates the following core operations:
+
+- **Multi-category Data Aggregation**: Consolidates heterogeneous wiki data types (concepts, components, guides) into a unified prompt context for comprehensive system analysis
+- **LLM-Powered Synthesis**: Integrates with Claude API using structured prompt templates to generate coherent architecture documentation
+- **Markdown Output Processing**: Implements sanitization logic to clean LLM responses, stripping code blocks and frontmatter to ensure consistent documentation artifacts
+- **Template-Driven Generation**: Uses prompt engineering to guide the LLM in producing structured, system-level architectural overviews
+
+## Relationships
+
+This component exemplifies the broader **agent-based documentation synthesis** pattern within the codebase architecture. It connects to:
+
+- **Wiki Data Sources**: Consumes structured data from concept, component, and guide repositories
+- **Claude API**: Integrates with external LLM services for intelligent content generation  
+- **Markdown Processing Pipeline**: Outputs clean, formatted documentation ready for wiki integration
+- **Agent Architecture Pattern**: Serves as a concrete implementation of the specialized agent approach for documentation tasks
+
+## Usage Example
+
+```javascript
+const ArchitectureOverviewAgent = require('./lib/agents/architecture-overview-agent');
+
+const agent = new [ArchitectureOverviewAgent](../components/architecture-overview-agent.md)();
+const wikiData = {
+  concepts: [...],
+  components: [...], 
+  guides: [...]
+};
+
+const architectureDoc = agent.generateOverview(wikiData);
+// Returns cleaned markdown content for architecture.md
+```
+
+## Testing
+
+No automated tests found. This component would benefit from unit tests covering the multi-category aggregation logic, Claude API integration, and markdown sanitization functionality.

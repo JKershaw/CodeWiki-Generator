@@ -1,88 +1,86 @@
 ---
-title: GitHub API Integration Layer
+title: GitHub API integration layer
 category: component
-sourceFile: lib/github.js
+sourceFile: lib/processor.js
 related: []
-created: 2025-11-24
-updated: 2025-11-24
+created: 2025-11-25
+updated: 2025-11-25
 ---
 
 # GitHub API Integration Layer
 
 ## Purpose and Overview
 
-The GitHub API Integration Layer (`lib/github.js`) provides a resilient, normalized abstraction over the Octokit library for accessing GitHub repository data and commit history. It encapsulates authentication, implements exponential backoff retry logic, and transforms raw GitHub API responses into consistent internal data structures, enabling reliable repository operations even when facing rate limits or transient network failures.
+The GitHub API integration layer provides batch processing capabilities for entire repositories, enabling systematic analysis and documentation generation from GitHub commit data. It serves as the core orchestration component that manages long-running operations with state persistence, cost tracking, and periodic meta-analysis.
 
 ## Key Functionality
 
-### GitHubClient Class
+**Repository Batch Processing**
+- Processes entire repositories incrementally with checkpoint-based resumption
+- Maintains processing state to enable pause/resume functionality across sessions
+- Handles repository URL parsing and commit fetching through GitHubClient integration
 
-The main wrapper class that manages all GitHub API interactions with built-in authentication and error resilience.
+**Cost-Aware Resource Management**
+- Integrates API cost tracking into the core processing loop
+- Enables graceful throttling based on configurable budget constraints
+- Monitors and reports resource usage throughout batch operations
 
-### Repository Operations
+**Intelligent File Processing**
+- Determines file significance and relevance for documentation purposes
+- Routes files to appropriate page paths based on content analysis
+- Manages context gathering for comprehensive documentation generation
 
-- **Repository Metadata**: Fetch and normalize repository information including name, description, default branch, and privacy settings via `getRepoInfo()`
-- **Commit History**: Retrieve paginated commit histories with optional date filtering in chronological order (oldest first) via `getCommits()`
-- **Commit Details**: Access detailed commit information including full diff patches and file-level change statistics via `getCommit()`
-- **File Content**: Fetch file contents at specific git references with automatic base64 decoding via `getFileContent()`
+**Periodic Meta-Analysis**
+- Runs high-level analysis at regular intervals during processing
+- Provides insights and recommendations for documentation improvement
+- Enables reflexive enhancement of generated documentation
 
-### URL Parsing
-
-The `parseRepoUrl()` function parses GitHub repository URLs in both HTTPS and SSH formats, extracting owner and repository components for API operations.
-
-### Resilient Request Handling
-
-- Implements exponential backoff retry logic via `_retryRequest()` for rate-limited and transient network failures
-- Intelligently classifies errors to determine retry eligibility
-- Handles GitHub API pagination patterns transparently across all methods
-
-### Lazy Loading with Test Mode Support
-
-Dependencies are initialized lazily and conditionally based on test mode configuration, enabling mock-friendly testing without requiring external API dependencies during test execution.
+**Comprehensive Monitoring**
+- Tracks processing statistics including commits, files, pages, and meta-analysis runs
+- Reports stop reasons and cost summaries for operational visibility
+- Provides detailed observability into long-running batch operations
 
 ## Relationships
 
-- **Config Module**: Depends on config for authentication tokens and test mode detection
-- **Octokit Library**: Wrapped and lazy-loaded only in non-test environments to support dependency mocking
-- **Retry Pattern**: Retry logic with rate-limit awareness spans all API methods for consistent error handling
-- **Pagination**: Commit history retrieval uses pagination patterns to transparently handle large repository histories
+**Dependencies:**
+- `GitHubClient` - Repository URL parsing and commit data fetching
+- `StateManager` - Processing state persistence and checkpoint management
+- `WikiManager` - Documentation page creation and management
+- Analysis agents (`CodeAnalysisAgent`, `DocWriterAgent`, `TechDebtAgent`, `SecurityAgent`) - Content generation
+
+**Integration Points:**
+- Coordinates between external GitHub API and internal documentation system
+- Manages workflow between analysis agents and wiki page creation
+- Provides central orchestration for all batch processing operations
 
 ## Usage Example
 
 ```javascript
-const GitHubClient = require('./lib/github');
+const processor = new Processor({
+  wikiManager: mockWikiManager,
+  stateManager: mockStateManager,
+  codeAnalysisAgent: mockCodeAnalysisAgent,
+  docWriterAgent: mockDocWriterAgent,
+  techDebtAgent: mockTechDebtAgent,
+  securityAgent: mockSecurityAgent
+});
 
-// Initialize the client (authentication token comes from config)
-const client = new GitHubClient();
+// Process individual commit
+await processor.processCommit(commitData, options);
 
-// Parse a repository URL
-const { owner, repo } = client.parseRepoUrl('https://github.com/owner/repo-name.git');
+// Process entire repository
+await processor.processRepository(repositoryUrl, config);
 
-// Get repository information
-const repoInfo = await client.getRepoInfo(owner, repo);
-console.log(repoInfo.name, repoInfo.description);
+// Check file significance
+const isSignificant = processor.isSignificantFile(filePath, fileContent);
 
-// Fetch commit history
-const commits = await client.getCommits(owner, repo, { since: '2024-01-01' });
-commits.forEach(commit => console.log(commit.sha, commit.message));
-
-// Retrieve file content at a specific reference
-const fileContent = await client.getFileContent(owner, repo, 'path/to/file.js', 'main');
-console.log(fileContent);
+// Determine documentation page path
+const pagePath = processor.determinePagePath(filePath, analysisResult);
 ```
 
 ## Testing
 
-The integration layer is thoroughly tested with 18 test cases across 7 test suites covering:
-
-- GitHubClient initialization and configuration
-- URL parsing for both HTTPS and SSH formats
-- Repository metadata retrieval and normalization
-- Commit history pagination and date filtering
-- Detailed commit information retrieval
-- File content fetching with content decoding
-- Error handling and retry strategies including rate limit scenarios
-
-Tests utilize mock Octokit instances injected during test mode to avoid external API dependencies. The lazy loading pattern allows tests to run without initializing the real Octokit library.
-
-**Coverage**: `tests/unit/github.test.js` - 18 test cases across 7 suites
+**Test Coverage**: `tests/unit/processor.test.js`
+- 26 test cases across 6 test suites
+- Comprehensive coverage including repository processing, commit handling, file analysis, context gathering, and page path determination
+- Mock implementations for all external dependencies to ensure isolated unit testing

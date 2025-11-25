@@ -2,44 +2,34 @@
 title: Agent-based documentation generation
 category: concept
 sourceFile: lib/agents/guide-generation-agent.js
-related: []
-created: 2025-11-24
-updated: 2025-11-24
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
 ---
 
 # Guide Generation Agent
 
-## Purpose and Overview
+## Purpose and [Overview](../meta/overview.md)
 
-The Guide Generation Agent orchestrates the creation of operational guides from wiki data by analyzing repository characteristics and leveraging Claude AI to generate structured, context-aware documentation. It bridges the existing wiki knowledge base with AI-powered synthesis to produce guides tailored to specific project environments rather than generic templates.
+The GuideGenerationAgent implements a specialized AI-powered agent that transforms wiki content into operational guides using Claude API integration. It automatically enriches guide generation with repository context by detecting project characteristics, eliminating the need for manual configuration while improving output quality.
 
 ## Key Functionality
 
-**GuideGenerationAgent** is a class that handles the end-to-end process of generating operational guides:
+The agent provides two core capabilities:
 
-- **Guide Generation**: The `generateGuides()` method accepts wiki data (concepts and components), formats it with repository context, sends it to Claude API via PromptManager templates, and returns validated guide structures in JSON format.
+- **Guide Generation**: Transforms wiki data into structured operational guides through prompt rendering and Claude API interaction, with built-in response validation for JSON output
+- **Repository Introspection**: Automatically detects repository metadata including testing frameworks, CI/CD systems, package managers, TypeScript usage, and Docker configuration to provide contextual information for guide generation
 
-- **Repository Introspection**: The `detectRepositoryInfo()` method analyzes the file structure to identify project characteristics including:
-  - Test frameworks (Jest, Mocha, etc.)
-  - CI/CD pipelines (GitHub Actions, GitLab CI, etc.)
-  - Package managers (npm, yarn, pnpm)
-  - TypeScript support
-  - Docker configuration
-
-- **Wiki Structure Formatting**: The `_formatWikiStructure()` method converts wiki concepts and components into formatted text suitable for prompt injection, establishing a pattern where existing wiki content serves as the knowledge base for higher-order documentation.
-
-- **Context Enrichment**: The `_formatRepositoryInfo()` method transforms detected repository metadata into human-readable format that provides contextual information to Claude during generation.
-
-- **Response Validation**: Validates that Claude's JSON response conforms to the expected guide structure before returning results.
+The agent follows a modular architecture pattern where AI-powered transformation tasks are encapsulated within specialized agent classes, making the system extensible and maintainable.
 
 ## Relationships
 
-The Guide Generation Agent operates within a larger multi-agent documentation system:
+This component is part of the broader agent-based documentation generation system located in `lib/agents/`. It integrates with:
 
-- **ClaudeClient**: Communicates with Claude API for AI-powered generation
-- **PromptManager**: Renders prompt templates with formatted wiki and repository data
-- **Wiki Data Structure**: Consumes concepts and components as input for contextual generation
-- **Sibling Agents**: Part of a coordinated multi-agent architecture for automated documentation
+- Claude API for AI-powered content transformation
+- Repository file system for metadata detection
+- Wiki content sources for input data
+- JSON validation systems for output structure verification
 
 ## Usage Example
 
@@ -48,17 +38,13 @@ const GuideGenerationAgent = require('./lib/agents/guide-generation-agent');
 
 const agent = new GuideGenerationAgent();
 
-const wikiData = {
-  concepts: [{ name: 'Agent-based generation', category: 'concept' }],
-  components: [{ name: 'ClaudeClient', category: 'component' }]
-};
+// Generate guide from wiki content
+const guide = await agent.generateGuide(wikiData);
 
-const guides = await agent.generateGuides(wikiData);
+// Detect repository context for enrichment
+const repoInfo = agent.detectRepositoryInfo();
 ```
 
 ## Testing
 
-No automated tests are currently available for this component. Contributors should validate the agent's output by:
-- Confirming generated guides match expected structure
-- Verifying repository detection accurately identifies project characteristics
-- Testing with repositories of varying configurations (TypeScript, Docker, different CI systems)
+No automated tests found for this component.

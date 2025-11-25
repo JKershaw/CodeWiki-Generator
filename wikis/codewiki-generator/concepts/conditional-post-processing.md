@@ -1,0 +1,62 @@
+---
+title: Conditional Post-Processing
+category: concept
+sourceFile: lib/processor.js
+related: [components/wiki-index-agent.md, meta/overview.md, concepts/automatic-documentation-navigation.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Conditional Post-Processing
+
+## Purpose and [Overview](../meta/overview.md)
+
+Conditional Post-Processing is a cost-aware completion pattern that determines when to execute optional pipeline stages based on resource constraints. It ensures that expensive operations like wiki index generation are only performed when the main processing pipeline completes successfully within budget limits.
+
+## Key Functionality
+
+The conditional post-processing system operates as a gatekeeper for optional completion tasks:
+
+- **Cost-Aware Execution**: Skips post-processing operations when the main pipeline stops due to cost limits
+- **Wiki Index Generation**: Automatically generates navigation indexes for documentation when processing completes successfully
+- **Graceful Degradation**: Allows core processing to succeed even if optional post-processing steps fail
+- **Resource Management**: Balances thoroughness with resource constraints by treating completion steps as optional
+
+The system integrates with the [Wiki Index Agent](../components/wiki-index-agent.md) to provide [automatic documentation navigation](../concepts/automatic-documentation-navigation.md) as part of Phase 2 implementation, but only when resources permit.
+
+## Relationships
+
+This concept works closely with several core components:
+
+- **[Wiki Index Agent](../components/wiki-index-agent.md)**: Executes the actual index generation when conditions are met
+- **Processor**: Main pipeline that determines when post-processing should occur
+- **State Manager**: Tracks processing state to inform conditional decisions
+- **Cost Management**: Integrates with cost tracking to make execution decisions
+
+The conditional pattern establishes a template for other optional pipeline stages that should enhance but not block successful completion.
+
+## Usage Example
+
+```javascript
+const Processor = require('./lib/processor');
+
+// Initialize processor with required dependencies
+const processor = new Processor({
+  wikiManager: mockWikiManager,
+  stateManager: mockStateManager,
+  codeAnalysisAgent: mockCodeAnalysisAgent,
+  docWriterAgent: mockDocWriterAgent,
+  techDebtAgent: mockTechDebtAgent,
+  securityAgent: mockSecurityAgent
+});
+
+// Process repository - post-processing occurs conditionally
+await processor.processRepository();
+```
+
+## Testing
+
+**Test Coverage**: tests/unit/processor.test.js
+- 26 test cases across 6 test suites
+- Test categories include: Processor initialization, processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository
+- Comprehensive mocking of dependencies including WikiManager, StateManager, and various agent components

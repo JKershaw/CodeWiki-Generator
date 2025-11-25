@@ -1,0 +1,54 @@
+---
+title: Template management system with caching
+category: component
+sourceFile: lib/prompts.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Template Management System with Caching
+
+## Purpose and [Overview](../meta/overview.md)
+
+The PromptManager provides a reusable abstraction for loading, caching, and rendering prompt templates with variable substitution. This system enables dynamic prompt generation for agent interactions without hardcoding prompts, supporting flexible template composition while ensuring all necessary context is provided.
+
+## Key Functionality
+
+- **Template Rendering**: Processes templates with `{{variable}}` placeholder syntax, substituting provided variables with their corresponding values
+- **Variable Validation**: Ensures all required variables are provided before rendering templates
+- **Template Management**: Loads and manages prompt templates for different use cases including code analysis, documentation writing, and meta-analysis
+- **Caching**: Implements caching mechanisms to optimize template loading and rendering performance
+- **Multiple Variable Handling**: Supports templates with multiple variables and handles repeated occurrences of the same variable
+
+## Relationships
+
+The PromptManager serves as a central component for prompt generation across the system, connecting to:
+- Agent interaction modules that require dynamic prompt creation
+- Template storage systems for loading predefined prompts
+- Various analysis components (code-analysis, documentation-writer, meta-analysis) that use specialized templates
+
+## Usage Example
+
+```javascript
+const PromptManager = require('./lib/prompts.js');
+
+const promptManager = new PromptManager();
+
+// Render a template with variables
+const template = 'Hello {{name}}, you are {{age}} years old.';
+const variables = { name: 'Alice', age: 30 };
+
+const result = promptManager.renderTemplate(template, variables);
+// Result: 'Hello Alice, you are 30 years old.'
+
+// Get and render predefined templates
+const renderedPrompt = promptManager.render('template-name', variables);
+```
+
+## Testing
+
+**Test Coverage**: tests/unit/prompts.test.js
+- 20 test cases across 7 test suites
+- Comprehensive coverage of template rendering, variable substitution, and template management
+- Test categories include: PromptManager initialization, renderTemplate functionality, getTemplate operations, render methods, and specialized templates for code-analysis, documentation-writer, and meta-analysis

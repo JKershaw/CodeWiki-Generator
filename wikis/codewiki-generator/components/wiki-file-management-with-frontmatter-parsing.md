@@ -1,0 +1,65 @@
+---
+title: Wiki file management with frontmatter parsing
+category: component
+sourceFile: lib/wiki-manager.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Wiki File Management with Frontmatter Parsing
+
+## Purpose and [Overview](../meta/overview.md)
+
+The WikiManager class provides core functionality for reading markdown files from a wiki directory structure, parsing YAML frontmatter metadata, and returning structured page objects. It enables flexible content navigation across nested wiki structures with search capabilities and content linking features.
+
+## Key Functionality
+
+The WikiManager component delivers:
+
+- **File Reading and Parsing**: Reads markdown files and extracts YAML frontmatter metadata into structured page objects
+- **Hierarchical Content Discovery**: Recursively traverses directory structures to discover markdown files while maintaining relative paths for organization
+- **Multiple Access Patterns**: Supports single page retrieval, full content catalogs, and keyword-based search operations
+- **Content Linking**: Implements a related pages system that connects content through frontmatter metadata relationships
+- **Search with Context**: Provides keyword-based search across both content and metadata with context snippets
+- **Graceful Error Handling**: Returns null or empty arrays for missing resources while allowing real errors to propagate
+
+## Relationships
+
+This component serves as the primary interface for wiki content management and integrates with:
+- File system operations for markdown file discovery and reading
+- YAML parsing libraries for frontmatter extraction
+- Search indexing systems for content discovery
+- Content relationship graphs for page linking
+
+## Usage Example
+
+```javascript
+const path = require('path');
+const WikiManager = require('./lib/wiki-manager');
+
+// Initialize WikiManager with wiki directory
+const testDir = path.join(__dirname, 'fixtures/test-wiki');
+const wikiManager = new WikiManager(testDir);
+
+// Read a single page with frontmatter
+const page = await wikiManager.getPage('test-page.md');
+console.log(page.metadata.title); // "Test Page"
+console.log(page.content); // Markdown content
+
+// Get all pages in the wiki
+const allPages = await wikiManager.getAllPages();
+
+// Search pages by keyword
+const searchResults = await wikiManager.searchPages('keyword');
+
+// Find related pages
+const relatedPages = await wikiManager.getRelatedPages('page-id');
+```
+
+## Testing
+
+**Test Coverage**: `tests/unit/wiki-manager.test.js`
+- 17 test cases across 5 test suites
+- Comprehensive coverage of WikiManager, getPage, getAllPages, searchPages, and getRelatedPages functionality
+- Tests validate frontmatter parsing, hierarchical discovery, search operations, and error handling patterns

@@ -1,0 +1,60 @@
+---
+title: Structured error context logging
+category: component
+sourceFile: lib/agents/guide-generation-agent.js
+related: [meta/overview.md]
+created: 2025-11-25
+updated: 2025-11-25
+---
+
+# Structured Error Context Logging
+
+## Purpose and [Overview](../meta/overview.md)
+
+This component provides enhanced error handling for LLM response parsing failures by capturing structured diagnostic information without exposing complete response content. It enables developers to debug JSON parsing issues in guide generation while maintaining performance and security by limiting logged content to essential context.
+
+## Key Functionality
+
+The structured error context logging captures critical debugging information when JSON parsing fails:
+
+- **Response size tracking** - Records the length of the response to identify truncation or unusually large outputs
+- **Content preview generation** - Extracts first and last 500 characters of the response for context
+- **Parsing stage identification** - Logs which validation layer failed (empty check, structure validation, per-guide filtering)
+- **Error preservation** - Maintains original parsing error details alongside contextual information
+
+The logging works in conjunction with graceful degradation patterns, ensuring that diagnostic information is captured before the system falls back to empty results rather than throwing exceptions.
+
+## Relationships
+
+This component integrates closely with other error handling patterns in the guide generation system:
+
+- **Defensive JSON parsing** - Provides diagnostic output when multi-stage validation fails
+- **Graceful degradation** - Captures context before returning empty fallback arrays
+- **JSON repair validation** - Logs context when post-repair verification detects continued parsing issues
+
+The structured logging feeds into the broader agent error handling pipeline, enabling operators to identify patterns in LLM output issues without storing potentially large response payloads.
+
+## Usage Example
+
+```javascript
+// Error context logging is automatically triggered during parsing failures
+try {
+  const guides = await parseGuideResponse(llmResponse);
+} catch (error) {
+  // Structured context is logged with response preview
+  logger.error('Guide parsing failed', {
+    responseLength: llmResponse.length,
+    preview: {
+      start: llmResponse.substring(0, 500),
+      end: llmResponse.substring(Math.max(0, llmResponse.length - 500))
+    },
+    parseStage: 'structure_validation',
+    originalError: error.message
+  });
+  return []; // Graceful degradation
+}
+```
+
+## Testing
+
+No automated tests found for this component.

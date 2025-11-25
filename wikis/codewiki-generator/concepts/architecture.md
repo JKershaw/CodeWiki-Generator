@@ -1,111 +1,108 @@
 ---
-related: [concepts/model-context-protocol-(mcp)-server.md]
-updated: 2025-11-24
+related: [concepts/multi-agent-documentation-generation-architecture.md, concepts/category-based-documentation-organization.md, components/intelligent-file-filtering-for-analysis.md, components/documentation-writer-agent.md, components/cross-page-linking-system.md]
+updated: 2025-11-25
 ---
 
 # CodeWiki-Generator Architecture
 
-## System Overview
+## System [Overview](../meta/overview.md)
 
-CodeWiki-Generator is a documentation automation system that bridges the gap between code repositories and AI-assisted development workflows. The system automatically generates, maintains, and exposes repository documentation through a [Model Context Protocol (MCP) server](../concepts/model-context-protocol-(mcp)-server.md), enabling AI agents to understand and interact with codebases more effectively. It combines wiki-style documentation generation with real-time MCP communication to create a living documentation system that evolves with the code.
+CodeWiki-Generator is an intelligent documentation automation system that transforms software repositories into comprehensive, navigable wikis through AI-powered analysis. The system leverages multiple specialized agents to analyze code, extract patterns, generate documentation, and create cross-linked content that maintains itself as repositories evolve. By combining repository introspection, commit history analysis, and contextual AI generation, it produces living documentation that captures both implementation details and architectural insights without manual intervention.
 
 ## Core Architecture
 
-The system follows a modular, event-driven architecture centered around MCP server integration. The core design separates documentation generation (wiki processing) from documentation consumption (MCP serving), with a request-response communication layer bridging AI agents and repository knowledge. The architecture emphasizes defensive programming patterns to handle the inherent unpredictability of AI interactions and dynamic repository states.
+The system implements a **[Multi-agent documentation generation architecture](../concepts/multi-agent-documentation-generation-architecture.md)** where specialized AI agents collaborate in a coordinated pipeline. Each agent has a distinct responsibility—code analysis, content generation, linking, or meta-analysis—and operates with **[Agent-based Documentation Pipeline](../concepts/agent-based-documentation-pipeline.md)** coordination. The architecture follows **[Cost-aware API consumption](../concepts/cost-aware-api-consumption.md)** principles to manage LLM usage efficiently while maintaining quality through **[Resilient API Communication with Exponential Backoff](../concepts/resilient-api-communication-with-exponential-backoff.md)** patterns.
 
-Key architectural patterns include:
-- **Agent-Server Communication**: MCP JSON-RPC protocol for structured AI interactions
-- **Pipeline Processing**: Sequential documentation generation and normalization
-- **Gap-Driven Updates**: Reactive documentation maintenance based on identified knowledge gaps
-- **Bridge Pattern**: Clean separation between wiki generation and AI query interfaces
+The system is built around **[Repository-scale batch processing with resumable state](../concepts/repository-scale-batch-processing-with-resumable-state.md)**, allowing it to handle large codebases incrementally while maintaining processing continuity across runs. **[Category-based Documentation Organization](../concepts/category-based-documentation-organization.md)** ensures content is properly structured and discoverable, while **[Contextual Metadata Enrichment Pattern](../concepts/contextual-metadata-enrichment-pattern.md)** maintains rich relationships between generated content.
 
 ## Major Components
 
-### Model Context Protocol (MCP) Server Integration
-The central communication hub that exposes repository knowledge to AI agents through standardized JSON-RPC protocols. Handles authentication, request routing, and response formatting while maintaining session state across interactions.
+### ArchitectureOverviewAgent
+Serves as the primary system coordinator, analyzing repository structure and generating high-level architectural documentation. This agent performs **[Repository structure analysis for guide generation](../components/repository-structure-analysis-for-guide-generation.md)** and implements **[Hierarchical content discovery and retrieval](../concepts/hierarchical-content-discovery-and-retrieval.md)** to understand codebase organization patterns.
 
-### [Wiki-to-AI Query Bridge](../components/wiki-to-ai-query-bridge.md)
-Translates between human-readable wiki documentation and AI-consumable data structures. Processes natural language queries from AI agents and maps them to specific documentation sections, code components, or architectural concepts.
+### [Code Analysis Agent](../components/code-analysis-agent.md)
+Handles deep repository inspection through **[Source code organization pattern](../concepts/source-code-organization-pattern.md)** analysis and **[Intelligent File Filtering for Analysis](../components/intelligent-file-filtering-for-analysis.md)**. It extracts meaningful code patterns, identifies key components, and feeds structured insights to other agents for content generation.
 
-### [Interactive MCP client](../components/interactive-mcp-client.md)
-Provides the user-facing interface for real-time interaction with the MCP server. Supports both direct queries and guided exploration of repository documentation, enabling developers to test and validate the AI integration.
+### [Documentation Writer Agent](../components/documentation-writer-agent.md)
+Transforms analytical insights into human-readable documentation using **[AI-driven content generation with formatting normalization](../components/ai-driven-content-generation-with-formatting-normalization.md)**. Implements **[LLM Response Cleaning and Normalization](../components/llm-response-cleaning-and-normalization.md)** to ensure consistent output quality and **[Markdown Response Sanitization](../components/markdown-response-sanitization.md)** for safe content generation.
 
-### [Documentation Gap Tracking System](../components/documentation-gap-tracking-system.md)
-Monitors documentation completeness by analyzing query patterns, failed lookups, and code changes. Automatically identifies areas where documentation is missing, outdated, or insufficient for AI understanding.
+### WikiIndexAgent / [Wiki Index Agent](../components/wiki-index-agent.md)
+Manages the overall wiki structure through **[Wiki Markdown Management System](../components/wiki-markdown-management-system.md)** and **[Category-based wiki content organization](../concepts/category-based-wiki-content-organization.md)**. Coordinates **[Multi-category wiki aggregation pattern](../components/multi-category-wiki-aggregation-pattern.md)** to maintain navigable content hierarchies.
 
-### [Interactive MCP Communication Pattern](../components/interactive-mcp-communication-pattern.md)
-Implements the bidirectional communication flow between AI agents and the documentation system. Manages conversation context, query disambiguation, and progressive disclosure of information based on agent capabilities.
+### [Cross-page linking system](../components/cross-page-linking-system.md)
+Implements **[Multi-agent linking workflow](../concepts/multi-agent-linking-workflow.md)** and **[Search and relationship graph for content linking](../concepts/search-and-relationship-graph-for-content-linking.md)** to create intelligent connections between documentation pages. Uses **[Content-aware mention detection](../concepts/content-aware-mention-detection.md)** and **[Cross-page link discovery system](../components/cross-page-link-discovery-system.md)** to build semantic relationships.
 
-### [Markdown link normalization](../components/markdown-link-normalization.md)
-Ensures consistency and validity of cross-references within generated documentation. Handles relative paths, broken links, and cross-component references to maintain navigable documentation structure.
+### MetaAnalysisAgent
+Provides system-wide insights through **[Meta-analysis agent for documentation patterns](../components/meta-analysis-agent-for-documentation-patterns.md)** and **[Periodic meta-analysis integration](../concepts/periodic-meta-analysis-integration.md)**. Identifies documentation gaps, suggests improvements, and maintains quality metrics across the generated wiki.
 
-### [MCP JSON-RPC Testing Framework](../components/mcp-json-rpc-testing-framework.md)
-Provides comprehensive testing infrastructure for MCP protocol compliance, message validation, and integration scenarios. Enables automated verification of AI agent interactions and protocol conformance.
+### ClaudeClient / Anthropic SDK wrapper
+Manages all AI interactions with **[Cost-Bounded Processing with Statistics Tracking](../concepts/cost-bounded-processing-with-statistics-tracking.md)** and **[Lazy-loaded External Dependencies](../concepts/lazy-loaded-external-dependencies.md)**. Provides **[Cost-aware API usage tracking](../concepts/cost-aware-api-usage-tracking.md)** to prevent runaway costs while maintaining service reliability.
 
 ## Data Flow
 
-The system operates through two primary data flows: documentation generation and AI query processing.
+The system processes repositories through a **[Two-phase Documentation Generation Pipeline](../concepts/two-phase-documentation-generation-pipeline.md)**:
 
 ```
-Repository Changes → Gap Detection → Wiki Generation → Link Normalization → MCP Server
-
-AI Agent Query → MCP Client → Query Bridge → Documentation Lookup → Response Formatting → Agent
+Repository Input
+      ↓
+  Code Analysis Agent → Repository Structure Analysis
+      ↓
+  Content Generation Phase:
+    ├─ [ArchitectureOverviewAgent](../components/architecture-overview-agent.md) → High-level docs
+    ├─ [Documentation Writer Agent](../components/documentation-writer-agent.md) → Detailed content  
+    └─ GuideGenerationAgent → Operational guides
+      ↓
+  Wiki Assembly Phase:
+    ├─ WikiIndexAgent → Structure organization
+    ├─ [Cross-page linking system](../components/cross-page-linking-system.md) → Relationship building
+    └─ MetaAnalysisAgent → Quality assessment
+      ↓
+  Wiki Output + State Persistence
 ```
 
-**Documentation Generation Flow**:
-1. Repository changes trigger gap analysis
-2. Missing or outdated documentation identified
-3. Wiki content generated for gaps
-4. Markdown links normalized across components
-5. Updated content registered with MCP server
+**[Commit-driven documentation pipeline](../concepts/commit-driven-documentation-pipeline.md)** ensures updates flow through the same stages when repositories change. **[Persistent State Management with Validation](../components/persistent-state-management-with-validation.md)** allows resuming interrupted processing, while **[Processing statistics and execution reporting](../components/processing-statistics-and-execution-reporting.md)** provide visibility into system operation.
 
-**AI Query Processing Flow**:
-1. AI agent sends MCP JSON-RPC request
-2. [Interactive MCP client](../components/interactive-mcp-client.md) validates and routes request
-3. [Wiki-to-AI Query Bridge](../components/wiki-to-ai-query-bridge.md) processes natural language query
-4. Relevant documentation sections retrieved and formatted
-5. Response sent through MCP Communication Pattern
-6. Query patterns logged for gap analysis
+The **[Contextual wiki retrieval](../concepts/contextual-wiki-retrieval.md)** system enables agents to access previously generated content for cross-referencing and link discovery, creating a feedback loop that improves content quality over iterations.
 
 ## Key Design Decisions
 
-### MCP Protocol Adoption
-**Choice**: Standardized Model Context Protocol for AI communication
-**Rationale**: Ensures compatibility with multiple AI agents and provides structured, versioned communication interface
-**Trade-offs**: Added protocol complexity but gained interoperability and future-proofing
+### [Agent-Based Architecture](../concepts/agent-based-architecture.md) Over Monolithic Processing
+**Choice**: Separate specialized agents rather than single large processor  
+**Rationale**: Each documentation concern (analysis, generation, linking, organization) requires different expertise and can be optimized independently. Agents can be developed, tested, and scaled separately.  
+**Trade-offs**: Added coordination complexity and state management overhead, but gained modularity, testability, and the ability to swap agent implementations.
 
-### [Defensive Chart Rendering](../concepts/defensive-chart-rendering.md)
-**Choice**: Robust error handling and graceful degradation for dynamic content
-**Rationale**: AI interactions are unpredictable; system must handle malformed queries, missing data, and edge cases
-**Trade-offs**: Increased code complexity but improved reliability and user experience
+### Cost-Aware Processing with Budget Controls
+**Choice**: Implement comprehensive API cost tracking and limits  
+**Rationale**: LLM APIs represent the primary operational cost and can scale unpredictably with repository size. **[Cost-Bounded Processing with Statistics Tracking](../concepts/cost-bounded-processing-with-statistics-tracking.md)** prevents runaway expenses.  
+**Trade-offs**: Additional complexity in request management and potential processing limitations, but gained predictable operational costs and system sustainability.
 
-### Gap-Driven Documentation Updates
-**Choice**: Reactive documentation generation based on actual usage patterns
-**Rationale**: Prevents over-documentation while ensuring AI agents get needed information
-**Trade-offs**: Some delay in documentation availability but much more efficient resource usage
+### Resumable State Architecture
+**Choice**: **[Persistent State Management with Validation](../components/persistent-state-management-with-validation.md)** for all processing stages  
+**Rationale**: Large repositories may require hours of processing, and network/API failures are inevitable. Resumable processing prevents losing work and enables incremental updates.  
+**Trade-offs**: Increased storage requirements and state management complexity, but gained reliability and efficiency for large-scale processing.
 
-### Bridge Pattern for Query Translation
-**Choice**: Separate component for translating between AI queries and documentation structure
-**Rationale**: Allows independent evolution of wiki format and AI interaction patterns
-**Trade-offs**: Additional abstraction layer but cleaner separation of concerns
+### Category-Based Organization Over Flat Structure  
+**Choice**: **[Category-based Documentation Organization](../concepts/category-based-documentation-organization.md)** with hierarchical navigation  
+**Rationale**: Generated wikis need to be navigable and maintainable as they grow. Categories provide logical groupings that scale with repository complexity.  
+**Trade-offs**: More complex wiki management logic, but significantly improved user experience and content discoverability.
 
-### [MCP Documentation Request System](../concepts/mcp-documentation-request-system.md)
-**Choice**: Structured request/response system with defined schemas
-**Rationale**: Enables reliable communication between diverse AI agents and documentation system
-**Trade-offs**: More rigid than free-form queries but provides consistency and validation
+### [Test Environment Isolation](../concepts/test-environment-isolation.md)
+**Choice**: **[Test-Mode Dependency Injection](../concepts/test-mode-dependency-injection.md)** and **Environment-driven configuration**  
+**Rationale**: Documentation generation involves external API calls and file system operations that need isolation during testing. Mock injection enables comprehensive testing without costs.  
+**Trade-offs**: Additional configuration complexity, but gained reliable test coverage and development workflow efficiency.
 
 ## Extension Points
 
-Developers can extend the system through several well-defined interfaces:
+The system provides several well-defined extension points for customization:
 
-**Custom Documentation Generators**: Implement new wiki content generators by extending the gap detection system. Add domain-specific documentation types (API specs, architectural diagrams, test coverage reports) that integrate with the existing normalization pipeline.
+**Agent Extension**: New agents can be added to the **[Multi-agent documentation generation architecture](../concepts/multi-agent-documentation-generation-architecture.md)** by implementing the standard agent interface and registering with the coordinator. Custom agents can handle specialized content types or analysis patterns.
 
-**AI Agent Integrations**: Create new MCP client implementations for different AI platforms by implementing the Interactive MCP Communication Pattern. The standardized JSON-RPC interface allows integration with any agent supporting MCP.
+**Template Customization**: The **[Template management system with caching](../components/template-management-system-with-caching.md)** allows custom documentation templates and formatting rules. Templates can be repository-specific or globally applied based on content categories.
 
-**Query Processing Extensions**: Extend the [Wiki-to-AI Query Bridge](../components/wiki-to-ai-query-bridge.md) with custom query handlers for specialized documentation types or domain-specific knowledge extraction patterns.
+**Processing Pipeline Hooks**: **[Conditional Post-Processing](../concepts/conditional-post-processing.md)** and **[Processor-based page operations](../components/processor-based-page-operations.md)** enable custom processing steps at any pipeline stage. Extensions can add validation, transformation, or enrichment operations.
 
-**Testing Framework Plugins**: Add new test scenarios to the [MCP JSON-RPC Testing Framework](../components/mcp-json-rpc-testing-framework.md) for custom protocols, edge cases, or integration patterns specific to your AI agents.
+**Configuration Extensions**: The **[Singleton configuration module](../components/singleton-configuration-module.md)** supports custom settings and **Environment-based configuration** for deployment-specific behavior. New configuration sections integrate automatically with the validation system.
 
-**Gap Detection Strategies**: Implement custom gap detection algorithms in the [Documentation Gap Tracking System](../components/documentation-gap-tracking-system.md) based on code analysis, user feedback, or external documentation standards.
+**Content Discovery**: **[Intelligent File Filtering for Analysis](../components/intelligent-file-filtering-for-analysis.md)** can be extended with custom rules for specific repository types or content patterns. New filters integrate with the existing **[Repository introspection for context enrichment](../concepts/repository-introspection-for-context-enrichment.md)** system.
 
-The modular architecture ensures extensions can be developed independently while leveraging the existing MCP infrastructure and defensive programming patterns.
+**State Management**: The **[State Schema Validation Pattern](../concepts/state-schema-validation-pattern.md)** allows extensions to add custom state tracking and **[Processing state lifecycle](../concepts/processing-state-lifecycle.md)** management for specialized processing requirements.
