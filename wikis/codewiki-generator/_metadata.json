@@ -1085,7 +1085,7 @@
       "title": "Markdown output sanitization",
       "created": "2025-11-25",
       "category": "component",
-      "sourceFile": "lib/agents/architecture-overview-agent.js",
+      "sourceFile": "lib/agents/wiki-index-agent.js",
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-25"
@@ -1728,13 +1728,382 @@
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-25"
+    },
+    "components/git-hub-api-integration-layer.md": {
+      "title": "GitHub API integration layer",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/processing-statistics-and-monitoring.md": {
+      "title": "Processing statistics and monitoring",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/local-git-based-testing-infrastructure.md": {
+      "title": "Local Git-based Testing Infrastructure",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "test-run-local.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/wiki-manager-api-parameter-ordering-and-options-consolidation.md": {
+      "title": "WikiManager API parameter ordering and options consolidation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/cost-aware-testing-framework.md": {
+      "title": "Cost-aware testing framework",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "test-run.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/page-path-generation-with-file-extensions.md": {
+      "title": "Page path generation with file extensions",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/commit-and-diff-extraction-from-git.md": {
+      "title": "Commit and Diff Extraction from Git",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "test-run-local.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/self-referential-repository-processing.md": {
+      "title": "Self-referential repository processing",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "test-run.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/git-hub-client-mocking-pattern.md": {
+      "title": "GitHub Client Mocking Pattern",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "test-run-local.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/processing-state-lifecycle-management.md": {
+      "title": "Processing state lifecycle management",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/cost-controlled-test-runs.md": {
+      "title": "Cost-controlled Test Runs",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "test-run-local.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/self-documentation-through-local-git-history.md": {
+      "title": "Self-documentation through local git history",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "generate-self-wiki.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/git-based-commit-extraction-and-processing.md": {
+      "title": "Git-based commit extraction and processing",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "generate-self-wiki.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/cost-bounded-documentation-generation.md": {
+      "title": "Cost-bounded documentation generation",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "generate-self-wiki.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/mock-git-hub-client-for-local-testing.md": {
+      "title": "Mock GitHub client for local testing",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "generate-self-wiki.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/backward-compatible-concept-format-migration.md": {
+      "title": "Backward-compatible concept format migration",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/category-aware-concept-extraction.md": {
+      "title": "Category-aware concept extraction",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/backward-compatible-concept-representation.md": {
+      "title": "Backward-compatible concept representation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/response-normalization-with-field-defaults.md": {
+      "title": "Response normalization with field defaults",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/code-analysis-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/metadata-synchronization-on-page-lifecycle-events.md": {
+      "title": "Metadata synchronization on page lifecycle events",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/multi-agent-documentation-pipeline-with-specialized-agents.md": {
+      "title": "Multi-agent documentation pipeline with specialized agents",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/agent-based-wiki-documentation-generation.md": {
+      "title": "Agent-based wiki documentation generation",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/wiki-index-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/post-processing-wiki-index-generation.md": {
+      "title": "Post-processing wiki index generation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/conditional-completion-hooks-with-error-isolation.md": {
+      "title": "Conditional completion hooks with error isolation",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/agent-based-documentation-generation-architecture.md": {
+      "title": "Agent-based documentation generation architecture",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/repository-introspection-for-context-aware-documentation.md": {
+      "title": "Repository introspection for context-aware documentation",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/multi-step-content-formatting-and-validation-pipeline.md": {
+      "title": "Multi-step content formatting and validation pipeline",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/resilient-json-response-parsing.md": {
+      "title": "Resilient JSON Response Parsing",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/architecture-overview-generation.md": {
+      "title": "Architecture Overview Generation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/markdown-output-normalization.md": {
+      "title": "Markdown output normalization",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/architecture-overview-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/defensive-json-parsing-with-repair-heuristics.md": {
+      "title": "Defensive JSON parsing with repair heuristics",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/defensive-file-system-operations-with-directory-pre-creation.md": {
+      "title": "Defensive file system operations with directory pre-creation",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/json-parsing-robustness-in-agent-output-handling.md": {
+      "title": "JSON parsing robustness in agent output handling",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/multi-stage-json-parsing-robustness.md": {
+      "title": "Multi-stage JSON parsing robustness",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/filtering-invalid-data-instead-of-rejecting.md": {
+      "title": "Filtering invalid data instead of rejecting",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/contextual-error-logging-for-debugging.md": {
+      "title": "Contextual error logging for debugging",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/agents/guide-generation-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/automatic-link-discovery-and-suggestion-system.md": {
+      "title": "Automatic link discovery and suggestion system",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/link-discovery-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/smart-link-collision-detection.md": {
+      "title": "Smart link collision detection",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/agents/documentation-writer-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/multi-stage-document-generation-pipeline.md": {
+      "title": "Multi-stage document generation pipeline",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/priority-based-mention-ranking.md": {
+      "title": "Priority-based mention ranking",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/agents/link-discovery-agent.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/link-discovery-agent-integration.md": {
+      "title": "LinkDiscoveryAgent integration",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/processor.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
     }
   },
   "statistics": {
-    "totalPages": 192,
-    "concepts": 66,
-    "components": 99,
-    "guides": 27,
+    "totalPages": 233,
+    "concepts": 80,
+    "components": 122,
+    "guides": 31,
     "totalCommitsProcessed": 0,
     "orphanedPages": []
   }

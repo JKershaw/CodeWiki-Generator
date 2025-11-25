@@ -9,29 +9,31 @@ updated: 2025-11-25
 
 # Global Metadata Tracking for Wiki Pages
 
-## Purpose and [Overview](../meta/overview.md)
+## Purpose and Overview
 
-The [global metadata tracking system](../components/global-metadata-tracking-system.md) provides centralized management of wiki page metadata within the processor component. It maintains a registry of page properties including titles, categories, and links to enable cross-referencing capabilities and future link analysis features.
+The global metadata tracking system provides centralized management of wiki page metadata within the processor component. It maintains a unified registry of page properties including titles, categories, creation dates, and link relationships to enable cross-referencing capabilities and support future analytics features.
 
 ## Key Functionality
 
-- **Systematic Metadata Management**: Tracks essential page properties (title, category, links) through the WikiManager's `updatePageGlobalMetadata()` method
-- **Dual-Phase Lifecycle**: Implements a two-step process where page creation/update operations are followed by metadata synchronization to ensure consistency
-- **Centralized Registry**: Maintains a global index of page metadata that supports page discovery and relationship mapping
-- **Cross-Reference Support**: Enables future implementation of link analysis and related page functionality
+- **Centralized Metadata Registry**: Maintains comprehensive page metadata (title, category, created date, incoming/outgoing links) through the WikiManager's `updatePageGlobalMetadata()` method
+- **Lifecycle Event Synchronization**: Automatically triggers metadata updates at critical page lifecycle points (creation and modification) to ensure consistency between page content and global metadata
+- **Decoupled Architecture**: Separates metadata management from individual page files, creating a single source of truth for page state information
+- **Link Relationship Tracking**: Records incoming and outgoing page links to support future link analysis and page discovery features
+- **Audit Trail Foundation**: Establishes patterns for versioning and change tracking through systematic metadata capture
 
-The system operates by intercepting page lifecycle events and updating the global metadata index whenever pages are created or modified, ensuring the central registry remains synchronized with actual page content.
+The system operates by intercepting page lifecycle events and maintaining synchronization between page operations and the global metadata index, ensuring the central registry accurately reflects the current state of all wiki pages.
 
 ## Relationships
 
-- **WikiManager**: Primary integration point that handles both page operations and metadata tracking through methods like `createPage()`, `updatePage()`, and `updatePageGlobalMetadata()`
-- **Processor**: Orchestrates the dual-phase lifecycle by coordinating page operations with metadata updates
-- **Page Discovery Features**: Provides the foundational data structure for future link analysis and page relationship features
+- **WikiManager**: Primary integration point that handles both page operations (`createPage()`, `updatePage()`) and metadata synchronization (`updatePageGlobalMetadata()`)
+- **Processor**: Orchestrates the dual-phase lifecycle by coordinating page operations with metadata updates during commit processing and repository analysis
+- **Page Discovery System**: Provides foundational data structure for future features like link analysis, related page suggestions, and wiki analytics
+- **State Management**: Works alongside the state management system to maintain consistent page metadata across application sessions
 
 ## Usage Example
 
 ```javascript
-// Mock setup showing the metadata tracking integration
+// Processor setup with WikiManager integration
 const mockWikiManager = {
   getPage: jest.fn(),
   createPage: jest.fn(),
@@ -41,8 +43,9 @@ const mockWikiManager = {
   updatePageGlobalMetadata: jest.fn()
 };
 
-// The processor coordinates page operations with metadata updates
-// After page creation/update, metadata synchronization occurs automatically
+// The processor automatically handles metadata tracking
+// After page creation or update, metadata synchronization occurs
+processor.processCommit(commitData); // Triggers page operations + metadata updates
 ```
 
 ## Testing
@@ -50,4 +53,5 @@ const mockWikiManager = {
 **Test Coverage**: `tests/unit/processor.test.js`
 - 26 test cases across 6 test suites
 - Comprehensive testing of processor functionality including metadata tracking workflows
-- Test categories cover: Processor initialization, commit processing, file significance detection, context retrieval, page path determination, and repository processing
+- Test categories: Processor initialization, commit processing, file significance detection, context retrieval, page path determination, and repository processing
+- Validates metadata synchronization through mock WikiManager interactions

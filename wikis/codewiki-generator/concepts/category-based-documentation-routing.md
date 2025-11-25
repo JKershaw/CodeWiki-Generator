@@ -9,7 +9,7 @@ updated: 2025-11-25
 
 # Category-based Documentation Routing
 
-## Purpose and [Overview](../meta/overview.md)
+## Purpose and Overview
 
 Category-based documentation routing enables the processor to organize documentation into different directories (components/, concepts/, guides/) based on category properties rather than a flat structure. This architectural enhancement allows for flexible documentation organization while maintaining backward compatibility with existing string-based concept names.
 
@@ -17,23 +17,25 @@ Category-based documentation routing enables the processor to organize documenta
 
 The processor implements category-aware routing that:
 
-- **Routes documentation by category**: Directs concept documentation to appropriate directories based on category metadata
-- **Maintains backward compatibility**: Accepts both legacy string concept names and new object format with name and category properties
-- **Enables flexible organization**: Supports different documentation types (components, concepts, guides) in their respective directories
+- **Routes documentation by category**: Directs concept documentation to appropriate directories based on category metadata through the `determinePagePath` method
+- **Maintains backward compatibility**: Accepts both legacy string concept names and new object format with name and category properties in `processConceptDocumentation`
+- **Enables flexible organization**: Supports different documentation types (components, concepts, guides) in their respective wiki directories
 - **Preserves existing functionality**: Legacy code continues to work without modification while new code can leverage enhanced categorization
 
-The dual-format handling allows functions to process either simple string concept names or rich concept objects containing both name and category information, enabling gradual migration to the enhanced format.
+The dual-format handling allows functions to process either simple string concept names or rich concept objects containing both name and category information, enabling gradual migration to the enhanced format without breaking existing integrations.
 
 ## Relationships
 
 This component integrates with several system components:
 
-- **Wiki Manager**: Receives categorized routing decisions for page creation and updates
-- **State Manager**: Stores and retrieves category-based organization state
-- **[Code Analysis Agent](../components/code-analysis-agent.md)**: Provides concept categorization during code analysis
-- **[Documentation Writer Agent](../components/documentation-writer-agent.md)**: Uses category information for appropriate content generation
+- **Wiki Manager**: Receives categorized routing decisions for page creation and updates across different directory structures
+- **State Manager**: Stores and retrieves category-based organization state for persistent routing decisions
+- **Code Analysis Agent**: Provides concept categorization during code analysis to inform routing decisions
+- **Documentation Writer Agent**: Uses category information for appropriate content generation in the correct wiki sections
+- **Tech Debt Agent**: Integrates with categorized routing for technical debt documentation
+- **Security Agent**: Leverages category-based routing for security-related documentation placement
 
-The processor serves as the central routing hub, coordinating between analysis agents and the wiki management system.
+The processor serves as the central routing hub, coordinating between analysis agents and the wiki management system to ensure proper document categorization.
 
 ## Usage Example
 
@@ -44,8 +46,6 @@ describe('Processor', () => {
   let mockStateManager;
   let mockCodeAnalysisAgent;
   let mockDocWriterAgent;
-  let mockTechDebtAgent;
-  let mockSecurityAgent;
 
   beforeEach(() => {
     // Create mock managers and agents
@@ -61,7 +61,8 @@ describe('Processor', () => {
     mockStateManager = {
       loadState: jest.fn()
     };
-    // Additional agent initialization...
+    // Initialize processor with category-aware routing
+    processor = new Processor(mockWikiManager, mockStateManager, mockCodeAnalysisAgent, mockDocWriterAgent);
   });
 ```
 
@@ -71,3 +72,4 @@ describe('Processor', () => {
 - 26 test cases across 6 test suites
 - Test categories include: Processor, processCommit, isSignificantFile, getRelevantContext, determinePagePath, processRepository
 - Comprehensive coverage of category-based routing functionality and backward compatibility scenarios
+- Specific testing of `determinePagePath` method ensures proper category-to-directory mapping

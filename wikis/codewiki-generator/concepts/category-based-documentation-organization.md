@@ -9,49 +9,45 @@ updated: 2025-11-25
 
 # Category-based Documentation Organization
 
-## Purpose and [Overview](../meta/overview.md)
+## Purpose and Overview
 
-Category-based Documentation Organization provides a systematic approach to organizing wiki pages using metadata categories (concepts, components, guides), enabling semantic grouping and hierarchical documentation management. This pattern supports the architecture [overview](../meta/overview.md) agent in synthesizing system-level documentation from categorized content across multiple document types.
+Category-based Documentation Organization is an architectural pattern that filters and routes wiki pages by metadata categories (concepts, components, guides) to generate specialized documentation outputs. This systematic approach enables content aggregation and synthesis across different documentation types, supporting automated architecture overview generation and structured knowledge management.
 
 ## Key Functionality
 
-- **Metadata Categorization**: Automatically classifies documentation into semantic categories during the generation process
-- **Two-phase Pipeline**: Implements a two-phase approach where content documentation is generated first from code analysis, followed by meta-documentation synthesis (architecture overviews, guides, indexes)
-- **Architecture Overview Generation**: Integrates the [ArchitectureOverviewAgent](../components/architecture-overview-agent.md) to create system-level documentation by synthesizing categorized wiki pages
-- **Graceful Degradation**: Handles errors in optional documentation steps without failing the entire process, ensuring partial success doesn't block subsequent generation steps
-
-The system processes files through significance filtering, generates categorized documentation, and then synthesizes higher-level architectural insights in a separate phase to avoid being blocked by cost limits or individual failures.
+- **Metadata-driven Content Routing**: Automatically filters wiki pages based on category metadata to create specialized content streams for different documentation purposes
+- **Multi-agent Integration**: Works seamlessly with the existing agent-based architecture, including DocumentationWriterAgent, GuideGenerationAgent, and the new ArchitectureOverviewAgent
+- **Systematic Content Aggregation**: Enables synthesis of categorized content into unified documentation outputs like architecture overviews
+- **Specialized Documentation Generation**: Supports generation of different documentation types by providing organized, category-specific content collections
+- **Extensible Category System**: Supports flexible categorization schemes that can be extended for new documentation types and organizational needs
 
 ## Relationships
 
-- **Integrates with**: WikiManager for page storage and retrieval, StateManager for process state tracking
-- **Coordinates**: Multiple agent types (DocumentationWriterAgent, MetaAnalysisAgent, [ArchitectureOverviewAgent](../components/architecture-overview-agent.md)) in the processing pipeline
-- **Supports**: Architecture [overview](../meta/overview.md) generation through categorized content synthesis
-- **Extends**: Existing agent pattern established in the codebase for consistent integration
+- **Integrates with**: ArchitectureOverviewAgent for generating system-level documentation from categorized content
+- **Extends**: Multi-agent documentation pipeline established in the processor architecture
+- **Coordinates with**: WikiManager for accessing and organizing categorized page data
+- **Supports**: DocumentationWriterAgent and GuideGenerationAgent by providing structured content inputs
+- **Enables**: Higher-level documentation synthesis through systematic content organization and routing
 
 ## Usage Example
 
 ```javascript
+const Processor = require('./lib/processor');
+
 const processor = new Processor({
   wikiManager: mockWikiManager,
   stateManager: mockStateManager,
   codeAnalysisAgent: mockCodeAnalysisAgent,
-  docWriterAgent: mockDocWriterAgent,
-  techDebtAgent: mockTechDebtAgent,
-  securityAgent: mockSecurityAgent
+  docWriterAgent: mockDocWriterAgent
 });
 
 // Process repository with category-based organization
-await processor.processRepository('/path/to/repo');
-
-// Access categorized documentation
-const concepts = await mockWikiManager.searchPages({ category: 'concept' });
-const components = await mockWikiManager.searchPages({ category: 'component' });
+await processor.processRepository(repositoryPath, options);
 ```
 
 ## Testing
 
 **Test Coverage**: tests/unit/processor.test.js
 - 26 test cases across 6 test suites
-- Tests cover core processor functionality including processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository methods
-- Validates integration with WikiManager, StateManager, and various agent components
+- Comprehensive testing of processor functionality including content routing and agent coordination
+- Test categories cover core processor methods: processCommit, isSignificantFile, getRelevantContext, determinePagePath, and processRepository
