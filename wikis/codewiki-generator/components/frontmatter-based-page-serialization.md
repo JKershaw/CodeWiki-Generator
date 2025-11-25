@@ -9,29 +9,29 @@ updated: 2025-11-25
 
 # Frontmatter-based Page Serialization
 
-## Purpose and [Overview](../meta/overview.md)
+## Purpose and Overview
 
-Frontmatter-based Page Serialization implements bidirectional conversion between metadata objects and markdown frontmatter format for wiki pages. The `_serializePage` method complements the existing `_parseFrontmatter` functionality, enabling structured metadata storage while maintaining markdown readability and human-editability.
+Frontmatter-based Page Serialization implements bidirectional conversion between metadata objects and markdown frontmatter format for wiki pages. The `_serializePage()` method complements the existing `_parseFrontmatter()` functionality, enabling structured metadata storage while maintaining markdown readability and human-editability.
 
 ## Key Functionality
 
 This component handles the serialization of wiki page objects into markdown format with YAML frontmatter:
 
 - **Metadata Serialization**: Converts page metadata objects into YAML frontmatter blocks enclosed by `---` delimiters
-- **Content Preservation**: Maintains the original markdown content while updating metadata headers
+- **Content Preservation**: Maintains the original markdown content while updating metadata headers  
 - **Structured Format**: Produces standardized markdown files that can be parsed by other markdown processors
-- **Bidirectional Conversion**: Works alongside `_parseFrontmatter` to enable round-trip serialization without data loss
+- **Bidirectional Conversion**: Works alongside `_parseFrontmatter()` to enable round-trip serialization without data loss
 
-The serialization process structures pages with frontmatter containing metadata (title, tags, timestamps) followed by the markdown content body.
+The serialization process structures pages with frontmatter containing metadata (title, tags, timestamps) followed by the markdown content body, ensuring consistent file format across all wiki operations.
 
 ## Relationships
 
 This component is tightly integrated with other WikiManager components:
 
-- **[Wiki Page Write Operations](../components/wiki-page-write-operations.md)**: Used by create, update, and delete operations to persist pages to disk
-- **[Automatic Metadata Lifecycle Management](../concepts/automatic-metadata-lifecycle-management.md)**: Serializes automatically managed timestamps and metadata
-- **[Safe File Operation Pattern](../guides/safe-file-operation-pattern.md)**: Works within the defensive file operation framework for robust persistence
-- **Frontmatter Parser**: Provides the inverse operation to `_parseFrontmatter` for complete page lifecycle management
+- **[Wiki Page CRUD Operations](../components/wiki-page-crud-operations.md)**: Used by create, update, and delete operations to persist pages to disk in proper markdown format
+- **[Metadata Management with Automatic Timestamps](../components/metadata-management-automatic-timestamps.md)**: Serializes automatically managed creation and modification timestamps along with other metadata
+- **[Safe File Operations with Conflict Detection](../components/safe-file-operations-conflict-detection.md)**: Works within the defensive file operation framework for robust persistence
+- **Frontmatter Parser**: Provides the inverse operation to `_parseFrontmatter()` for complete page lifecycle management
 
 ## Usage Example
 
@@ -58,6 +58,6 @@ expect(page.content).toBeDefined();
 
 **Test Coverage**: `tests/unit/wiki-manager.test.js`
 
-- 17 test cases across 5 test suites
-- Comprehensive testing of WikiManager functionality including getPage, getAllPages, searchPages, and getRelatedPages operations
-- Tests verify proper frontmatter parsing and page structure handling, ensuring the serialization component maintains data integrity
+- 17 test cases across 5 test suites (WikiManager, getPage, getAllPages, searchPages, getRelatedPages)
+- Comprehensive testing of WikiManager functionality including frontmatter parsing and page structure handling
+- Tests verify proper bidirectional conversion between page objects and markdown format, ensuring the serialization component maintains data integrity

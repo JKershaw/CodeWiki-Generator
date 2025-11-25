@@ -7,99 +7,182 @@ updated: 2025-11-25
 related: [meta/implementation-guide.md, meta/specification.md]
 ---
 
-# Philosophy & Core Idea
+# CodeWiki Generator - Philosophy & Core Concepts
 
 ## The Central Insight
 
 **Code tells you what. Documentation tells you why. History tells you how.**
 
-Most documentation systems fail because they're written once, never updated, kept separate from code, and created after the fact. But what if documentation could **grow organically** alongside code?
-
-CodeWiki Generator reimagines documentation as **archaeological documentation**—a living wiki that walks through git history chronologically to capture:
-
-- **Concepts**: The mental models and abstractions
-- **Components**: The actual code structures  
-- **Relationships**: How pieces connect
-- **Evolution**: How understanding deepened over time
-
-You can see when concepts were introduced, when they changed, when they were refined. The documentation carries the story of the codebase's intellectual development.
+Most documentation systems fail because they're written once, never updated, kept separate from code, created after the fact, and expensive to maintain. This project explores whether documentation can **grow organically alongside code**, transforming understanding into a living artifact.
 
 ## Core Philosophy
 
-### 1. Documentation as Emergent Property
+### Documentation as Emergent Property
 
-Good documentation emerges from understanding, not exhaustive cataloging. Understanding deepens naturally:
+Good documentation emerges from understanding, not exhaustive cataloging. The system starts simple and deepens naturally:
 
 - First pass: "This file handles authentication"
-- Later: "This is OAuth2 with refresh token rotation"
-- Even later: "This implements RFC 6749 with custom security extensions"
+- Later: "This is OAuth2 with refresh token rotation"  
+- Eventually: "This implements RFC 6749 with custom security extensions"
 
-Just like a human learning a codebase, the system processes more commits and deepens its analysis.
+This mirrors how humans learn codebases—understanding deepens through repeated engagement.
 
-### 2. Organic Growth, Not Comprehensive Coverage
+### Organic Growth, Not Comprehensive Coverage
 
 Not everything deserves documentation. A wiki page should exist because it's **useful**, not because it's **complete**.
 
-Important code gets referenced repeatedly → Gets detailed documentation  
-Peripheral utilities mentioned once → Gets a brief note  
-Boring config files → Might be ignored entirely
+- Important code referenced repeatedly → Detailed documentation
+- Peripheral utilities mentioned once → Brief note
+- Boring config files → Possibly ignored
 
-The system discovers what matters by observing what's significant in commits and what other code depends on. See also: [[Architecture]]
+The system discovers what matters by analyzing git commit patterns and code dependencies.
 
-### 3. Self-Limiting Complexity
+### Self-Limiting Complexity
 
-Wikis naturally stay manageable because verbosity is a bug, not a feature. If a page grows too long, it becomes less useful, signaling the need to split it. If pages have redundant content, consolidation improves quality.
+Wikis naturally stay manageable because verbosity is a bug, not a feature. If documentation grows unwieldy, it signals the need to split or consolidate. The medium itself enforces good practices—you can't have a 10,000-word wiki page without recognizing something's wrong.
 
-The medium itself enforces good practices.
+### Documentation as Truth Test
 
-### 4. Documentation as Truth Test
-
-**If you build a documentation system that documents itself poorly, the system is broken.**
+The meta-insight: **If you build a documentation system that documents itself poorly, the system is broken.**
 
 This project practices radical self-reference:
-
 - The system documents codebases by analyzing git history
 - The system's own git history is its test case
-- If you can't understand this codebase from its own generated wiki, the documentation system has failed
-- Fix the system until its self-documentation is excellent
+- If the generated wiki doesn't clearly explain the codebase, the system has failed
+- Improving the system improves its self-documentation, revealing further improvements
 
-This creates a virtuous feedback loop: improving the documentation system improves its ability to document itself, revealing new ways to improve the system.
+This creates a virtuous feedback loop where the tool proves itself through self-application.
 
 ## The Vision
 
 ### For Developers
 
-Imagine opening an unfamiliar codebase and asking:
+Imagine opening an unfamiliar codebase and having instant answers:
 
-- "How does authentication work?" → Wiki has a clear page
-- "Where are tests configured?" → Operational guide exists  
+- "How does authentication work?" → Clear wiki page
+- "Where are tests configured?" → Operational guide exists
 - "Why was this approach chosen?" → History shows the decision point
 
-The wiki becomes your **external brain** for the codebase. It's always current because it's regenerated from history. It's always consistent because it's generated by the same AI understanding the patterns.
-
-See also: [[Getting Started]]
+The wiki becomes your **external brain** for the codebase—always current because regenerated from history, always consistent because generated by the same AI understanding.
 
 ### For AI Coding Agents
 
-Current problem: AI agents get a massive context dump of code and struggle to find relevant information.
+Current AI problem: agents receive massive context dumps and struggle to find relevant information.
 
 With CodeWiki:
 - Agent queries: "How do I run tests?"
-- MCP server returns the exact wiki page documenting test setup
+- MCP server returns the exact wiki page with test setup
 - Agent has perfect context, not overwhelming context
 
-The wiki acts as a **compressed, indexed, structured knowledge base**—optimized for retrieval, not raw code dumping.
+The wiki acts as a **compressed, indexed, structured knowledge base** optimized for retrieval rather than raw code dumping.
 
-When the agent encounters something undocumented, it requests documentation, the system adds it to the queue, and future agents benefit.
+When agents encounter undocumented patterns, they request documentation, which queues for the next run, benefiting future agents.
 
-### The Feedback Loop
+## Key Principles
+
+### Start Minimal, Grow Organically
+
+Don't attempt comprehensive documentation on day one. Let importance reveal itself through repeated references and usage patterns. Rough documentation is better than silently missing documentation.
+
+### Embrace Imperfection and Iteration
+
+Early documentation will be rough—that's acceptable. Continuous improvement beats false perfection. Stale is worse than imperfect.
+
+### Trust the Medium
+
+Wikis have survived decades because the format works. Internal linking, simple markup, and human readability aren't accidental—they're proven principles. Don't fight the medium.
+
+### Make It Useful First, Complete Later
+
+A single excellent page about authentication is more valuable than fifty mediocre pages cataloging every function.
+
+### Dogfooding Proves Value
+
+If building this system makes you avoid using it on itself, something is fundamentally broken. The best validation is applying the tool to itself and seeing if the generated documentation is excellent.
+
+## System Characteristics
+
+### Time as a Feature, Not a Bug
+
+Most documentation hides history ("Here's how it works now"). This system **embraces history** ("Here's how understanding evolved"). Seeing that "UserManager" became "AuthenticationService" at commit 147 tells you something valuable about architectural maturation.
+
+### Human + AI Collaboration
+
+The system isn't fully autonomous or fully manual:
+
+- AI handles bulk processing (generates docs from commits)
+- Humans handle judgment calls (importance assessment)
+- Meta-analysis agent proposes improvements
+- Humans approve or reject proposals
+- Humans can edit wiki pages directly
+- AI learns from human edits
+
+It's a **pair programming model** for documentation.
+
+### Documentation That Documents Its Own Quality
+
+- Normal documentation: silent about coverage or accuracy
+- CodeWiki: knows which pages are well-linked (probably important), which are orphaned (possibly obsolete), which get frequently requested (need improvement)
+
+The **metadata about documentation** becomes valuable information itself.
+
+## Design Philosophy
+
+### For Humans
+- Dashboard shows exactly what's happening (transparency, no black box)
+- Manual stepping lets you verify before trusting
+- Direct page editing capability when AI gets things wrong
+- Simple controls: start, pause, step
+
+### For AI Agents
+- Small, focused tasks (analyze one file, write one page)
+- Structured inputs and outputs (JSON for agent-to-agent communication)
+- Clear context boundaries (max 3 related pages, truncated diffs)
+- Feedback mechanisms (request queue for missing information)
+
+### For the System Itself
+- Test-driven development proves functionality
+- Self-documentation proves usefulness
+- Git commits provide audit trail
+- Modularity enables improvements without rewrites
+
+## What This Isn't vs. What This Is
+
+### Not:
+- A code search engine (curated understanding, not indexed raw code)
+- A replacement for human documentation (critical guides need human writing)
+- Comprehensive (deliberately selective about what to document)
+- Real-time (documentation is generated, not live-updated)
+- A silver bullet (good architecture documentation requires architectural thinking)
+
+### Is:
+- A time machine for understanding (see code evolution, not just current state)
+- A knowledge compressor (100,000 lines of code → 50 pages of insight)
+- A collaboration tool (human judgment + AI processing)
+- Self-improving (quality feedback improves future documentation)
+- An experiment in meta-software (can software that documents software document itself?)
+
+## Success Criteria
+
+You open this codebase for the first time. After 15 minutes reading the generated wiki, you understand:
+
+- The overall architecture
+- Where each major component lives
+- How to run and test the system
+- Why key decisions were made
+
+You start using Claude Code with the MCP server. It asks intelligent questions because it has perfect context from the wiki. You make changes. The wiki updates. The AI agent uses updated wiki. The loop closes.
+
+A new developer joins your team. After one hour reading the wiki, they're productive—not because it's comprehensive, but because it answers the right questions.
+
+## The Feedback Loop
 
 ```
 Developer commits code
     ↓
 System generates documentation
     ↓
-Developer reads documentation (or AI agent queries it)
+Developer/AI agent reads documentation
     ↓
 Gaps or confusion identified
     ↓
@@ -112,109 +195,16 @@ Documentation improves
 
 The system **learns what documentation is needed** by observing what gets requested.
 
-## Unique Aspects
-
-### Time as a Feature, Not a Bug
-
-Most documentation tries to hide history. This system **embraces history**—here's how understanding evolved.
-
-Seeing that "UserManager" became "AuthenticationService" at commit 147 tells you something valuable about the architecture's maturation.
-
-### Human + AI Collaboration
-
-The system isn't fully autonomous or fully manual:
-
-- AI handles bulk processing (generates docs from commits)
-- Humans handle judgment calls (this is important, that isn't)
-- Meta-analysis agent proposes improvements
-- Humans approve or reject
-- Humans can edit wiki pages directly
-- AI learns from human edits
-
-It's a **pair programming model** for documentation.
-
-### Documentation That Documents Its Own Quality
-
-Normal documentation: silent about its coverage or accuracy
-
-CodeWiki: knows which pages are well-linked (probably important), which are orphaned (maybe obsolete), which get frequently requested (need improvement)
-
-The **metadata about documentation** is itself valuable information.
-
-## Key Principles
-
-### Start Minimal, Grow Organically
-Don't document everything on day one. Let importance reveal itself through repeated references and usage patterns.
-
-### Embrace Imperfection
-Early documentation will be rough. That's fine—it improves with each pass. Stale is worse than imperfect.
-
-### Trust the Medium
-Wikis have survived decades because the format works. Internal linking, simple markup, human readability—don't fight the medium.
-
-### Make It Useful First, Complete Later
-A single excellent page about authentication is more valuable than 50 mediocre pages cataloging every function.
-
-### The System Should Love Being Used On Itself
-If building this system makes you avoid using it on itself, something is wrong. The best validation is dogfooding.
-
-## Design Philosophy
-
-### For Humans
-- Dashboard shows exactly what's happening (no black box)
-- Manual stepping lets you verify before trusting
-- Edit pages directly when AI gets it wrong
-- Controls are simple: start, pause, step
-
-### For AI Agents
-- Small, focused tasks (analyze one file, write one page)
-- Structured inputs and outputs (JSON for agent-to-agent communication)
-- Clear context boundaries (max 3 related pages, truncated diffs)
-- Feedback mechanisms (request queue for missing info)
-
-### For the System Itself
-- Test-driven development proves it works
-- Self-documentation proves it's useful
-- Git commits provide audit trail
-- Modularity allows improvements without rewrites
-
-See also: [[Implementation Guide]]
-
-## What This Is and Isn't
-
-### What This Isn't
-- Not a code search engine (wiki is curated understanding, not indexed raw code)
-- Not a replacement for human docs (critical guides still need human writing)
-- Not comprehensive (deliberately selective about what to document)
-- Not real-time (documentation is generated, not live-updated)
-- Not a silver bullet (good architecture documentation still requires architectural thinking)
-
-### What This Is
-- A time machine for understanding (see how code evolved, not just its current state)
-- A knowledge compressor (turns 100,000 lines of code into 50 pages of insight)
-- A collaboration tool (human judgment + AI processing = better than either alone)
-- A self-improving system (quality feedback improves future documentation)
-- An experiment in meta-software (can software that documents software document itself well?)
-
-## Success Metrics
-
-You open this system's codebase for the first time. You read the generated wiki for 15 minutes. You now understand:
-
-- The overall architecture
-- Where each major component lives
-- How to run and test it
-- Why key decisions were made
-
-A new developer joins your team. They read the wiki for an hour. They're productive. Not because the wiki is comprehensive, but because it answers the right questions.
-
 ## The Meta-Question
+
+Here's the philosophical heart of this project:
 
 **Can a system that generates understanding generate understanding of itself?**
 
-- If yes: We've created something genuinely useful—a documentation tool that proves its value by documenting itself excellently
-- If no: We learn exactly where AI-generated documentation fails by seeing it fail on the ideal test case (itself)
+- If yes: we've created a genuinely useful documentation tool that proves its value by documenting itself excellently
+- If no: we learn exactly where AI-generated documentation fails by seeing it fail on the ideal test case (itself)
 
-Either outcome teaches us something profound about documentation, understanding, and AI capabilities.
+Either outcome teaches something profound about documentation, understanding, and AI capabilities.
 
 ## Core Belief
 
@@ -223,7 +213,5 @@ Good documentation is like good teaching—it meets learners where they are and 
 **Ultimate Goal**: Make understanding codebases feel less like archaeology and more like having a knowledgeable guide who was there for the entire journey.
 
 ---
-
-**Remember**: This project is a loop that closes on itself. The better the documentation system, the better it documents itself, revealing more ways to improve. That recursive improvement is the entire point.
 
 *This is not just a tool. It's an exploration of whether machines can help us understand complexity—starting with helping us understand themselves.*

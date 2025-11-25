@@ -2,7 +2,7 @@
   "generated": "2025-11-24T20:50:58.833Z",
   "pages": {
     "guides/test-infrastructure-configuration.md": {
-      "title": "Test infrastructure configuration",
+      "title": "Test Infrastructure Configuration",
       "created": "2025-11-24",
       "category": "guide",
       "sourceFile": "jest.config.js",
@@ -101,13 +101,13 @@
       "updated": "2025-11-24"
     },
     "components/persistent-state-management-with-validation.md": {
-      "title": "Persistent State Management with Validation",
+      "title": "Persistent state management with validation",
       "created": "2025-11-24",
       "category": "component",
       "sourceFile": "lib/state-manager.js",
       "incomingLinks": [],
       "outgoingLinks": [],
-      "updated": "2025-11-24"
+      "updated": "2025-11-25"
     },
     "concepts/state-schema-validation-pattern.md": {
       "title": "State Schema Validation Pattern",
@@ -1413,13 +1413,103 @@
       "incomingLinks": [],
       "outgoingLinks": [],
       "updated": "2025-11-25"
+    },
+    "components/wiki-content-management-with-frontmatter-parsing.md": {
+      "title": "Wiki content management with frontmatter parsing",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/coverage-driven-development.md": {
+      "title": "Coverage-driven Development",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "jest.config.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/recursive-directory-traversal-for-content-discovery.md": {
+      "title": "Recursive directory traversal for content discovery",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/search-and-discovery-with-snippet-extraction.md": {
+      "title": "Search and discovery with snippet extraction",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "concepts/metadata-driven-page-relationships.md": {
+      "title": "Metadata-driven page relationships",
+      "created": "2025-11-25",
+      "category": "concept",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/wiki-page-crud-operations.md": {
+      "title": "Wiki page CRUD operations",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/metadata-management-with-automatic-timestamps.md": {
+      "title": "Metadata management with automatic timestamps",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/safe-file-operations-with-conflict-detection.md": {
+      "title": "Safe file operations with conflict detection",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/wiki-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "components/in-memory-state-caching-with-lazy-loading.md": {
+      "title": "In-memory state caching with lazy loading",
+      "created": "2025-11-25",
+      "category": "component",
+      "sourceFile": "lib/state-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
+    },
+    "guides/schema-validation-for-resilience.md": {
+      "title": "Schema validation for resilience",
+      "created": "2025-11-25",
+      "category": "guide",
+      "sourceFile": "lib/state-manager.js",
+      "incomingLinks": [],
+      "outgoingLinks": [],
+      "updated": "2025-11-25"
     }
   },
   "statistics": {
-    "totalPages": 157,
-    "concepts": 54,
-    "components": 81,
-    "guides": 22,
+    "totalPages": 167,
+    "concepts": 56,
+    "components": 88,
+    "guides": 23,
     "totalCommitsProcessed": 0,
     "orphanedPages": []
   }
